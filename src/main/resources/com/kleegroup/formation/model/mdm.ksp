@@ -1,0 +1,12 @@
+package com.kleegroup.formation
+
+alter DtDefinition DT_NIVEAU {
+        sortField : "LIBELLE"
+        displayField : "LIBELLE"
+}
+
+
+alter DtDefinition DT_UTILISATEUR {
+        sortField : "MAIL"
+        displayField : "MAIL"
+}

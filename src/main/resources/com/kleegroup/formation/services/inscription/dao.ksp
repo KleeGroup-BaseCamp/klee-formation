@@ -1,0 +1,43 @@
+package com.kleegroup.formation.dao.services.inscription
+
+create Task TK_GET_LIST_INSCRIPTION_BY_UTI_ID {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ins.*
+               From	INSCRIPTION ins
+               Where ins.UTI_ID = #UTILISATEUR_ID#",
+  attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
+}
+
+create Task TK_GET_INSCRIPTION_BY_UTI_SES_ID {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ins.*
+               From	INSCRIPTION ins
+               Where ins.UTI_ID = #UTILISATEUR_ID#
+                 and ins.SES_ID = #SESSION_FORMATION_ID#",
+  attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute SESSION_FORMATION_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC {domain : DO_DT_INSCRIPTION_DTO, notNull:"true", inOut :"out",}
+}
+
+
+create Task TK_GET_INSCRIPTION_VENIR_FORMATION {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ins.*
+               From	INSCRIPTION ins
+               Where ins.UTI_ID = #UTILISATEUR_ID#
+								 and ins.DATEFIN >= CURRENT_DATE()",
+  attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
+}
+
+
+create Task TK_GET_INSCRIPTION_PASSER_FORMATION {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ins.*
+               From	INSCRIPTION ins
+               Where ins.UTI_ID = #UTILISATEUR_ID#
+			and ins.DATEFIN < CURRENT_DATE()",
+  attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
+}

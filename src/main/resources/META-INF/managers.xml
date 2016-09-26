@@ -1,0 +1,85 @@
+<?xml version =	'1.0' encoding = 'ISO-8859-1'?>
+<!-- Utilisation -->
+<config>
+	<boot locales="fr_FR">
+		<plugin class="io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin" />
+		<plugin class="io.vertigo.struts2.plugins.resource.servlet.ServletResourceResolverPlugin" />
+		<plugin class="io.vertigo.core.plugins.param.xml.XmlParamPlugin">
+			<param name="url" value="${boot.configXmlInterne}" />
+		</plugin>
+		<plugin class="io.vertigo.struts2.plugins.config.servlet.WebAppContextParamPlugin" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.kpr.KprLoaderPlugin">
+			<param name='encoding' value='utf8' />
+		</plugin>
+		<plugin class="io.vertigo.dynamo.plugins.environment.registries.domain.DomainDynamicRegistryPlugin" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.registries.task.TaskDynamicRegistryPlugin" />
+		<plugin class="io.vertigo.persona.plugins.security.loaders.SecurityResourceLoaderPlugin" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.registries.file.FileDynamicRegistryPlugin" />
+	</boot>
+	<module name="KleeFormation">
+		<definitions>
+			<resource type="classes" path="com.kleegroup.formation.domain.DtDefinitions" />
+			<resource type="kpr" path="com/kleegroup/formation/execution.kpr" />
+			<resource type="security" path="/META-INF/kleeFormation-auth-config.xml" />
+		</definitions>
+	</module>
+	<module name="commons">
+		<component api="TaskManager" class="io.vertigo.dynamo.impl.task.TaskManagerImpl" />
+		<component api="ScriptManager" class="io.vertigo.commons.impl.script.ScriptManagerImpl">
+			<plugin class="io.vertigo.commons.plugins.script.janino.JaninoExpressionEvaluatorPlugin" />
+		</component>
+
+		<component api="AnalyticsManager" class="io.vertigo.commons.impl.analytics.AnalyticsManagerImpl" />
+
+		<component api="VSecurityManager" class="io.vertigo.persona.impl.security.VSecurityManagerImpl">
+			<param name="userSessionClassName" value="com.kleegroup.formation.services.KleeFormationUserSession" />
+		</component>
+
+		<component api="CodecManager" class="io.vertigo.commons.impl.codec.CodecManagerImpl" />
+		<component api="CacheManager" class="io.vertigo.commons.impl.cache.CacheManagerImpl">
+			<plugin class="io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin">
+			</plugin>
+		</component>
+		<component api="VTransactionManager" class="io.vertigo.dynamo.impl.transaction.VTransactionManagerImpl" />
+		<component api="SqlDataBaseManager" class="io.vertigo.dynamo.impl.database.SqlDataBaseManagerImpl">
+			<plugin class="io.vertigo.dynamo.plugins.database.connection.datasource.DataSourceConnectionProviderPlugin">
+				<param name="source" value="java:/comp/env/jdbc/DataSource" />
+				<param name="classname" value="io.vertigo.dynamo.impl.database.vendor.h2.H2Database" />
+			</plugin>
+		</component>
+
+		<component api="CollectionsManager" class="io.vertigo.dynamo.impl.collections.CollectionsManagerImpl">
+			<plugin class="io.vertigo.dynamo.plugins.collections.lucene.LuceneIndexPlugin" />
+		</component>
+		<component api="StoreManager" class="io.vertigo.dynamo.impl.store.StoreManagerImpl">
+			<plugin class="io.vertigo.dynamo.plugins.store.datastore.postgresql.PostgreSqlDataStorePlugin">
+				<param name="sequencePrefix" value="SEQ_" />
+			</plugin>	
+		</component>
+		<component api="JobManager" class="io.vertigo.tempo.impl.job.JobManagerImpl" />
+		<component api="SchedulerManager" class="io.vertigo.tempo.impl.scheduler.SchedulerManagerImpl" >
+			<plugin class="io.vertigo.tempo.plugins.scheduler.basic.BasicSchedulerPlugin"/>
+		</component>
+		<component api="EventBusManager" class="io.vertigo.commons.impl.eventbus.EventBusManagerImpl" />
+		<component api="DaemonManager" class="io.vertigo.commons.impl.daemon.DaemonManagerImpl" />
+
+	</module>
+
+	<module name="ui">
+		<component api="ContextCacheManager" class="io.vertigo.struts2.impl.context.ContextCacheManagerImpl">
+			<plugin class="io.vertigo.struts2.plugins.context.berkeley.BerkeleyContextCachePlugin">
+				<param name="cachePath" value="java.io.tmpdir/ehcache/KleeFormationVActionContext" />
+				<param name="timeToLiveSeconds" value="86400" /> <!-- 24h -->
+			</plugin>
+		</component>
+	</module>
+
+	<init>
+		<initializer class="com.kleegroup.formation.boot.initializer.LocaleManagerInitializer"/>
+		<initializer class="com.kleegroup.formation.boot.initializer.PersistenceManagerInitializer"/>
+		<initializer class="com.kleegroup.formation.boot.initializer.JobManagerInitializer"/>
+		<initializer class="com.kleegroup.formation.boot.initializer.SecurityManagerInitializer"/>
+	</init>
+
+</config>

@@ -1,0 +1,104 @@
+package com.kleegroup.formation.dao.services.session
+
+/**
+ * R�cup�re la liste des sessions correspondant aux dates
+ */
+create Task TK_LIST_SESSION_BY_DATE {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ses.*
+               From	SESSION_FORMATION ses
+               Where ses.DATE_DEBUT >= CURRENT_DATE()
+               AND ses.STATUS = 'Publier'",
+  attribute DTC_SESSION_FORMATION {domain : DO_DT_SESSION_FORMATION_DTC, notNull:"true", inOut :"out",}
+}
+
+
+create Task TK_LIST_SESSION_BROUILLON {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Delete ses.*
+               From	SESSION_FORMATION ses
+               Where ses.DATE_DEBUT >= CURRENT_DATE()
+               AND ses.STATUS = 'Brouillon'",
+  attribute DTC_SESSION_FORMATION {domain : DO_DT_SESSION_FORMATION_DTC, notNull:"true", inOut :"out",}
+}
+
+create Task TK_LIST_SESSION_BY_ETAT {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ses.*
+               From	SESSION_FORMATION ses
+               Where ses.STATUS = 'Réaliser'
+               OR ses.STATUS = 'Publier'
+               OR ses.STATUS = 'Annuler'",
+  attribute DTC_SESSION_FORMATION {domain : DO_DT_SESSION_FORMATION_DTC, notNull:"true", inOut :"out",}
+}
+
+
+create Task TK_GET_LIST_INSCRIPTIONS_BY_SESSION_ID {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ins.*
+               From	INSCRIPTION ins
+               Where ins.SES_ID = #SESSION_ID#",
+  attribute SESSION_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC_INSCRIPTIONS {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
+}
+
+create Task TK_GET_LIST_UTILISATEUR_BY_INSCRIPTION {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ins.*
+               From	INSCRIPTION ins
+               Where ins.UTI_ID = #UTILISATEUR_ID#",
+  attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC_ {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
+}
+
+
+create Task TK_GET_LIST_SESSION_BY_FORMATEUR_ID {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ses.*
+               From	SESSION_FORMATION ses
+               Where ses.UTI_ID = #FORMATEUR_ID#",
+  attribute FORMATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC_ {domain : DO_DT_SESSION_FORMATION_DTC, notNull:"true", inOut :"out",}
+}
+
+
+create Task TK_GET_LIST_SESSION_FORMATEUR_VENIR {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ses.*
+               From	SESSION_FORMATION ses
+               Where ses.UTI_ID = #FORMATEUR_ID#
+               and ses.DATE_FIN >= CURRENT_DATE()",
+  attribute FORMATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC_ {domain : DO_DT_SESSION_FORMATION_DTC, notNull:"true", inOut :"out",}
+  }
+  
+  
+  create Task TK_GET_LIST_SESSION_FORMATEUR_PASSER {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ses.*
+               From	SESSION_FORMATION ses
+               Where ses.UTI_ID = #FORMATEUR_ID#
+               and ses.DATE_FIN < CURRENT_DATE()",
+  attribute FORMATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC_ {domain : DO_DT_SESSION_FORMATION_DTC, notNull:"true", inOut :"out",}
+  }
+  
+ create Task TK_GET_LIST_SESSION_BY_FOR_ID {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ses.*
+               From	SESSION_FORMATION ses
+               Where ses.FOR_ID = #FOR_ID# ",
+  attribute FOR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC_SESSION {domain : DO_DT_SESSION_FORMATION_DTC, notNull:"true", inOut :"out",}
+}
+  
+
+create Task TK_DELETE_SESSION_CASCADE {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Delete From HORAIRES
+			   Where SES_ID = #SES_ID#;
+               
+			Delete From SESSION_FORMATION
+               Where SES_ID = #SES_ID#",
+  attribute SES_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+}

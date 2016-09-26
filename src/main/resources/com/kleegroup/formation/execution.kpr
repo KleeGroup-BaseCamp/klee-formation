@@ -1,0 +1,10 @@
+services/domain.ksp
+
+services/administration/utilisateur/dao.ksp
+services/referentiel/dao.ksp
+services/session/dao.ksp
+services/inscription/dao.ksp
+services/formation/dao.ksp
+
+model/mdm.ksp
+

@@ -1,0 +1,30 @@
+<?xml version =	'1.0' encoding = 'ISO-8859-1'?>
+<!-- Utilisation -->
+<config>
+	<!-- Aspects declaration -->
+	<module name="aspects" >
+		<aspect class="io.vertigo.dynamo.impl.transaction.VTransactionAspect"/>
+	</module>
+	
+	<module name="dao" api="false">
+	    <component class="com.kleegroup.formation.dao.administration.utilisateur.LoginDAO" />
+	    <component class="com.kleegroup.formation.dao.administration.utilisateur.RoleDAO" />
+	    <component class="com.kleegroup.formation.dao.administration.utilisateur.UtilisateurDAO" />
+	    <component class="com.kleegroup.formation.dao.formation.FormationDAO" />
+	    <component class="com.kleegroup.formation.dao.formation.SessionFormationDAO" />
+	    <component class="com.kleegroup.formation.dao.formation.InscriptionDAO" />
+	    <component class="com.kleegroup.formation.dao.services.session.SessionPAO" />
+	    <component class="com.kleegroup.formation.dao.formation.HorairesDAO" />
+	    <component class="com.kleegroup.formation.dao.services.formation.FormationPAO" />
+	</module>
+	
+	<module name="services">
+	    <component api="UtilisateurServices" class="com.kleegroup.formation.services.administration.utilisateur.UtilisateurServicesImpl" />
+	    <component api="SessionServices" class="com.kleegroup.formation.services.session.SessionServicesImpl" />
+	    <component api="InscriptionServices" class="com.kleegroup.formation.services.inscription.InscriptionServicesImpl" />
+	    <component api="FormationServices" class="com.kleegroup.formation.services.formation.FormationServicesImpl" />
+	   	<component api="HorairesServices" class="com.kleegroup.formation.services.horaires.HorairesServicesImpl" />
+	   	
+	</module>
+	
+ </config>

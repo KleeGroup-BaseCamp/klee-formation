@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE authorisation-config PUBLIC "-//Kasper//DTD Kasper Authorisation Config 1.0//EN"
+  "http://www.kleegroup.com/dtd/kasper-authorisation-config_1_0.dtd">
+<authorisation-config>
+
+	<!-- Opérations -->
+
+	<!-- Ressources -->
+	<!-- Les ressources sont contruites par un arbre /{type}/{name} -->
+	<!-- {type} possible : PAGE/{url}, DATA/{URI}, SERVICE/{class.method} -->
+	<!-- L'abrorescence tente de respecter /{type}/{name}/{pkId}/{id entité de ratachement niveau N}/{id entité de ratachement niveau N-1} ... -->
+	<!-- Exemple: /DATA/Declaration/profilId/departementId/regionId -->
+	<!-- Exemple: /PAGE/Accueil.do -->
+
+
+	
+
+	<!-- Pays -->
+	<role name="R_ADMIN" description="Administrateur">
+	</role>
+
+	<role name="R_FORMATTEUR" description="Formatteur">
+	</role>
+
+	<role name="R_RESPONSSABLE" description="Responssable">
+	</role>
+
+</authorisation-config>
