@@ -20,4 +20,3 @@
 			<title>Formation - ${param.subtitle}</title>	
 	</head>
 	<body>
-		<div class="container">
