@@ -67,10 +67,8 @@ public class HorairesServicesImpl implements HorairesServices {
 	@Override
 	public void deleteHoraires(final Long sesId) {
 		final SessionFormation session = sessionServices.loadSessionbyId(sesId);
-		int i = 0;
-		while (i < session.getHorairesList().size()) {
-			horairesDAO.delete(session.getHorairesList().get(i).getDatId());
-			i++;
+		for (final Horaires horaires : session.getHorairesList()) {
+			horairesDAO.delete(horaires.getDatId());
 		}
 		sessionServices.saveSessionFormation(session);
 	}

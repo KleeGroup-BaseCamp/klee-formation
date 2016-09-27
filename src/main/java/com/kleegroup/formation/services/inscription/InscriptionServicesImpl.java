@@ -75,9 +75,10 @@ public class InscriptionServicesImpl implements InscriptionServices {
 
 	@Override
 	public void inscrireUtilisateurAutre(final Long sesId, final Inscription inscriptions) {
+		final Utilisateur utilisateur = utilisateurServices.loadUtilisateurWithRoles(inscriptions.getUtiId());
+
 		final Inscription inscription = new Inscription();
 		inscription.setUtiId(inscriptions.getUtiId());
-		final Utilisateur utilisateur = utilisateurServices.loadUtilisateurWithRoles(inscription.getUtiId());
 		inscription.setNom(utilisateur.getNom());
 		inscription.setPrenom(utilisateur.getPrenom());
 		inscription.setMail(utilisateur.getMail());
@@ -86,8 +87,9 @@ public class InscriptionServicesImpl implements InscriptionServices {
 	}
 
 	private void inscription(final Long sesId) {
-		final Inscription inscription = new Inscription();
 		final SessionFormation session = sessionServices.loadSessionbyId(sesId);
+
+		final Inscription inscription = new Inscription();
 		inscription.setSessionName(session.getFormationName());
 		inscription.setCommentaire(session.getCommentaire());
 		inscription.setNiveau(session.getNiveau());

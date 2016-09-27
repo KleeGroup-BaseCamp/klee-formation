@@ -22,7 +22,7 @@ public interface SessionServices extends Component {
 	 */
 	SessionFormation loadSessionFormation(Long sesId);
 
-	public SessionFormation loadSessionbyId(final Long sesId);
+	SessionFormation loadSessionbyId(final Long sesId);
 
 	/**
 	 * Retourne la liste des sessions formations répondant aux critères.

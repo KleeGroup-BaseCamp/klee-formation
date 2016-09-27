@@ -154,7 +154,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 			System.out.println(Integer.toString(i));
 			utilisateur.getRoleList().remove(i);
 			i = i + 1;
-		
+
 		}*/
 
 		final List<URI> roles = new ArrayList<>();
@@ -189,8 +189,9 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 			throw new VUserException(new MessageText("Login ou mot de passe incorrect", null));
 		}
 
-		final KleeFormationUserSession session = securityManager.<KleeFormationUserSession> getCurrentUserSession().get();
 		final Utilisateur utilisateur = utilisateurDAO.get(logins.get(0).getUtiId());
+
+		final KleeFormationUserSession session = securityManager.<KleeFormationUserSession> getCurrentUserSession().get();
 		session.setUtilisateur(utilisateur);
 		session.authenticate();
 

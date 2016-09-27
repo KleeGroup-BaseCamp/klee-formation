@@ -176,12 +176,9 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			sessions.setDateDebut(null);
 			sessions.setDateFin(null);
 			sessionServices.saveSessionFormation(sessions);
-			horaires.publish(new DtList<>(Horaires.class));
-			horaire.publish(new Horaires());
-		} else {
-			horaires.publish(new DtList<>(Horaires.class));
-			horaire.publish(new Horaires());
 		}
+		horaires.publish(new DtList<>(Horaires.class));
+		horaire.publish(new Horaires());
 
 		return NONE;
 	}

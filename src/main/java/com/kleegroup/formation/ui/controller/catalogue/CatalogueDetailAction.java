@@ -45,9 +45,8 @@ public final class CatalogueDetailAction extends AbstractKleeFormationActionSupp
 	}
 
 	public String doSave() {
-		if (isModeCreate()) {
+		if (isModeCreate() || isModeEdit()) {
 			formationServices.saveFormation(formation.readDto());
-		} else if (isModeEdit()) {
 			formationServices.saveFormation(formation.readDto());
 		}
 		return SUCCESS;
