@@ -65,44 +65,28 @@ public class InscriptionServicesImpl implements InscriptionServices {
 	public void inscrireUtilisateurASession(final Long sesId) {
 		final Utilisateur utilisateurCourant = utilisateurServices.getCurrentUtilisateur();
 		final Inscription inscription = new Inscription();
-		final SessionFormation session = sessionServices.loadSessionbyId(sesId);
-		inscription.setUtiId(utilisateurCourant.getUtiId());
-		inscription.setSesId(sesId);
 		inscription.setMail(utilisateurCourant.getMail());
 		inscription.setNom(utilisateurCourant.getNom());
 		inscription.setPrenom(utilisateurCourant.getPrenom());
-		inscription.setSessionName(session.getFormationName());
-		inscription.setCommentaire(session.getCommentaire());
-		inscription.setNiveau(session.getNiveau());
-		inscription.setDatedebut(session.getDateDebut());
-		inscription.setDatefin(session.getDateFin());
-
-		inscription.setDureejour(session.getDuree());
-		inscription.setHoraire(session.getHoraire());
-		final BigDecimal zero = new BigDecimal(0);
-		inscription.setSatisfaction(zero);
-
-		if (session.getInscriptionList().size() + 1 < session.getNbPersonne()) {
-			inscriptionDAO.save(inscription);
-
-		} else {
-			session.setIsOuvert("Complet");
-			sessionServices.saveSessionFormation(session);
-
-		}
+		inscription.setUtiId(utilisateurCourant.getUtiId());
+		inscription(sesId);
 
 	}
 
 	@Override
 	public void inscrireUtilisateurAutre(final Long sesId, final Inscription inscriptions) {
 		final Inscription inscription = new Inscription();
-		inscriptionDAO.create(inscription);
-		inscription.setSesId(sesId);
 		inscription.setUtiId(inscriptions.getUtiId());
 		final Utilisateur utilisateur = utilisateurServices.loadUtilisateurWithRoles(inscription.getUtiId());
 		inscription.setNom(utilisateur.getNom());
 		inscription.setPrenom(utilisateur.getPrenom());
 		inscription.setMail(utilisateur.getMail());
+		inscription(sesId);
+
+	}
+
+	private void inscription(final Long sesId) {
+		final Inscription inscription = new Inscription();
 		final SessionFormation session = sessionServices.loadSessionbyId(sesId);
 		inscription.setSessionName(session.getFormationName());
 		inscription.setCommentaire(session.getCommentaire());
@@ -110,19 +94,18 @@ public class InscriptionServicesImpl implements InscriptionServices {
 		inscription.setDatedebut(session.getDateDebut());
 		inscription.setDatefin(session.getDateFin());
 		inscription.setDureejour(session.getDuree());
-
+		inscription.setSesId(sesId);
 		inscription.setHoraire(session.getHoraire());
 		final BigDecimal zero = new BigDecimal(0);
 		inscription.setSatisfaction(zero);
-		if (session.getInscriptionList().size() + 1 < session.getNbPersonne()) {
+		//+1
+		if (session.getInscriptionList().size() < session.getNbPersonne()) {
 			inscriptionDAO.save(inscription);
 
 		} else {
 			session.setIsOuvert("Complet");
 			sessionServices.saveSessionFormation(session);
-
 		}
-
 	}
 
 	@Override
