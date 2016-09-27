@@ -1,9 +1,6 @@
 package com.kleegroup.formation.boot.initializer;
 
-import javax.inject.Inject;
-
 import io.vertigo.core.spaces.component.ComponentInitializer;
-import io.vertigo.persona.security.VSecurityManager;
 
 /**
  * Initialisation du manager de Securit�.
@@ -12,8 +9,8 @@ import io.vertigo.persona.security.VSecurityManager;
  */
 public final class SecurityManagerInitializer implements ComponentInitializer {
 
-	@Inject
-	private VSecurityManager securityManager;
+	//	@Inject
+	//	private VSecurityManager securityManager;
 
 	/** {@inheritDoc} */
 	@Override

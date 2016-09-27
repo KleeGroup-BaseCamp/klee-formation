@@ -36,7 +36,7 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 	Long id;
 
 	/**insciptionServices
-	 * @param fodId Id de l'élément a afficher.
+	 * @param forId Id de l'élément a afficher.
 	 */
 	public void initContext(@Named("sesId") final Option<Long> sesId, @Named("forId") final Option<Long> forId, @Named("Intitule") final Option<String> intitule) {
 		if (sesId.isPresent()) {

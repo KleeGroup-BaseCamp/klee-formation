@@ -111,8 +111,6 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 	}
 
 	/**
-	 * @param utiId Identifiant de l'utilisateur
-	 * @Named("utiId") final Long utiId
 	 * @return Outcome de suppression
 	 */
 	public String doDelete() {

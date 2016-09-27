@@ -33,9 +33,6 @@ public final class SatisfactionAction extends AbstractKleeFormationActionSupport
 	private final ContextForm<Inscription> statistique = new ContextForm<>("statistique", this);
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 
-	/**
-	 * @param fodId Id de l'élément a afficher.
-	 */
 	public void initContext(@Named("sesId") final Option<Long> sesId, @Named("utiId") final Option<Long> utiId) {
 		if (utiId.isPresent()) {
 			statistique.publish(inscriptionServices.InscriptionByUtiSesId(utiId.get(), sesId.get()));

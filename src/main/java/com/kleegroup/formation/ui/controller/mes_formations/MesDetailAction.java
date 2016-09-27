@@ -36,9 +36,6 @@ public final class MesDetailAction extends AbstractKleeFormationActionSupport {
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 	private final ContextList<Inscription> inscriptions = new ContextList<>("inscriptions", this);
 
-	/**
-	 * @param fodId Id de l'élément a afficher.
-	 */
 	public void initContext(@Named("sesId") final Option<Long> sesId) {
 		if (sesId.isPresent()) {
 			session.publish(sessionServices.loadSessionFormation(sesId.get()));

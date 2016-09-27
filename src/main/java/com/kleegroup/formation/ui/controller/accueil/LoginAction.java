@@ -4,10 +4,9 @@ import javax.inject.Inject;
 
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurLogin;
-
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
-import io.vertigo.persona.security.VSecurityManager;
+
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.UiRequestUtil;
 
@@ -17,9 +16,6 @@ import io.vertigo.struts2.core.UiRequestUtil;
  */
 public final class LoginAction extends AbstractKleeFormationActionSupport {
 	private static final long serialVersionUID = 3517185648660870776L;
-
-	@Inject
-	private VSecurityManager securityManager;
 
 	@Inject
 	private UtilisateurServices utilisateurServices;

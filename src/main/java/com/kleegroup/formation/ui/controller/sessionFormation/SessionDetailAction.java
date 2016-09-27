@@ -49,9 +49,6 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	private final ContextList<Formation> formations = new ContextList<>("formations", this);
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 
-	/**
-	 * @param fodId Id de l'élément a afficher.
-	 */
 	public void initContext(@Named("sesId") final Option<Long> sesId) {
 		if (sesId.isPresent()) {
 			session.publish(sessionServices.loadSessionFormation(sesId.get()));
@@ -157,12 +154,11 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			sessionServices.deleteSessionFormation(session.readDto().getSesId());
 			return "success_delete";
 
-		} else {
-			sessions.setStatus("Annuler");
-			sessions.setIsOuvert("Annuler");
-			sessionServices.saveSessionFormation(sessions);
-			return SUCCESS;
 		}
+		sessions.setStatus("Annuler");
+		sessions.setIsOuvert("Annuler");
+		sessionServices.saveSessionFormation(sessions);
+		return SUCCESS;
 	}
 
 	public String doAdd() {

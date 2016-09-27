@@ -35,7 +35,7 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
 
 	/**
-	 * @param fodId Id de l'élément a afficher.
+	 * @param forId Id de l'élément a afficher.
 	 */
 	public void initContext(@Named("forId") final Option<Long> forId) {
 		if (forId.isPresent()) {

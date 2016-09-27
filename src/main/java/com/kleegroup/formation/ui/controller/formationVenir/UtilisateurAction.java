@@ -31,8 +31,6 @@ public final class UtilisateurAction extends AbstractKleeFormationActionSupport 
 	private final ContextForm<Inscription> inscriptionForm = new ContextForm<>("inscription", this);
 	private final ContextList<Utilisateur> utilisateurs = new ContextList<>("utilisateurs", this);
 
-	/** {@inheritDoc} */
-
 	public void initContext(@Named("sesId") final Option<Long> sesId) {
 		final UtilisateurCritere utilisateurcritere = new UtilisateurCritere();
 		utilisateurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurcritere));
@@ -49,7 +47,6 @@ public final class UtilisateurAction extends AbstractKleeFormationActionSupport 
 
 	public String doInscrire() {
 		inscriptionServices.inscrireUtilisateurAutre(sesIdRef.get(), inscriptionForm.readDto());
-		;
 		return "success_inscription";
 	}
 

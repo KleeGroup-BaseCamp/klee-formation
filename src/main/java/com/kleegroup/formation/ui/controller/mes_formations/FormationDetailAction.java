@@ -31,9 +31,6 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 	private final ContextList<Inscription> inscriptions = new ContextList<>("inscriptions", this);
 
-	/**
-	 * @param fodId Id de l'élément a afficher.
-	 */
 	public void initContext(@Named("sesId") final Option<Long> sesId) {
 		if (sesId.isPresent()) {
 			session.publish(sessionServices.loadSessionFormation(sesId.get()));
@@ -53,9 +50,9 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 
 	public String doSave() {
 		for (final Inscription inscription : inscriptions.readDtList()) {
-			final SessionFormation session = sessionServices.loadSessionbyId(sesIdRef.get());
-			session.setStatus("Réaliser");
-			sessionServices.saveSessionFormation(session);
+			final SessionFormation sessionFormation = sessionServices.loadSessionbyId(sesIdRef.get());
+			sessionFormation.setStatus("Réaliser");
+			sessionServices.saveSessionFormation(sessionFormation);
 			inscriptionServices.saveInscription(inscription);
 
 		}

@@ -18,7 +18,6 @@ import io.vertigo.struts2.exception.VSecurityException;
  * @version $Id: SecurityUtil.java,v 1.2 2014/07/07 16:40:26 pchretien Exp $
  */
 public final class SecurityUtil {
-
 	private static ComponentRef<VSecurityManager> securityManager = ComponentRef.makeLazyRef(VSecurityManager.class);
 
 	/**
@@ -46,12 +45,11 @@ public final class SecurityUtil {
 	}
 
 	public static void checkRole(final Role... authorizedRoles) {
-		final VSecurityManager securityManager = Home.getApp().getComponentSpace().resolve(VSecurityManager.class);
 		final Set<io.vertigo.persona.security.metamodel.Role> roles = new HashSet<>();
 		for (final Role authorizedRole : authorizedRoles) {
 			roles.add(Home.getApp().getDefinitionSpace().resolve(authorizedRole.name(), io.vertigo.persona.security.metamodel.Role.class));
 		}
-		if (!securityManager.hasRole(securityManager.getCurrentUserSession().get(), roles)) {
+		if (!securityManager.get().hasRole(securityManager.get().getCurrentUserSession().get(), roles)) {
 			throw new VSecurityException(new MessageText(Resources.DROIT_PAS_SUFFISANT).getDisplay());
 
 			//throw new VSecurityException("Vous n'avez pas les droits suffisants");
@@ -62,12 +60,11 @@ public final class SecurityUtil {
 	}
 
 	public static boolean hasRole(final Role... authorizedRoles) {
-		final VSecurityManager securityManager = Home.getApp().getComponentSpace().resolve(VSecurityManager.class);
 		final Set<io.vertigo.persona.security.metamodel.Role> roles = new HashSet<>();
 		for (final Role authorizedRole : authorizedRoles) {
 			roles.add(Home.getApp().getDefinitionSpace().resolve(authorizedRole.name(), io.vertigo.persona.security.metamodel.Role.class));
 		}
-		if (securityManager.hasRole(securityManager.getCurrentUserSession().get(), roles)) {
+		if (securityManager.get().hasRole(securityManager.get().getCurrentUserSession().get(), roles)) {
 			return true;
 
 		}

@@ -42,7 +42,7 @@ public final class FormationsDetailAction extends AbstractKleeFormationActionSup
 	private final ContextList<Inscription> inscriptions = new ContextList<>("inscriptions", this);
 
 	/**
-	 * @param fodId Id de l'élément a afficher.
+	 * @param forId Id de l'élément a afficher.
 	 */
 	public void initContext(@Named("sesId") final Option<Long> sesId, @Named("forId") final Option<Long> forId, @Named("Intitule") final Option<String> intitule, @Named("utiId") final Option<Long> utiId) {
 		if (sesId.isPresent()) {
