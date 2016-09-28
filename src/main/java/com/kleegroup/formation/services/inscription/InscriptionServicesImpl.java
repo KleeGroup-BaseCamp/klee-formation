@@ -5,9 +5,11 @@ import java.math.BigDecimal;
 import javax.inject.Inject;
 
 import com.kleegroup.formation.dao.formation.InscriptionDAO;
+import com.kleegroup.formation.dao.services.inscription.InscriptionPAO;
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.formation.Inscription;
 import com.kleegroup.formation.domain.formation.SessionFormation;
+import com.kleegroup.formation.domain.inscription.InscriptionView;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.session.SessionServices;
 
@@ -21,6 +23,8 @@ public class InscriptionServicesImpl implements InscriptionServices {
 
 	@Inject
 	private InscriptionDAO inscriptionDAO;
+	@Inject
+	private InscriptionPAO inscriptionPAO;
 
 	@Inject
 	private UtilisateurServices utilisateurServices;
@@ -55,6 +59,13 @@ public class InscriptionServicesImpl implements InscriptionServices {
 	}
 
 	@Override
+	public DtList<InscriptionView> getListInscriptionsViewBySessionId(final Long sessionId) {
+		Assertion.checkNotNull(sessionId);
+		// ---
+		return inscriptionPAO.getListInscriptionsViewBySessionId(sessionId);
+	}
+
+	@Override
 	public DtList<Inscription> getListInscriptionsBySessionId(final Long sessionId) {
 		Assertion.checkNotNull(sessionId);
 		// ---
@@ -71,6 +82,7 @@ public class InscriptionServicesImpl implements InscriptionServices {
 	public void inscrireUtilisateur(final Long sesId, final long utiId) {
 		final Inscription inscription = new Inscription();
 		inscription.setUtiId(utiId);
+		inscription.setSesId(sesId);
 		enregistrerInscription(inscription);
 	}
 
@@ -84,14 +96,14 @@ public class InscriptionServicesImpl implements InscriptionServices {
 			inscriptionDAO.save(inscription);
 
 		} else {
-			session.setIsOuvert("Complet");
+			session.setEsuCode("Complet");
 			sessionServices.saveSessionFormation(session);
 		}
 	}
 
 	@Override
-	public DtList<Inscription> getListInscriptionByUtiId(final Long utiId) {
-		return inscriptionDAO.getListInscriptionByUtiId(utiId);
+	public DtList<InscriptionView> getListInscriptionByUtiId(final Long utiId) {
+		return inscriptionPAO.getListInscriptionViewByUtiId(utiId);
 	}
 
 	@Override
@@ -100,13 +112,13 @@ public class InscriptionServicesImpl implements InscriptionServices {
 	}
 
 	@Override
-	public DtList<Inscription> InscriptionVenirFormation(final Long utilisateurId) {
-		return inscriptionDAO.getInscriptionVenirFormation(utilisateurId);
+	public DtList<InscriptionView> InscriptionVenirFormation(final Long utilisateurId) {
+		return inscriptionPAO.getInscriptionViewVenirFormation(utilisateurId);
 	}
 
 	@Override
-	public DtList<Inscription> InscriptionPasserFormation(final Long utilisateurId) {
-		return inscriptionDAO.getInscriptionPasserFormation(utilisateurId);
+	public DtList<InscriptionView> InscriptionPasserFormation(final Long utilisateurId) {
+		return inscriptionPAO.getInscriptionViewPasserFormation(utilisateurId);
 	}
 
 }

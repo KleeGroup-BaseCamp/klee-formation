@@ -9,7 +9,7 @@ import javax.inject.Named;
 import com.kleegroup.formation.domain.administration.utilisateur.Role;
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurLogin;
-import com.kleegroup.formation.domain.formation.Inscription;
+import com.kleegroup.formation.domain.inscription.InscriptionView;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.services.util.SecurityUtil;
@@ -38,7 +38,7 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 	@Inject
 	private InscriptionServices inscriptionServices;
 
-	private final ContextList<Inscription> inscriptions = new ContextList<>("inscriptions", this);
+	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", this);
 	private final ContextForm<UtilisateurLogin> utilisateurLogin = new ContextForm<>("utilisateurLogin", this);
 	private final ContextForm<Utilisateur> utilisateur = new ContextForm<>("utilisateur", this);
 	private final ContextRef<Boolean> roleAdmin = new ContextRef<>("roleAdmin", Boolean.class, this);

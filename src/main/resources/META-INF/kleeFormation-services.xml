@@ -17,6 +17,7 @@
 	    <component class="com.kleegroup.formation.dao.formation.HorairesDAO" />
 	    <component class="com.kleegroup.formation.dao.services.formation.FormationPAO" />
 	    <component class="com.kleegroup.formation.dao.formation.EtatSessionUtilisateurDAO" />
+	    <component class="com.kleegroup.formation.dao.services.inscription.InscriptionPAO" />
 	</module>
 	
 	<module name="services">

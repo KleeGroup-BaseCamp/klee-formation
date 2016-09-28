@@ -27,6 +27,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 			Horaires(com.kleegroup.formation.domain.formation.Horaires.class),
 			/** Objet de données Inscription. */
 			Inscription(com.kleegroup.formation.domain.formation.Inscription.class),
+			/** Objet de données InscriptionView. */
+			InscriptionView(com.kleegroup.formation.domain.inscription.InscriptionView.class),
 			/** Objet de données Login. */
 			Login(com.kleegroup.formation.domain.administration.utilisateur.Login.class),
 			/** Objet de données Niveau. */
@@ -161,6 +163,36 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		SES_ID,
 		/** Propriété 'Utilisateur'. */
 		UTI_ID,
+	}
+
+	/**
+	 * Enumération des champs de InscriptionView.
+	 */
+	public enum InscriptionViewFields implements DtFieldName {
+		/** Propriété 'SesId'. */
+		SES_ID,
+		/** Propriété 'Libellé court'. */
+		FORMATION_NAME,
+		/** Propriété 'Début'. */
+		DATE_DEBUT,
+		/** Propriété 'Fin'. */
+		DATE_FIN,
+		/** Propriété 'Horaires'. */
+		HORAIRES,
+		/** Propriété 'Durée'. */
+		DUREE,
+		/** Propriété 'Niveau'. */
+		NIVEAU,
+		/** Propriété 'Descriptif'. */
+		COMMENTAIRE,
+		/** Propriété 'Satisfaction'. */
+		SATISFACTION,
+		/** Propriété 'Présence'. */
+		PRESENCE,
+		/** Propriété 'Nom'. */
+		NOM,
+		/** Propriété 'Prénom'. */
+		PRENOM,
 	}
 
 	/**

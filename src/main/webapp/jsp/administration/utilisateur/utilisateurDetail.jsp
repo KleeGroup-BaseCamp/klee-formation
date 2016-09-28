@@ -48,10 +48,10 @@
 		<s:url action="MesDetail" includeParams="get" var="MesDetailURL">
 			<s:param name="sesId">${item.sesId}</s:param>
 		</s:url> 
-		<a href="${MesDetailURL}">${item.sessionName}</a>				
+		<a href="${MesDetailURL}">${item.formationName}</a>				
 	</display:column>
-	<display:column  property="datedebut" title="date de début" sortable="true"/>
-	<display:column  property="datefin" title="date de fin" sortable="true"/>
+	<display:column  property="dateDebut" title="date de début" sortable="true"/>
+	<display:column  property="dateFin" title="date de fin" sortable="true"/>
 	<display:column  property="presence" title="Présence" sortable="true"/>
 	<display:column title="Satisfaction" sortable="true">
 		<s:url action="Satisfaction" includeParams="get" var="SatisfactionURL">

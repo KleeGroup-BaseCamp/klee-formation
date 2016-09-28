@@ -67,6 +67,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			final com.kleegroup.formation.security.Role role = com.kleegroup.formation.security.Role.R_FORMATTEUR;
 			utilisateurcritere.setRole(role.toString());
 			session.publish(new SessionFormation());
+			horaires.publish(new DtList<>(Horaires.class));
 			loadListsForEdit();
 			toModeCreate();
 
@@ -80,15 +81,24 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		utilisateurcritere.setRole(role.toString());
 		formatteurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurcritere));
 		horaire.publish(new Horaires());
-		horaires.publish(new DtList<>(Horaires.class));
 		final FormationCritere formationcritere = new FormationCritere();
 		formations.publish(formationServices.getFormationListByCritere(formationcritere));
 
 	}
 
 	public String doEdit() {
-		session.publish(sessionServices.loadSessionFormation(sesIdRef.get()));
+		final SessionFormation my_session = sessionServices.loadSessionFormation(sesIdRef.get());
+		session.publish(my_session);
+		horaires.publish(new DtList<>(Horaires.class));
+		/*	System.out.println(Integer.toString(my_session.getHorairesList().size()));
+			if (my_session.getHorairesList().size() > 0) {
+				//	horaires.publish(my_session.getHorairesList());
+			} else {
+				horaires.publish(new DtList<>(Horaires.class));
+			}*/
+
 		loadListsForEdit();
+
 		toModeEdit();
 		return NONE;
 	}

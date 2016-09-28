@@ -26,16 +26,16 @@
 <s:form>
 	<!--   mode création / modification ----------------------------------------------------------------------------------- -->
 	<s:div layout="table" cols="2">
-	<s:textfield name="sessionTest.formationName" label="Nom"  disabled="disabled"/>
-	<s:textfield name="sessionTest.niveau" label="Niveau"  disabled="disabled"/>
-	<s:textfield name="sessionTest.commentaire" label="Commentaire"  disabled="disabled"/>
+	<s:textfield name="formation.intitule" label="Nom"  theme="xhtml_read"/>
+		<s:select name="formation.nivCode" label="default" list="niveaux" theme="xhtml_read"/>	
+		<s:textfield name="formation.commentaire" label="Commentaire" theme="xhtml_read"/>
 		<tr><td colspan="2">&nbsp;</td></tr>
-	 <sj:datepicker name="sessionTest.dateDebut" label="Début" changeMonth="true" changeYear="true" displayFormat="dd/mm/yy" showOn="button"/>
-	 <sj:datepicker name="sessionTest.dateFin" label="Fin" changeMonth="true" changeYear="true" displayFormat="dd/mm/yy" showOn="button"/>
-	 <s:textfield name="sessionTest.duree" label="Durée(jours)"/>
-	 <s:textfield name="sessionTest.horaire" label="Horaires"/>
-	 <s:textfield name="sessionTest.formateur" label="Formateur"/>
-	 <s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>
+	 <s:textfield name="sessionTest.dateDebut" label="Début" theme="xhtml_read"/>
+		<s:textfield name="sessionTest.dateFin" label="Fin" theme="xhtml_read"/>
+		<s:textfield name="sessionTest.duree" label="Durée (jours) " theme="xhtml_read"/>
+		<s:textfield name="sessionTest.horaire" label="Horaires" theme="xhtml_read"/>
+		<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
+		<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum" theme="xhtml_read"/>
 	</s:div>	
 </s:form>
 

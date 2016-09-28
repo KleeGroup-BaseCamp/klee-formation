@@ -5,9 +5,9 @@ import javax.inject.Named;
 
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.formation.Formation;
-import com.kleegroup.formation.domain.formation.Inscription;
 import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.formation.SessionFormation;
+import com.kleegroup.formation.domain.inscription.InscriptionView;
 import com.kleegroup.formation.security.Role;
 import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
@@ -37,7 +37,7 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
 	private final ContextForm<SessionFormation> session = new ContextForm<>("sessionTest", this);
-	private final ContextList<Inscription> inscriptions = new ContextList<>("inscriptions", this);
+	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", this);
 
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
 	private final ContextMdl<Utilisateur> utilisateurs = new ContextMdl<>("utilisateurs", this);
@@ -53,7 +53,7 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 		final SessionFormation sessionFormation = sessionServices.loadSessionFormation(sesId);
 		session.publish(sessionFormation);
 		formation.publish(formationServices.loadFormation(sessionFormation.getForId()));
-		inscriptions.publish(inscriptionServices.getListInscriptionsBySessionId(sesId));
+		inscriptions.publish(inscriptionServices.getListInscriptionsViewBySessionId(sesId));
 	}
 
 	public String doInscrire() {

@@ -65,6 +65,34 @@ public final class SessionPAO implements StoreServices {
 	}
 
 	/**
+	 * Execute la tache TK_GET_LIST_SESSION_FORMATEUR_VENIR.
+	 * @param formateurId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> dtc
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> getListSessionFormateurVenir(final Long formateurId) {
+		final Task task = createTaskBuilder("TK_GET_LIST_SESSION_FORMATEUR_VENIR")
+				.addValue("FORMATEUR_ID", formateurId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_GET_LIST_SESSION_FORMATEUR_PASSER.
+	 * @param formateurId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> dtc
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> getListSessionFormateurPasser(final Long formateurId) {
+		final Task task = createTaskBuilder("TK_GET_LIST_SESSION_FORMATEUR_PASSER")
+				.addValue("FORMATEUR_ID", formateurId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TK_GET_LIST_SESSION_BY_FOR_ID.
 	 * @param forId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> dtcSession

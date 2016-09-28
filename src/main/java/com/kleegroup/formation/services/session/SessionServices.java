@@ -56,9 +56,9 @@ public interface SessionServices extends Component {
 	 */
 	DtList<SessionFormation> listSessionByFormateurId(final Long formateurId);
 
-	DtList<SessionFormation> ListSessionFormateurVenir(final Long formateurId);
+	DtList<SessionView> ListSessionFormateurVenir(final Long formateurId);
 
-	DtList<SessionFormation> ListSessionFormateurPasser(final Long formateurId);
+	DtList<SessionView> ListSessionFormateurPasser(final Long formateurId);
 
 	void deleteSessionFormation(Long sesId);
 

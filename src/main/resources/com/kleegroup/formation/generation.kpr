@@ -3,7 +3,9 @@ execution.kpr
 services/administration/utilisateur/model.ksp
 
 services/formation/model.ksp
+
 services/session/model.ksp
+services/inscription/model.ksp
 
 
 

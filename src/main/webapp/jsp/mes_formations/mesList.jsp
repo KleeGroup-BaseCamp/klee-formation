@@ -14,12 +14,12 @@
 			<s:url action="MesDetail" includeParams="get" var="MesDetailURL">
 				<s:param name="sesId">${item.sesId}</s:param>
 			</s:url> 
-			<a href="${MesDetailURL}">${item.sessionName}</a>				
+			<a href="${MesDetailURL}">${item.formationName}</a>				
 		</display:column>
-	<display:column  property="datedebut" title="Début" sortable="true"/>
-	<display:column  property="datefin" title="Fin" sortable="true"/>
-	<display:column  property="dureejour" title="Durée(jours)" sortable="true"/>
-	<display:column  property="horaire" title="Horaires" sortable="true"/>
+	<display:column  property="dateDebut" title="Début" sortable="true"/>
+	<display:column  property="dateFin" title="Fin" sortable="true"/>
+	<display:column  property="duree" title="Durée(jours)" sortable="true"/>
+	<display:column  property="horaires" title="Horaires" sortable="true"/>
 	<display:column  property="niveau" title="Niveau" sortable="true" />
 	<display:column  property="commentaire" title="Descriptif" sortable="true" />	
 </display:table>
@@ -31,10 +31,10 @@
 			<s:url action="MesDetail" includeParams="get" var="MesDetailURL">
 				<s:param name="sesId">${item.sesId}</s:param>
 			</s:url> 
-			<a href="${MesDetailURL}">${item.sessionName}</a>			
+			<a href="${MesDetailURL}">${item.formationName}</a>			
 		</display:column>
-		<display:column  property="datedebut" title="Début" sortable="true"/>
-		<display:column  property="datefin" title="Fin" sortable="true"/>
+		<display:column  property="dateDebut" title="Début" sortable="true"/>
+		<display:column  property="dateFin" title="Fin" sortable="true"/>
 		<display:column title="Satisfaction" sortable="true">
 			<s:url action="Satisfaction" includeParams="get" var="SatisfactionURL">
 				<s:param name="sesId">${item.sesId}</s:param>
@@ -56,7 +56,7 @@
 		<display:column  property="dateDebut" title="Début" sortable="true"/>
 		<display:column  property="dateFin" title="Fin" sortable="true"/>
 		<display:column  property="duree" title="Durée(jours)" sortable="true"/>
-		<display:column  property="horaire" title="Horaires" sortable="true"/>
+		<display:column  property="horaires" title="Horaires" sortable="true"/>
 		<display:column  property="niveau" title="Niveau" sortable="true" />
 		<display:column  property="commentaire" title="Descriptif" sortable="true" />		
 	</display:table>
@@ -75,8 +75,8 @@
 		<display:column  property="dateFin" title="Fin" sortable="true"/>
 		<display:column  property="satisfaction" title="Staisfaction générale" sortable="true"/> 
 	</display:table>
+	
 </s:if>
-
 
 <%@include file="/jsp/include/footer.jsp"%>
 

@@ -38,7 +38,6 @@ public class SessionServicesImpl implements SessionServices {
 	@Override
 	public SessionFormation loadSessionbyId(final Long sesId) {
 		final SessionFormation session = sessionformationDAO.get(sesId);
-
 		return session;
 
 	}
@@ -87,13 +86,13 @@ public class SessionServicesImpl implements SessionServices {
 	}
 
 	@Override
-	public DtList<SessionFormation> ListSessionFormateurVenir(final Long formateurId) {
-		return sessionformationDAO.getListSessionFormateurVenir(formateurId);
+	public DtList<SessionView> ListSessionFormateurVenir(final Long formateurId) {
+		return sessionPAO.getListSessionFormateurVenir(formateurId);
 	}
 
 	@Override
-	public DtList<SessionFormation> ListSessionFormateurPasser(final Long formateurId) {
-		return sessionformationDAO.getListSessionFormateurPasser(formateurId);
+	public DtList<SessionView> ListSessionFormateurPasser(final Long formateurId) {
+		return sessionPAO.getListSessionFormateurPasser(formateurId);
 	}
 
 	@Override

@@ -76,33 +76,5 @@ public final class SessionFormationDAO extends DAO<SessionFormation, java.lang.L
 				.getResult();
 	}
 
-	/**
-	 * Execute la tache TK_GET_LIST_SESSION_FORMATEUR_VENIR.
-	 * @param formateurId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> dtc
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> getListSessionFormateurVenir(final Long formateurId) {
-		final Task task = createTaskBuilder("TK_GET_LIST_SESSION_FORMATEUR_VENIR")
-				.addValue("FORMATEUR_ID", formateurId)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
-	 * Execute la tache TK_GET_LIST_SESSION_FORMATEUR_PASSER.
-	 * @param formateurId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> dtc
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> getListSessionFormateurPasser(final Long formateurId) {
-		final Task task = createTaskBuilder("TK_GET_LIST_SESSION_FORMATEUR_PASSER")
-				.addValue("FORMATEUR_ID", formateurId)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
 
 }

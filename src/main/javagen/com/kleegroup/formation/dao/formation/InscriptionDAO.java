@@ -39,40 +39,12 @@ public final class InscriptionDAO extends DAO<Inscription, java.lang.Long> imple
 	}
 
 	/**
-	 * Execute la tache TK_GET_LIST_INSCRIPTIONS_BY_SESSION_ID.
-	 * @param sessionId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> dtcInscriptions
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> getListInscriptionsBySessionId(final Long sessionId) {
-		final Task task = createTaskBuilder("TK_GET_LIST_INSCRIPTIONS_BY_SESSION_ID")
-				.addValue("SESSION_ID", sessionId)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
 	 * Execute la tache TK_GET_LIST_UTILISATEUR_BY_INSCRIPTION.
 	 * @param utilisateurId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> dtc
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> getListUtilisateurByInscription(final Long utilisateurId) {
 		final Task task = createTaskBuilder("TK_GET_LIST_UTILISATEUR_BY_INSCRIPTION")
-				.addValue("UTILISATEUR_ID", utilisateurId)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
-	 * Execute la tache TK_GET_LIST_INSCRIPTION_BY_UTI_ID.
-	 * @param utilisateurId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> dtc
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> getListInscriptionByUtiId(final Long utilisateurId) {
-		final Task task = createTaskBuilder("TK_GET_LIST_INSCRIPTION_BY_UTI_ID")
 				.addValue("UTILISATEUR_ID", utilisateurId)
 				.build();
 		return getTaskManager()
@@ -97,27 +69,13 @@ public final class InscriptionDAO extends DAO<Inscription, java.lang.Long> imple
 	}
 
 	/**
-	 * Execute la tache TK_GET_INSCRIPTION_VENIR_FORMATION.
-	 * @param utilisateurId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> dtc
+	 * Execute la tache TK_GET_LIST_INSCRIPTIONS_BY_SESSION_ID.
+	 * @param sessionId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> dtcInscriptions
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> getInscriptionVenirFormation(final Long utilisateurId) {
-		final Task task = createTaskBuilder("TK_GET_INSCRIPTION_VENIR_FORMATION")
-				.addValue("UTILISATEUR_ID", utilisateurId)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
-	 * Execute la tache TK_GET_INSCRIPTION_PASSER_FORMATION.
-	 * @param utilisateurId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> dtc
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> getInscriptionPasserFormation(final Long utilisateurId) {
-		final Task task = createTaskBuilder("TK_GET_INSCRIPTION_PASSER_FORMATION")
-				.addValue("UTILISATEUR_ID", utilisateurId)
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> getListInscriptionsBySessionId(final Long sessionId) {
+		final Task task = createTaskBuilder("TK_GET_LIST_INSCRIPTIONS_BY_SESSION_ID")
+				.addValue("SESSION_ID", sessionId)
 				.build();
 		return getTaskManager()
 				.execute(task)

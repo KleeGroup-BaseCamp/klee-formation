@@ -26,15 +26,15 @@
 <s:form>
 	<!--   mode création / modification ----------------------------------------------------------------------------------- -->
 	<s:div layout="table" cols="2">
-		<s:textfield name="sessionTest.formationName" label="Nom"  theme="xhtml_read"/>
-		<s:textfield name="sessionTest.niveau" label="Niveau"  theme="xhtml_read"/>
-		<s:textfield name="sessionTest.commentaire" label="Commentaire" theme="xhtml_read"/>
+		<s:textfield name="formation.intitule" label="Nom"  theme="xhtml_read"/>
+		<s:select name="formation.nivCode" label="default" list="niveaux" theme="xhtml_read"/>	
+		<s:textfield name="formation.commentaire" label="Commentaire" theme="xhtml_read"/>
 			<tr><td colspan="2">&nbsp;</td></tr>
 		<s:textfield name="sessionTest.dateDebut" label="Début" theme="xhtml_read"/>
 		<s:textfield name="sessionTest.dateFin" label="Fin" theme="xhtml_read"/>
 		<s:textfield name="sessionTest.duree" label="Durée (jours) " theme="xhtml_read"/>
 		<s:textfield name="sessionTest.horaire" label="Horaires" theme="xhtml_read"/>
-		<s:textfield name="sessionTest.formateur" label="Formateur" theme="xhtml_read"/>
+		<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
 		<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum" theme="xhtml_read"/>
 	</s:div>	
 </s:form>
@@ -44,24 +44,22 @@
 	<display:table  name="inscriptions" class="tableau" uid="item" export="true" sort="list" requestURI="#" pagesize="20">
 		<display:setProperty name="basic.msg.empty_list">Aucune inscription.</display:setProperty>
 		<display:setProperty name="export.csv.filename">inscriptions.csv</display:setProperty>
-	<display:column  property="nom" title="Nom" sortable="true"/>
-	<display:column  property="prenom" title="Prénom" sortable="true"/>
-	
-	<s:if test="%{modeEdit}">
-	<display:column  title="présence" sortable="true">
-		<s:checkbox name="%{util.contextKey(#attr.item)}.presence" id="presence" value="false" label=" "/>
+	<display:column title="Nom" sortable="true">
+		<s:select name="%{util.contextKey(#attr.item)}.utiId" list="utilisateurs" listKey="utiId" listValue="nom" theme="xhtml_read" />
 	</display:column>
-	</s:if>
-	<s:if test="%{modeReadOnly}">
-		<display:column  property="presence" title="Présence" sortable="true"/>
-	</s:if>
-		<display:column title="Satisfaction" sortable="true">
-			<s:url action="Satisfaction" includeParams="get" var="SatisfactionURL">
-				<s:param name="sesId">${item.sesId}</s:param>
-				<s:param name="utiId">${item.utiId}</s:param>
-			</s:url> 
-			<a href="${SatisfactionURL}">${item.satisfaction}</a>			
-		</display:column>
+	<display:column title="Prénom" sortable="true">
+		<s:select name="%{util.contextKey(#attr.item)}.utiId" list="utilisateurs" listKey="utiId" listValue="prenom" theme="xhtml_read" />
+	</display:column>
+	<display:column title="Présence" sortable="true">
+		<s:checkbox name="%{util.contextKey(#attr.item)}.presence" theme="simple%{modeReadOnly ? '_read' : ''}"/>
+	</display:column>
+	<display:column title="Satisfaction" sortable="true">
+		<s:url action="Satisfaction" includeParams="get" var="SatisfactionURL">
+			<s:param name="sesId">${item.sesId}</s:param>
+			<s:param name="utiId">${item.utiId}</s:param>
+		</s:url> 
+		<a href="${SatisfactionURL}">${item.satisfaction}</a>			
+	</display:column>
 	</display:table>
 
 <s:if test="%{modeEdit}">

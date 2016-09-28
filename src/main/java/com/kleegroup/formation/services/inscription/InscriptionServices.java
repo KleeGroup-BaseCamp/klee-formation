@@ -1,6 +1,7 @@
 package com.kleegroup.formation.services.inscription;
 
 import com.kleegroup.formation.domain.formation.Inscription;
+import com.kleegroup.formation.domain.inscription.InscriptionView;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.Component;
@@ -35,13 +36,15 @@ public interface InscriptionServices extends Component {
 
 	DtList<Inscription> getInscriptionListByCritere(final Inscription inscription);
 
-	DtList<Inscription> getListInscriptionsBySessionId(Long sessionId);
+	DtList<InscriptionView> getListInscriptionsViewBySessionId(Long sessionId);
 
-	DtList<Inscription> getListInscriptionByUtiId(final Long utiId);
+	DtList<InscriptionView> getListInscriptionByUtiId(final Long utiId);
 
 	Inscription InscriptionByUtiSesId(final Long utilisateurId, final Long sessionFormationId);
 
-	DtList<Inscription> InscriptionVenirFormation(final Long utilisateurId);
+	DtList<InscriptionView> InscriptionVenirFormation(final Long utilisateurId);
 
-	DtList<Inscription> InscriptionPasserFormation(final Long utilisateurId);
+	DtList<InscriptionView> InscriptionPasserFormation(final Long utilisateurId);
+
+	DtList<Inscription> getListInscriptionsBySessionId(Long sessionId);
 }

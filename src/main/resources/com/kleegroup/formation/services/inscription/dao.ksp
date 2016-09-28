@@ -1,12 +1,26 @@
 package com.kleegroup.formation.dao.services.inscription
 
-create Task TK_GET_LIST_INSCRIPTION_BY_UTI_ID {
+create Task TK_GET_LIST_INSCRIPTION_VIEW_BY_UTI_ID {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
-	request : "Select ins.*
-               From	INSCRIPTION ins
+	request : "Select ins.SATISFACTION as SATISFACTION,
+						ins.PRESENCE as PRESENCE,
+						ses.SES_ID as SES_ID,
+						ses.DATE_DEBUT as DATE_DEBUT,
+						ses.DATE_FIN as DATE_FIN,
+						ses.HORAIRE as HORAIRES,
+						ses.DUREE as DUREE,
+						form.INTITULE as FORMATION_NAME,
+						form.COMMENTAIRE as COMMENTAIRE,
+						niv.LIBELLE as NIVEAU	
+               From	INSCRIPTION as ins
+               join SESSION_FORMATION ses on ins.SES_ID = ses.SES_ID
+               join FORMATION as form on ses.FOR_ID = form.FOR_ID 
+               join ETAT as eta on ses.ETA_CODE = eta.ETA_CODE
+               join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
+               join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
                Where ins.UTI_ID = #UTILISATEUR_ID#",
   attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
-  attribute DTC {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
+  attribute DTC {domain : DO_DT_INSCRIPTION_VIEW_DTC, notNull:"true", inOut :"out",}
 }
 
 create Task TK_GET_INSCRIPTION_BY_UTI_SES_ID {
@@ -21,25 +35,83 @@ create Task TK_GET_INSCRIPTION_BY_UTI_SES_ID {
 }
 
 
-create Task TK_GET_INSCRIPTION_VENIR_FORMATION {
+create Task TK_GET_INSCRIPTION_VIEW_VENIR_FORMATION {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
-	request : "Select ins.*
-               From	INSCRIPTION ins
+	request : "Select ses.SES_ID as SES_ID,
+						ses.DATE_DEBUT as DATE_DEBUT,
+						ses.DATE_FIN as DATE_FIN,
+						ses.HORAIRE as HORAIRES,
+						ses.DUREE as DUREE,
+						form.INTITULE as FORMATION_NAME,
+						form.COMMENTAIRE as COMMENTAIRE,
+						niv.LIBELLE as NIVEAU	
+               From	INSCRIPTION as ins
                join SESSION_FORMATION ses on ins.SES_ID = ses.SES_ID
+               join FORMATION as form on ses.FOR_ID = form.FOR_ID 
+               join ETAT as eta on ses.ETA_CODE = eta.ETA_CODE
+               join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
+               join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
                Where ins.UTI_ID = #UTILISATEUR_ID#
 								 and ses.DATE_FIN >= CURRENT_DATE()",
   attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
-  attribute DTC {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
+  attribute DTC {domain : DO_DT_INSCRIPTION_VIEW_DTC, notNull:"true", inOut :"out",}
+}
+               
+               
+
+create Task TK_GET_INSCRIPTION_VIEW_PASSER_FORMATION {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select 	ins.SATISFACTION as SATISFACTION,
+						ses.SES_ID as SES_ID,
+						ses.DATE_DEBUT as DATE_DEBUT,
+						ses.DATE_FIN as DATE_FIN,
+						ses.HORAIRE as HORAIRES,
+						ses.DUREE as DUREE,
+						form.INTITULE as FORMATION_NAME,
+						form.COMMENTAIRE as COMMENTAIRE,
+						niv.LIBELLE as NIVEAU	
+               From	INSCRIPTION as ins
+               join SESSION_FORMATION ses on ins.SES_ID = ses.SES_ID
+               join FORMATION as form on ses.FOR_ID = form.FOR_ID 
+               join ETAT as eta on ses.ETA_CODE = eta.ETA_CODE
+               join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
+               join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
+               Where ins.UTI_ID = #UTILISATEUR_ID#
+			and ses.DATE_DEBUT < CURRENT_DATE()",
+  attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC {domain : DO_DT_INSCRIPTION_VIEW_DTC, notNull:"true", inOut :"out",}
 }
 
 
-create Task TK_GET_INSCRIPTION_PASSER_FORMATION {
+create Task TK_GET_LIST_INSCRIPTIONS_VIEW_BY_SESSION_ID {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select ses.SES_ID as SES_ID,
+						ses.DATE_DEBUT as DATE_DEBUT,
+						ses.DATE_FIN as DATE_FIN,
+						ses.HORAIRE as HORAIRES,
+						ses.DUREE as DUREE,
+						form.INTITULE as FORMATION_NAME,
+						form.COMMENTAIRE as COMMENTAIRE,
+						niv.LIBELLE as NIVEAU,
+						uti.NOM as NOM,
+						uti.PRENOM as PRENOM
+               From	INSCRIPTION as ins
+               join SESSION_FORMATION ses on ins.SES_ID = ses.SES_ID
+               join FORMATION as form on ses.FOR_ID = form.FOR_ID 
+               join ETAT as eta on ses.ETA_CODE = eta.ETA_CODE
+               join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
+               join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
+               join UTILISATEUR as uti on ins. UTI_ID = uti.UTI_ID
+               Where ins.SES_ID = #SESSION_ID#",
+  attribute SESSION_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC_INSCRIPTIONS {domain : DO_DT_INSCRIPTION_VIEW_DTC, notNull:"true", inOut :"out",}
+ }
+  
+create Task TK_GET_LIST_INSCRIPTIONS_BY_SESSION_ID {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "Select ins.*
-               From	INSCRIPTION ins
-               join SESSION_FORMATION ses on ins.SES_ID = ses.SES_ID
-               Where ins.UTI_ID = #UTILISATEUR_ID#
-			and ses.DATE_FIN < CURRENT_DATE()",
-  attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
-  attribute DTC {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
+               From	INSCRIPTION as ins
+               Where ins.SES_ID = #SESSION_ID#",
+  attribute SESSION_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DTC_INSCRIPTIONS {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
 }
