@@ -39,18 +39,6 @@ public final class SessionFormationDAO extends DAO<SessionFormation, java.lang.L
 	}
 
 	/**
-	 * Execute la tache TK_LIST_SESSION_BY_DATE.
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> dtcSessionFormation
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> listSessionByDate() {
-		final Task task = createTaskBuilder("TK_LIST_SESSION_BY_DATE")
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
 	 * Execute la tache TK_LIST_SESSION_BROUILLON.
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> dtcSessionFormation
 	*/
@@ -110,20 +98,6 @@ public final class SessionFormationDAO extends DAO<SessionFormation, java.lang.L
 	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> getListSessionFormateurPasser(final Long formateurId) {
 		final Task task = createTaskBuilder("TK_GET_LIST_SESSION_FORMATEUR_PASSER")
 				.addValue("FORMATEUR_ID", formateurId)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
-	 * Execute la tache TK_GET_LIST_SESSION_BY_FOR_ID.
-	 * @param forId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> dtcSession
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> getListSessionByForId(final Long forId) {
-		final Task task = createTaskBuilder("TK_GET_LIST_SESSION_BY_FOR_ID")
-				.addValue("FOR_ID", forId)
 				.build();
 		return getTaskManager()
 				.execute(task)

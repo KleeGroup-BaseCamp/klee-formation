@@ -3,18 +3,22 @@ package com.kleegroup.formation.ui.controller.formationVenir;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
+import com.kleegroup.formation.domain.formation.Formation;
 import com.kleegroup.formation.domain.formation.Inscription;
+import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.security.Role;
+import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.services.util.SecurityUtil;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
-import io.vertigo.lang.Assertion;
-import io.vertigo.lang.Option;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
+import io.vertigo.struts2.core.ContextMdl;
 import io.vertigo.struts2.core.ContextRef;
 
 /**
@@ -25,37 +29,31 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 
 	@Inject
 	private SessionServices sessionServices;
-
+	@Inject
+	private FormationServices formationServices;
 	@Inject
 	private InscriptionServices inscriptionServices;
 
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
+	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
 	private final ContextForm<SessionFormation> session = new ContextForm<>("sessionTest", this);
 	private final ContextList<Inscription> inscriptions = new ContextList<>("inscriptions", this);
 
-	Long id;
+	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
+	private final ContextMdl<Utilisateur> utilisateurs = new ContextMdl<>("utilisateurs", this);
 
 	/**insciptionServices
 	 * @param forId Id de l'élément a afficher.
 	 */
-	public void initContext(@Named("sesId") final Option<Long> sesId, @Named("forId") final Option<Long> forId, @Named("Intitule") final Option<String> intitule) {
-		if (sesId.isPresent()) {
-			sesIdRef.set(sesId.get());
-			Assertion.checkArgument(!forId.isPresent(), "L'id de formation ne doit pas être passé pour le chargement d'une session");
-			session.publish(sessionServices.loadSessionFormation(sesId.get()));
-			inscriptions.publish(inscriptionServices.getListInscriptionsBySessionId(sesId.get()));
+	public void initContext(@Named("sesId") final Long sesId) {
+		sesIdRef.set(sesId);
+		niveaux.publish(Niveau.class, null);
+		utilisateurs.publish(Utilisateur.class, null);
 
-		} else {
-			Assertion.checkArgument(forId.isPresent(), "L'id de formation est obligatoire");
-
-			final SessionFormation sessions = new SessionFormation();
-			sessions.setForId(forId.get());
-			sessions.setFormationName(intitule.get());
-
-			session.publish(sessions);
-			toModeCreate();
-
-		}
+		final SessionFormation sessionFormation = sessionServices.loadSessionFormation(sesId);
+		session.publish(sessionFormation);
+		formation.publish(formationServices.loadFormation(sessionFormation.getForId()));
+		inscriptions.publish(inscriptionServices.getListInscriptionsBySessionId(sesId));
 	}
 
 	public String doInscrire() {
@@ -75,6 +73,11 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 			return "Modification d'une session deformation";
 		}
 		return "Detail d'une session de formation";
+	}
+
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.VENIR;
 	}
 
 }

@@ -9,6 +9,7 @@ import com.kleegroup.formation.domain.formation.Inscription;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.lang.Option;
 import io.vertigo.struts2.core.ContextForm;
@@ -46,7 +47,7 @@ public final class UtilisateurAction extends AbstractKleeFormationActionSupport 
 	}
 
 	public String doInscrire() {
-		inscriptionServices.inscrireUtilisateurAutre(sesIdRef.get(), inscriptionForm.readDto());
+		inscriptionServices.inscrireUtilisateur(sesIdRef.get(), inscriptionForm.readDto().getUtiId());
 		return "success_inscription";
 	}
 
@@ -58,6 +59,12 @@ public final class UtilisateurAction extends AbstractKleeFormationActionSupport 
 			return "Modification d'une session deformation";
 		}
 		return "Detail d'une session de formation";
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.ADMINISTRATION;
 	}
 
 }

@@ -1,1 +1,23 @@
 package com.kleegroup.formation.domain.session
+
+create DtDefinition DT_SESSION_VIEW {
+    persistent : "false"
+    field SES_ID {domain : DO_IDENTIFIANT, label : "SesId", notNull : "false"}
+	field FORMATION_NAME {domain : DO_LIBELLE_COURT, label : "Libellé court", notNull : "false"}
+	field DATE_DEBUT {domain : DO_DATE_MINUTE, label : "Début", notNull : "false"}
+	field DATE_FIN {domain : DO_DATE_MINUTE, label : "Fin", notNull : "false"}
+	field HORAIRES {domain : DO_LIBELLE_LONG, label : "Horaires", notNull : "false"}
+	field DUREE {domain : DO_IDENTIFIANT, label : "Durée", notNull : "false"}
+	field NIVEAU {domain : DO_LIBELLE_COURT, label : "Niveau", notNull : "false"}
+	field COMMENTAIRE {domain : DO_LIBELLE_LONG, label : "Descriptif", notNull : "false"}
+	field STATUS {domain : DO_LIBELLE_COURT, label : "Etat", notNull : "false"}
+	field STATUS_UTILISATEUR {domain : DO_LIBELLE_COURT, label : "Etat", notNull : "false"}
+}
+
+
+create DtDefinition DT_CRITERE_SESSION {
+    persistent : "false"
+	field INTITULE {domain : DO_LIBELLE_COURT, label : "Libellé court", notNull : "false"}
+	
+}
+

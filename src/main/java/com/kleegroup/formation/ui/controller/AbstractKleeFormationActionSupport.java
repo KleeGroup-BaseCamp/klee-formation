@@ -2,6 +2,9 @@ package com.kleegroup.formation.ui.controller;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.kleegroup.formation.ui.controller.menu.Menu;
+import com.kleegroup.formation.ui.controller.menu.NavigationItem;
+
 import io.vertigo.struts2.core.AbstractActionSupport;
 import io.vertigo.struts2.impl.MethodUtil;
 import io.vertigo.struts2.impl.servlet.RequestContainerWrapper;
@@ -28,6 +31,47 @@ public abstract class AbstractKleeFormationActionSupport extends AbstractActionS
 	protected void initContext() {
 		final RequestContainerWrapper container = new RequestContainerWrapper(ServletActionContext.getRequest());
 		MethodUtil.invoke(this, "initContext", container);
+	}
+
+	/**
+	* Initialisation du context.
+	*/
+	@Override
+	protected final void preInitContext() {
+		super.preInitContext();
+		getModel().put("menuItems", Menu.ROOT_MENU.getChildren());
+		getModel().put("activeMenu", getActiveMenu());
+		// Enregistrement des informations des sous-menus si besoin.
+		if (getActiveSubMenu() != null) {
+			getModel().put("subMenuItems", getSubMenuItems());
+			getModel().put("activeSubMenu", getActiveSubMenu());
+		}
+	}
+
+	/**
+		* Retourne le menu actif.
+		*
+		* @return Menu
+		*/
+	public abstract Menu getActiveMenu();
+
+	/**
+	* Retourne le sous-menu actif si besoin.
+	*
+	* @return sous menu actif
+	*/
+	protected Menu getActiveSubMenu() {
+		// A surcharger si besoin
+		return null;
+	}
+
+	/**
+		* Retourne la liste des sous menu d'un menu .
+		*
+		* @return liste des enfant d'un menu
+		*/
+	public final NavigationItem[] getSubMenuItems() {
+		return getActiveMenu().getChildren();
 	}
 
 	/**

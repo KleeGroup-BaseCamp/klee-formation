@@ -25,9 +25,9 @@
 	<!--   mode création / modification ----------------------------------------------------------------------------------- -->
 	<s:div layout="table" cols="4">
 	<s:if test="%{!modeCreate}">
-	<s:textfield name="sessionTest.formationName" label="Nom" theme="xhtml_read" />
-	<s:textfield name="sessionTest.niveau" label="Niveau" theme="xhtml_read"/>
-	<s:textfield name="sessionTest.commentaire" label="Descriptif" theme="xhtml_read"/>
+	<s:textfield name="formation.intitule" label="Nom" theme="xhtml_read" />
+	<s:select name="formation.nivCode" list="niveaux" label="Niveau" theme="xhtml_read"/>
+	<s:textfield name="formation.commentaire" label="Descriptif" theme="xhtml_read"/>
 	</s:if>
 		<tr><td colspan="2">&nbsp;</td></tr>
 	 <s:if test="%{modeCreate}" >
@@ -44,7 +44,7 @@
 				href="ListAutocomplete.do" />
 		</s:if>
 		<s:if test="%{modeReadOnly}">
-			<s:textfield name="sessionTest.formateur" label="Formateur"/>
+			<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
 		</s:if>
 		<s:if test="%{modeCreate}">
 			<display:table  name="horaires" class="tableau" id="item" export="false" requestURI="#" pagesize="20">

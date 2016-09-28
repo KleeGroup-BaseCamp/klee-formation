@@ -62,8 +62,6 @@ public class HorairesServicesImpl implements HorairesServices {
 
 	}
 
-	//public SessionFormationDAO sessionDAO;
-
 	@Override
 	public void deleteHoraires(final Long sesId) {
 		final SessionFormation session = sessionServices.loadSessionbyId(sesId);

@@ -18,4 +18,8 @@ public enum Role {
 	 * R_RESPONSSABLE.
 	 */
 	R_RESPONSSABLE,
+	/**
+	 * R_ANONYMOUS.
+	 */
+	R_ANONYMOUS,
 }

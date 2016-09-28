@@ -5,11 +5,10 @@ import javax.inject.Inject;
 import com.kleegroup.formation.domain.formation.Formation;
 import com.kleegroup.formation.domain.formation.FormationCritere;
 import com.kleegroup.formation.domain.formation.Niveau;
-import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.services.formation.FormationServices;
-import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.services.util.SecurityUtil;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
@@ -28,11 +27,6 @@ public final class CatalogueListAction extends AbstractKleeFormationActionSuppor
 	private final ContextForm<FormationCritere> formationCritere = new ContextForm<>("formationCritere", this);
 	private final ContextList<Formation> formations = new ContextList<>("formations", this);
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
-	@Inject
-	private SessionServices sessionServices;
-
-	private final ContextForm<SessionFormation> session = new ContextForm<>("session", this);
-	private final ContextList<SessionFormation> sessions = new ContextList<>("sessions", this);
 
 	/** {@inheritDoc} */
 	@Override
@@ -41,10 +35,6 @@ public final class CatalogueListAction extends AbstractKleeFormationActionSuppor
 		niveaux.publish(Niveau.class, null);
 		formationCritere.publish(new FormationCritere());
 		formations.publish(formationServices.getFormationListByCritere(formationCritere.readDto()));
-		session.publish(new SessionFormation());
-		final SessionFormation test1 = new SessionFormation();
-		test1.setStatus("Brouillon");
-		sessions.publish(sessionServices.getSessionListByCritere(test1));
 
 		toModeEdit();
 
@@ -62,4 +52,9 @@ public final class CatalogueListAction extends AbstractKleeFormationActionSuppor
 		return "Recherche de formation";
 	}
 
+	/** {@inheritDoc} */
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.ROOT_MENU;
+	}
 }

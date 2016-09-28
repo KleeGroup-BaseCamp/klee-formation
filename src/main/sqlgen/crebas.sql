@@ -46,7 +46,6 @@ create table ETAT
 (
     ETA_CODE    	 VARCHAR(30) 	not null,
     LIBELLE     	 VARCHAR(40) 	,
-    SES_ID      	 BIGINT      	not null,
     constraint PK_ETAT primary key (ETA_CODE)
 );
 
@@ -56,10 +55,6 @@ comment on column ETAT.ETA_CODE is
 comment on column ETAT.LIBELLE is
 'Libelle';
 
-comment on column ETAT.SES_ID is
-'Session formation';
-
-create index ETAT_SES_ID_FK on ETAT (SES_ID asc);
 -- ============================================================
 --   Table : ETAT_SESSION_UTILISATEUR                                        
 -- ============================================================
@@ -67,7 +62,6 @@ create table ETAT_SESSION_UTILISATEUR
 (
     ESU_CODE    	 VARCHAR(30) 	not null,
     LIBELLE     	 VARCHAR(100)	,
-    SES_ID      	 BIGINT      	not null,
     constraint PK_ETAT_SESSION_UTILISATEUR primary key (ESU_CODE)
 );
 
@@ -77,10 +71,6 @@ comment on column ETAT_SESSION_UTILISATEUR.ESU_CODE is
 comment on column ETAT_SESSION_UTILISATEUR.LIBELLE is
 'Libellé';
 
-comment on column ETAT_SESSION_UTILISATEUR.SES_ID is
-'Session formation';
-
-create index ETAT_SESSION_UTILISATEUR_SES_ID_FK on ETAT_SESSION_UTILISATEUR (SES_ID asc);
 -- ============================================================
 --   Table : FORMATION                                        
 -- ============================================================
@@ -89,8 +79,7 @@ create table FORMATION
     FOR_ID      	 BIGINT      	not null,
     INTITULE    	 VARCHAR(40) 	,
     COMMENTAIRE 	 VARCHAR(250)	,
-    NIV_FORMATION	 VARCHAR(40) 	,
-    NIV_CODE    	 VARCHAR(30) 	,
+    NIV_CODE    	 VARCHAR(30) 	not null,
     constraint PK_FORMATION primary key (FOR_ID)
 );
 
@@ -102,9 +91,6 @@ comment on column FORMATION.INTITULE is
 
 comment on column FORMATION.COMMENTAIRE is
 'commentaire';
-
-comment on column FORMATION.NIV_FORMATION is
-'niveau';
 
 comment on column FORMATION.NIV_CODE is
 'Niveau';
@@ -118,7 +104,7 @@ create table HORAIRES
     DAT_ID      	 BIGINT      	not null,
     DEBUT       	 TIMESTAMP   	,
     FIN         	 TIMESTAMP   	,
-    SES_ID      	 BIGINT      	,
+    SES_ID      	 BIGINT      	not null,
     constraint PK_HORAIRES primary key (DAT_ID)
 );
 
@@ -143,16 +129,6 @@ create table INSCRIPTION
     INS_ID      	 BIGINT      	not null,
     PRESENCE    	 BOOLEAN     	,
     SATISFACTION	 NUMERIC(5,2)	,
-    SESSION_NAME	 VARCHAR(100)	,
-    NOM         	 VARCHAR(100)	,
-    PRENOM      	 VARCHAR(100)	,
-    MAIL        	 VARCHAR(100)	,
-    NIVEAU      	 VARCHAR(40) 	,
-    COMMENTAIRE 	 VARCHAR(250)	,
-    DATEDEBUT   	 TIMESTAMP   	,
-    DATEFIN     	 TIMESTAMP   	,
-    HORAIRE     	 VARCHAR(250)	,
-    DUREEJOUR   	 BIGINT      	,
     DUREE       	 NUMERIC(5,2)	,
     THEME       	 NUMERIC(5,2)	,
     CONTENU     	 NUMERIC(5,2)	,
@@ -163,8 +139,8 @@ create table INSCRIPTION
     CONTACT     	 NUMERIC(5,2)	,
     EXPLICATION 	 NUMERIC(5,2)	,
     ETAT        	 VARCHAR(100)	,
-    SES_ID      	 BIGINT      	,
-    UTI_ID      	 BIGINT      	,
+    SES_ID      	 BIGINT      	not null,
+    UTI_ID      	 BIGINT      	not null,
     constraint PK_INSCRIPTION primary key (INS_ID)
 );
 
@@ -176,36 +152,6 @@ comment on column INSCRIPTION.PRESENCE is
 
 comment on column INSCRIPTION.SATISFACTION is
 'SATISFACTION';
-
-comment on column INSCRIPTION.SESSION_NAME is
-'sessionName';
-
-comment on column INSCRIPTION.NOM is
-'nom';
-
-comment on column INSCRIPTION.PRENOM is
-'prenom';
-
-comment on column INSCRIPTION.MAIL is
-'mail';
-
-comment on column INSCRIPTION.NIVEAU is
-'niveau';
-
-comment on column INSCRIPTION.COMMENTAIRE is
-'commentaire';
-
-comment on column INSCRIPTION.DATEDEBUT is
-'dateDebut';
-
-comment on column INSCRIPTION.DATEFIN is
-'dateFin';
-
-comment on column INSCRIPTION.HORAIRE is
-'horaire';
-
-comment on column INSCRIPTION.DUREEJOUR is
-'duréejour';
 
 comment on column INSCRIPTION.DUREE is
 'Durée';
@@ -310,19 +256,17 @@ create table SESSION_FORMATION
     SES_ID      	 BIGINT      	not null,
     HORAIRE     	 VARCHAR(250)	,
     NB_PERSONNE 	 BIGINT      	,
-    FORMATION_NAME	 VARCHAR(100)	,
     STATUS      	 VARCHAR(100)	,
-    COMMENTAIRE 	 VARCHAR(250)	,
-    NIVEAU      	 VARCHAR(40) 	,
     IS_OUVERT   	 VARCHAR(100)	,
-    FORMATEUR   	 VARCHAR(250)	,
     SATISFACTION	 NUMERIC(5,2)	,
     I           	 NUMERIC(5,2)	,
     DUREE       	 BIGINT      	,
     DATE_FIN    	 TIMESTAMP   	,
     DATE_DEBUT  	 TIMESTAMP   	,
-    FOR_ID      	 BIGINT      	,
-    UTI_ID      	 BIGINT      	,
+    FOR_ID      	 BIGINT      	not null,
+    ETA_CODE    	 VARCHAR(30) 	not null,
+    UTI_ID      	 BIGINT      	not null,
+    ESU_CODE    	 VARCHAR(30) 	not null,
     constraint PK_SESSION_FORMATION primary key (SES_ID)
 );
 
@@ -335,23 +279,11 @@ comment on column SESSION_FORMATION.HORAIRE is
 comment on column SESSION_FORMATION.NB_PERSONNE is
 'NbPersonne';
 
-comment on column SESSION_FORMATION.FORMATION_NAME is
-'FormationName';
-
 comment on column SESSION_FORMATION.STATUS is
 'Status';
 
-comment on column SESSION_FORMATION.COMMENTAIRE is
-'Commentaire';
-
-comment on column SESSION_FORMATION.NIVEAU is
-'Niveau';
-
 comment on column SESSION_FORMATION.IS_OUVERT is
 'Is_ouvert';
-
-comment on column SESSION_FORMATION.FORMATEUR is
-'Formateur';
 
 comment on column SESSION_FORMATION.SATISFACTION is
 'Satisfaction';
@@ -372,10 +304,18 @@ comment on column SESSION_FORMATION.FOR_ID is
 'Formation';
 
 create index SESSION_FORMATION_FOR_ID_FK on SESSION_FORMATION (FOR_ID asc);
+comment on column SESSION_FORMATION.ETA_CODE is
+'Etat';
+
+create index SESSION_FORMATION_ETA_CODE_FK on SESSION_FORMATION (ETA_CODE asc);
 comment on column SESSION_FORMATION.UTI_ID is
 'Utilisateur';
 
 create index SESSION_FORMATION_UTI_ID_FK on SESSION_FORMATION (UTI_ID asc);
+comment on column SESSION_FORMATION.ESU_CODE is
+'Etat session utilisateur';
+
+create index SESSION_FORMATION_ESU_CODE_FK on SESSION_FORMATION (ESU_CODE asc);
 -- ============================================================
 --   Table : UTILISATEUR                                        
 -- ============================================================
@@ -435,9 +375,9 @@ alter table INSCRIPTION
 	add constraint FK_ASSOCIATION3 foreign key (UTI_ID)
 	references UTILISATEUR (UTI_ID);
 
-alter table ETAT
-	add constraint FK_ASSOCIATION5 foreign key (SES_ID)
-	references SESSION_FORMATION (SES_ID);
+alter table SESSION_FORMATION
+	add constraint FK_ASSOCIATION5 foreign key (ETA_CODE)
+	references ETAT (ETA_CODE);
 
 alter table FORMATION
 	add constraint FK_ASSOCIATION6 foreign key (NIV_CODE)
@@ -447,9 +387,9 @@ alter table HORAIRES
 	add constraint FK_ASSOCIATION7 foreign key (SES_ID)
 	references SESSION_FORMATION (SES_ID);
 
-alter table ETAT_SESSION_UTILISATEUR
-	add constraint FK_ESUSES foreign key (SES_ID)
-	references SESSION_FORMATION (SES_ID);
+alter table SESSION_FORMATION
+	add constraint FK_ESUSES foreign key (ESU_CODE)
+	references ETAT_SESSION_UTILISATEUR (ESU_CODE);
 
 alter table SESSION_FORMATION
 	add constraint FK_FOR_SES foreign key (FOR_ID)

@@ -1,6 +1,7 @@
 package com.kleegroup.formation.ui.controller.accueil;
 
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 /**
  * @author npiedeloup
@@ -19,6 +20,12 @@ public final class AccueilAction extends AbstractKleeFormationActionSupport {
 	@Override
 	public String getPageName() {
 		return PAGE_TITLE;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.ACCUEIL;
 	}
 
 }

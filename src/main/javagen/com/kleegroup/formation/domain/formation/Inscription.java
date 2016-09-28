@@ -17,16 +17,6 @@ public final class Inscription implements DtObject {
 	private Long insId;
 	private Boolean presence;
 	private java.math.BigDecimal satisfaction;
-	private String sessionName;
-	private String nom;
-	private String prenom;
-	private String mail;
-	private String niveau;
-	private String commentaire;
-	private java.util.Date datedebut;
-	private java.util.Date datefin;
-	private String horaire;
-	private Long dureejour;
 	private java.math.BigDecimal duree;
 	private java.math.BigDecimal theme;
 	private java.math.BigDecimal contenu;
@@ -97,196 +87,6 @@ public final class Inscription implements DtObject {
 	 */
 	public void setSatisfaction(final java.math.BigDecimal satisfaction) {
 		this.satisfaction = satisfaction;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'sessionName'. 
-	 * @return String sessionName 
-	 */
-	@Field(domain = "DO_LIBELLE", label = "sessionName")
-	public String getSessionName() {
-		return sessionName;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'sessionName'.
-	 * @param sessionName String 
-	 */
-	public void setSessionName(final String sessionName) {
-		this.sessionName = sessionName;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'nom'. 
-	 * @return String nom 
-	 */
-	@Field(domain = "DO_LIBELLE", label = "nom")
-	public String getNom() {
-		return nom;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'nom'.
-	 * @param nom String 
-	 */
-	public void setNom(final String nom) {
-		this.nom = nom;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'prenom'. 
-	 * @return String prenom 
-	 */
-	@Field(domain = "DO_LIBELLE", label = "prenom")
-	public String getPrenom() {
-		return prenom;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'prenom'.
-	 * @param prenom String 
-	 */
-	public void setPrenom(final String prenom) {
-		this.prenom = prenom;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'mail'. 
-	 * @return String mail 
-	 */
-	@Field(domain = "DO_LIBELLE", label = "mail")
-	public String getMail() {
-		return mail;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'mail'.
-	 * @param mail String 
-	 */
-	public void setMail(final String mail) {
-		this.mail = mail;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'niveau'. 
-	 * @return String niveau 
-	 */
-	@Field(domain = "DO_LIBELLE_COURT", label = "niveau")
-	public String getNiveau() {
-		return niveau;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'niveau'.
-	 * @param niveau String 
-	 */
-	public void setNiveau(final String niveau) {
-		this.niveau = niveau;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'commentaire'. 
-	 * @return String commentaire 
-	 */
-	@Field(domain = "DO_LIBELLE_LONG", label = "commentaire")
-	public String getCommentaire() {
-		return commentaire;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'commentaire'.
-	 * @param commentaire String 
-	 */
-	public void setCommentaire(final String commentaire) {
-		this.commentaire = commentaire;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'dateDebut'. 
-	 * @return java.util.Date datedebut 
-	 */
-	@Field(domain = "DO_DATE_MINUTE", label = "dateDebut")
-	public java.util.Date getDatedebut() {
-		return datedebut;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'dateDebut'.
-	 * @param datedebut java.util.Date 
-	 */
-	public void setDatedebut(final java.util.Date datedebut) {
-		this.datedebut = datedebut;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'dateFin'. 
-	 * @return java.util.Date datefin 
-	 */
-	@Field(domain = "DO_DATE_MINUTE", label = "dateFin")
-	public java.util.Date getDatefin() {
-		return datefin;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'dateFin'.
-	 * @param datefin java.util.Date 
-	 */
-	public void setDatefin(final java.util.Date datefin) {
-		this.datefin = datefin;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'horaire'. 
-	 * @return String horaire 
-	 */
-	@Field(domain = "DO_LIBELLE_LONG", label = "horaire")
-	public String getHoraire() {
-		return horaire;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'horaire'.
-	 * @param horaire String 
-	 */
-	public void setHoraire(final String horaire) {
-		this.horaire = horaire;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'duréejour'. 
-	 * @return Long dureejour 
-	 */
-	@Field(domain = "DO_IDENTIFIANT", label = "duréejour")
-	public Long getDureejour() {
-		return dureejour;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'duréejour'.
-	 * @param dureejour Long 
-	 */
-	public void setDureejour(final Long dureejour) {
-		this.dureejour = dureejour;
 	}
 
 	/**
@@ -482,9 +282,9 @@ public final class Inscription implements DtObject {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Session formation'. 
-	 * @return Long sesId 
+	 * @return Long sesId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_IDENTIFIANT", type = "FOREIGN_KEY", label = "Session formation")
+	@Field(domain = "DO_IDENTIFIANT", type = "FOREIGN_KEY", required = true, label = "Session formation")
 	public Long getSesId() {
 		return sesId;
 	}
@@ -492,7 +292,7 @@ public final class Inscription implements DtObject {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Définit la valeur de la propriété 'Session formation'.
-	 * @param sesId Long 
+	 * @param sesId Long <b>Obligatoire</b>
 	 */
 	public void setSesId(final Long sesId) {
 		this.sesId = sesId;
@@ -501,9 +301,9 @@ public final class Inscription implements DtObject {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Utilisateur'. 
-	 * @return Long utiId 
+	 * @return Long utiId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_IDENTIFIANT", type = "FOREIGN_KEY", label = "Utilisateur")
+	@Field(domain = "DO_IDENTIFIANT", type = "FOREIGN_KEY", required = true, label = "Utilisateur")
 	public Long getUtiId() {
 		return utiId;
 	}
@@ -511,7 +311,7 @@ public final class Inscription implements DtObject {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Définit la valeur de la propriété 'Utilisateur'.
-	 * @param utiId Long 
+	 * @param utiId Long <b>Obligatoire</b>
 	 */
 	public void setUtiId(final Long utiId) {
 		this.utiId = utiId;
@@ -528,7 +328,7 @@ public final class Inscription implements DtObject {
     	primaryIsNavigable = true,
     	primaryRole = "SessionFormation",
     	primaryLabel = "Session formation",
-    	primaryMultiplicity = "0..1",
+    	primaryMultiplicity = "1..1",
     	foreignDtDefinitionName = "DT_INSCRIPTION",
     	foreignIsNavigable = true,
     	foreignRole = "Inscription",
@@ -566,7 +366,7 @@ public final class Inscription implements DtObject {
     	primaryIsNavigable = true,
     	primaryRole = "SessionFormation",
     	primaryLabel = "Session formation",
-    	primaryMultiplicity = "0..1",
+    	primaryMultiplicity = "1..1",
     	foreignDtDefinitionName = "DT_INSCRIPTION",
     	foreignIsNavigable = true,
     	foreignRole = "Inscription",
@@ -587,7 +387,7 @@ public final class Inscription implements DtObject {
     	primaryIsNavigable = true,
     	primaryRole = "Utilisateur",
     	primaryLabel = "Utilisateur",
-    	primaryMultiplicity = "0..1",
+    	primaryMultiplicity = "1..1",
     	foreignDtDefinitionName = "DT_INSCRIPTION",
     	foreignIsNavigable = false,
     	foreignRole = "Inscription",
@@ -625,7 +425,7 @@ public final class Inscription implements DtObject {
     	primaryIsNavigable = true,
     	primaryRole = "Utilisateur",
     	primaryLabel = "Utilisateur",
-    	primaryMultiplicity = "0..1",
+    	primaryMultiplicity = "1..1",
     	foreignDtDefinitionName = "DT_INSCRIPTION",
     	foreignIsNavigable = false,
     	foreignRole = "Inscription",

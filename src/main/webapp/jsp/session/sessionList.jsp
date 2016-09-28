@@ -10,7 +10,7 @@
 <s:form>
 <h4>Rechercher une session</h4>
 	<s:div layout="table" cols="2">
-		<s:textfield name="session.formationName" label="Nom de la session"/>
+		<s:textfield name="critere.intitule" label="Nom de la session"/>
 	</s:div>
 			<div class="button-bar">
 		<div class="right">

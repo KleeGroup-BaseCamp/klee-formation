@@ -22,6 +22,7 @@ INSERT INTO ROLE ( ROL_CODE, LIBELLE ) VALUES ( 'R_REF_PRF_MODIF', 'Modification
 INSERT INTO ROLE ( ROL_CODE, LIBELLE ) VALUES ( 'R_ADMIN', 'Administrateur');
 INSERT INTO ROLE ( ROL_CODE, LIBELLE ) VALUES ( 'R_FORMATTEUR', 'Formatteur');
 INSERT INTO ROLE ( ROL_CODE, LIBELLE ) VALUES ( 'R_RESPONSSABLE', 'Responsable');
+INSERT INTO ROLE ( ROL_CODE, LIBELLE ) VALUES ( 'R_ANONYMOUS', 'Anonyme');
 
 /*==============================================================*/
 /* Table: UTILISATEUR                                                  */
@@ -100,22 +101,42 @@ INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_REF_PRF_MODIF');
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_ADMIN');
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_FORMATTEUR');
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_RESPONSSABLE');
+INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_ANONYMOUS');
 
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (2, 'R_RESPONSSABLE');
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (2, 'R_FORMATTEUR');
+INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (2, 'R_ANONYMOUS');
 
+INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (4, 'R_ANONYMOUS');
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (4, 'R_ADMIN');
 
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (5, 'R_FORMATTEUR');
+INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (5, 'R_ANONYMOUS');
 
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (6, 'R_RESPONSSABLE');
-
+INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (6, 'R_ANONYMOUS');
 /*==============================================================*/
 /* Table: NIVEAUX                                                  */
 /*==============================================================*/
 INSERT INTO NIVEAU (NIV_CODE, LIBELLE) VALUES ('DEBUT', 'débutant');
 INSERT INTO NIVEAU (NIV_CODE, LIBELLE) VALUES ('INTER','intermédiaire');
 INSERT INTO NIVEAU (NIV_CODE, LIBELLE) VALUES ('EXPER','expert');
+
+/*==============================================================*/
+/* Table: ETAT                                                */
+/*==============================================================*/
+INSERT INTO ETAT (ETA_CODE, LIBELLE) VALUES ('Publier', 'Publier');
+INSERT INTO ETAT (ETA_CODE, LIBELLE) VALUES ('Brouillon', 'Brouillon');
+INSERT INTO ETAT (ETA_CODE, LIBELLE) VALUES ('Realiser', 'Réalisée');
+INSERT INTO ETAT (ETA_CODE, LIBELLE) VALUES ('Annuler', 'Annulée');
+
+/*==============================================================*/
+/* Table: ETAT_SESSION_UTILISATEUR                              */
+/*==============================================================*/
+INSERT INTO ETAT_SESSION_UTILISATEUR (ESU_CODE, LIBELLE) VALUES ('Ouvert', 'Ouvert');
+INSERT INTO ETAT_SESSION_UTILISATEUR (ESU_CODE, LIBELLE) VALUES ('Complet', 'Complet');
+INSERT INTO ETAT_SESSION_UTILISATEUR (ESU_CODE, LIBELLE) VALUES ('Annuler', 'Annuler');
+
 
 
 COMMIT;

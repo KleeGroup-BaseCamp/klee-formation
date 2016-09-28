@@ -7,6 +7,7 @@ import com.kleegroup.formation.domain.formation.Formation;
 import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.lang.Option;
 import io.vertigo.struts2.core.ContextForm;
@@ -35,7 +36,6 @@ public final class CatalogueDetailAction extends AbstractKleeFormationActionSupp
 			formation.publish(new Formation());
 			toModeCreate();
 		}
-		//niveaux.publish(Niveau.class, PersistenceManagerInitializer.ALL_DATA_CODE);
 		niveaux.publish(Niveau.class, null);
 	}
 
@@ -65,5 +65,10 @@ public final class CatalogueDetailAction extends AbstractKleeFormationActionSupp
 			return "Modification d'une formation";
 		}
 		return "Detail d'une formation";
+	}
+
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.CATALOGUE;
 	}
 }

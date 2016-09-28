@@ -39,6 +39,46 @@ public final class SessionPAO implements StoreServices {
 	}
 
 	/**
+	 * Execute la tache TK_LIST_SESSION_BY_DATE.
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> dtcSessionFormation
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> listSessionByDate() {
+		final Task task = createTaskBuilder("TK_LIST_SESSION_BY_DATE")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_LIST_SESSION_BY_CRITERE.
+	 * @param critere com.kleegroup.formation.domain.session.CritereSession 
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> dtcSessionFormation
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> listSessionByCritere(final com.kleegroup.formation.domain.session.CritereSession critere) {
+		final Task task = createTaskBuilder("TK_LIST_SESSION_BY_CRITERE")
+				.addValue("CRITERE", critere)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_GET_LIST_SESSION_BY_FOR_ID.
+	 * @param forId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> dtcSession
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> getListSessionByForId(final Long forId) {
+		final Task task = createTaskBuilder("TK_GET_LIST_SESSION_BY_FOR_ID")
+				.addValue("FOR_ID", forId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TK_DELETE_SESSION_CASCADE.
 	 * @param sesId Long 
 	*/

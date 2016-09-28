@@ -31,7 +31,7 @@ public interface InscriptionServices extends Component {
 
 	void inscrireUtilisateurASession(Long sesId);
 
-	void inscrireUtilisateurAutre(final Long sesId, Inscription inscriptions);
+	void inscrireUtilisateur(final Long sesId, long utiId);
 
 	DtList<Inscription> getInscriptionListByCritere(final Inscription inscription);
 

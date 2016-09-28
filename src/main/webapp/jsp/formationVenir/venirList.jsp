@@ -10,7 +10,7 @@
 <s:form>
 <h4>Rechercher une formation</h4>
 	<s:div layout="table" cols="2">
-		<s:textfield name="session.formationName" label="nom de la formation"/>
+		<s:textfield name="critere.intitule" label="nom de la formation"/>
 	</s:div>
 	<div class="button-bar">
 		<div class="right">
@@ -34,10 +34,10 @@
 	<display:column  property="dateDebut" title="Début" sortable="true"/>
 	<display:column  property="dateFin" title="Fin" sortable="true" />
 	<display:column  property="duree" title="Durée(jours)" sortable="true" />
-	<display:column  property="horaire" title="Horaires" sortable="true" />
+	<display:column  property="horaires" title="Horaires" sortable="true" />
 	<display:column  property="niveau" title="Niveau" sortable="true" />
 	<display:column  property="commentaire" title="Descriptif" sortable="true" />
-	<display:column  property="isOuvert" title="Etat" sortable="true" class="${item.isOuvert == 'Ouvert' ? 'session-ouvert': 'session-ferme'}"/>
+	<display:column  property="statusUtilisateur" title="Etat" sortable="true" class="${item.statusUtilisateur == 'Ouvert' ? 'session-ouvert': 'session-ferme'}"/>
 </display:table>
 
 <%@include file="/jsp/include/footer.jsp"%>

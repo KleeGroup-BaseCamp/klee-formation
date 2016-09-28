@@ -4,11 +4,10 @@ import javax.inject.Inject;
 
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere;
-import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
-import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.services.util.SecurityUtil;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -24,12 +23,6 @@ public final class FormationsListAction extends AbstractKleeFormationActionSuppo
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private SessionServices sessionServices;
-
-	private final ContextForm<SessionFormation> session = new ContextForm<>("session", this);
-	private final ContextList<SessionFormation> sessions = new ContextList<>("sessions", this);
-
-	@Inject
 	private UtilisateurServices utilisateurServices;
 
 	private final ContextForm<UtilisateurCritere> utilisateurCritereForm = new ContextForm<>("utilisateurCritere", this);
@@ -40,9 +33,6 @@ public final class FormationsListAction extends AbstractKleeFormationActionSuppo
 	@Override
 	public void initContext() {
 		SecurityUtil.checkRole(com.kleegroup.formation.security.Role.R_RESPONSSABLE);
-		session.publish(new SessionFormation());
-
-		sessions.publish(sessionServices.listSessionByEtat());
 
 		utilisateurCritereForm.publish(new UtilisateurCritere());
 		allUserRef.set(true);
@@ -59,8 +49,8 @@ public final class FormationsListAction extends AbstractKleeFormationActionSuppo
 		utilisateurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurCritere));
 	}
 
-	public String doRechercher() {
-		sessions.publish(sessionServices.getSessionListByCritere(session.readDto()));
+	public String doUtilisateurRechercher() {
+		reloadList();
 		return NONE;
 	}
 
@@ -70,29 +60,9 @@ public final class FormationsListAction extends AbstractKleeFormationActionSuppo
 		return "Recherche session de formation";
 	}
 
-	public String doUtilisateurRechercher() {
-		reloadList();
-		return NONE;
-	}
-
-	public String doRechercherActif() {
-		utilisateurCritereForm.getUiObject().setTypedValue("isActif", true);
-		allUserRef.set(false);
-		reloadList();
-		return NONE;
-	}
-
-	public String doRechercherInactif() {
-		utilisateurCritereForm.getUiObject().setTypedValue("isActif", false);
-		allUserRef.set(false);
-		reloadList();
-		return NONE;
-	}
-
-	public String doRechercherTous() {
-		utilisateurCritereForm.getUiObject().setTypedValue("isActif", false);
-		allUserRef.set(true);
-		reloadList();
-		return NONE;
+	/** {@inheritDoc} */
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.ROOT_MENU;
 	}
 }

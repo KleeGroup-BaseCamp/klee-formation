@@ -2,6 +2,8 @@ package com.kleegroup.formation.services.session;
 
 import com.kleegroup.formation.domain.formation.EtatSessionUtilisateur;
 import com.kleegroup.formation.domain.formation.SessionFormation;
+import com.kleegroup.formation.domain.session.CritereSession;
+import com.kleegroup.formation.domain.session.SessionView;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.Component;
@@ -27,12 +29,12 @@ public interface SessionServices extends Component {
 	/**
 	 * Retourne la liste des sessions formations répondant aux critères.
 	 *
-	 * @param criteres critère de recherche des formations
+	 * @param critereSession critère de recherche des formations
 	 * @return liste de formations r�pondant aux crit�res donn�s en entr�e
 	 */
-	DtList<SessionFormation> getSessionListByCritere(SessionFormation session);
+	DtList<SessionView> getSessionListByCritere(CritereSession critereSession);
 
-	DtList<SessionFormation> listSessionByDate();
+	DtList<SessionView> listSessionByDate();
 
 	DtList<SessionFormation> listSessionByEtat();
 
@@ -60,7 +62,7 @@ public interface SessionServices extends Component {
 
 	void deleteSessionFormation(Long sesId);
 
-	DtList<SessionFormation> ListSessionByForId(final Long forId);
+	DtList<SessionView> ListSessionByForId(final Long forId);
 
 	void deleteSessionCascade(final Long sesId);
 

@@ -8,8 +8,8 @@ import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
-import io.vertigo.lang.Option;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextRef;
@@ -31,19 +31,17 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 	private final ContextList<Inscription> inscriptions = new ContextList<>("inscriptions", this);
 
-	public void initContext(@Named("sesId") final Option<Long> sesId) {
-		if (sesId.isPresent()) {
-			session.publish(sessionServices.loadSessionFormation(sesId.get()));
-			inscriptions.publish(inscriptionServices.getListInscriptionsBySessionId(sesId.get()));
+	public void initContext(@Named("sesId") final Long sesId) {
+		session.publish(sessionServices.loadSessionFormation(sesId));
+		inscriptions.publish(inscriptionServices.getListInscriptionsBySessionId(sesId));
 
-			if (inscriptionServices.getListInscriptionsBySessionId(sesId.get()).size() > 0) {
-				if (inscriptionServices.getListInscriptionsBySessionId(sesId.get()).get(0).getPresence() == null) {
-					toModeEdit();
-				} else {
-					toModeReadOnly();
-				}
-
+		if (inscriptionServices.getListInscriptionsBySessionId(sesId).size() > 0) {
+			if (inscriptionServices.getListInscriptionsBySessionId(sesId).get(0).getPresence() == null) {
+				toModeEdit();
+			} else {
+				toModeReadOnly();
 			}
+
 		}
 
 	}
@@ -68,6 +66,11 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 			return "Modification d'une session deformation";
 		}
 		return "Detail d'une session de formation";
+	}
+
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.MES_FORMATION;
 	}
 
 }

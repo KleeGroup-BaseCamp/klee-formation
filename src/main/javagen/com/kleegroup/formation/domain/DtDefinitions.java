@@ -13,6 +13,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 * Enumération des DtDefinitions.
 	 */
 	public enum Definitions {
+			/** Objet de données CritereSession. */
+			CritereSession(com.kleegroup.formation.domain.session.CritereSession.class),
 			/** Objet de données Etat. */
 			Etat(com.kleegroup.formation.domain.formation.Etat.class),
 			/** Objet de données EtatSessionUtilisateur. */
@@ -35,6 +37,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 			RoleInput(com.kleegroup.formation.domain.administration.utilisateur.RoleInput.class),
 			/** Objet de données SessionFormation. */
 			SessionFormation(com.kleegroup.formation.domain.formation.SessionFormation.class),
+			/** Objet de données SessionView. */
+			SessionView(com.kleegroup.formation.domain.session.SessionView.class),
 			/** Objet de données Utilisateur. */
 			Utilisateur(com.kleegroup.formation.domain.administration.utilisateur.Utilisateur.class),
 			/** Objet de données UtilisateurCritere. */
@@ -58,6 +62,14 @@ public final class DtDefinitions implements Iterable<Class<?>> {
     }
 
 	/**
+	 * Enumération des champs de CritereSession.
+	 */
+	public enum CritereSessionFields implements DtFieldName {
+		/** Propriété 'Libellé court'. */
+		INTITULE,
+	}
+
+	/**
 	 * Enumération des champs de Etat.
 	 */
 	public enum EtatFields implements DtFieldName {
@@ -65,8 +77,6 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		ETA_CODE,
 		/** Propriété 'Libelle'. */
 		LIBELLE,
-		/** Propriété 'Session formation'. */
-		SES_ID,
 	}
 
 	/**
@@ -77,8 +87,6 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		ESU_CODE,
 		/** Propriété 'Libellé'. */
 		LIBELLE,
-		/** Propriété 'Session formation'. */
-		SES_ID,
 	}
 
 	/**
@@ -91,8 +99,6 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		INTITULE,
 		/** Propriété 'commentaire'. */
 		COMMENTAIRE,
-		/** Propriété 'niveau'. */
-		NIV_FORMATION,
 		/** Propriété 'Niveau'. */
 		NIV_CODE,
 	}
@@ -131,26 +137,6 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		PRESENCE,
 		/** Propriété 'SATISFACTION'. */
 		SATISFACTION,
-		/** Propriété 'sessionName'. */
-		SESSION_NAME,
-		/** Propriété 'nom'. */
-		NOM,
-		/** Propriété 'prenom'. */
-		PRENOM,
-		/** Propriété 'mail'. */
-		MAIL,
-		/** Propriété 'niveau'. */
-		NIVEAU,
-		/** Propriété 'commentaire'. */
-		COMMENTAIRE,
-		/** Propriété 'dateDebut'. */
-		DATEDEBUT,
-		/** Propriété 'dateFin'. */
-		DATEFIN,
-		/** Propriété 'horaire'. */
-		HORAIRE,
-		/** Propriété 'duréejour'. */
-		DUREEJOUR,
 		/** Propriété 'Durée'. */
 		DUREE,
 		/** Propriété 'Theme'. */
@@ -229,18 +215,10 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		HORAIRE,
 		/** Propriété 'NbPersonne'. */
 		NB_PERSONNE,
-		/** Propriété 'FormationName'. */
-		FORMATION_NAME,
 		/** Propriété 'Status'. */
 		STATUS,
-		/** Propriété 'Commentaire'. */
-		COMMENTAIRE,
-		/** Propriété 'Niveau'. */
-		NIVEAU,
 		/** Propriété 'Is_ouvert'. */
 		IS_OUVERT,
-		/** Propriété 'Formateur'. */
-		FORMATEUR,
 		/** Propriété 'Satisfaction'. */
 		SATISFACTION,
 		/** Propriété 'i'. */
@@ -253,8 +231,38 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		DATE_DEBUT,
 		/** Propriété 'Formation'. */
 		FOR_ID,
+		/** Propriété 'Etat'. */
+		ETA_CODE,
 		/** Propriété 'Utilisateur'. */
 		UTI_ID,
+		/** Propriété 'Etat session utilisateur'. */
+		ESU_CODE,
+	}
+
+	/**
+	 * Enumération des champs de SessionView.
+	 */
+	public enum SessionViewFields implements DtFieldName {
+		/** Propriété 'SesId'. */
+		SES_ID,
+		/** Propriété 'Libellé court'. */
+		FORMATION_NAME,
+		/** Propriété 'Début'. */
+		DATE_DEBUT,
+		/** Propriété 'Fin'. */
+		DATE_FIN,
+		/** Propriété 'Horaires'. */
+		HORAIRES,
+		/** Propriété 'Durée'. */
+		DUREE,
+		/** Propriété 'Niveau'. */
+		NIVEAU,
+		/** Propriété 'Descriptif'. */
+		COMMENTAIRE,
+		/** Propriété 'Etat'. */
+		STATUS,
+		/** Propriété 'Etat'. */
+		STATUS_UTILISATEUR,
 	}
 
 	/**

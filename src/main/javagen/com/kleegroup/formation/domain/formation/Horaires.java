@@ -79,9 +79,9 @@ public final class Horaires implements DtObject {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Session formation'. 
-	 * @return Long sesId 
+	 * @return Long sesId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_IDENTIFIANT", type = "FOREIGN_KEY", label = "Session formation")
+	@Field(domain = "DO_IDENTIFIANT", type = "FOREIGN_KEY", required = true, label = "Session formation")
 	public Long getSesId() {
 		return sesId;
 	}
@@ -89,7 +89,7 @@ public final class Horaires implements DtObject {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Définit la valeur de la propriété 'Session formation'.
-	 * @param sesId Long 
+	 * @param sesId Long <b>Obligatoire</b>
 	 */
 	public void setSesId(final Long sesId) {
 		this.sesId = sesId;

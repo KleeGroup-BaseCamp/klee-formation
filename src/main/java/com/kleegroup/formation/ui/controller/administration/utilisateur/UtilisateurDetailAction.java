@@ -14,6 +14,7 @@ import com.kleegroup.formation.services.administration.utilisateur.UtilisateurSe
 import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.services.util.SecurityUtil;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.URI;
@@ -102,6 +103,7 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 			uti.setResponsable(true);
 		}
 
+		roles.add(DtObjectUtil.createURI(Role.class, com.kleegroup.formation.security.Role.R_ANONYMOUS.name()));
 		if (isModeCreate()) {
 			utilisateurServices.saveUtilisateur(utilisateurLogin.readDto(), uti, roles);
 		} else {
@@ -135,5 +137,10 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 			return "Modification d'un utilisateur";
 		}
 		return "Detail d'un utilisateur";
+	}
+
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.ADMINISTRATION;
 	}
 }

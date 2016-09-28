@@ -1,6 +1,12 @@
 package com.kleegroup.formation.boot.initializer;
 
+import javax.inject.Inject;
+
+import com.kleegroup.formation.ui.controller.menu.NavigationItem;
+
 import io.vertigo.core.spaces.component.ComponentInitializer;
+import io.vertigo.persona.impl.security.BeanResourceNameFactory;
+import io.vertigo.persona.security.VSecurityManager;
 
 /**
  * Initialisation du manager de Securit�.
@@ -9,12 +15,19 @@ import io.vertigo.core.spaces.component.ComponentInitializer;
  */
 public final class SecurityManagerInitializer implements ComponentInitializer {
 
-	//	@Inject
-	//	private VSecurityManager securityManager;
+	@Inject
+	private VSecurityManager securityManager;
 
 	/** {@inheritDoc} */
 	@Override
 	public void init() {
-		//securityManager.registerResourceNameFactory(Produit.class.getSimpleName(), new BeanResourceNameFactory("/DATA/Produit/${prdId}/${famId}"));
+		registerResourceNameFactory(NavigationItem.class.getSimpleName(), "/PAGE/${rawAddress}", securityManager);
+
 	}
+
+	private static void registerResourceNameFactory(final String resourceType, final String securityPattern, final VSecurityManager securityManager) {
+		final BeanResourceNameFactory beanResourceNameFactory = new BeanResourceNameFactory(securityPattern);
+		securityManager.registerResourceNameFactory(resourceType, beanResourceNameFactory);
+	}
+
 }

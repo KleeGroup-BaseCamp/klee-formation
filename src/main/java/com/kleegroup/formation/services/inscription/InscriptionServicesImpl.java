@@ -64,40 +64,19 @@ public class InscriptionServicesImpl implements InscriptionServices {
 	@Override
 	public void inscrireUtilisateurASession(final Long sesId) {
 		final Utilisateur utilisateurCourant = utilisateurServices.getCurrentUtilisateur();
-		final Inscription inscription = new Inscription();
-		inscription.setMail(utilisateurCourant.getMail());
-		inscription.setNom(utilisateurCourant.getNom());
-		inscription.setPrenom(utilisateurCourant.getPrenom());
-		inscription.setUtiId(utilisateurCourant.getUtiId());
-		inscription(sesId);
-
+		inscrireUtilisateur(sesId, utilisateurCourant.getUtiId());
 	}
 
 	@Override
-	public void inscrireUtilisateurAutre(final Long sesId, final Inscription inscriptions) {
-		final Utilisateur utilisateur = utilisateurServices.loadUtilisateurWithRoles(inscriptions.getUtiId());
-
+	public void inscrireUtilisateur(final Long sesId, final long utiId) {
 		final Inscription inscription = new Inscription();
-		inscription.setUtiId(inscriptions.getUtiId());
-		inscription.setNom(utilisateur.getNom());
-		inscription.setPrenom(utilisateur.getPrenom());
-		inscription.setMail(utilisateur.getMail());
-		inscription(sesId);
-
+		inscription.setUtiId(utiId);
+		enregistrerInscription(inscription);
 	}
 
-	private void inscription(final Long sesId) {
-		final SessionFormation session = sessionServices.loadSessionbyId(sesId);
-
-		final Inscription inscription = new Inscription();
-		inscription.setSessionName(session.getFormationName());
-		inscription.setCommentaire(session.getCommentaire());
-		inscription.setNiveau(session.getNiveau());
-		inscription.setDatedebut(session.getDateDebut());
-		inscription.setDatefin(session.getDateFin());
-		inscription.setDureejour(session.getDuree());
-		inscription.setSesId(sesId);
-		inscription.setHoraire(session.getHoraire());
+	private void enregistrerInscription(final Inscription inscription) {
+		//		final SessionFormation session = sessionServices.loadSessionbyId(inscription.getSesId());
+		final SessionFormation session = sessionServices.loadSessionbyId(inscription.getSesId());
 		final BigDecimal zero = new BigDecimal(0);
 		inscription.setSatisfaction(zero);
 		//+1

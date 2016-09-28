@@ -7,6 +7,6 @@ alter DtDefinition DT_NIVEAU {
 
 
 alter DtDefinition DT_UTILISATEUR {
-        sortField : "MAIL"
-        displayField : "MAIL"
+        sortField : "NOM"
+        displayField : "NOM_COMPLET"
 }

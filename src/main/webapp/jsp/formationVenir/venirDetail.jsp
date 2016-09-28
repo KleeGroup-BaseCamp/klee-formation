@@ -26,9 +26,9 @@
 <s:form>
 	<!--   mode création / modification ----------------------------------------------------------------------------------- -->
 	<s:div layout="table" cols="4">
-	<s:textfield name="sessionTest.formationName" label="Nom"  disabled="disabled"/>
-	<s:textfield name="sessionTest.niveau" label="Niveau"  disabled="disabled"/>
-	<s:textfield name="sessionTest.commentaire" label="Descriptif"  disabled="disabled"/>
+		<s:textfield name="formation.intitule" label="Nom" theme="xhtml_read" />
+		<s:select name="formation.nivCode" list="niveaux" label="Niveau" theme="xhtml_read"/>
+		<s:textfield name="formation.commentaire" label="Descriptif" theme="xhtml_read"/>
 	<tr><td colspan="2">&nbsp;</td></tr>
 	</s:div>
 	<s:div layout="table" cols="4">
@@ -36,7 +36,7 @@
 		<s:textfield name="sessionTest.dateFin" label="Fin"/>
 		<s:textfield name="sessionTest.duree" label="Durée"/>
 		<s:textfield name="sessionTest.horaire" label="Horaires"/>
-		<s:textfield name="sessionTest.formateur" label="Formateur"/>	
+		<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
 	</s:div>
 	<s:div layout="table" cols="4">
 		<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>

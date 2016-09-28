@@ -2,9 +2,11 @@ package com.kleegroup.formation.ui.controller.formationVenir;
 
 import javax.inject.Inject;
 
-import com.kleegroup.formation.domain.formation.SessionFormation;
+import com.kleegroup.formation.domain.session.CritereSession;
+import com.kleegroup.formation.domain.session.SessionView;
 import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
@@ -19,19 +21,19 @@ public final class VenirListAction extends AbstractKleeFormationActionSupport {
 	@Inject
 	private SessionServices sessionServices;
 
-	private final ContextForm<SessionFormation> session = new ContextForm<>("session", this);
-	private final ContextList<SessionFormation> sessions = new ContextList<>("sessions", this);
+	private final ContextForm<CritereSession> critere = new ContextForm<>("critere", this);
+	private final ContextList<SessionView> sessions = new ContextList<>("sessions", this);
 
 	/** {@inheritDoc}*/
 	@Override
 	public void initContext() {
-		session.publish(new SessionFormation());
+		critere.publish(new CritereSession());
 		sessions.publish(sessionServices.listSessionByDate());
 		toModeEdit();
 	}
 
 	public String doRechercher() {
-		sessions.publish(sessionServices.getSessionListByCritere(session.readDto()));
+		sessions.publish(sessionServices.getSessionListByCritere(critere.readDto()));
 		return NONE;
 	}
 
@@ -39,5 +41,11 @@ public final class VenirListAction extends AbstractKleeFormationActionSupport {
 	@Override
 	public String getPageName() {
 		return "Recherche session de formation";
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.VENIR;
 	}
 }

@@ -5,12 +5,12 @@ import javax.inject.Named;
 
 import com.kleegroup.formation.domain.formation.Formation;
 import com.kleegroup.formation.domain.formation.Niveau;
-import com.kleegroup.formation.domain.formation.SessionFormation;
+import com.kleegroup.formation.domain.session.SessionView;
 import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
-import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.Option;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
@@ -30,9 +30,10 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 
 	public Long test;
 
-	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
-	private final ContextList<SessionFormation> sessions = new ContextList<>("sessions", this);
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
+
+	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
+	private final ContextList<SessionView> sessions = new ContextList<>("sessions", this);
 
 	/**
 	 * @param forId Id de l'élément a afficher.
@@ -45,7 +46,6 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 			formation.publish(new Formation());
 			toModeCreate();
 		}
-		//niveaux.publish(Niveau.class, PersistenceManagerInitializer.ALL_DATA_CODE);
 		niveaux.publish(Niveau.class, null);
 	}
 
@@ -55,19 +55,7 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 	}
 
 	public String doSave() {
-		if (isModeCreate()) {
-			formationServices.saveFormation(formation.readDto());
-		} else if (isModeEdit()) {
-			final Formation formation_modifier = formation.readDto();
-			final DtList<SessionFormation> session_modif = sessionServices.ListSessionByForId(formation.readDto().getForId());
-			int i = 0;
-			while (i < session_modif.size()) {
-				session_modif.get(i).setFormationName(formation_modifier.getIntitule());
-				session_modif.get(i).setCommentaire(formation_modifier.getCommentaire());
-				session_modif.get(i).setNiveau(formation_modifier.getNiveau().getLibelle());
-				sessionServices.saveSessionFormation(session_modif.get(i));
-				i = i + 1;
-			}
+		if (isModeCreate() || isModeEdit()) {
 			formationServices.saveFormation(formation.readDto());
 		}
 		return SUCCESS;
@@ -86,5 +74,10 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 			return "Modification d'une formation";
 		}
 		return "Detail d'une formation";
+	}
+
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.CATALOGUE;
 	}
 }

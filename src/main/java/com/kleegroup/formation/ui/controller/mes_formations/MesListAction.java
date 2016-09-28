@@ -11,6 +11,7 @@ import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.services.util.SecurityUtil;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
@@ -58,6 +59,12 @@ public final class MesListAction extends AbstractKleeFormationActionSupport {
 	@Override
 	public String getPageName() {
 		return "Recherche session de formation";
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.ROOT_MENU;
 	}
 
 }

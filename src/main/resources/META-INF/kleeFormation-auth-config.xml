@@ -14,15 +14,42 @@
 
 
 	
-
-	<!-- Pays -->
+    <permission description="Accès à la page d'accueil" id="PRM_ACCUEIL" filter="/PAGE/Accueil.do" operation="OP_READ" />
+	<permission description="Accès à la page de " id="PRM_MES_FORMATION" filter="/PAGE/MesList.do" operation="OP_READ" />
+	<permission description="Accès à la page de " id="PRM_VENIR" filter="/PAGE/VenirList.do" operation="OP_READ" />
+	<permission description="Accès à la page de " id="PRM_SUIVI_RH" filter="/PAGE/FormationsList.do" operation="OP_READ" />
+	<permission description="Accès à la page de " id="PRM_GESTIONS" filter="/PAGE/SessionList.do" operation="OP_READ" />
+	<permission description="Accès à la page de " id="PRM_CATALOGUE" filter="/PAGE/CatalogueList.do" operation="OP_READ" />
+	<permission description="Accès à la page de " id="PRM_ADMINISTRATION" filter="/PAGE/UtilisateurList.do" operation="OP_READ" />
+	
+	<!-- Roles -->
 	<role name="R_ADMIN" description="Administrateur">
+		<permission ref="PRM_ACCUEIL" />
+		<permission ref="PRM_MES_FORMATION" />
+		<permission ref="PRM_VENIR" />
+			<permission ref="PRM_ADMINISTRATION" />
 	</role>
 
 	<role name="R_FORMATTEUR" description="Formatteur">
+		<permission ref="PRM_ACCUEIL" />
+		<permission ref="PRM_MES_FORMATION" />
+		<permission ref="PRM_VENIR" />
+		<permission ref="PRM_GESTIONS" />
+		<permission ref="PRM_CATALOGUE" />
 	</role>
 
 	<role name="R_RESPONSSABLE" description="Responssable">
+		<permission ref="PRM_ACCUEIL" />
+		<permission ref="PRM_MES_FORMATION" />
+		<permission ref="PRM_SUIVI_RH" />
+		<permission ref="PRM_VENIR" />
 	</role>
+
+	<role name="R_ANONYMOUS" description="Anonyme">
+		<permission ref="PRM_ACCUEIL" />
+			<permission ref="PRM_MES_FORMATION" />
+		<permission ref="PRM_VENIR" />
+	</role>
+
 
 </authorisation-config>

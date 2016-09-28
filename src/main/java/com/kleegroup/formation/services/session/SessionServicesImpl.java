@@ -7,9 +7,10 @@ import com.kleegroup.formation.dao.formation.SessionFormationDAO;
 import com.kleegroup.formation.dao.services.session.SessionPAO;
 import com.kleegroup.formation.domain.formation.EtatSessionUtilisateur;
 import com.kleegroup.formation.domain.formation.SessionFormation;
+import com.kleegroup.formation.domain.session.CritereSession;
+import com.kleegroup.formation.domain.session.SessionView;
 
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.domain.model.DtListURIForCriteria;
 import io.vertigo.dynamo.transaction.Transactional;
 
 @Transactional
@@ -44,14 +45,14 @@ public class SessionServicesImpl implements SessionServices {
 
 	/** {@inheritDoc} */
 	@Override
-	public DtList<SessionFormation> getSessionListByCritere(final SessionFormation session) {
-		return sessionformationDAO.getList(DtListURIForCriteria.createCriteria(session), 100);
+	public DtList<SessionView> getSessionListByCritere(final CritereSession critereSession) {
+		return sessionPAO.listSessionByCritere(critereSession);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public DtList<SessionFormation> listSessionByDate() {
-		return sessionformationDAO.listSessionByDate();
+	public DtList<SessionView> listSessionByDate() {
+		return sessionPAO.listSessionByDate();
 	}
 
 	/** {@inheritDoc} */
@@ -96,8 +97,8 @@ public class SessionServicesImpl implements SessionServices {
 	}
 
 	@Override
-	public DtList<SessionFormation> ListSessionByForId(final Long forId) {
-		return sessionformationDAO.getListSessionByForId(forId);
+	public DtList<SessionView> ListSessionByForId(final Long forId) {
+		return sessionPAO.getListSessionByForId(forId);
 	}
 
 	@Override

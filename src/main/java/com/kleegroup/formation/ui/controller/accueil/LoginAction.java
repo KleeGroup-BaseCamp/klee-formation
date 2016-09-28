@@ -6,6 +6,7 @@ import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurLogin;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.UiRequestUtil;
@@ -55,5 +56,11 @@ public final class LoginAction extends AbstractKleeFormationActionSupport {
 	@Override
 	public String getPageName() {
 		return "Page de connexion";
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.ROOT_MENU;
 	}
 }

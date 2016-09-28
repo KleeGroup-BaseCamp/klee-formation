@@ -17,7 +17,6 @@ public final class Formation implements DtObject {
 	private Long forId;
 	private String intitule;
 	private String commentaire;
-	private String nivFormation;
 	private String nivCode;
 	private io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> sessionFormation;
 	private com.kleegroup.formation.domain.formation.Niveau niveau;
@@ -80,30 +79,11 @@ public final class Formation implements DtObject {
 	}
 
 	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'niveau'. 
-	 * @return String nivFormation 
-	 */
-	@Field(domain = "DO_LIBELLE_COURT", label = "niveau")
-	public String getNivFormation() {
-		return nivFormation;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'niveau'.
-	 * @param nivFormation String 
-	 */
-	public void setNivFormation(final String nivFormation) {
-		this.nivFormation = nivFormation;
-	}
-
-	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Niveau'. 
-	 * @return String nivCode 
+	 * @return String nivCode <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Niveau")
+	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", required = true, label = "Niveau")
 	public String getNivCode() {
 		return nivCode;
 	}
@@ -111,7 +91,7 @@ public final class Formation implements DtObject {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Définit la valeur de la propriété 'Niveau'.
-	 * @param nivCode String 
+	 * @param nivCode String <b>Obligatoire</b>
 	 */
 	public void setNivCode(final String nivCode) {
 		this.nivCode = nivCode;
@@ -128,7 +108,7 @@ public final class Formation implements DtObject {
     	primaryIsNavigable = true,
     	primaryRole = "Formation",
     	primaryLabel = "Formation",
-    	primaryMultiplicity = "0..1",
+    	primaryMultiplicity = "1..1",
     	foreignDtDefinitionName = "DT_SESSION_FORMATION",
     	foreignIsNavigable = true,
     	foreignRole = "SessionFormation",
@@ -162,7 +142,7 @@ public final class Formation implements DtObject {
     	primaryIsNavigable = true,
     	primaryRole = "Formation",
     	primaryLabel = "Formation",
-    	primaryMultiplicity = "0..1",
+    	primaryMultiplicity = "1..1",
     	foreignDtDefinitionName = "DT_SESSION_FORMATION",
     	foreignIsNavigable = true,
     	foreignRole = "SessionFormation",
@@ -183,7 +163,7 @@ public final class Formation implements DtObject {
     	primaryIsNavigable = true,
     	primaryRole = "Niveau",
     	primaryLabel = "Niveau",
-    	primaryMultiplicity = "0..1",
+    	primaryMultiplicity = "1..1",
     	foreignDtDefinitionName = "DT_FORMATION",
     	foreignIsNavigable = false,
     	foreignRole = "Formation",
@@ -221,7 +201,7 @@ public final class Formation implements DtObject {
     	primaryIsNavigable = true,
     	primaryRole = "Niveau",
     	primaryLabel = "Niveau",
-    	primaryMultiplicity = "0..1",
+    	primaryMultiplicity = "1..1",
     	foreignDtDefinitionName = "DT_FORMATION",
     	foreignIsNavigable = false,
     	foreignRole = "Formation",

@@ -5,13 +5,55 @@ package com.kleegroup.formation.dao.services.session
  */
 create Task TK_LIST_SESSION_BY_DATE {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
-	request : "Select ses.*
-               From	SESSION_FORMATION ses
+	request : "select 	
+						ses.SES_ID as SES_ID,
+						ses.DATE_DEBUT as DATE_DEBUT,
+						ses.DATE_FIN as DATE_FIN,
+						ses.HORAIRE as HORAIRES,
+						ses.DUREE as DUREE,
+						form.INTITULE as FORMATION_NAME,
+						form.COMMENTAIRE as COMMENTAIRE,
+						niv.LIBELLE as NIVEAU,
+						eta.LIBELLE as STATUS,
+						esu.LIBELLE as STATUS_UTILISATEUR
+               From	SESSION_FORMATION as ses
+               join FORMATION as form on ses.FOR_ID = form.FOR_ID 
+               join ETAT as eta on ses.ETA_CODE = eta.ETA_CODE
+               join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
+               join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
+               
                Where ses.DATE_DEBUT >= CURRENT_DATE()
                AND ses.STATUS = 'Publier'",
-  attribute DTC_SESSION_FORMATION {domain : DO_DT_SESSION_FORMATION_DTC, notNull:"true", inOut :"out",}
+  attribute DTC_SESSION_FORMATION {domain : DO_DT_SESSION_VIEW_DTC, notNull:"true", inOut :"out",}
 }
 
+
+create Task TK_LIST_SESSION_BY_CRITERE {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "select 	
+						ses.SES_ID as SES_ID,
+						ses.DATE_DEBUT as DATE_DEBUT,
+						ses.DATE_FIN as DATE_FIN,
+						ses.HORAIRE as HORAIRES,
+						ses.DUREE as DUREE,
+						form.INTITULE as FORMATION_NAME,
+						form.COMMENTAIRE as COMMENTAIRE,
+						niv.LIBELLE as NIVEAU,
+						eta.ETA_CODE as STATUS,
+						esu.LIBELLE as STATUS_UTILISATEUR
+               From	SESSION_FORMATION as ses
+               join FORMATION as form on ses.FOR_ID = form.FOR_ID 
+               join ETAT as eta on ses.ETA_CODE = eta.ETA_CODE
+               join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
+               join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
+               where 1=1 
+               <% if (critere.getIntitule() != null) { %>
+               		and form.INTITULE = #CRITERE.INTITULE#
+               <%}%>
+              ",
+  attribute CRITERE {domain : DO_DT_CRITERE_SESSION_DTO, notNull:"true", inOut :"in",}
+  attribute DTC_SESSION_FORMATION {domain : DO_DT_SESSION_VIEW_DTC, notNull:"true", inOut :"out",}
+}
 
 create Task TK_LIST_SESSION_BROUILLON {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
@@ -85,11 +127,25 @@ create Task TK_GET_LIST_SESSION_FORMATEUR_VENIR {
   
  create Task TK_GET_LIST_SESSION_BY_FOR_ID {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
-	request : "Select ses.*
-               From	SESSION_FORMATION ses
+	request : "select 	
+						ses.SES_ID as SES_ID,
+						ses.DATE_DEBUT as DATE_DEBUT,
+						ses.DATE_FIN as DATE_FIN,
+						ses.HORAIRE as HORAIRES,
+						ses.DUREE as DUREE,
+						form.INTITULE as FORMATION_NAME,
+						form.COMMENTAIRE as COMMENTAIRE,
+						niv.LIBELLE as NIVEAU,
+						eta.ETA_CODE as STATUS,
+						esu.LIBELLE as STATUS_UTILISATEUR
+               From	SESSION_FORMATION as ses
+               join FORMATION as form on ses.FOR_ID = form.FOR_ID 
+               join ETAT as eta on ses.ETA_CODE = eta.ETA_CODE
+               join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
+               join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
                Where ses.FOR_ID = #FOR_ID# ",
   attribute FOR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
-  attribute DTC_SESSION {domain : DO_DT_SESSION_FORMATION_DTC, notNull:"true", inOut :"out",}
+  attribute DTC_SESSION {domain : DO_DT_SESSION_VIEW_DTC, notNull:"true", inOut :"out",}
 }
   
 

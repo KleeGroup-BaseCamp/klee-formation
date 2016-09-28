@@ -46,7 +46,7 @@
 		<display:column  property="dateDebut" title="Début" sortable="true"/>
 		<display:column  property="dateFin" title="Fin" sortable="true" />
 		<display:column  property="duree" title="Durée(jours)" sortable="true" />
-		<display:column  property="horaire" title="Horaires" sortable="true" />
+		<display:column  property="horaires" title="Horaires" sortable="true" />
 		<display:column  property="niveau" title="Niveau" sortable="true" />
 		<display:column  property="commentaire" title="Descriptif" sortable="true" />
 		<display:column  property="status" title="Etat" sortable="true" /> 

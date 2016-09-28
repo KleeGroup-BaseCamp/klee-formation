@@ -25,8 +25,9 @@ create Task TK_GET_INSCRIPTION_VENIR_FORMATION {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "Select ins.*
                From	INSCRIPTION ins
+               join SESSION_FORMATION ses on ins.SES_ID = ses.SES_ID
                Where ins.UTI_ID = #UTILISATEUR_ID#
-								 and ins.DATEFIN >= CURRENT_DATE()",
+								 and ses.DATE_FIN >= CURRENT_DATE()",
   attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
   attribute DTC {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
 }
@@ -36,8 +37,9 @@ create Task TK_GET_INSCRIPTION_PASSER_FORMATION {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "Select ins.*
                From	INSCRIPTION ins
+               join SESSION_FORMATION ses on ins.SES_ID = ses.SES_ID
                Where ins.UTI_ID = #UTILISATEUR_ID#
-			and ins.DATEFIN < CURRENT_DATE()",
+			and ses.DATE_FIN < CURRENT_DATE()",
   attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
   attribute DTC {domain : DO_DT_INSCRIPTION_DTC, notNull:"true", inOut :"out",}
 }

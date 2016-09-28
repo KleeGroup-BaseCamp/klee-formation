@@ -11,6 +11,7 @@ import com.kleegroup.formation.services.administration.utilisateur.UtilisateurSe
 import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.lang.Option;
 import io.vertigo.struts2.core.ContextForm;
@@ -33,18 +34,13 @@ public final class SatisfactionAction extends AbstractKleeFormationActionSupport
 	private final ContextForm<Inscription> statistique = new ContextForm<>("statistique", this);
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 
-	public void initContext(@Named("sesId") final Option<Long> sesId, @Named("utiId") final Option<Long> utiId) {
-		if (utiId.isPresent()) {
-			statistique.publish(inscriptionServices.InscriptionByUtiSesId(utiId.get(), sesId.get()));
-
-		} else {
-			final BigDecimal zero = new BigDecimal(0);
-			if (inscriptionServices.InscriptionByUtiSesId(utilisateurServices.getCurrentUtilisateur().getUtiId(), sesId.get()).getSatisfaction().compareTo(zero) == 0) {
-				statistique.publish(inscriptionServices.InscriptionByUtiSesId(utilisateurServices.getCurrentUtilisateur().getUtiId(), sesId.get()));
-				toModeCreate();
-			}
+	public void initContext(@Named("sesId") final Option<Long> sesId) {
+		final BigDecimal zero = new BigDecimal(0);
+		if (inscriptionServices.InscriptionByUtiSesId(utilisateurServices.getCurrentUtilisateur().getUtiId(), sesId.get()).getSatisfaction().compareTo(zero) == 0) {
 			statistique.publish(inscriptionServices.InscriptionByUtiSesId(utilisateurServices.getCurrentUtilisateur().getUtiId(), sesId.get()));
+			toModeCreate();
 		}
+		statistique.publish(inscriptionServices.InscriptionByUtiSesId(utilisateurServices.getCurrentUtilisateur().getUtiId(), sesId.get()));
 
 	}
 
@@ -75,6 +71,11 @@ public final class SatisfactionAction extends AbstractKleeFormationActionSupport
 			return "Modification d'une session deformation";
 		}
 		return "Detail d'une session de formation";
+	}
+
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.MES_FORMATION;
 	}
 
 }

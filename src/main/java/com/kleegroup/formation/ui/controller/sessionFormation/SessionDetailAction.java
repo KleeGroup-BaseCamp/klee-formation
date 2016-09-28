@@ -7,22 +7,24 @@ import javax.inject.Named;
 
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere;
-import com.kleegroup.formation.domain.formation.EtatSessionUtilisateur;
 import com.kleegroup.formation.domain.formation.Formation;
 import com.kleegroup.formation.domain.formation.FormationCritere;
 import com.kleegroup.formation.domain.formation.Horaires;
+import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.services.horaires.HorairesServices;
 import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
+import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.Option;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextListModifiable;
+import io.vertigo.struts2.core.ContextMdl;
 import io.vertigo.struts2.core.ContextRef;
 
 /**
@@ -43,34 +45,35 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	private UtilisateurServices utilisateurServices;
 
 	private final ContextForm<SessionFormation> session = new ContextForm<>("sessionTest", this);
+	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
 	private final ContextForm<Horaires> horaire = new ContextForm<>("horaire", this);
 	private final ContextListModifiable<Horaires> horaires = new ContextListModifiable<>("horaires", this);
 	private final ContextList<Utilisateur> formatteurs = new ContextList<>("formatteurs", this);
 	private final ContextList<Formation> formations = new ContextList<>("formations", this);
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 
+	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
+	private final ContextMdl<Utilisateur> utilisateurs = new ContextMdl<>("utilisateurs", this);
+
 	public void initContext(@Named("sesId") final Option<Long> sesId) {
+		niveaux.publish(Niveau.class, null);
+		utilisateurs.publish(Utilisateur.class, null);
 		if (sesId.isPresent()) {
-			session.publish(sessionServices.loadSessionFormation(sesId.get()));
+			final SessionFormation sessionFormation = sessionServices.loadSessionFormation(sesId.get());
+			session.publish(sessionFormation);
+			formation.publish(formationServices.loadFormation(sessionFormation.getForId()));
 		} else {
 			final UtilisateurCritere utilisateurcritere = new UtilisateurCritere();
 			final com.kleegroup.formation.security.Role role = com.kleegroup.formation.security.Role.R_FORMATTEUR;
 			utilisateurcritere.setRole(role.toString());
-
-			formatteurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurcritere));
-
-			horaire.publish(new Horaires());
-			horaires.publish(new DtList<>(Horaires.class));
-			final FormationCritere formationcritere = new FormationCritere();
-			formations.publish(formationServices.getFormationListByCritere(formationcritere));
 			session.publish(new SessionFormation());
+			loadListsForEdit();
 			toModeCreate();
 
 		}
 	}
 
-	public String doEdit() {
-		toModeEdit();
+	private void loadListsForEdit() {
 
 		final UtilisateurCritere utilisateurcritere = new UtilisateurCritere();
 		final com.kleegroup.formation.security.Role role = com.kleegroup.formation.security.Role.R_FORMATTEUR;
@@ -80,7 +83,13 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		horaires.publish(new DtList<>(Horaires.class));
 		final FormationCritere formationcritere = new FormationCritere();
 		formations.publish(formationServices.getFormationListByCritere(formationcritere));
+
+	}
+
+	public String doEdit() {
 		session.publish(sessionServices.loadSessionFormation(sesIdRef.get()));
+		loadListsForEdit();
+		toModeEdit();
 		return NONE;
 	}
 
@@ -114,13 +123,8 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	}
 
 	private void doSaveSession(final BigDecimal satisfaction, final SessionFormation sessions) {
-
-		final Utilisateur uti = utilisateurServices.loadUtilisateurWithRoles(sessions.getUtiId());
-		sessions.setFormateur(uti.getNom().concat(" ").concat(uti.getPrenom()));
-		final Formation formation = formationServices.loadFormation(sessions.getForId());
-		sessions.setFormationName(formation.getIntitule());
-		sessions.setCommentaire(formation.getCommentaire());
-		sessions.setNiveau(formation.getNiveau().getLibelle());
+		sessions.setEtaCode("Publier");
+		sessions.setEsuCode("Ouvert");
 		sessionServices.saveSessionFormation(sessions);
 		final DtList<Horaires> horairess = horaires.readDtList();
 		if (!horairess.isEmpty()) {
@@ -135,11 +139,9 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		if (satisfaction != null) {
 			sessions.setSatisfaction(satisfaction);
 			sessions.setI(satisfaction);
-			final EtatSessionUtilisateur etatsessionutilisateur = new EtatSessionUtilisateur();
-			etatsessionutilisateur.setLibelle("Ouvert");
-			etatsessionutilisateur.setSesId(sessions.getSesId());
+			//			sessions.setEsuCode();
 			sessions.setIsOuvert("Ouvert");
-			sessionServices.saveEtatSessionUtilisateur(etatsessionutilisateur);
+			//			sessionServices.saveEtatSessionUtilisateur(etatsessionutilisateur);
 			sessionServices.saveSessionFormation(sessions);
 		}
 
@@ -191,6 +193,11 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			return "Modification d'une session deformation";
 		}
 		return "Detail d'une session de formation";
+	}
+
+	@Override
+	public Menu getActiveMenu() {
+		return Menu.MES_FORMATION;
 	}
 
 }

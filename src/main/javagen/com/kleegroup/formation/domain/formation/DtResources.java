@@ -19,10 +19,6 @@ public enum DtResources implements MessageKey {
 	 * Libelle.
 	 */
 	FLD_ETAT$LIBELLE,
-	/**
-	 * Session formation.
-	 */
-	FLD_ETAT$SES_ID,
 
 	/***********************************************************
 	/** EtatSessionUtilisateur.
@@ -35,10 +31,6 @@ public enum DtResources implements MessageKey {
 	 * Libellé.
 	 */
 	FLD_ETAT_SESSION_UTILISATEUR$LIBELLE,
-	/**
-	 * Session formation.
-	 */
-	FLD_ETAT_SESSION_UTILISATEUR$SES_ID,
 
 	/***********************************************************
 	/** Formation.
@@ -55,10 +47,6 @@ public enum DtResources implements MessageKey {
 	 * commentaire.
 	 */
 	FLD_FORMATION$COMMENTAIRE,
-	/**
-	 * niveau.
-	 */
-	FLD_FORMATION$NIV_FORMATION,
 	/**
 	 * Niveau.
 	 */
@@ -111,46 +99,6 @@ public enum DtResources implements MessageKey {
 	 * SATISFACTION.
 	 */
 	FLD_INSCRIPTION$SATISFACTION,
-	/**
-	 * sessionName.
-	 */
-	FLD_INSCRIPTION$SESSION_NAME,
-	/**
-	 * nom.
-	 */
-	FLD_INSCRIPTION$NOM,
-	/**
-	 * prenom.
-	 */
-	FLD_INSCRIPTION$PRENOM,
-	/**
-	 * mail.
-	 */
-	FLD_INSCRIPTION$MAIL,
-	/**
-	 * niveau.
-	 */
-	FLD_INSCRIPTION$NIVEAU,
-	/**
-	 * commentaire.
-	 */
-	FLD_INSCRIPTION$COMMENTAIRE,
-	/**
-	 * dateDebut.
-	 */
-	FLD_INSCRIPTION$DATEDEBUT,
-	/**
-	 * dateFin.
-	 */
-	FLD_INSCRIPTION$DATEFIN,
-	/**
-	 * horaire.
-	 */
-	FLD_INSCRIPTION$HORAIRE,
-	/**
-	 * duréejour.
-	 */
-	FLD_INSCRIPTION$DUREEJOUR,
 	/**
 	 * Durée.
 	 */
@@ -228,29 +176,13 @@ public enum DtResources implements MessageKey {
 	 */
 	FLD_SESSION_FORMATION$NB_PERSONNE,
 	/**
-	 * FormationName.
-	 */
-	FLD_SESSION_FORMATION$FORMATION_NAME,
-	/**
 	 * Status.
 	 */
 	FLD_SESSION_FORMATION$STATUS,
 	/**
-	 * Commentaire.
-	 */
-	FLD_SESSION_FORMATION$COMMENTAIRE,
-	/**
-	 * Niveau.
-	 */
-	FLD_SESSION_FORMATION$NIVEAU,
-	/**
 	 * Is_ouvert.
 	 */
 	FLD_SESSION_FORMATION$IS_OUVERT,
-	/**
-	 * Formateur.
-	 */
-	FLD_SESSION_FORMATION$FORMATEUR,
 	/**
 	 * Satisfaction.
 	 */
@@ -276,7 +208,15 @@ public enum DtResources implements MessageKey {
 	 */
 	FLD_SESSION_FORMATION$FOR_ID,
 	/**
+	 * Etat.
+	 */
+	FLD_SESSION_FORMATION$ETA_CODE,
+	/**
 	 * Utilisateur.
 	 */
 	FLD_SESSION_FORMATION$UTI_ID,
+	/**
+	 * Etat session utilisateur.
+	 */
+	FLD_SESSION_FORMATION$ESU_CODE,
 }
