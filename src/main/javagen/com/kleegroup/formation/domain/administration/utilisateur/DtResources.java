@@ -96,6 +96,10 @@ public enum DtResources implements MessageKey {
 	 */
 	FLD_UTILISATEUR_CRITERE$NOM,
 	/**
+	 * Nom.
+	 */
+	FLD_UTILISATEUR_CRITERE$PRENOM,
+	/**
 	 * Indentifiant.
 	 */
 	FLD_UTILISATEUR_CRITERE$LOGIN,

@@ -27,6 +27,7 @@ create DtDefinition DT_UTILISATEUR_LOGIN {
 create DtDefinition DT_UTILISATEUR_CRITERE {
     persistent : "false",
     field NOM {domain : DO_LIBELLE, label : "Nom", notNull : "false",},
+     field PRENOM {domain : DO_LIBELLE, label : "Nom", notNull : "false",},
 	field LOGIN {domain : DO_LOGIN, label : "Indentifiant", notNull : "false",},
 	field ROLE {domain : DO_LIBELLE, label : "Rôle", notNull : "false",},
 	/*field IS_ALL {domain : DO_ACTIF, label : "Tous les utilisateurs", notNull : "true",},*/

@@ -7,10 +7,11 @@
 	<s:param name="subtitle">${pageName}</s:param>
 </s:include>
 <s:form>
-	<s:div layout="table">
+	<s:div layout="table" cols="6">
 		<s:textfield name="utilisateurCritere.nom" label="default"/>
-		<s:textfield name="utilisateurCritere.login" label="default"/>
-		<s:textfield name="utilisateurCritere.role" label="default"/>
+		<s:textfield name="utilisateurCritere.prenom" label="Prénom"/>
+		<%--<s:textfield name="utilisateurCritere.role" label="default"/> --%>
+		<s:select name="utilisateurCritere.role" label="default" list="roles"/>	
 	</s:div>
 	<div class="button-bar">
 		<div class="right">
@@ -31,12 +32,17 @@
 	</display:column>
 	<display:column  property="prenom" title="${util.label('utilisateurs.prenom')}"/>		
 	<display:column property="mail" title="${util.label('utilisateurs.mail')}" sortable="true"/>
+	<display:column property="responsable" title="Responsable" sortable="true"/>
+	<display:column property="admin" title="Administrateur" sortable="true"/>
+	<display:column property="formateur" title="Formateur" sortable="true"/>
 	<display:column property="utiId" title="${util.label('utilisateurs.utiId')}" sortable="true"/>
 </display:table>
 
 <div class="button-bar">
 	<div class="right">
+		<s:if test="%{isAdministrateur()}">
 		<s:a action="UtilisateurDetail" cssClass="creer">NOUVEAU</s:a>
+		</s:if>
 	</div>
 </div>
 <s:include value="/jsp/include/footer.jsp" />

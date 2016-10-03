@@ -123,11 +123,6 @@
 			<result name="success" type="redirectAction">FormationsDetail</result>
 		</action>
 
-	<action name="*FormationsList" class="com.kleegroup.formation.ui.controller.formations.FormationsListAction" method="{1}">
-			<result name="none">/jsp/formations/formationsList.jsp</result>
-			<result name="success" type="redirectAction">FormationsList</result>
-		</action>
-
 		<action name="*FormationList" class="com.kleegroup.formation.ui.controller.formation.FormationListAction" method="{1}">
 			<result name="none">/jsp/formation/formationList.jsp</result>
 			<result name="success" type="redirectAction">FormationList</result>

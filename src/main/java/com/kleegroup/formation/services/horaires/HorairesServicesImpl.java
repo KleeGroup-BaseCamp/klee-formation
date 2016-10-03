@@ -42,23 +42,38 @@ public class HorairesServicesImpl implements HorairesServices {
 			}
 		}
 
-		final SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yy 'de' HH:mm");
+		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yy 'de' HH:mm");
 		final String lineSeparator = System.getProperty("line.separator");
 		final StringBuilder buffer = new StringBuilder();
-		for (final Horaires horaires : horairess) {
-			horaires.setSesId(sesId);
-			horairesDAO.save(horaires);
-			final Long tmp_test = (horaires.getDebut().getTime() - horaires.getFin().getTime()) / 3600000 / 24;
-			if (tmp_test == 0) {
+		final SessionFormation session = sessionServices.loadSessionbyId(sesId);
+		System.out.println(Integer.toString(horairess.size()));
+		if (horairess.size() == 1) {
+			String line = new String();
+			line = "de ";
+			line = line + formater.format(horairess.get(0).getFin()).substring(12, formater.format(horairess.get(0).getDebut()).length()).concat(" à ".concat(formater.format(horairess.get(0).getFin()).substring(12, formater.format(horairess.get(0).getDebut()).length())));
+			sessionServices.saveSessionFormation(session);
+			return line;
+		} else {
+			for (final Horaires horaires : horairess) {
+				session.getHorairesList().add(horaires);
+				//	session.getHorairesList().isEmpty()
+				horaires.setSesId(sesId);
 
-				buffer.append(lineSeparator).append(formater.format(horaires.getDebut()))
-						.append(" à ").append(formater.format(horaires.getFin()).substring(12, formater.format(horaires.getFin()).length()));
+				horairesDAO.save(horaires);
+				final Long tmp_test = (horaires.getDebut().getTime() - horaires.getFin().getTime()) / 3600000 / 24;
+				if (tmp_test == 0) {
+					formater = new SimpleDateFormat("dd/MM/yy 'de' HH:mm");
+					buffer.append(lineSeparator).append(formater.format(horaires.getDebut()))
+							.append(" à ").append(formater.format(horaires.getFin()).substring(12, formater.format(horaires.getFin()).length()));
 
-			} else {
-				buffer.append(formater.format(horaires.getDebut())).append(" - ").append(formater.format(horaires.getFin()));
+				} else {
+					formater = new SimpleDateFormat("dd/MM/yy 'à' HH:mm");
+					buffer.append(lineSeparator).append(formater.format(horaires.getDebut())).append(" - ").append(formater.format(horaires.getFin()));
+				}
 			}
+			sessionServices.saveSessionFormation(session);
+			return buffer.toString();
 		}
-		return buffer.toString();
 
 	}
 

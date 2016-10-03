@@ -12,6 +12,7 @@ create DtDefinition DT_SESSION_VIEW {
 	field COMMENTAIRE {domain : DO_LIBELLE_LONG, label : "Descriptif", notNull : "false"}
 	field STATUS {domain : DO_LIBELLE_COURT, label : "Etat", notNull : "false"}
 	field STATUS_UTILISATEUR {domain : DO_LIBELLE_COURT, label : "Etat", notNull : "false"}
+	field SATISFACTION {domain : DO_STATIQUE, label : "Satisfaction", notNull : "false"}
 }
 
 

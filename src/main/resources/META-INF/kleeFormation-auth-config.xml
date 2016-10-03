@@ -47,7 +47,7 @@
 
 	<role name="R_ANONYMOUS" description="Anonyme">
 		<permission ref="PRM_ACCUEIL" />
-			<permission ref="PRM_MES_FORMATION" />
+		<permission ref="PRM_MES_FORMATION" />
 		<permission ref="PRM_VENIR" />
 	</role>
 

@@ -38,8 +38,8 @@ create Task TK_LIST_UTILISATEUR_BY_CRITERE {
                		<%if(dtoUtilisateurCritere.getNom()!=null) {%>
                			And uti.NOM LIKE #DTO_UTILISATEUR_CRITERE.NOM# || '%%'
                		<%}%>
-               		<%if(dtoUtilisateurCritere.getLogin()!=null) {%>
-               			And log.LOGIN LIKE #DTO_UTILISATEUR_CRITERE.LOGIN# || '%%'
+               		<%if(dtoUtilisateurCritere.getPrenom()!=null) {%>
+               			And uti.PRENOM LIKE #DTO_UTILISATEUR_CRITERE.PRENOM# || '%%'
                		<%}%>
                		<%if(dtoUtilisateurCritere.getRole()!=null) {%>
                			And exists (Select null From UTI_ROL pro

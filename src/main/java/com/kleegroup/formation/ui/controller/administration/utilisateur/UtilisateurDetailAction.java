@@ -6,10 +6,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.kleegroup.formation.domain.administration.utilisateur.Role;
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurLogin;
 import com.kleegroup.formation.domain.inscription.InscriptionView;
+import com.kleegroup.formation.security.Role;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.services.util.SecurityUtil;
@@ -57,8 +57,8 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 			roleAdmin.set(Boolean.FALSE);
 			roleFormatteur.set(Boolean.FALSE);
 			roleResponssable.set(Boolean.FALSE);
-			final DtList<Role> roles = dtoUtilisateur.getRoleList();
-			for (final Role role : roles) {
+			final DtList<com.kleegroup.formation.domain.administration.utilisateur.Role> roles = dtoUtilisateur.getRoleList();
+			for (final com.kleegroup.formation.domain.administration.utilisateur.Role role : roles) {
 				if (com.kleegroup.formation.security.Role.R_ADMIN.equals(role.getRolCode())) {
 					roleAdmin.set(Boolean.TRUE);
 				}
@@ -91,19 +91,19 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 		uti.setResponsable(false);
 		final List<URI> roles = new ArrayList<>();
 		if (roleAdmin.get()) {
-			roles.add(DtObjectUtil.createURI(Role.class, com.kleegroup.formation.security.Role.R_ADMIN.name()));
+			roles.add(DtObjectUtil.createURI(com.kleegroup.formation.domain.administration.utilisateur.Role.class, com.kleegroup.formation.security.Role.R_ADMIN.name()));
 			uti.setAdmin(true);
 		}
 		if (roleFormatteur.get()) {
-			roles.add(DtObjectUtil.createURI(Role.class, com.kleegroup.formation.security.Role.R_FORMATTEUR.name()));
+			roles.add(DtObjectUtil.createURI(com.kleegroup.formation.domain.administration.utilisateur.Role.class, com.kleegroup.formation.security.Role.R_FORMATTEUR.name()));
 			uti.setFormateur(true);
 		}
 		if (roleResponssable.get()) {
-			roles.add(DtObjectUtil.createURI(Role.class, com.kleegroup.formation.security.Role.R_RESPONSSABLE.name()));
+			roles.add(DtObjectUtil.createURI(com.kleegroup.formation.domain.administration.utilisateur.Role.class, com.kleegroup.formation.security.Role.R_RESPONSSABLE.name()));
 			uti.setResponsable(true);
 		}
 
-		roles.add(DtObjectUtil.createURI(Role.class, com.kleegroup.formation.security.Role.R_ANONYMOUS.name()));
+		roles.add(DtObjectUtil.createURI(com.kleegroup.formation.domain.administration.utilisateur.Role.class, com.kleegroup.formation.security.Role.R_ANONYMOUS.name()));
 		if (isModeCreate()) {
 			utilisateurServices.saveUtilisateur(utilisateurLogin.readDto(), uti, roles);
 		} else {
@@ -137,6 +137,10 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 			return "Modification d'un utilisateur";
 		}
 		return "Detail d'un utilisateur";
+	}
+
+	public boolean isAdministrateur() {
+		return SecurityUtil.hasRole(Role.R_ADMIN);
 	}
 
 	@Override

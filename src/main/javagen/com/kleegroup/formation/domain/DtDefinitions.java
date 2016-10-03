@@ -295,6 +295,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		STATUS,
 		/** Propriété 'Etat'. */
 		STATUS_UTILISATEUR,
+		/** Propriété 'Satisfaction'. */
+		SATISFACTION,
 	}
 
 	/**
@@ -327,6 +329,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	public enum UtilisateurCritereFields implements DtFieldName {
 		/** Propriété 'Nom'. */
 		NOM,
+		/** Propriété 'Nom'. */
+		PRENOM,
 		/** Propriété 'Indentifiant'. */
 		LOGIN,
 		/** Propriété 'Rôle'. */

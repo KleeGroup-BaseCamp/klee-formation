@@ -15,6 +15,7 @@ public final class UtilisateurCritere implements DtObject {
 	private static final long serialVersionUID = 1L;
 
 	private String nom;
+	private String prenom;
 	private String login;
 	private String role;
 	private Boolean isActif;
@@ -36,6 +37,25 @@ public final class UtilisateurCritere implements DtObject {
 	 */
 	public void setNom(final String nom) {
 		this.nom = nom;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Nom'. 
+	 * @return String prenom 
+	 */
+	@Field(domain = "DO_LIBELLE", persistent = false, label = "Nom")
+	public String getPrenom() {
+		return prenom;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Nom'.
+	 * @param prenom String 
+	 */
+	public void setPrenom(final String prenom) {
+		this.prenom = prenom;
 	}
 
 	/**

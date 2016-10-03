@@ -10,3 +10,8 @@ alter DtDefinition DT_UTILISATEUR {
         sortField : "NOM"
         displayField : "NOM_COMPLET"
 }
+
+alter DtDefinition DT_ROLE{
+        sortField : "LIBELLE"
+        displayField : "LIBELLE"
+}

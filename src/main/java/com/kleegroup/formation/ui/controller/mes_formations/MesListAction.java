@@ -65,7 +65,7 @@ public final class MesListAction extends AbstractKleeFormationActionSupport {
 	/** {@inheritDoc} */
 	@Override
 	public Menu getActiveMenu() {
-		return Menu.ROOT_MENU;
+		return Menu.MES_FORMATION;
 	}
 
 }

@@ -49,6 +49,6 @@ public final class SessionListAction extends AbstractKleeFormationActionSupport 
 	/** {@inheritDoc} */
 	@Override
 	public Menu getActiveMenu() {
-		return Menu.ROOT_MENU;
+		return Menu.GESTIONS;
 	}
 }

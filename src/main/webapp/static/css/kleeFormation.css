@@ -586,7 +586,7 @@ textarea[readonly] {
 
 
 input[type="text"].hasDatepicker {
-	width: 75px;
+	width: 150px;
 }
 
 .ui-datepicker-trigger {
@@ -741,9 +741,17 @@ input[type="text"].hasDatepicker {
 	
 	
 }
+
+
+ul li a:active {
+	background:#FF8C00;
+ color:white;
+}
+
+
 ul li a {
 height: 50px;
-width:135px;
+width:155px;
 
  display:block;
  float:left;   
@@ -759,6 +767,8 @@ ul li a:hover {
  background:#FF8C00;
  color:white;
  } 
+ 
+
 
 #menu ul {	
 	height: 50px;
@@ -786,6 +796,10 @@ ul li a:hover {
 	color:rgb(0,0,0);
 }
 
+#menu ul li.act a {
+	background:#FF8C00;
+	 color:white;
+}
 #menu > ul > li {
 	padding: 1px;
 	/*border-left: 1px solid #ccdce9;	*/

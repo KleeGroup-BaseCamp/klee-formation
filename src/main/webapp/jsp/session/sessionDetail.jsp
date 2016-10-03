@@ -53,7 +53,7 @@
 			</display:table>
 			</br>
 			</br>
-			<sj:datepicker name="horaire.debut" label="Début"  displayFormat="dd/mm/yy" changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>
+			<sj:datepicker name="horaire.debut" label="Début" displayFormat="dd/mm/yy" timepickerFormat="HH:mm" changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>
 		    <sj:datepicker name="horaire.fin" label="Fin" displayFormat="dd/mm/yy"  changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>
 		</s:if>
 		<s:if test="%{!modeCreate}">

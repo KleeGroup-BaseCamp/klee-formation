@@ -55,6 +55,6 @@ public final class CatalogueListAction extends AbstractKleeFormationActionSuppor
 	/** {@inheritDoc} */
 	@Override
 	public Menu getActiveMenu() {
-		return Menu.ROOT_MENU;
+		return Menu.CATALOGUE;
 	}
 }

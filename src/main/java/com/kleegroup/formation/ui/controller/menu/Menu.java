@@ -18,8 +18,7 @@ public enum Menu {
 	ACCUEIL(ROOT_MENU, "Accueil", "Accueil.do"), //
 	MES_FORMATION(ROOT_MENU, "Mes formations", "MesList.do"), //
 	VENIR(ROOT_MENU, "Formations à venir", "VenirList.do"), //
-	SUIVI_RH(ROOT_MENU, "Suivi RH", "FormationsList.do"), //
-	GESTIONS(ROOT_MENU, "Gestions", "SessionList.do"), //
+	GESTIONS(ROOT_MENU, "Gestion", "SessionList.do"), //
 	CATALOGUE(ROOT_MENU, "Catalogue", "CatalogueList.do"), //
 	ADMINISTRATION(ROOT_MENU, "Administration", "UtilisateurList.do");
 

@@ -59,4 +59,8 @@ public enum DtResources implements MessageKey {
 	 * Etat.
 	 */
 	FLD_SESSION_VIEW$STATUS_UTILISATEUR,
+	/**
+	 * Satisfaction.
+	 */
+	FLD_SESSION_VIEW$SATISFACTION,
 }

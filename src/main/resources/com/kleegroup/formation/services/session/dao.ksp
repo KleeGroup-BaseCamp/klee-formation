@@ -135,12 +135,15 @@ create Task TK_GET_LIST_SESSION_FORMATEUR_VENIR {
 						form.COMMENTAIRE as COMMENTAIRE,
 						niv.LIBELLE as NIVEAU,
 						eta.ETA_CODE as STATUS,
+						ins.SATISFACTION as SATISFACTION,
 						esu.LIBELLE as STATUS_UTILISATEUR
+						
                From	SESSION_FORMATION as ses
                join FORMATION as form on ses.FOR_ID = form.FOR_ID 
                join ETAT as eta on ses.ETA_CODE = eta.ETA_CODE
                join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
                join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
+               join INSCRIPTION as ins on ses.SES_ID = ins.SES_ID
                Where ses.UTI_ID = #FORMATEUR_ID#
                and ses.DATE_FIN < CURRENT_DATE()",
   attribute FORMATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}

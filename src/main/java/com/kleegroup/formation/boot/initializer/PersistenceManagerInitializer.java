@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
+import com.kleegroup.formation.domain.administration.utilisateur.Role;
 import com.kleegroup.formation.domain.formation.Niveau;
 
 import io.vertigo.app.Home;
@@ -46,7 +47,7 @@ public final class PersistenceManagerInitializer implements ComponentInitializer
 	public void init() {
 		registerMasterData(persistenceManager, Niveau.class);
 		registerMasterData(persistenceManager, Utilisateur.class);
-		//registerMasterData(persistenceManager, Famille.class);
+		registerMasterData(persistenceManager, Role.class);
 		//Liste de référence des communes-CP
 		//registerMasterData(persistenceManager, Commune.class, CACHE_DURATION_LONG, true);
 

@@ -2,6 +2,7 @@ package com.kleegroup.formation.ui.controller.administration.utilisateur;
 
 import javax.inject.Inject;
 
+import com.kleegroup.formation.domain.administration.utilisateur.Role;
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
@@ -11,6 +12,7 @@ import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
+import io.vertigo.struts2.core.ContextMdl;
 
 /**
  * @author npiedeloup
@@ -21,14 +23,15 @@ public final class UtilisateurListAction extends AbstractKleeFormationActionSupp
 
 	@Inject
 	private UtilisateurServices utilisateurServices;
-
+	private final ContextMdl<Role> roles = new ContextMdl<>("roles", this);
 	private final ContextForm<UtilisateurCritere> utilisateurCritereForm = new ContextForm<>("utilisateurCritere", this);
 	private final ContextList<Utilisateur> utilisateurs = new ContextList<>("utilisateurs", this);
 
 	/** {@inheritDoc} */
 	@Override
 	protected void initContext() {
-		SecurityUtil.checkRole(com.kleegroup.formation.security.Role.R_ADMIN);
+		SecurityUtil.checkRole(com.kleegroup.formation.security.Role.R_ADMIN, com.kleegroup.formation.security.Role.R_RESPONSSABLE);
+		roles.publish(Role.class, null);
 		utilisateurCritereForm.publish(new UtilisateurCritere());
 		utilisateurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurCritereForm.readDto()));
 		toModeEdit();
@@ -49,6 +52,10 @@ public final class UtilisateurListAction extends AbstractKleeFormationActionSupp
 	@Override
 	public Menu getActiveMenu() {
 		return Menu.ADMINISTRATION;
+	}
+
+	public boolean isAdministrateur() {
+		return SecurityUtil.hasRole(com.kleegroup.formation.security.Role.R_ADMIN);
 	}
 
 	@Override

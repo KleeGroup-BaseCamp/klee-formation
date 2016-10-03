@@ -1,6 +1,7 @@
 package com.kleegroup.formation.ui.controller.sessionFormation;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -80,7 +81,10 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		final com.kleegroup.formation.security.Role role = com.kleegroup.formation.security.Role.R_FORMATTEUR;
 		utilisateurcritere.setRole(role.toString());
 		formatteurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurcritere));
-		horaire.publish(new Horaires());
+		final Horaires int_horaire = new Horaires();
+		int_horaire.setDebut(new Date());
+		int_horaire.setFin(new Date());
+		horaire.publish(int_horaire);
 		final FormationCritere formationcritere = new FormationCritere();
 		formations.publish(formationServices.getFormationListByCritere(formationcritere));
 
@@ -90,12 +94,13 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		final SessionFormation my_session = sessionServices.loadSessionFormation(sesIdRef.get());
 		session.publish(my_session);
 		horaires.publish(new DtList<>(Horaires.class));
-		/*	System.out.println(Integer.toString(my_session.getHorairesList().size()));
-			if (my_session.getHorairesList().size() > 0) {
-				//	horaires.publish(my_session.getHorairesList());
-			} else {
-				horaires.publish(new DtList<>(Horaires.class));
-			}*/
+
+		//System.out.println(Integer.toString(my_session.getHorairesList().size()));
+		/*if (my_session.getHorairesList().size() > 0) {
+			horaires.publish(my_session.getHorairesList());
+		} else {
+			horaires.publish(new DtList<>(Horaires.class));
+		}*/
 
 		loadListsForEdit();
 
@@ -137,7 +142,13 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		sessions.setEsuCode("Ouvert");
 		sessionServices.saveSessionFormation(sessions);
 		final DtList<Horaires> horairess = horaires.readDtList();
-		if (!horairess.isEmpty()) {
+		final Horaires horaireAddHorairess = horaire.readDto();
+		if (horaireAddHorairess != null) {
+			horairess.add(horaireAddHorairess);
+		}
+		if (!horairess.isEmpty())
+
+		{
 			sessions.setHoraire(horairesServices.saveHoraires(horairess, sessions.getSesId()));
 			final Long durée = (horairess.get(horairess.size() - 1).getFin().getTime() - horairess.get(0).getDebut().getTime()) / 3600000 / 24;
 			sessions.setDateDebut(horairess.get(0).getDebut());
@@ -207,7 +218,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 
 	@Override
 	public Menu getActiveMenu() {
-		return Menu.MES_FORMATION;
+		return Menu.GESTIONS;
 	}
 
 }

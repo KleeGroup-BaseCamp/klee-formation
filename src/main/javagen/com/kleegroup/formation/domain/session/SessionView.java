@@ -24,6 +24,7 @@ public final class SessionView implements DtObject {
 	private String commentaire;
 	private String status;
 	private String statusUtilisateur;
+	private java.math.BigDecimal satisfaction;
 
 	/**
 	 * Champ : DATA.
@@ -213,6 +214,25 @@ public final class SessionView implements DtObject {
 	 */
 	public void setStatusUtilisateur(final String statusUtilisateur) {
 		this.statusUtilisateur = statusUtilisateur;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Satisfaction'. 
+	 * @return java.math.BigDecimal satisfaction 
+	 */
+	@Field(domain = "DO_STATIQUE", persistent = false, label = "Satisfaction")
+	public java.math.BigDecimal getSatisfaction() {
+		return satisfaction;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Satisfaction'.
+	 * @param satisfaction java.math.BigDecimal 
+	 */
+	public void setSatisfaction(final java.math.BigDecimal satisfaction) {
+		this.satisfaction = satisfaction;
 	}
 
 	//Aucune Association déclarée

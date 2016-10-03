@@ -91,8 +91,8 @@ public class InscriptionServicesImpl implements InscriptionServices {
 		final SessionFormation session = sessionServices.loadSessionbyId(inscription.getSesId());
 		final BigDecimal zero = new BigDecimal(0);
 		inscription.setSatisfaction(zero);
-		//+1
-		if (session.getInscriptionList().size() < session.getNbPersonne()) {
+
+		if (session.getInscriptionList().size() + 1 < session.getNbPersonne()) {
 			inscriptionDAO.save(inscription);
 
 		} else {

@@ -41,7 +41,7 @@
 		</s:if>
 	</s:div>
 	
-<h3>Liste des formations</h3>
+<h3>Inscrit aux sessions suivantes :</h3>
 <display:table  name="inscriptions" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20">
 	<display:setProperty name="basic.msg.empty_list">Aucune inscription.</display:setProperty>
 	<display:column title="Nom" sortable="true">
@@ -62,9 +62,10 @@
 </display:table>
 	
 	
-		
+		<s:if test="%{isAdministrateur()}">
 	<div class="button-bar">
 		<s:if test="%{modeReadOnly}">
+		
 			<s:hidden name="utiId" value="%{utilisateur.utiId}" />
 			<s:submit action="deleteUtilisateurDetail" value="" cssClass="supprimer" onclick='return confirmAction(this, "Etes vous sur de vouloir supprimer ce compte utilisateur ?")' />
 		</s:if>
@@ -82,6 +83,7 @@
 		</div> 
 		
 	</div>
+	</s:if>
 </s:form>
 
 <s:include value="/jsp/include/footer.jsp"/>
