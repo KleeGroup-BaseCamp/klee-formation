@@ -24,23 +24,48 @@
 
 </head>
 <s:form>
-	<!--   mode création / modification ----------------------------------------------------------------------------------- -->
-	<s:div layout="table" cols="4">
-		<s:textfield name="formation.intitule" label="Nom" theme="xhtml_read" />
-		<s:select name="formation.nivCode" list="niveaux" label="Niveau" theme="xhtml_read"/>
-		<s:textfield name="formation.commentaire" label="Descriptif" theme="xhtml_read"/>
-	<tr><td colspan="2">&nbsp;</td></tr>
-	</s:div>
-	<s:div layout="table" cols="4">
-		<s:textfield name="sessionTest.dateDebut" label="Début"/>
-		<s:textfield name="sessionTest.dateFin" label="Fin"/>
-		<s:textfield name="sessionTest.duree" label="Durée"/>
-		<s:textfield name="sessionTest.horaire" label="Horaires"/>
-		<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
-	</s:div>
-	<s:div layout="table" cols="4">
-		<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>
-	</s:div>
+	<div class="row">
+		<div class="span1">
+		</div>
+		<s:div cssClass="span2 %{formation.nivCode == 'DEBUT' ? 'debutant': formation.nivCode == 'INTER' ?  'intermediaire' : 'expert'}">
+			<s:select name="formation.nivCode" list="niveaux" label="" theme="xhtml_read" />
+		</s:div>
+		<div class="span6">
+			<s:textfield name="formation.intitule" label="" cssClass="h3" theme="xhtml_read"/>
+			</br>
+			<s:textfield name="formation.commentaire" label="" theme="xhtml_read"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span3">
+		</div>
+	</br>
+	<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
+	</div>
+	<div class="row">
+		<div class="span3">
+		</div>
+		<div class="span2">
+			<s:textfield name="sessionTest.dateDebut" label="Début" theme="xhtml_read" />
+			<s:textfield name="sessionTest.duree" label="Durée (jours) " theme="xhtml_read"/>
+			</div>
+		<div class="span2">
+	</div>
+		<div class="span3">
+			<s:textfield name="sessionTest.dateFin" label="Fin" theme="xhtml_read" />
+			</br>
+			<s:textfield name="sessionTest.horaire" label="Horaires" theme="xhtml_read"/>
+		</div>	
+	</div>
+	<div class="row">
+		<div class="span3">
+		</div>
+		<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum" theme="xhtml_read"/>
+		</br>
+		<div class="span3">
+		</div>
+		<s:textfield name="sessionTest.esuCode" label="La session est" theme="xhtml_read"/>
+	</div>
 </s:form>
 
 <h3>Liste des personnes inscrites</h3>
@@ -56,12 +81,18 @@
 <div class="button-bar">
 	<div class="right">
 		<s:if test="%{isManager()}">
-			<s:a action="Utilisateur" cssClass="creer">INSCRIPTION
-				<s:param name="sesId" value="sessionTest.sesId"/>
-			</s:a>
+			<s:if test="%{isComplet()}">
+				<s:a action="Utilisateur" cssClass="creer">INSCRIPTION
+					<s:param name="sesId" value="sessionTest.sesId"/>
+				</s:a>
+			</s:if>
 		</s:if>
 		<s:else>
+		<s:if test="%{isComplet()}">
+		<s:if test="%{isInscrit()}">
 			<s:submit action="inscrireVenirDetail" cssClass="enregistrer" value="S'INSCRIRE" />
+			</s:if>
+			</s:if>
 		</s:else>
 	</div>
 </div>

@@ -222,7 +222,7 @@ create Formatter FMT_DATE {
 create Formatter FMT_OUI_NON {
       className :"io.vertigo.dynamox.domain.formatter.FormatterBoolean"
       /*args : "<img src:'../static/images/icon/select_on.gif' alt:'oui'/>;<img src:'../static/images/icon/select_off.gif' alt:'non'/>"*/
-      args : "Oui;Non"
+      args : "<i class=\"fa fa-check\" aria-hidden=\"true\"></i>;<i class=\"fa fa-times\" aria-hidden=\"true\"></i>"
 }
 
 create Formatter FMT_ACTIF_INACTIF {

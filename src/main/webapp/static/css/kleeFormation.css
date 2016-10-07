@@ -5,8 +5,15 @@
  * @version : $Id: kasper_demo.css,v 1.2 2013/09/27 15:47:28 npiedeloup Exp $
 
  */
- 
-  a.logout{
+ .debutant{
+ color :bleue;
+ }
+ .h3{ 
+
+    font-size: 24.5px;
+
+ }
+ a.logout{
 	color: #FFF;
 	text-decoration: none;
 	padding: 3px 5px;
@@ -144,11 +151,11 @@ td.multiLabel label {
 }
 
 .panel {
-	border-top:2px solid #FF8C00;
+	border-top:2px solid #FFD740;
 	/*border-width:2px;
 	border-bottom: 2px;
 	/*border-style: inset;*/
-	border-color: orange;
+	border-color: #FFD740;
 	position: relative;
 	background-color: white;
 	/*background-color: #edefee;*/
@@ -497,7 +504,38 @@ input[type="submit"]:focus {
 	outline: none; /* surcharge bootstrap */
 }
 
-.connexion, .confirmer, .continuer, .rechercher {
+.rechercher {
+	margin-top:0px;
+	margin-right:0px;
+	margin-left:5px;
+	
+	line-height: 49px;
+	height: 49px;
+	display: inline-block;
+	font-size: 16px;
+	
+	color: white;
+	border: none;
+	background:#FF8C00 ;
+	padding-left: 12px;
+	padding-right: 12px;
+
+	}
+.add{
+	
+ margin: auto;
+	line-height: 30px;
+	height: 30px;
+	display: inline-block;
+	font-size: 16px;
+	
+	color: black;
+	border: none;
+	background:#BDBDBD;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+.connexion, .confirmer, .continuer {
 	background:#FF8C00 ;
 	padding-left: 12px;
 	padding-right: 12px;
@@ -510,8 +548,8 @@ input[type="submit"]:focus {
 }
 
 .modifier  {
-	background: url(../img/icon_modify.png) no-repeat left center;
-	padding-left: 45px;
+	background: #FF8C00;
+	padding-left: 12px;
 	padding-right: 12px;
 }
 
@@ -523,8 +561,8 @@ input[type="submit"]:focus {
 }
 
 .supprimer {
-	background: url(../img/icon_minus.png) no-repeat left center;
-	padding-left: 50px;
+	background:#FFA000 ;
+	padding-left: 12px;
 	padding-right: 12px;
 }
 
@@ -750,12 +788,12 @@ ul li a:active {
 
 
 ul li a {
-height: 50px;
-width:155px;
+height: 40px;
+width:185px;
 
  display:block;
  float:left;   
- line-height:50px; /*hauteur de l'image de fond*/
+ line-height:40px; /*hauteur de l'image de fond*/
  background:white;
  color:black;
  text-decoration:none;
@@ -764,14 +802,14 @@ width:155px;
  
  
 ul li a:hover {
- background:#FF8C00;
+ background:#FFD740;
  color:white;
  } 
  
 
 
 #menu ul {	
-	height: 50px;
+	height: 40px;
 	-moz-border-radius: 0px 5px 0px 5px;
     -webkit-border-radius: 0px 5px 0px 5px;
     -khtml-border-radius: 0px 5px 0px 5px;
@@ -797,8 +835,8 @@ ul li a:hover {
 }
 
 #menu ul li.act a {
-	background:#FF8C00;
-	 color:white;
+	background:#FFD740;
+	 color:black;
 }
 #menu > ul > li {
 	padding: 1px;

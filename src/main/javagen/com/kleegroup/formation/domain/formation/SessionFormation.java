@@ -192,7 +192,7 @@ public final class SessionFormation implements DtObject {
 	 * Récupère la valeur de la propriété 'DateFin'. 
 	 * @return java.util.Date dateFin 
 	 */
-	@Field(domain = "DO_DATE_MINUTE", label = "DateFin")
+	@Field(domain = "DO_DATE", label = "DateFin")
 	public java.util.Date getDateFin() {
 		return dateFin;
 	}
@@ -211,7 +211,7 @@ public final class SessionFormation implements DtObject {
 	 * Récupère la valeur de la propriété 'DateDebut'. 
 	 * @return java.util.Date dateDebut 
 	 */
-	@Field(domain = "DO_DATE_MINUTE", label = "DateDebut")
+	@Field(domain = "DO_DATE", label = "DateDebut")
 	public java.util.Date getDateDebut() {
 		return dateDebut;
 	}

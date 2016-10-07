@@ -7,7 +7,31 @@
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  */
+.debutant{
+	 border-radius : 20px 20px 20px 20px;
+	 text-align: center;
+	background: #26C4EC;
+	padding-left: 12px;
+	padding-right: 12px;
 
+	}
+.intermediaire
+	{
+	 border-radius : 20px 20px 20px 20px;
+	 text-align: center;
+	background: #2C75FF;
+	padding-left: 12px;
+	padding-right: 12px;
+	}
+	.expert
+	{
+	 border-radius : 20px 20px 20px 20px;
+	 text-align: center;
+	background: #318CE7;
+	padding-left: 12px;
+	padding-right: 12px;
+
+	}
 .clearfix {
   *zoom: 1;
 }
@@ -264,7 +288,7 @@ a:focus {
 }
 
 .row {
-  margin-left: -20px;
+  margin-left: -5px;
   *zoom: 1;
 }
 
@@ -317,7 +341,7 @@ a:focus {
 }
 
 .span6 {
-  width: 460px;
+  width: 450px;
 }
 
 .span5 {
@@ -389,7 +413,7 @@ a:focus {
 }
 
 .row-fluid {
-  width: 100%;
+  width: 110%;
   *zoom: 1;
 }
 
@@ -480,6 +504,10 @@ a:focus {
 }
 
 .row-fluid .span1 {
+  width: 11.382978723404255%;
+  *width: 6.329787234042553%;
+}
+.row-fluid .span0 {
   width: 6.382978723404255%;
   *width: 6.329787234042553%;
 }

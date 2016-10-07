@@ -17,6 +17,7 @@ public final class Horaires implements DtObject {
 	private Long datId;
 	private java.util.Date debut;
 	private java.util.Date fin;
+	private java.util.Date jour;
 	private Long sesId;
 
 	/**
@@ -74,6 +75,25 @@ public final class Horaires implements DtObject {
 	 */
 	public void setFin(final java.util.Date fin) {
 		this.fin = fin;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'jour'. 
+	 * @return java.util.Date jour 
+	 */
+	@Field(domain = "DO_DATE", label = "jour")
+	public java.util.Date getJour() {
+		return jour;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'jour'.
+	 * @param jour java.util.Date 
+	 */
+	public void setJour(final java.util.Date jour) {
+		this.jour = jour;
 	}
 
 	/**

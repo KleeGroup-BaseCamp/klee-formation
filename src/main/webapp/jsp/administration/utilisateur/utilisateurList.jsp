@@ -21,7 +21,7 @@
 </s:form>
 <h3>Liste des utilisateurs</h3>
 
-<display:table  name="utilisateurs" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20">
+<display:table  name="utilisateurs" class="tableau" uid="item" export="true" sort="list" requestURI="#" pagesize="20">
 	<display:setProperty name="basic.msg.empty_list">Aucun utilisateur.</display:setProperty>
 	<display:setProperty name="export.csv.filename">utilisateurs.csv</display:setProperty>
 	<display:column title="${util.label('utilisateurs.nom')}" sortable="true">
@@ -32,9 +32,16 @@
 	</display:column>
 	<display:column  property="prenom" title="${util.label('utilisateurs.prenom')}"/>		
 	<display:column property="mail" title="${util.label('utilisateurs.mail')}" sortable="true"/>
-	<display:column property="responsable" title="Responsable" sortable="true"/>
-	<display:column property="admin" title="Administrateur" sortable="true"/>
-	<display:column property="formateur" title="Formateur" sortable="true"/>
+	<display:column title="Responsable" sortable="true" >
+		<s:checkbox name="%{util.contextKey(#attr.item)}.responsable" theme="simple_read" />
+	</display:column>
+	<display:column title="Administrateur" sortable="true" >
+		<s:checkbox name="%{util.contextKey(#attr.item)}.admin" theme="simple_read" />
+	</display:column>
+	<display:column title="Formateur" sortable="true" >
+		<s:checkbox name="%{util.contextKey(#attr.item)}.formateur" theme="simple_read" />
+	</display:column>
+	
 	<display:column property="utiId" title="${util.label('utilisateurs.utiId')}" sortable="true"/>
 </display:table>
 

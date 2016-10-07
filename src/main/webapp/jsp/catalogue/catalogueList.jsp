@@ -7,19 +7,13 @@
 	<s:param name="subtitle">${pageName}</s:param>
 </s:include>
 
-<h4>Rechercher une Formation</h4>
+<h5>Rechercher une Formation</h5>
 <s:form>
-	<s:div layout="table" cols="2">
-		<s:textfield name="formationCritere.intitule" label="Nom de la formation"/>
-	</s:div>
-	<div class="button-bar">
-		<div class="right">
-			<s:submit action="rechercherFormationList" value="RECHERCHER" cssClass="rechercher" />
-		</div>
-	</div>
+	<s:textfield name="formationCritere.intitule" label="Nom de la formation"/>
+	<s:submit action="rechercherFormationList" value="RECHERCHER" cssClass="rechercher" />	
 </s:form>
-<h3>Liste des Formations</h3>
-<display:table  name="formations" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20">
+<h4>Liste des Formations</h4>
+<display:table  name="formations" class="tableau" uid="item" export="true" sort="list" requestURI="#" pagesize="20">
 	<display:setProperty name="basic.msg.empty_list">Aucune formation.</display:setProperty>
 	<display:setProperty name="export.csv.filename">formations.csv</display:setProperty> 
 	<display:column title="Intitulé" sortable="true">
@@ -28,8 +22,9 @@
 		</s:url>
 		<a href="${formationDetailURL}">${item.intitule}</a>				
 	</display:column>
-	<display:column  property="commentaire" title="Descriptif"/>
-	<display:column  property="nivCode" title="${util.label('formations.nivCode')}">
+	<display:column  property="commentaire" title="Descriptif" sortable="true"/>
+	<display:column title="${util.label('formations.nivCode')}" sortable="true" sortProperty="nivCode">
+		<s:select list="niveaux" name="%{util.contextKey(#attr.item)}.nivCode" theme="simple_read" />
 	</display:column>
 </display:table>
 	

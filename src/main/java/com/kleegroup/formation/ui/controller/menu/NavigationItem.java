@@ -36,6 +36,9 @@ public class NavigationItem implements Serializable {
 	// Adresse
 	private final String address;
 
+	// fontawesome icon class
+	private final String icon;
+
 	/**
 	 * Constructeur.
 	 *
@@ -43,11 +46,12 @@ public class NavigationItem implements Serializable {
 	 * @param label affiché à l'utilisateur
 	 * @param address Adresse
 	 */
-	public NavigationItem(final String code, final String label, final String address) {
+	public NavigationItem(final String code, final String label, final String address, final String icon) {
 		Assertion.checkNotNull(code, CODE_REQUIRED, label);
 		this.code = code;
 		this.label = label;
 		this.address = address;
+		this.icon = icon;
 	}
 
 	/**
@@ -149,6 +153,15 @@ public class NavigationItem implements Serializable {
 	 */
 	public String getAddress() {
 		return viewMenu() ? address : null;
+	}
+
+	/**
+	 * Donne la valeur de l'icone.
+	 *
+	 * @return la classe css de l'icon à afficher
+	 */
+	public String getIconClass() {
+		return viewMenu() ? icon : null;
 	}
 
 	public String getRawAddress() {

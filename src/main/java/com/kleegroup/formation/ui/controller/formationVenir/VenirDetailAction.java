@@ -9,6 +9,7 @@ import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.domain.inscription.InscriptionView;
 import com.kleegroup.formation.security.Role;
+import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.services.session.SessionServices;
@@ -16,6 +17,7 @@ import com.kleegroup.formation.services.util.SecurityUtil;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
+import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextMdl;
@@ -33,6 +35,8 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 	private FormationServices formationServices;
 	@Inject
 	private InscriptionServices inscriptionServices;
+	@Inject
+	private UtilisateurServices utilisateurServices;
 
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
@@ -65,6 +69,27 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 		return SecurityUtil.hasRole(Role.R_RESPONSSABLE);
 	}
 
+	public boolean isComplet() {
+		if (session.readDto().getEsuCode().equals("Complete")) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean isInscrit() {
+		final Long uti_id_courant = utilisateurServices.getCurrentUtilisateur().getUtiId();
+		final DtList<InscriptionView> inscriptions_uti = inscriptionServices.getListInscriptionByUtiId(uti_id_courant);
+		int i = 0;
+		while (i < inscriptions_uti.size()) {
+			if (inscriptions_uti.get(i).getSesId().equals(session.readDto().getSesId())) {
+				return false;
+			}
+			i++;
+		}
+		return true;
+	}
+
 	@Override
 	public String getPageName() {
 		if (isModeCreate()) {
@@ -77,7 +102,7 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 
 	@Override
 	public Menu getActiveMenu() {
-		return Menu.VENIR;
+		return Menu.ACCUEIL;
 	}
 
 }

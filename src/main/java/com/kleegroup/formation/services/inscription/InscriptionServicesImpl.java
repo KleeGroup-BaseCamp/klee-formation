@@ -91,14 +91,19 @@ public class InscriptionServicesImpl implements InscriptionServices {
 		final SessionFormation session = sessionServices.loadSessionbyId(inscription.getSesId());
 		final BigDecimal zero = new BigDecimal(0);
 		inscription.setSatisfaction(zero);
+		if (session.getInscriptionList().size() < session.getNbPersonne()) {
+			if (session.getInscriptionList().size() + 1 == session.getNbPersonne()) {
+				session.setEsuCode("Complete");
+				sessionServices.saveSessionFormation(session);
 
-		if (session.getInscriptionList().size() + 1 < session.getNbPersonne()) {
+			}
 			inscriptionDAO.save(inscription);
 
-		} else {
-			session.setEsuCode("Complet");
-			sessionServices.saveSessionFormation(session);
 		}
+		/*else {
+			session.setEsuCode("Complete");
+			sessionServices.saveSessionFormation(session);
+		}*/
 	}
 
 	@Override

@@ -19,7 +19,7 @@ public interface HorairesServices extends Component {
 	 *
 	 */
 
-	String saveHoraires(DtList<Horaires> horairess, Long sesId);
+	void saveHoraires(DtList<Horaires> horairess, Long sesId);
 
 	/**
 	 * Supprime en base une horaire.

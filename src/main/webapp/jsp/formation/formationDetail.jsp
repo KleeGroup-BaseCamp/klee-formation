@@ -34,7 +34,7 @@
 		</div> 	
 	</div>
 </s:form>
-<h3>Liste des sessions de la formation</h3>
+<h5>Liste des sessions de la formation</h5>
 	<display:table  name="sessions" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20">
 		<display:setProperty name="basic.msg.empty_list">Aucune session.</display:setProperty>
 		<display:column title="Nom" sortable="true">

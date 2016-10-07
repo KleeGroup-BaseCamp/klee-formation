@@ -104,6 +104,7 @@ create table HORAIRES
     DAT_ID      	 BIGINT      	not null,
     DEBUT       	 TIMESTAMP   	,
     FIN         	 TIMESTAMP   	,
+    JOUR        	 DATE        	,
     SES_ID      	 BIGINT      	not null,
     constraint PK_HORAIRES primary key (DAT_ID)
 );
@@ -116,6 +117,9 @@ comment on column HORAIRES.DEBUT is
 
 comment on column HORAIRES.FIN is
 'fin';
+
+comment on column HORAIRES.JOUR is
+'jour';
 
 comment on column HORAIRES.SES_ID is
 'Session formation';
@@ -261,8 +265,8 @@ create table SESSION_FORMATION
     SATISFACTION	 NUMERIC(5,2)	,
     I           	 NUMERIC(5,2)	,
     DUREE       	 BIGINT      	,
-    DATE_FIN    	 TIMESTAMP   	,
-    DATE_DEBUT  	 TIMESTAMP   	,
+    DATE_FIN    	 DATE        	,
+    DATE_DEBUT  	 DATE        	,
     FOR_ID      	 BIGINT      	not null,
     ETA_CODE    	 VARCHAR(30) 	not null,
     UTI_ID      	 BIGINT      	not null,

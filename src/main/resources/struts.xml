@@ -60,7 +60,7 @@
 		<action name="*Login" class="com.kleegroup.formation.ui.controller.accueil.LoginAction" method="{1}">
 			<result name="reload" type="redirectAction">Login</result>
 			<result name="none">/jsp/accueil/login.jsp</result>
-			<result name="success" type="redirectAction">Accueil</result>
+			<result name="success" type="redirectAction">VenirList</result>
 		</action>
 
 		<action name="*Accueil" class="com.kleegroup.formation.ui.controller.accueil.AccueilAction" method="{1}">
@@ -131,10 +131,10 @@
 		  <action name="*FormationDetail" class="com.kleegroup.formation.ui.controller.formation.FormationDetailAction" method="{1}">
 			<result name="none">/jsp/formation/formationDetail.jsp</result>
 			<result name="success" type="redirectAction">
-				<param name="actionName">FormationList</param>
+				<param name="actionName">CatalogueList</param>
 			</result>
 			<result name="success_delete" type="redirectAction">
-				<param name="actionName">FormationList</param>
+				<param name="actionName">CatalogueList</param>
 			</result>
 		</action>
 

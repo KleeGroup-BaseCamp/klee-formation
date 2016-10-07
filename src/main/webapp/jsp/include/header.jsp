@@ -9,7 +9,7 @@
 	</div>
 		<div class="container">
 <div id="header">
-<s:a action="Accueil" id="logo">
+<s:a action="VenirList" id="logo">
 		<img src="./static/images/logo2.jpg" alt="Image" />
 	</s:a>
 	<p style="line-height:65px;">

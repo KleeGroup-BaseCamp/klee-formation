@@ -80,6 +80,10 @@ public enum DtResources implements MessageKey {
 	 */
 	FLD_HORAIRES$FIN,
 	/**
+	 * jour.
+	 */
+	FLD_HORAIRES$JOUR,
+	/**
 	 * Session formation.
 	 */
 	FLD_HORAIRES$SES_ID,

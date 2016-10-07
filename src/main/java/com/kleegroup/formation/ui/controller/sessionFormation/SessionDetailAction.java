@@ -69,6 +69,10 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			utilisateurcritere.setRole(role.toString());
 			session.publish(new SessionFormation());
 			horaires.publish(new DtList<>(Horaires.class));
+			final Horaires int_horaire = new Horaires();
+			int_horaire.setDebut(new Date());
+			int_horaire.setFin(new Date());
+			horaire.publish(int_horaire);
 			loadListsForEdit();
 			toModeCreate();
 
@@ -81,10 +85,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		final com.kleegroup.formation.security.Role role = com.kleegroup.formation.security.Role.R_FORMATTEUR;
 		utilisateurcritere.setRole(role.toString());
 		formatteurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurcritere));
-		final Horaires int_horaire = new Horaires();
-		int_horaire.setDebut(new Date());
-		int_horaire.setFin(new Date());
-		horaire.publish(int_horaire);
+
 		final FormationCritere formationcritere = new FormationCritere();
 		formations.publish(formationServices.getFormationListByCritere(formationcritere));
 
@@ -94,7 +95,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		final SessionFormation my_session = sessionServices.loadSessionFormation(sesIdRef.get());
 		session.publish(my_session);
 		horaires.publish(new DtList<>(Horaires.class));
-
+		horaire.publish(new Horaires());
 		//System.out.println(Integer.toString(my_session.getHorairesList().size()));
 		/*if (my_session.getHorairesList().size() > 0) {
 			horaires.publish(my_session.getHorairesList());
@@ -125,31 +126,35 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 
 	public String doPublish() {
 		final SessionFormation sessions = session.readDto();
-		sessions.setStatus("Publier");
+
 		if (isModeCreate()) {
 			final BigDecimal satisfaction = new BigDecimal(0);
+			sessions.setEtaCode("Publier");
+			sessions.setStatus("Publier");
+			sessions.setEsuCode("Ouverte");
+			sessionServices.saveSessionFormation(sessions);
 			doSaveSession(satisfaction, sessions);
 
 		} else if (isModeEdit()) {
 			final BigDecimal satisfaction = null;
 			doSaveSession(satisfaction, sessions);
+
 		}
 		return SUCCESS;
 	}
 
 	private void doSaveSession(final BigDecimal satisfaction, final SessionFormation sessions) {
-		sessions.setEtaCode("Publier");
-		sessions.setEsuCode("Ouvert");
-		sessionServices.saveSessionFormation(sessions);
 		final DtList<Horaires> horairess = horaires.readDtList();
 		final Horaires horaireAddHorairess = horaire.readDto();
 		if (horaireAddHorairess != null) {
 			horairess.add(horaireAddHorairess);
-		}
-		if (!horairess.isEmpty())
 
-		{
-			sessions.setHoraire(horairesServices.saveHoraires(horairess, sessions.getSesId()));
+		}
+		if (!horairess.isEmpty()) {
+			System.out.println(horairess.get(0).getDebut().toString());
+			horairesServices.saveHoraires(horairess, sessions.getSesId());
+
+			System.out.println("coucou");
 			final Long durée = (horairess.get(horairess.size() - 1).getFin().getTime() - horairess.get(0).getDebut().getTime()) / 3600000 / 24;
 			sessions.setDateDebut(horairess.get(0).getDebut());
 			sessions.setDateFin(horairess.get(horairess.size() - 1).getFin());
@@ -160,10 +165,10 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		if (satisfaction != null) {
 			sessions.setSatisfaction(satisfaction);
 			sessions.setI(satisfaction);
-			//			sessions.setEsuCode();
-			sessions.setIsOuvert("Ouvert");
-			//			sessionServices.saveEtatSessionUtilisateur(etatsessionutilisateur);
+			sessions.setEsuCode("Ouverte");
+			//sessions.setIsOuvert("Ouvert");
 			sessionServices.saveSessionFormation(sessions);
+
 		}
 
 	}
@@ -171,15 +176,24 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	public String doDelete() {
 		final SessionFormation sessions = session.readDto();
 		final String status = sessions.getStatus();
+		final String etat = sessions.getEtat().getLibelle();
 		if (status.equals("Brouillon")) {
 			sessionServices.deleteSessionCascade(sesIdRef.get());
 			horairesServices.deleteHoraires(session.readDto().getSesId());
 			sessionServices.deleteSessionFormation(session.readDto().getSesId());
 			return "success_delete";
+		}
 
+		if (etat.equals("Brouillon")) {
+			sessionServices.deleteSessionCascade(sesIdRef.get());
+			horairesServices.deleteHoraires(session.readDto().getSesId());
+			sessionServices.deleteSessionFormation(session.readDto().getSesId());
+			return "success_delete";
 		}
 		sessions.setStatus("Annuler");
-		sessions.setIsOuvert("Annuler");
+		sessions.setEtaCode("Annuler");
+		//sessions.setIsOuvert("Annuler");
+		sessions.setEsuCode("Annuler");
 		sessionServices.saveSessionFormation(sessions);
 		return SUCCESS;
 	}

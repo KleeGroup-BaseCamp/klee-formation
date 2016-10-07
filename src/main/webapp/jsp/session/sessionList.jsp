@@ -8,22 +8,13 @@
 </s:include>
 
 <s:form>
-<h4>Rechercher une session</h4>
-	<s:div layout="table" cols="2">
-		<s:textfield name="critere.intitule" label="Nom de la session"/>
-	</s:div>
-			<div class="button-bar">
-		<div class="right">
-			<s:submit action="rechercherSessionList" value="RECHERCHER" cssClass="rechercher" />
-		</div>
-	</div>
-	 <div class="button-bar">
-		<div class="right">
-		</div>
-	</div>
+<h5>Rechercher une session</h5>
+<s:textfield name="critere.intitule" label="Nom de la session"/>
+<s:submit action="rechercherSessionList" value="RECHERCHER" cssClass="rechercher" />
+
 </s:form>
 
-<h3>Liste des sessions</h3>
+<h4>Liste des sessions</h4>
 <display:table  name="sessions" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20" defaultsort="3">
 		<display:setProperty name="basic.msg.empty_list">Aucune session.</display:setProperty>
 		<display:setProperty name="export.csv.filename">sessions.csv</display:setProperty>

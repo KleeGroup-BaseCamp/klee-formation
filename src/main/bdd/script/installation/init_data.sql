@@ -120,9 +120,9 @@ INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (6, 'R_ANONYMOUS');
 /*==============================================================*/
 /* Table: NIVEAUX                                                  */
 /*==============================================================*/
-INSERT INTO NIVEAU (NIV_CODE, LIBELLE) VALUES ('DEBUT', 'débutant');
-INSERT INTO NIVEAU (NIV_CODE, LIBELLE) VALUES ('INTER','intermédiaire');
-INSERT INTO NIVEAU (NIV_CODE, LIBELLE) VALUES ('EXPER','expert');
+INSERT INTO NIVEAU (NIV_CODE, LIBELLE) VALUES ('DEBUT', 'Débutant');
+INSERT INTO NIVEAU (NIV_CODE, LIBELLE) VALUES ('INTER','Intermédiaire');
+INSERT INTO NIVEAU (NIV_CODE, LIBELLE) VALUES ('EXPER','Expert');
 
 /*==============================================================*/
 /* Table: ETAT                                                */
@@ -135,9 +135,9 @@ INSERT INTO ETAT (ETA_CODE, LIBELLE) VALUES ('Annuler', 'Annulée');
 /*==============================================================*/
 /* Table: ETAT_SESSION_UTILISATEUR                              */
 /*==============================================================*/
-INSERT INTO ETAT_SESSION_UTILISATEUR (ESU_CODE, LIBELLE) VALUES ('Ouvert', 'Ouvert');
-INSERT INTO ETAT_SESSION_UTILISATEUR (ESU_CODE, LIBELLE) VALUES ('Complet', 'Complet');
-INSERT INTO ETAT_SESSION_UTILISATEUR (ESU_CODE, LIBELLE) VALUES ('Annuler', 'Annuler');
+INSERT INTO ETAT_SESSION_UTILISATEUR (ESU_CODE, LIBELLE) VALUES ('Ouverte', 'Ouverte');
+INSERT INTO ETAT_SESSION_UTILISATEUR (ESU_CODE, LIBELLE) VALUES ('Complete', 'Complete');
+INSERT INTO ETAT_SESSION_UTILISATEUR (ESU_CODE, LIBELLE) VALUES ('Annulée', 'Annulée');
 
 
 

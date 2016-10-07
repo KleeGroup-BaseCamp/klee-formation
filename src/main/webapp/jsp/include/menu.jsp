@@ -5,12 +5,17 @@
 		<s:if test="#menu.viewMenu()">
 			<li class="${activeMenu.name == menu.code ? 'act' : 'non'}">
 				<span class="menu">
+				
 					<s:if test="#menu.isAddressEmpty()">
 						<s:property value="#menu.getLabel()"/>
+						
 					</s:if>
+					
 					<s:else>
 						<s:set var="address" value="#menu.getAddress()"/>
-						<s:a href="%{address}"><s:property value="#menu.getLabel()"/></s:a>
+						
+						<s:a href="%{address}"><i class="${menu.iconClass}" aria-hidden="true"></i><s:property value="#menu.getLabel()"/></s:a>
+				
 					</s:else>
 				</span>
 				

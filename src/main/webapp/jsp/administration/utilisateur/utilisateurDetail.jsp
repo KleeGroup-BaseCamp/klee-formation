@@ -41,7 +41,7 @@
 		</s:if>
 	</s:div>
 	
-<h3>Inscrit aux sessions suivantes :</h3>
+<h5>Inscrit aux sessions suivantes :</h5>
 <display:table  name="inscriptions" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20">
 	<display:setProperty name="basic.msg.empty_list">Aucune inscription.</display:setProperty>
 	<display:column title="Nom" sortable="true">
@@ -64,17 +64,14 @@
 	
 		<s:if test="%{isAdministrateur()}">
 	<div class="button-bar">
-		<s:if test="%{modeReadOnly}">
-		
-			<s:hidden name="utiId" value="%{utilisateur.utiId}" />
-			<s:submit action="deleteUtilisateurDetail" value="" cssClass="supprimer" onclick='return confirmAction(this, "Etes vous sur de vouloir supprimer ce compte utilisateur ?")' />
-		</s:if>
 		<s:elseif test="%{modeEdit}" >
 			<s:a action="UtilisateurDetail" cssClass="annuler">Annuler
 			<s:param name="utiId" value="utilisateur.utiId"/></s:a>
 		</s:elseif>
 		<div class="right">
 			<s:if test="%{modeReadOnly}">
+			<s:hidden name="utiId" value="%{utilisateur.utiId}" />
+			<s:submit action="deleteUtilisateurDetail" value="SUPPRIMER" cssClass="supprimer" onclick='return confirmAction(this, "Etes vous sur de vouloir supprimer ce compte utilisateur ?")' />
 				<s:submit action="editUtilisateurDetail" value="MODIFIER" cssClass="modifier" />
 			</s:if>
 			<s:else>

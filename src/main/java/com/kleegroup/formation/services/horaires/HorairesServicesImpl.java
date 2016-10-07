@@ -32,7 +32,7 @@ public class HorairesServicesImpl implements HorairesServices {
 	private HorairesDAO horairesDAO;
 
 	@Override
-	public String saveHoraires(final DtList<Horaires> horairess, final Long sesId) {
+	public void saveHoraires(final DtList<Horaires> horairess, final Long sesId) {
 		for (final Horaires horaires : horairess) {
 			if (DateUtil.newDate().after(horaires.getDebut())) {
 				throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
@@ -41,7 +41,6 @@ public class HorairesServicesImpl implements HorairesServices {
 				throw new VUserException(new MessageText(Resources.SESSION_DATE_FIN_MUST_BE_IN_FUTURE));
 			}
 		}
-
 		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yy 'de' HH:mm");
 		final String lineSeparator = System.getProperty("line.separator");
 		final StringBuilder buffer = new StringBuilder();
@@ -50,9 +49,9 @@ public class HorairesServicesImpl implements HorairesServices {
 		if (horairess.size() == 1) {
 			String line = new String();
 			line = "de ";
-			line = line + formater.format(horairess.get(0).getFin()).substring(12, formater.format(horairess.get(0).getDebut()).length()).concat(" à ".concat(formater.format(horairess.get(0).getFin()).substring(12, formater.format(horairess.get(0).getDebut()).length())));
+			line = line + formater.format(horairess.get(0).getDebut()).substring(12, formater.format(horairess.get(0).getDebut()).length()).concat(" à ".concat(formater.format(horairess.get(0).getFin()).substring(12, formater.format(horairess.get(0).getFin()).length())));
+			session.setHoraire(line);
 			sessionServices.saveSessionFormation(session);
-			return line;
 		} else {
 			for (final Horaires horaires : horairess) {
 				session.getHorairesList().add(horaires);
@@ -71,8 +70,8 @@ public class HorairesServicesImpl implements HorairesServices {
 					buffer.append(lineSeparator).append(formater.format(horaires.getDebut())).append(" - ").append(formater.format(horaires.getFin()));
 				}
 			}
+			session.setHoraire(buffer.toString());
 			sessionServices.saveSessionFormation(session);
-			return buffer.toString();
 		}
 
 	}

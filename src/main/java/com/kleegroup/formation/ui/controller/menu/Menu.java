@@ -15,12 +15,12 @@ public enum Menu {
 	 */
 	ROOT_MENU(),
 	/************************************** Menu Accueil. **************************************************/
-	ACCUEIL(ROOT_MENU, "Accueil", "Accueil.do"), //
-	MES_FORMATION(ROOT_MENU, "Mes formations", "MesList.do"), //
-	VENIR(ROOT_MENU, "Formations à venir", "VenirList.do"), //
-	GESTIONS(ROOT_MENU, "Gestion", "SessionList.do"), //
-	CATALOGUE(ROOT_MENU, "Catalogue", "CatalogueList.do"), //
-	ADMINISTRATION(ROOT_MENU, "Administration", "UtilisateurList.do");
+	ACCUEIL(ROOT_MENU, "Accueil", "VenirList.do", "fa fa-home"), //
+	MES_FORMATION(ROOT_MENU, "Mes formations", "MesList.do", "fa fa-user"), //
+	//VENIR(ROOT_MENU, "Formations à venir", "VenirList.do"), //
+	GESTIONS(ROOT_MENU, "Création de session", "SessionList.do", "fa fa-file-text"), //
+	CATALOGUE(ROOT_MENU, "Création de formation", "CatalogueList.do", "fa fa-book"), //
+	ADMINISTRATION(ROOT_MENU, "Administration", "UtilisateurList.do", "fa fa-users");
 
 	/**
 	 * Associated navigation item.
@@ -36,7 +36,8 @@ public enum Menu {
 	 * Raccourcis.
 	 */
 	private Menu() {
-		navItem = new NavigationItem(name(), "Accueil", "Accueil.do");
+		navItem = new NavigationItem(name(), "Accueil", "VenirList.do", null);
+		//navItem = new NavigationItem(name(), "Accueil", "Accueil.do");
 	}
 
 	/**
@@ -45,10 +46,10 @@ public enum Menu {
 	 * @param parent
 	 * @param address
 	 */
-	private Menu(final Menu parent, final String label, final String adresse) {
+	private Menu(final Menu parent, final String label, final String adresse, final String icon) {
 		Assertion.checkNotNull(parent);
 		// ---------------------------------------------------------------------
-		navItem = new NavigationItem(name(), label, adresse);
+		navItem = new NavigationItem(name(), label, adresse, icon);
 		parent.getNavItem().addSubItem(navItem);
 	}
 

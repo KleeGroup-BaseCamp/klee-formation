@@ -23,16 +23,29 @@
 </head>
 <s:form>
 	<!--   mode création / modification ----------------------------------------------------------------------------------- -->
-	<s:div layout="table" cols="4">
+	<%-- <s:div layout="table" cols="4">--%>
+	
 	<s:if test="%{!modeCreate}">
-	<s:textfield name="formation.intitule" label="Nom" theme="xhtml_read" />
-	<s:select name="formation.nivCode" list="niveaux" label="Niveau" theme="xhtml_read"/>
-	<s:textfield name="formation.commentaire" label="Descriptif" theme="xhtml_read"/>
+	<div class="row">
+	<div class="span1">
+	</div>
+	<s:div cssClass="span2 %{formation.nivCode == 'DEBUT' ? 'debutant': formation.nivCode == 'INTER' ?  'intermediaire' : 'expert'}">
+		<s:select name="formation.nivCode" list="niveaux" label="" theme="xhtml_read" />
+	</s:div>
+	<div class="span6">
+	<s:textfield name="formation.intitule" label="" cssClass="h3" theme="xhtml_read"/>
+	</br>
+	<s:textfield name="formation.commentaire" label="" theme="xhtml_read"/>
+	</div>
+</div>
 	</s:if>
+	
+	
+	<s:div layout="table" cols="4">
 		<tr><td colspan="2">&nbsp;</td></tr>
 	 <s:if test="%{modeCreate}" >
-		<sj:autocompleter list="formations" listKey="forId" listValue="intitule"
-				label="Nom" name="sessionTest.forId" headerKey="" headerValue=""
+		<sj:autocompleter list="formations" listKey="forId"  listValue="intitule"
+				label="Nom de la formation" name="sessionTest.forId" headerKey="" headerValue=""
 				href="ListAutocomplete.do" />	 
 		<sj:autocompleter list="formatteurs" listKey="utiId" listValue="nomComplet"
 				label="Formateur" name="sessionTest.utiId" headerKey="" headerValue=""
@@ -42,49 +55,91 @@
 			<sj:autocompleter list="formatteurs" listKey="utiId" listValue="nomComplet"
 				label="Formateur" name="sessionTest.utiId" headerKey="" headerValue=""
 				href="ListAutocomplete.do" />
+	
 		</s:if>
+		</s:div>
 		<s:if test="%{modeReadOnly}">
-			<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
+		<div class="row">
+		<div class="span3">
+		</div>
+		<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
+	</div>
+			
 		</s:if>
+		<s:div layout="table" cols="8">
 		<s:if test="%{modeCreate}">
 			<display:table  name="horaires" class="tableau" id="item" export="false" requestURI="#" pagesize="20">
+			<display:column  property="jour" title="Jour"/>
 				<display:column  property="debut" title="Début"/>
 				<display:column  property="fin" title="Fin"/>
 			</display:table>
 			</br>
 			</br>
-			<sj:datepicker name="horaire.debut" label="Début" displayFormat="dd/mm/yy" timepickerFormat="HH:mm" changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>
+			<sj:datepicker name="horaire.debut" label="Début" displayFormat="dd/mm/yy" changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>
 		    <sj:datepicker name="horaire.fin" label="Fin" displayFormat="dd/mm/yy"  changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>
+		    <s:submit action="removeSessionDetail" value="-" cssClass="add" />
+		    <s:submit action="addSessionDetail" value="+" cssClass="add" />
+			
 		</s:if>
+		</s:div>
 		<s:if test="%{!modeCreate}">
+		<div class="row">
+		<div class="span3">
+		</div>
+		<div class="span2">
 			<s:textfield name="sessionTest.dateDebut" label="Début" theme="xhtml_read" />
+			</div>
+				<div class="span2">
+		</div>
+			<div class="span2">
 			<s:textfield name="sessionTest.dateFin" label="Fin" theme="xhtml_read" />
-			<s:textfield name="sessionTest.horaire" label="Horaires" theme="xhtml_read" />
+				</div>
+	</div>
 			</s:if>
-</s:div>
+
+	
 		<s:if test="%{modeEdit}">
 			<display:table  name="horaires" class="tableau" id="item" export="false" requestURI="#" pagesize="20">
+				<display:column  property="jour" title="Jour"/>
 				<display:column  property="debut" title="Début"/>
 				<display:column  property="fin" title="Fin"/>
 			</display:table>
 			</br>
 			</br>
-			<s:div layout="table" cols="4">
-			<sj:datepicker name="horaire.debut" label="Début"  displayFormat="dd/mm/yy" changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>
-		    <sj:datepicker name="horaire.fin" label="Fin" displayFormat="dd/mm/yy"  changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>
-		    	</s:div>
+			<div class="row">
+		<div class="span3">
+		</div>
+		<div class="span3">
+		<sj:datepicker name="horaire.debut"  label="Début"  displayFormat="dd/mm/yy" changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>
+			<%-- <sj:datepicker name="horaire.debut" value="horaire.debut" label="Début"  timepickerOnly="true" displayFormat="dd/mm/yy" changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>--%>
+			</div>
+			<div class="span0">
+				</div>	
+				<div class="span4">
+		    <sj:datepicker name="horaire.fin" value="horaire.fin" label="Fin" displayFormat="dd/mm/yy"  changeMonth="true" changeYear="true" showOn="button" timepicker="true"/>
+		   
+			<s:submit action="removeSessionDetail" value="-" cssClass="add" />
+			 <s:submit action="addSessionDetail" value="+" cssClass="add" />
+			</div>
+		</div>
+		    	
 		</s:if>
-	
-		<div class="button-bar">
-			<s:if test="%{!modeReadOnly}">
-				<div class="right">
+
+	<s:if test="%{!modeCreate}">
+		<s:div layout="table" cols="1">
+			<s:textfield name="sessionTest.horaire" label="Horaires" theme="xhtml_read" />
+			</s:div>
+				
+			
 		
+			</s:if>
+	<%-- <div class="button-bar">
+			<s:if test="%{!modeReadOnly}">
 					<s:submit action="addSessionDetail" value="+" cssClass="enregistrer" />
-					
-				</div>
+				
 				<s:submit action="removeSessionDetail" value="-" cssClass="enregistrer" />
 			</s:if>
-		</div>
+		</div>--%>	
 		<s:div layout="table" cols="2">
 		  <s:if test="%{modeReadOnly}">
 			<s:textfield name="sessionTest.duree" label="Durée(jours)"/>
@@ -92,7 +147,7 @@
 			<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>
 		</s:div>
 		<s:if test="%{!modeCreate}">
-		<h3>Liste des personnes inscrites</h3>
+		<h5>Liste des personnes inscrites</h5>
 	<display:table  name="inscriptions" class="tableau" uid="item" export="true" sort="list" requestURI="#" pagesize="20">
 		<display:setProperty name="basic.msg.empty_list">Aucune inscription.</display:setProperty>
 		<display:setProperty name="export.csv.filename">inscriptions.csv</display:setProperty>
@@ -106,14 +161,15 @@
 			<s:param name="sesId" value="sessionTest.sesId"/></s:a>
 		</s:elseif>
 			<s:if test="%{modeReadOnly}">
-			<s:submit action="deleteSessionDetail" value="SUPPRIMER" cssClass="enregistrer" onclick='return confirmAction(this, "Etes vous sur de vouloir supprimer cette session ?")' />
+			
 			<div class="right">
+			<s:submit action="deleteSessionDetail" value="SUPPRIMER" cssClass="supprimer" onclick='return confirmAction(this, "Etes vous sur de vouloir supprimer cette session ?")' />
 				<s:submit action="editSessionDetail" value="MODIFIER" cssClass="enregistrer" />
 			</div>
 			</s:if>
 			<s:else>
 			<div class="right">
-				<s:submit action="saveSessionDetail" value="ENREGISTRER" cssClass="enregistrer" />
+				<s:submit action="saveSessionDetail" value="ENREGISTRER" cssClass="supprimer" />
 				<s:submit action="publishSessionDetail" value="PUBLIER" cssClass="enregistrer" />
 			</div>
 

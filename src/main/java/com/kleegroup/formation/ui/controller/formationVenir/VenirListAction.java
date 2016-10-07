@@ -46,6 +46,6 @@ public final class VenirListAction extends AbstractKleeFormationActionSupport {
 	/** {@inheritDoc} */
 	@Override
 	public Menu getActiveMenu() {
-		return Menu.VENIR;
+		return Menu.ACCUEIL;
 	}
 }
