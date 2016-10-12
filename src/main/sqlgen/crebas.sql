@@ -102,9 +102,11 @@ create index FORMATION_NIV_CODE_FK on FORMATION (NIV_CODE asc);
 create table HORAIRES
 (
     DAT_ID      	 BIGINT      	not null,
-    DEBUT       	 TIMESTAMP   	,
-    FIN         	 TIMESTAMP   	,
+    DEBUT       	 INT         	,
+    FIN         	 INT         	,
     JOUR        	 DATE        	,
+    DEBUT_APREM 	 INT         	,
+    FIN_APREM   	 INT         	,
     SES_ID      	 BIGINT      	not null,
     constraint PK_HORAIRES primary key (DAT_ID)
 );
@@ -120,6 +122,12 @@ comment on column HORAIRES.FIN is
 
 comment on column HORAIRES.JOUR is
 'jour';
+
+comment on column HORAIRES.DEBUT_APREM is
+'debutAprem';
+
+comment on column HORAIRES.FIN_APREM is
+'finAprem';
 
 comment on column HORAIRES.SES_ID is
 'Session formation';

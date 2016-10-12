@@ -44,4 +44,5 @@ public interface FormationServices extends Component {
 	 */
 	void deleteFormation(Long ForId);
 
+	void deleteFormationCascade(final Long forId);
 }

@@ -146,7 +146,8 @@
 <action name="*SessionDetail" class="com.kleegroup.formation.ui.controller.sessionFormation.SessionDetailAction" method="{1}">
 			<result name="none">/jsp/session/sessionDetail.jsp</result>
 			<result name="success" type="redirectAction">
-				<param name="actionName">SessionList</param>
+        <param name="actionName">SessionDetail</param>
+        <param name="sesId">${sessionTest.sesId}</param>
 			</result>
 			<result name="success_delete" type="redirectAction">
 				<param name="actionName">SessionList</param>

@@ -2,6 +2,7 @@ package com.kleegroup.formation.services.horaires;
 
 //import com.kleegroup.formation.domain.client.ClientCritere;
 import com.kleegroup.formation.domain.formation.Horaires;
+import com.kleegroup.formation.domain.formation.SessionFormation;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.Component;
@@ -19,11 +20,18 @@ public interface HorairesServices extends Component {
 	 *
 	 */
 
-	void saveHoraires(DtList<Horaires> horairess, Long sesId);
+	String saveHoraires(DtList<Horaires> horairess, Long sesId);
+
+	/**
+	 * @param sessionFormation
+	 * @return
+	 */
+	DtList<Horaires> getHoraires(SessionFormation sessionFormation);
 
 	/**
 	 * Supprime en base une horaire.
 	 *
 	 */
 	void deleteHoraires(final Long sesId);
+
 }

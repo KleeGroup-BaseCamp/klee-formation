@@ -1,11 +1,16 @@
 package com.kleegroup.formation.ui.controller.sessionFormation;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.kleegroup.formation.domain.DtDefinitions.SessionFormationFields;
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere;
 import com.kleegroup.formation.domain.formation.Formation;
@@ -13,6 +18,7 @@ import com.kleegroup.formation.domain.formation.FormationCritere;
 import com.kleegroup.formation.domain.formation.Horaires;
 import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.formation.SessionFormation;
+import com.kleegroup.formation.resources.Resources;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.services.horaires.HorairesServices;
@@ -21,12 +27,16 @@ import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.dynamo.domain.model.DtList;
+import io.vertigo.lang.MessageText;
 import io.vertigo.lang.Option;
+import io.vertigo.lang.VUserException;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextListModifiable;
 import io.vertigo.struts2.core.ContextMdl;
 import io.vertigo.struts2.core.ContextRef;
+import io.vertigo.struts2.core.UiObject;
+import io.vertigo.util.DateUtil;
 
 /**
  */
@@ -63,17 +73,18 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			final SessionFormation sessionFormation = sessionServices.loadSessionFormation(sesId.get());
 			session.publish(sessionFormation);
 			formation.publish(formationServices.loadFormation(sessionFormation.getForId()));
+			//System.out.println(sessionFormation.getHorairesList().size());
+
+			horaires.publish(horairesServices.getHoraires(sessionFormation));
 		} else {
 			final UtilisateurCritere utilisateurcritere = new UtilisateurCritere();
 			final com.kleegroup.formation.security.Role role = com.kleegroup.formation.security.Role.R_FORMATTEUR;
 			utilisateurcritere.setRole(role.toString());
 			session.publish(new SessionFormation());
 			horaires.publish(new DtList<>(Horaires.class));
-			final Horaires int_horaire = new Horaires();
-			int_horaire.setDebut(new Date());
-			int_horaire.setFin(new Date());
-			horaire.publish(int_horaire);
+			//horaire.publish(new Horaires());
 			loadListsForEdit();
+
 			toModeCreate();
 
 		}
@@ -94,15 +105,8 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	public String doEdit() {
 		final SessionFormation my_session = sessionServices.loadSessionFormation(sesIdRef.get());
 		session.publish(my_session);
-		horaires.publish(new DtList<>(Horaires.class));
-		horaire.publish(new Horaires());
-		//System.out.println(Integer.toString(my_session.getHorairesList().size()));
-		/*if (my_session.getHorairesList().size() > 0) {
-			horaires.publish(my_session.getHorairesList());
-		} else {
-			horaires.publish(new DtList<>(Horaires.class));
-		}*/
-
+		horaires.publish(horairesServices.getHoraires(my_session));
+		//horaire.publish(new Horaires());
 		loadListsForEdit();
 
 		toModeEdit();
@@ -111,13 +115,16 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 
 	public String doSave() {
 		final SessionFormation sessions = session.readDto();
-		sessions.setStatus("Brouillon");
 		if (isModeCreate()) {
 			final BigDecimal satisfaction = new BigDecimal(0);
+			sessions.setStatus("Brouillon");
+			sessions.setEtaCode("Brouillon");
+
 			doSaveSession(satisfaction, sessions);
 
 		} else if (isModeEdit()) {
 			final BigDecimal satisfaction = null;
+
 			doSaveSession(satisfaction, sessions);
 
 		}
@@ -126,49 +133,79 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 
 	public String doPublish() {
 		final SessionFormation sessions = session.readDto();
-
 		if (isModeCreate()) {
 			final BigDecimal satisfaction = new BigDecimal(0);
 			sessions.setEtaCode("Publier");
 			sessions.setStatus("Publier");
 			sessions.setEsuCode("Ouverte");
+
 			sessionServices.saveSessionFormation(sessions);
 			doSaveSession(satisfaction, sessions);
 
 		} else if (isModeEdit()) {
 			final BigDecimal satisfaction = null;
+
 			doSaveSession(satisfaction, sessions);
 
 		}
 		return SUCCESS;
 	}
 
+	private void DateIsCorrect(final SessionFormation session) {
+		if (DateUtil.newDate().after(session.getDateDebut())) {
+			throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
+		}
+		if (session.getDateDebut().compareTo(session.getDateFin()) > 0) {
+			throw new VUserException(new MessageText(Resources.SESSION_DATE_FIN_MUST_BE_IN_FUTURE));
+		}
+	}
+
+	@SuppressWarnings("deprecation")
 	private void doSaveSession(final BigDecimal satisfaction, final SessionFormation sessions) {
+
 		final DtList<Horaires> horairess = horaires.readDtList();
-		final Horaires horaireAddHorairess = horaire.readDto();
-		if (horaireAddHorairess != null) {
-			horairess.add(horaireAddHorairess);
-
-		}
-		if (!horairess.isEmpty()) {
-			System.out.println(horairess.get(0).getDebut().toString());
-			horairesServices.saveHoraires(horairess, sessions.getSesId());
-
-			System.out.println("coucou");
-			final Long durée = (horairess.get(horairess.size() - 1).getFin().getTime() - horairess.get(0).getDebut().getTime()) / 3600000 / 24;
-			sessions.setDateDebut(horairess.get(0).getDebut());
-			sessions.setDateFin(horairess.get(horairess.size() - 1).getFin());
-			sessions.setDuree(durée + 1);
-			sessionServices.saveSessionFormation(sessions);
-
-		}
 		if (satisfaction != null) {
 			sessions.setSatisfaction(satisfaction);
 			sessions.setI(satisfaction);
 			sessions.setEsuCode("Ouverte");
-			//sessions.setIsOuvert("Ouvert");
 			sessionServices.saveSessionFormation(sessions);
 
+		}
+		if (!horairess.isEmpty()) {
+
+			sessions.setHoraire(horairesServices.saveHoraires(horairess, sessions.getSesId()));
+			//final int durée = DateUtil.daysBetween(horairess.get(0).getJour(), horairess.get(horairess.size() - 1).getJour());
+			sessions.setDateDebut(horairess.get(0).getJour());
+			sessions.setDateFin(horairess.get(horairess.size() - 1).getJour());
+			final Long durée = (horairess.get(horairess.size() - 1).getJour().getTime() - horairess.get(0).getJour().getTime()) / 3600000 / 24;
+			//sessions.setDuree(Long.valueOf(durée + 1));
+			sessions.setDuree(durée + 1);
+			sessionServices.saveSessionFormation(sessions);
+		} else {
+			final Date date_début = sessions.getDateDebut();
+			final Date date_fin = sessions.getDateFin();
+			final DtList<Horaires> horaires_no_modif = new DtList<>(Horaires.class);
+			while (date_début.compareTo(date_fin) <= 0) {
+				final Horaires horaire = new Horaires();
+				horaire.setJour(new Date(date_début.getTime()));
+				horaire.setDebut(9 * 60);
+				horaire.setFin(12 * 60);
+				horaire.setDebutAprem(14 * 60);
+				horaire.setFinAprem(18 * 60);
+				horaires_no_modif.add(horaire);
+				date_début.setDate(date_début.getDate() + 1);
+			}
+			sessions.setDateDebut(horaires_no_modif.get(0).getJour());
+			sessions.setDateFin(horaires_no_modif.get(horaires_no_modif.size() - 1).getJour());
+			sessions.setHoraire(horairesServices.saveHoraires(horaires_no_modif, sessions.getSesId()));
+			//final int durée = DateUtil.daysBetween(horairess.get(0).getJour(), horairess.get(horairess.size()).getJour());
+			//System.out.println(horaires_no_modif.size());
+
+			final Long durée = (horaires_no_modif.get(horaires_no_modif.size() - 1).getJour().getTime() - horaires_no_modif.get(0).getJour().getTime()) / 3600000 / 24;
+			//sessions.setDuree(Long.valueOf(durée + 1));
+
+			sessions.setDuree(durée + 1);
+			sessionServices.saveSessionFormation(sessions);
 		}
 
 	}
@@ -176,50 +213,84 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	public String doDelete() {
 		final SessionFormation sessions = session.readDto();
 		final String status = sessions.getStatus();
-		final String etat = sessions.getEtat().getLibelle();
+		//final String etat = sessions.getEtat().getEtaCode();
 		if (status.equals("Brouillon")) {
 			sessionServices.deleteSessionCascade(sesIdRef.get());
 			horairesServices.deleteHoraires(session.readDto().getSesId());
 			sessionServices.deleteSessionFormation(session.readDto().getSesId());
 			return "success_delete";
-		}
-
-		if (etat.equals("Brouillon")) {
-			sessionServices.deleteSessionCascade(sesIdRef.get());
-			horairesServices.deleteHoraires(session.readDto().getSesId());
-			sessionServices.deleteSessionFormation(session.readDto().getSesId());
-			return "success_delete";
-		}
-		sessions.setStatus("Annuler");
-		sessions.setEtaCode("Annuler");
-		//sessions.setIsOuvert("Annuler");
-		sessions.setEsuCode("Annuler");
-		sessionServices.saveSessionFormation(sessions);
-		return SUCCESS;
-	}
-
-	public String doAdd() {
-		horaires.getUiListModifiable().add(horaire.readDto());
-		horaire.publish(new Horaires());
-
-		return NONE;
-	}
-
-	public String doRemove() {
-		if (isModeEdit()) {
-			final SessionFormation sessions = session.readDto();
-			horairesServices.deleteHoraires(sessions.getSesId());
-			sessions.setHoraire("");
-			sessions.setDateDebut(null);
-			sessions.setDateFin(null);
+		} else {
+			sessions.setStatus("Annulée");
+			sessions.setEtaCode("Annuler");
+			//sessions.setIsOuvert("Annuler");
+			sessions.setEsuCode("Annulée");
 			sessionServices.saveSessionFormation(sessions);
+			return SUCCESS;
 		}
-		horaires.publish(new DtList<>(Horaires.class));
-		horaire.publish(new Horaires());
+		/*	if (etat.equals("Brouillon")) {
+				sessionServices.deleteSessionCascade(sesIdRef.get());
+				horairesServices.deleteHoraires(session.readDto().getSesId());
+				sessionServices.deleteSessionFormation(session.readDto().getSesId());
+				return "success_delete";
+			}*/
+	}
 
+	@SuppressWarnings("deprecation")
+	public String doHorairemodif() throws ParseException {
+
+		final UiObject<SessionFormation> session_date = session.getUiObject();
+
+		if (DateUtil.newDate().after(session_date.getDate(SessionFormationFields.DATE_DEBUT.name()))) {
+			throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
+		}
+		if (session_date.getDate(SessionFormationFields.DATE_DEBUT.name()).compareTo(session_date.getDate(SessionFormationFields.DATE_FIN.name())) > 0) {
+			throw new VUserException(new MessageText(Resources.SESSION_DATE_FIN_MUST_BE_IN_FUTURE));
+		}
+
+		final Date date_début = session_date.getDate(SessionFormationFields.DATE_DEBUT.name());
+		final Date date_fin = session_date.getDate(SessionFormationFields.DATE_FIN.name());
+		final DtList<Horaires> horairess = new DtList<>(Horaires.class);
+
+		while (date_début.compareTo(date_fin) <= 0) {
+			final Horaires horaire = new Horaires();
+			final SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yy");
+			//System.out.println(formater.format(date_début));
+			horaire.setJour(new Date(date_début.getTime()));
+			//System.out.println(horaire.getJour());
+
+			horaire.setDebut(9 * 60);
+			horaire.setFin(12 * 60);
+			horaire.setDebutAprem(14 * 60);
+			horaire.setFinAprem(18 * 60);
+			horairess.add(horaire);
+			//date_debut.
+			//Calendar.
+			final Calendar c1 = GregorianCalendar.getInstance();
+
+			//c1.set(date_début.getDate(), 1);
+			date_début.setDate(date_début.getDate() + 1);
+		}
+
+		horaires.publish(horairess);
 		return NONE;
 	}
 
+	/*
+		public String doRemove() {
+			if (isModeEdit()) {
+				final SessionFormation sessions = session.readDto();
+				horairesServices.deleteHoraires(sessions.getSesId());
+				sessions.setHoraire("");
+				sessions.setDateDebut(null);
+				sessions.setDateFin(null);
+				sessionServices.saveSessionFormation(sessions);
+			}
+			horaires.publish(new DtList<>(Horaires.class));
+			horaire.publish(new Horaires());
+	
+			return NONE;
+		}
+	*/
 	@Override
 	public String getPageName() {
 		if (isModeCreate()) {

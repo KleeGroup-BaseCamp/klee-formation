@@ -1,15 +1,29 @@
 package com.kleegroup.formation.dao.services.formation
 
 create Task TK_GET_DELETE_FORMATION_CASCADE {
-	className : "io.vertigo.dynamox.task.TaskEngineSelect",
-	request : "Delete From HORAIRES Where SES_ID In (Select SES_ID From SESSION_FORMATION Where FOR_ID = #FOR_ID#);
+	className : "io.vertigo.dynamox.task.TaskEngineProc",
+	request : "Delete From HORAIRES Where SES_ID In (Select SES_ID From SESSION_FORMATION Where FOR_ID = #FORMATION_ID#);
 			
 			Delete From	SESSION_FORMATION
-               Where FOR_ID = #FOR_ID#;
+               Where FOR_ID = #FORMATION_ID#;
             
             Delete From	FORMATION
-               Where FOR_ID = #FOR_ID#",
+               Where FOR_ID = #FORMATION_ID#",
                
+  attribute FORMATION_ID{domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+}
+
+
+create Task TK_DELETE_HORAIRES {
+className : "io.vertigo.dynamox.task.TaskEngineProc",
+	request : "Delete From HORAIRES Where SES_ID In (Select SES_ID From SESSION_FORMATION Where FOR_ID = #FOR_ID#)",
+  attribute FOR_ID{domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+}
+
+create Task TK_DELETE_SESSION_BY_FOR_ID {
+className : "io.vertigo.dynamox.task.TaskEngineProc",
+	request : "Delete From	SESSION_FORMATION
+               Where FOR_ID = #FOR_ID#",
   attribute FOR_ID{domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
 }
 

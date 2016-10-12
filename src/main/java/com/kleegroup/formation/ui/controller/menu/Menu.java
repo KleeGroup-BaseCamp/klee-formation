@@ -15,12 +15,12 @@ public enum Menu {
 	 */
 	ROOT_MENU(),
 	/************************************** Menu Accueil. **************************************************/
-	ACCUEIL(ROOT_MENU, "Accueil", "VenirList.do", "fa fa-home"), //
-	MES_FORMATION(ROOT_MENU, "Mes formations", "MesList.do", "fa fa-user"), //
+	ACCUEIL(ROOT_MENU, " Accueil", "VenirList.do", "fa fa-home"), //
+	MES_FORMATION(ROOT_MENU, " Mes formations", "MesList.do", "fa fa-user"), //
 	//VENIR(ROOT_MENU, "Formations à venir", "VenirList.do"), //
-	GESTIONS(ROOT_MENU, "Création de session", "SessionList.do", "fa fa-file-text"), //
-	CATALOGUE(ROOT_MENU, "Création de formation", "CatalogueList.do", "fa fa-book"), //
-	ADMINISTRATION(ROOT_MENU, "Administration", "UtilisateurList.do", "fa fa-users");
+	GESTIONS(ROOT_MENU, " Création de session", "SessionList.do", "fa fa-file-text"), //
+	CATALOGUE(ROOT_MENU, " Création de formation", "CatalogueList.do", "fa fa-book"), //
+	ADMINISTRATION(ROOT_MENU, " Administration", "UtilisateurList.do", "fa fa-users");
 
 	/**
 	 * Associated navigation item.

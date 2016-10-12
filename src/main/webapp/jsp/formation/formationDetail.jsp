@@ -19,19 +19,20 @@
 		
 	<div class="button-bar">
 		<s:if test="%{modeReadOnly}">
-			 <s:hidden name="forId" value="%{formation.forId}" /> 
-			<s:submit action="deleteFormationDetail" value="SUPPRIMER" cssClass="enregistrer" onclick='return confirmAction(this, "Etes vous sur de vouloir supprimer cette formation ?")' />
 			<div class="right">
+			 <s:hidden name="forId" value="%{formation.forId}" /> 
+			<s:submit action="deleteFormationDetail" value="SUPPRIMER" cssClass="supprimer" onclick='return confirmAction(this, "Etes vous sur de vouloir supprimer cette formation ?")' />
 			<s:submit action="editFormationDetail" value="MODIFIER" cssClass="enregistrer" />
 			</div>
 		</s:if>
-		<s:elseif test="%{modeEdit}" >
-			<s:a action="FormationDetail" cssClass="annuler">Annuler
-			<s:param name="forId" value="formation.forId"/></s:a>
-		</s:elseif>
+		
+		<s:if test="%{!modeReadOnly}">
 		<div class="right">
 			<s:submit action="saveFormationDetail" value="ENREGISTRER" cssClass="enregistrer" />
-		</div> 	
+			
+		</div> 
+		</s:if>
+		
 	</div>
 </s:form>
 <h5>Liste des sessions de la formation</h5>

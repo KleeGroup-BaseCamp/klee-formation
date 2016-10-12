@@ -40,10 +40,32 @@ public final class FormationPAO implements StoreServices {
 
 	/**
 	 * Execute la tache TK_GET_DELETE_FORMATION_CASCADE.
+	 * @param formationId Long 
+	*/
+	public void getDeleteFormationCascade(final Long formationId) {
+		final Task task = createTaskBuilder("TK_GET_DELETE_FORMATION_CASCADE")
+				.addValue("FORMATION_ID", formationId)
+				.build();
+		getTaskManager().execute(task);
+	}
+
+	/**
+	 * Execute la tache TK_DELETE_HORAIRES.
 	 * @param forId Long 
 	*/
-	public void getDeleteFormationCascade(final Long forId) {
-		final Task task = createTaskBuilder("TK_GET_DELETE_FORMATION_CASCADE")
+	public void deleteHoraires(final Long forId) {
+		final Task task = createTaskBuilder("TK_DELETE_HORAIRES")
+				.addValue("FOR_ID", forId)
+				.build();
+		getTaskManager().execute(task);
+	}
+
+	/**
+	 * Execute la tache TK_DELETE_SESSION_BY_FOR_ID.
+	 * @param forId Long 
+	*/
+	public void deleteSessionByForId(final Long forId) {
+		final Task task = createTaskBuilder("TK_DELETE_SESSION_BY_FOR_ID")
 				.addValue("FOR_ID", forId)
 				.build();
 		getTaskManager().execute(task);

@@ -11,12 +11,6 @@ import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListURIForCriteria;
 import io.vertigo.dynamo.transaction.Transactional;
 
-/**
- * Implémentation des services associés à la gestion des produits.
- *
- * @author cgodard
- * @version $Id: ProduitServicesImpl.java,v 1.5 2014/02/07 16:48:27 npiedeloup Exp $
- */
 @Transactional
 public class FormationServicesImpl implements FormationServices {
 
@@ -48,8 +42,16 @@ public class FormationServicesImpl implements FormationServices {
 	/** {@inheritDoc} */
 	@Override
 	public void deleteFormation(final Long forId) {
-		formationPAO.getDeleteFormationCascade(forId);
+		formationDAO.delete(forId);
 
 	}
 
+	/** {@inheritDoc} */
+	@Override
+	public void deleteFormationCascade(final Long forId) {
+		formationPAO.deleteHoraires(forId);
+		formationPAO.deleteSessionByForId(forId);
+		//formationPAO.getDeleteFormationCascade(forId);
+		formationDAO.delete(forId);
+	}
 }

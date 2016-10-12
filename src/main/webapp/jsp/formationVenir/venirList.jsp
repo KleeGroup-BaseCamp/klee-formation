@@ -15,7 +15,7 @@
 </br>
 <h4>Liste des formations à venir</h4>
 
-<display:table  name="sessions" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20">
+<display:table  name="sessions" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20" defaultsort="2">
 	<display:setProperty name="basic.msg.empty_list">Aucune session.</display:setProperty>
 	<display:setProperty name="export.csv.filename">sessions.csv</display:setProperty>
 	<display:column title="Nom" sortable="true">

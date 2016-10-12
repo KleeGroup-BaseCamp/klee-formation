@@ -28,10 +28,11 @@
 		</s:url>
 		<a href="${formationDetailURL}">${item.intitule}</a>				
 	</display:column>
-	<display:column  property="commentaire" title="${util.label('formations.commentaire')}"/>
-	<display:column  property="nivCode" title="${util.label('formations.nivCode')}">
+	<display:column  property="commentaire" title="${util.label('formations.commentaire')}"  sortable="true"/>
+	<display:column  property="nivCode" title="${util.label('formations.nivCode')}"  sortable="true">
 	</display:column>
 </display:table>
+
  <div class="button-bar">
 	<div class="right">
 		<s:a action="FormationDetail" cssClass="creer">NOUVELLE FORMATION</s:a>

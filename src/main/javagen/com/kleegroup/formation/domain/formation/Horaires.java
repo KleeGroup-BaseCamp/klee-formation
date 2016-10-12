@@ -15,9 +15,11 @@ public final class Horaires implements DtObject {
 	private static final long serialVersionUID = 1L;
 
 	private Long datId;
-	private java.util.Date debut;
-	private java.util.Date fin;
+	private Integer debut;
+	private Integer fin;
 	private java.util.Date jour;
+	private Integer debutAprem;
+	private Integer finAprem;
 	private Long sesId;
 
 	/**
@@ -42,38 +44,38 @@ public final class Horaires implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'debut'. 
-	 * @return java.util.Date debut 
+	 * @return Integer debut 
 	 */
-	@Field(domain = "DO_DATE_MINUTE", label = "debut")
-	public java.util.Date getDebut() {
+	@Field(domain = "DO_HEURE", label = "debut")
+	public Integer getDebut() {
 		return debut;
 	}
 
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'debut'.
-	 * @param debut java.util.Date 
+	 * @param debut Integer 
 	 */
-	public void setDebut(final java.util.Date debut) {
+	public void setDebut(final Integer debut) {
 		this.debut = debut;
 	}
 
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'fin'. 
-	 * @return java.util.Date fin 
+	 * @return Integer fin 
 	 */
-	@Field(domain = "DO_DATE_MINUTE", label = "fin")
-	public java.util.Date getFin() {
+	@Field(domain = "DO_HEURE", label = "fin")
+	public Integer getFin() {
 		return fin;
 	}
 
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'fin'.
-	 * @param fin java.util.Date 
+	 * @param fin Integer 
 	 */
-	public void setFin(final java.util.Date fin) {
+	public void setFin(final Integer fin) {
 		this.fin = fin;
 	}
 
@@ -94,6 +96,44 @@ public final class Horaires implements DtObject {
 	 */
 	public void setJour(final java.util.Date jour) {
 		this.jour = jour;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'debutAprem'. 
+	 * @return Integer debutAprem 
+	 */
+	@Field(domain = "DO_HEURE", label = "debutAprem")
+	public Integer getDebutAprem() {
+		return debutAprem;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'debutAprem'.
+	 * @param debutAprem Integer 
+	 */
+	public void setDebutAprem(final Integer debutAprem) {
+		this.debutAprem = debutAprem;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'finAprem'. 
+	 * @return Integer finAprem 
+	 */
+	@Field(domain = "DO_HEURE", label = "finAprem")
+	public Integer getFinAprem() {
+		return finAprem;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'finAprem'.
+	 * @param finAprem Integer 
+	 */
+	public void setFinAprem(final Integer finAprem) {
+		this.finAprem = finAprem;
 	}
 
 	/**

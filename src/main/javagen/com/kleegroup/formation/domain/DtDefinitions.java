@@ -127,6 +127,10 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		FIN,
 		/** Propriété 'jour'. */
 		JOUR,
+		/** Propriété 'debutAprem'. */
+		DEBUT_APREM,
+		/** Propriété 'finAprem'. */
+		FIN_APREM,
 		/** Propriété 'Session formation'. */
 		SES_ID,
 	}

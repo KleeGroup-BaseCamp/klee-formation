@@ -69,7 +69,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Début'. 
 	 * @return java.util.Date dateDebut 
 	 */
-	@Field(domain = "DO_DATE_MINUTE", persistent = false, label = "Début")
+	@Field(domain = "DO_DATE", persistent = false, label = "Début")
 	public java.util.Date getDateDebut() {
 		return dateDebut;
 	}
@@ -88,7 +88,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Fin'. 
 	 * @return java.util.Date dateFin 
 	 */
-	@Field(domain = "DO_DATE_MINUTE", persistent = false, label = "Fin")
+	@Field(domain = "DO_DATE", persistent = false, label = "Fin")
 	public java.util.Date getDateFin() {
 		return dateFin;
 	}

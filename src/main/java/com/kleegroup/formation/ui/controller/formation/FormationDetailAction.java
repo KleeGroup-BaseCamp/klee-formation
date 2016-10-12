@@ -11,6 +11,7 @@ import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
+import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.Option;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
@@ -62,8 +63,23 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 	}
 
 	public String doDelete() {
-		formationServices.deleteFormation(formation.readDto().getForId());
-		return "success_delete";
+		final Long forId = formation.readDto().getForId();
+		final DtList<SessionView> sessionView = sessionServices.ListSessionByForId(forId);
+		if (sessionView.size() == 0) {
+			formationServices.deleteFormation(forId);
+			return "success_delete";
+		} else {
+			formationServices.deleteFormationCascade(forId);
+			/*int i = 0;
+			while (i <= sessionView.size()) {
+				sessionView.remove(sessionView.get(0).getSesId());
+				sessionServices.deleteSessionCascade(sessionView.get(0).getSesId());
+				i = i + 1;
+			}
+			//formationServices.deleteFormation(forId);*/
+			return "success_delete";
+		}
+
 	}
 
 	@Override

@@ -90,7 +90,7 @@ create Domain DO_LIBELLE_COURT {
 
 create Domain DO_HEURE {
 	dataType : Integer
-	formatter : FMT_DEFAULT
+	formatter : FMT_HEURE
 	storeType : "INT"
 }
 
@@ -192,7 +192,9 @@ create Formatter FMT_DATE_MINUTE {
      className :"io.vertigo.dynamox.domain.formatter.FormatterDate"
      args : "dd/MM/yyyy HH:mm"
 }
-
+create Formatter FMT_HEURE {
+     className :"com.kleegroup.formation.ui.util.FormatterHeure"
+}
 
 create Formatter FMT_MONTANT {
     className : "io.vertigo.dynamox.domain.formatter.FormatterNumber"

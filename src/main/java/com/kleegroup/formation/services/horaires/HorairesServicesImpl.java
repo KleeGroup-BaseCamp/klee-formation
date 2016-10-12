@@ -7,14 +7,11 @@ import javax.inject.Inject;
 import com.kleegroup.formation.dao.formation.HorairesDAO;
 import com.kleegroup.formation.domain.formation.Horaires;
 import com.kleegroup.formation.domain.formation.SessionFormation;
-import com.kleegroup.formation.resources.Resources;
 import com.kleegroup.formation.services.session.SessionServices;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.transaction.Transactional;
-import io.vertigo.lang.MessageText;
-import io.vertigo.lang.VUserException;
-import io.vertigo.util.DateUtil;
+import io.vertigo.lang.Assertion;
 
 /**
  * Implémentation des services associés à la gestion des produits.
@@ -32,47 +29,35 @@ public class HorairesServicesImpl implements HorairesServices {
 	private HorairesDAO horairesDAO;
 
 	@Override
-	public void saveHoraires(final DtList<Horaires> horairess, final Long sesId) {
-		for (final Horaires horaires : horairess) {
-			if (DateUtil.newDate().after(horaires.getDebut())) {
-				throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
-			}
-			if (horaires.getDebut().compareTo(horaires.getFin()) > 0) {
-				throw new VUserException(new MessageText(Resources.SESSION_DATE_FIN_MUST_BE_IN_FUTURE));
-			}
-		}
-		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yy 'de' HH:mm");
-		final String lineSeparator = System.getProperty("line.separator");
-		final StringBuilder buffer = new StringBuilder();
+	public String saveHoraires(final DtList<Horaires> horairess, final Long sesId) {
+
+		final SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yy");
 		final SessionFormation session = sessionServices.loadSessionbyId(sesId);
-		System.out.println(Integer.toString(horairess.size()));
-		if (horairess.size() == 1) {
-			String line = new String();
-			line = "de ";
-			line = line + formater.format(horairess.get(0).getDebut()).substring(12, formater.format(horairess.get(0).getDebut()).length()).concat(" à ".concat(formater.format(horairess.get(0).getFin()).substring(12, formater.format(horairess.get(0).getFin()).length())));
-			session.setHoraire(line);
-			sessionServices.saveSessionFormation(session);
-		} else {
-			for (final Horaires horaires : horairess) {
-				session.getHorairesList().add(horaires);
-				//	session.getHorairesList().isEmpty()
-				horaires.setSesId(sesId);
-
-				horairesDAO.save(horaires);
-				final Long tmp_test = (horaires.getDebut().getTime() - horaires.getFin().getTime()) / 3600000 / 24;
-				if (tmp_test == 0) {
-					formater = new SimpleDateFormat("dd/MM/yy 'de' HH:mm");
-					buffer.append(lineSeparator).append(formater.format(horaires.getDebut()))
-							.append(" à ").append(formater.format(horaires.getFin()).substring(12, formater.format(horaires.getFin()).length()));
-
-				} else {
-					formater = new SimpleDateFormat("dd/MM/yy 'à' HH:mm");
-					buffer.append(lineSeparator).append(formater.format(horaires.getDebut())).append(" - ").append(formater.format(horaires.getFin()));
-				}
-			}
-			session.setHoraire(buffer.toString());
-			sessionServices.saveSessionFormation(session);
+		for (final Horaires horaires : horairess) {
+			horaires.setSesId(sesId);
+			horairesDAO.save(horaires);
 		}
+		final int objValue = horairess.get(0).getDebut();
+		String str = new String();
+		float i = (float) objValue / (float) 60;
+		str = (int) i + ":" + String.valueOf(i).substring(String.valueOf(i).length() - 1, String.valueOf(i).length()) + "0";
+		final int objValue2 = horairess.get(horairess.size() - 1).getFin();
+		i = (float) objValue2 / (float) 60;
+		String str_fin = new String();
+		str_fin = (int) i + ":" + String.valueOf(i).substring(String.valueOf(i).length() - 1, String.valueOf(i).length()) + "0";
+
+		final String line = formater.format(horairess.get(0).getJour()).concat(" à ").concat(str).concat(" au ").concat(formater.format(horairess.get(horairess.size() - 1).getJour())).concat(" à ").concat(str_fin);
+		session.setHoraire(line);
+		sessionServices.saveSessionFormation(session);
+		return line;
+
+	}
+
+	@Override
+	public DtList<Horaires> getHoraires(final SessionFormation sessionFormation) {
+		Assertion.checkNotNull(sessionFormation);
+		// ---
+		return sessionFormation.getHorairesList();
 
 	}
 

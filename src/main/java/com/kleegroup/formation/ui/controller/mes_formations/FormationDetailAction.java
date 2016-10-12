@@ -5,10 +5,12 @@ import javax.inject.Named;
 
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.formation.Formation;
+import com.kleegroup.formation.domain.formation.Horaires;
 import com.kleegroup.formation.domain.formation.Inscription;
 import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.services.formation.FormationServices;
+import com.kleegroup.formation.services.horaires.HorairesServices;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
@@ -37,11 +39,15 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 	@Inject
 	private InscriptionServices inscriptionServices;
 
+	@Inject
+	private HorairesServices horairesServices;
+
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 	private final ContextListModifiable<Inscription> inscriptions = new ContextListModifiable<>("inscriptions", this);
 	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
 	private final ContextMdl<Utilisateur> utilisateursList = new ContextMdl<>("utilisateurs", this);
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
+	private final ContextListModifiable<Horaires> horaires = new ContextListModifiable<>("horaires", this);
 
 	public void initContext(@Named("sesId") final Long sesId) {
 		niveaux.publish(Niveau.class, null);
@@ -50,7 +56,7 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 		session.publish(sessionFormation);
 		formation.publish(formationServices.loadFormation(sessionFormation.getForId()));
 		final DtList<Inscription> myInscriptions = inscriptionServices.getListInscriptionsBySessionId(sesId);
-
+		horaires.publish(horairesServices.getHoraires(sessionFormation));
 		inscriptions.publish(myInscriptions);
 
 		if (myInscriptions.size() > 0) {

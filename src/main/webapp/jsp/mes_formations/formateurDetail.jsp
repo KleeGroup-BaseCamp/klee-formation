@@ -54,9 +54,29 @@
 		<div class="span3">
 			<s:textfield name="sessionTest.dateFin" label="Fin" theme="xhtml_read" />
 			</br>
-			<s:textfield name="sessionTest.horaire" label="Horaires" theme="xhtml_read"/>
+			<%--<s:textfield name="sessionTest.horaire" label="Horaires" theme="xhtml_read"/> --%>
 		</div>	
 	</div>
+		</br>
+			<display:table  name="horaires" class="tableau" id="item" export="false" requestURI="#" defaultsort="0" >
+			<display:setProperty name="basic.msg.empty_list" value=""/>
+				<display:setProperty name="paging.banner.all_items_found" value=""/>
+			<display:column property="jour" title="Jour" sortable="true"/>
+			<display:column title="Début" sortable="true">
+			<s:textfield name="%{util.contextKey(#attr.item)}.debut" theme="xhtml_read"/>		
+			</display:column>
+			<display:column title="Fin" sortable="true">
+			<s:textfield name="%{util.contextKey(#attr.item)}.fin"  theme="xhtml_read"/>		
+			</display:column>
+			<display:column title="Début" sortable="true">
+			<s:textfield name="%{util.contextKey(#attr.item)}.debutAprem"  theme="xhtml_read"/>		
+			</display:column>
+			<display:column title="Fin" sortable="true">
+			<s:textfield name="%{util.contextKey(#attr.item)}.finAprem"  theme="xhtml_read"/>		
+			</display:column>
+			</display:table>
+			</br>
+			</br>
 	<div class="row">
 		<div class="span3">
 		</div>
