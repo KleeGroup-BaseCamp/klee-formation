@@ -41,7 +41,7 @@ public class HorairesServicesImpl implements HorairesServices {
 		String str = new String();
 		float i = (float) objValue / (float) 60;
 		str = (int) i + ":" + String.valueOf(i).substring(String.valueOf(i).length() - 1, String.valueOf(i).length()) + "0";
-		final int objValue2 = horairess.get(horairess.size() - 1).getFin();
+		final int objValue2 = horairess.get(horairess.size() - 1).getFinAprem();
 		i = (float) objValue2 / (float) 60;
 		String str_fin = new String();
 		str_fin = (int) i + ":" + String.valueOf(i).substring(String.valueOf(i).length() - 1, String.valueOf(i).length()) + "0";

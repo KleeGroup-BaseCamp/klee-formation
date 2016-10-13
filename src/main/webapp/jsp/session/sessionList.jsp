@@ -15,15 +15,15 @@
 </s:form>
 
 <h4>Liste des sessions</h4>
-<display:table  name="sessions" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20" defaultsort="1">
+<display:table  name="sessions" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20" defaultsort="1" defaultorder="descending">
 		<display:setProperty name="basic.msg.empty_list">Aucune session.</display:setProperty>
 		<display:setProperty name="export.csv.filename">sessions.csv</display:setProperty>
-		<display:column title="Numéro" sortable="true" defaultorder="descending">
+		
+		<display:column title="Numéro" sortable="true" >
 		<s:url action="SessionDetail" includeParams="get" var="SessionDetailURL">
 			<s:param name="sesId">${item.sesId}</s:param>
 		</s:url>
-		<a href="${SessionDetailURL}">${item.sesId}</a>			
-			
+		<a href="${SessionDetailURL}">${item.sesId}</a>				
 		</display:column>
 		<display:column  property="formationName" title="Nom" sortable="true"/>
 		<display:column  property="dateDebut" title="Début" sortable="true" />

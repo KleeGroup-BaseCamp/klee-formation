@@ -45,18 +45,20 @@
 	<div class="row">
 		<div class="span3">
 		</div>
-		<div class="span2">
-			<s:textfield name="sessionTest.dateDebut" label="Début" theme="xhtml_read" />
-			<s:textfield name="sessionTest.duree" label="Durée (jours) " theme="xhtml_read"/>
-			</div>
-		<div class="span2">
-	</div>
 		<div class="span3">
-			<s:textfield name="sessionTest.dateFin" label="Fin" theme="xhtml_read" />
+		<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum" theme="xhtml_read"/>
+			<s:textfield name="sessionTest.dateDebut" label="Début" theme="xhtml_read" />
+				</div>	
+			<div class="span1">
+		</div>
+		<div class="span2">
+			<s:textfield name="sessionTest.duree" label="Durée(jours) " theme="xhtml_read"/>
 			</br>
-			<%-- <s:textfield name="sessionTest.horaire" label="Horaires" theme="xhtml_read"/>--%>
-		</div>	
-	</div>
+			<s:textfield name="sessionTest.dateFin" label="Fin" theme="xhtml_read" />
+			
+			</div>
+						
+	</div>		
 		</br>
 			<display:table  name="horaires" class="tableau" id="item" export="false" requestURI="#" defaultsort="0">
 			 <display:setProperty name="basic.msg.empty_list" value=""/>
@@ -77,11 +79,7 @@
 			</display:table>
 			</br>
 			</br>
-	<div class="row">
-		<div class="span3">
-		</div>
-	<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum" theme="xhtml_read"/>
-</div>
+
 </s:form>
 
 	<h5>Liste des personnes inscritent</h5>

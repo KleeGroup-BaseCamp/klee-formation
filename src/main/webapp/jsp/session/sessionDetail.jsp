@@ -64,18 +64,33 @@
 		<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
 	</div>
 		</s:if>
+		 <s:div layout="table" cols="2">
+		  <s:if test="%{modeReadOnly}">
+			<s:textfield name="sessionTest.duree" label="Durée(jours)"/>
+			</s:if>
+			<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>
+		</s:div>
 			<s:div layout="table" cols="4">		
 			<sj:datepicker name="sessionTest.dateDebut" label="Début" displayFormat="dd/mm/yy" changeMonth="true" changeYear="true" showOn="button"/>
 		    <sj:datepicker name="sessionTest.dateFin" label="Fin" displayFormat="dd/mm/yy"  changeMonth="true" changeYear="true" showOn="button"/>
 		  </s:div>
+		 
 		  <div class="row">
 				<div class="span10">
 				</div>
 			<s:if test="%{modeCreate}">
+			</br>
 			    <s:submit action="HorairemodifSessionDetail" value="valider les dates" cssClass="add" />
+			    </br>
+			</s:if>
+			<s:if test="%{modeEdit}">
+			</br>
+			    <s:submit action="DatemodifSessionDetail" value="modifier les dates" cssClass="add" />
+			 </br>
 			</s:if>
 			</div>
-			<display:table  name="horaires" class="tableau" id="item" export="false" requestURI="#" defaultsort="0">
+			 </br>
+			<display:table  name="horaires" class="tableau" id="item" export="false" requestURI="#" defaultsort="1" defaultorder="ascending">
 				<display:setProperty name="basic.msg.empty_list" value=""/>
 				<display:setProperty name="paging.banner.all_items_found" value=""/>
 				<display:column property="jour" title="Jour" sortable="true"/>
@@ -92,12 +107,7 @@
 					<s:textfield name="%{util.contextKey(#attr.item)}.finAprem"/>		
 				</display:column>
 			</display:table>
-		<s:div layout="table" cols="2">
-		  <s:if test="%{modeReadOnly}">
-			<s:textfield name="sessionTest.duree" label="Durée(jours)"/>
-			</s:if>
-			<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>
-		</s:div>
+		
 		<s:if test="%{!modeCreate}">
 		<h5>Liste des personnes inscrites</h5>
 	<display:table  name="inscriptions" class="tableau" uid="item" export="true" sort="list" requestURI="#" pagesize="20">

@@ -108,7 +108,6 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		horaires.publish(horairesServices.getHoraires(my_session));
 		//horaire.publish(new Horaires());
 		loadListsForEdit();
-
 		toModeEdit();
 		return NONE;
 	}
@@ -160,6 +159,31 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		}
 	}
 
+	private void HoraireIsCorrect(final DtList<Horaires> horairess) {
+		int i = 0;
+
+		/*	if (session.getDateDebut().compareTo(session.getDateFin()) > 0) {
+		throw new VUserException(new MessageText(Resources.SESSION_DATE_FIN_MUST_BE_IN_FUTURE));
+		}*/
+		while (i < horairess.size()) {
+			if (horairess.get(i).getFin().compareTo(horairess.get(i).getDebut()) < 0) {
+				throw new VUserException(new MessageText(Resources.HORAIRES_INCORRECTS));
+			}
+			if (horairess.get(i).getFinAprem().compareTo(horairess.get(i).getDebutAprem()) < 0) {
+				throw new VUserException(new MessageText(Resources.HORAIRES_INCORRECTS));
+			}
+
+			if (horairess.get(i).getFin() - horairess.get(i).getDebut() >= 360) {
+				throw new VUserException(new MessageText(Resources.HORAIRES_INCORRECTS));
+			}
+
+			if (horairess.get(i).getFinAprem() - horairess.get(i).getDebutAprem() >= 360) {
+				throw new VUserException(new MessageText(Resources.HORAIRES_INCORRECTS));
+			}
+			i = i + 1;
+		}
+	}
+
 	@SuppressWarnings("deprecation")
 	private void doSaveSession(final BigDecimal satisfaction, final SessionFormation sessions) {
 
@@ -172,14 +196,13 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 
 		}
 		if (!horairess.isEmpty()) {
-
+			HoraireIsCorrect(horairess);
 			sessions.setHoraire(horairesServices.saveHoraires(horairess, sessions.getSesId()));
-			//final int durée = DateUtil.daysBetween(horairess.get(0).getJour(), horairess.get(horairess.size() - 1).getJour());
 			sessions.setDateDebut(horairess.get(0).getJour());
 			sessions.setDateFin(horairess.get(horairess.size() - 1).getJour());
 			final Long durée = (horairess.get(horairess.size() - 1).getJour().getTime() - horairess.get(0).getJour().getTime()) / 3600000 / 24;
-			//sessions.setDuree(Long.valueOf(durée + 1));
 			sessions.setDuree(durée + 1);
+
 			sessionServices.saveSessionFormation(sessions);
 		} else {
 			final Date date_début = sessions.getDateDebut();
@@ -236,6 +259,104 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	}
 
 	@SuppressWarnings("deprecation")
+	public String doDatemodif() throws ParseException {
+		final SessionFormation session_modif = session.readDto();
+
+		if (DateUtil.newDate().after(session_modif.getDateDebut())) {
+			throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
+		}
+		if (session_modif.getDateDebut().compareTo(session_modif.getDateFin()) > 0) {
+			throw new VUserException(new MessageText(Resources.SESSION_DATE_FIN_MUST_BE_IN_FUTURE));
+		}
+
+		final Date date_début = session_modif.getDateDebut();
+		final Date date_fin = session_modif.getDateFin();
+		final DtList<Horaires> horairess = session_modif.getHorairesList();
+		final Long durée = (date_fin.getTime() - date_début.getTime()) / 3600000 / 24 + 1;
+		if (durée >= horairess.size() && date_début.getTime() == horairess.get(0).getJour().getTime()) {
+			int i = horairess.size();
+			final Date jour = horairess.get(i - 1).getJour();
+			jour.setDate(jour.getDate() + 1);
+			while (i < durée) {
+				final Horaires horaire = new Horaires();
+				horaire.setJour(new Date(jour.getTime()));
+				horaire.setDebut(9 * 60);
+				horaire.setFin(12 * 60);
+				horaire.setDebutAprem(14 * 60);
+				horaire.setFinAprem(18 * 60);
+				horairess.add(horaire);
+				jour.setDate(jour.getDate() + 1);
+				i = i + 1;
+			}
+			horaires.publish(horairess);
+			return NONE;
+		}
+
+		else if (durée == horairess.size()) {
+			int i = 0;
+			while (i < horairess.size()) {
+				horairess.get(i).setJour(new Date(date_début.getTime()));
+				date_début.setDate(date_début.getDate() + 1);
+				i = i + 1;
+			}
+			horaires.publish(horairess);
+			return NONE;
+		} else if (durée >= horairess.size() && date_fin.getTime() == horairess.get(horairess.size() - 1).getJour().getTime()) {
+			final DtList<Horaires> horaires_new = new DtList<>(Horaires.class);
+			int i = horairess.size();
+			final Date jour = date_début;
+			while (i < durée) {
+				final Horaires horaire = new Horaires();
+				horaire.setJour(new Date(jour.getTime()));
+				horaire.setDebut(9 * 60);
+				horaire.setFin(12 * 60);
+				horaire.setDebutAprem(14 * 60);
+				horaire.setFinAprem(18 * 60);
+				horaires_new.add(horaire);
+				jour.setDate(jour.getDate() + 1);
+				i = i + 1;
+			}
+			i = 0;
+			while (i < horairess.size()) {
+				horaires_new.add(horairess.get(i));
+				i = i + 1;
+			}
+			//horairesServices.deleteHoraires(session.readDto().getSesId());
+			horaires.publish(horaires_new);
+			return NONE;
+		} else {
+			final DtList<Horaires> horaires_new = new DtList<>(Horaires.class);
+			int i = 0;
+			final Date jour = date_début;
+			while (i < durée) {
+				System.out.println(Integer.toString(i));
+				if (i < horairess.size()) {
+					System.out.println("cc");
+					if (horairess.get(i).getJour().compareTo(jour) == 0) {
+						horaires_new.add(horairess.get(i));
+						System.out.println("cc");
+					}
+
+				} else {
+					final Horaires horaire = new Horaires();
+					horaire.setJour(new Date(jour.getTime()));
+					horaire.setDebut(9 * 60);
+					horaire.setFin(12 * 60);
+					horaire.setDebutAprem(14 * 60);
+					horaire.setFinAprem(18 * 60);
+					horaires_new.add(horaire);
+
+				}
+				jour.setDate(jour.getDate() + 1);
+				i = i + 1;
+			}
+			horaires.publish(horaires_new);
+			return NONE;
+		}
+
+	}
+
+	@SuppressWarnings("deprecation")
 	public String doHorairemodif() throws ParseException {
 
 		final UiObject<SessionFormation> session_date = session.getUiObject();
@@ -275,22 +396,6 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		return NONE;
 	}
 
-	/*
-		public String doRemove() {
-			if (isModeEdit()) {
-				final SessionFormation sessions = session.readDto();
-				horairesServices.deleteHoraires(sessions.getSesId());
-				sessions.setHoraire("");
-				sessions.setDateDebut(null);
-				sessions.setDateFin(null);
-				sessionServices.saveSessionFormation(sessions);
-			}
-			horaires.publish(new DtList<>(Horaires.class));
-			horaire.publish(new Horaires());
-	
-			return NONE;
-		}
-	*/
 	@Override
 	public String getPageName() {
 		if (isModeCreate()) {
