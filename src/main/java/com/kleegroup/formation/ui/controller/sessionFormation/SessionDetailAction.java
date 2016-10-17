@@ -3,9 +3,7 @@ package com.kleegroup.formation.ui.controller.sessionFormation;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -36,6 +34,7 @@ import io.vertigo.struts2.core.ContextListModifiable;
 import io.vertigo.struts2.core.ContextMdl;
 import io.vertigo.struts2.core.ContextRef;
 import io.vertigo.struts2.core.UiObject;
+import io.vertigo.util.DateBuilder;
 import io.vertigo.util.DateUtil;
 
 /**
@@ -368,15 +367,18 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			throw new VUserException(new MessageText(Resources.SESSION_DATE_FIN_MUST_BE_IN_FUTURE));
 		}
 
-		final Date date_début = session_date.getDate(SessionFormationFields.DATE_DEBUT.name());
+		final Date dateDebut = session_date.getDate(SessionFormationFields.DATE_DEBUT.name());
 		final Date date_fin = session_date.getDate(SessionFormationFields.DATE_FIN.name());
 		final DtList<Horaires> horairess = new DtList<>(Horaires.class);
+		Date date = new DateBuilder(dateDebut)
+				.build();
 
-		while (date_début.compareTo(date_fin) <= 0) {
+		System.out.println(date.toString());
+		while (date.compareTo(date_fin) <= 0) {
 			final Horaires horaire = new Horaires();
 			final SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yy");
 			//System.out.println(formater.format(date_début));
-			horaire.setJour(new Date(date_début.getTime()));
+			horaire.setJour(new Date(date.getTime()));
 			//System.out.println(horaire.getJour());
 
 			horaire.setDebut(9 * 60);
@@ -386,12 +388,16 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			horairess.add(horaire);
 			//date_debut.
 			//Calendar.
-			final Calendar c1 = GregorianCalendar.getInstance();
+			date = new DateBuilder(date)
+					.addDays(1)
+					.build();
+
+			//final Calendar c1 = GregorianCalendar.getInstance();
 
 			//c1.set(date_début.getDate(), 1);
-			date_début.setDate(date_début.getDate() + 1);
+			//date_début.setDate(date_début.getDate() + 1);
 		}
-
+		//session.readDto().setDateDebut(horairess.get(0).getJour());
 		horaires.publish(horairess);
 		return NONE;
 	}

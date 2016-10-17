@@ -275,6 +275,7 @@ create table SESSION_FORMATION
     DUREE       	 BIGINT      	,
     DATE_FIN    	 DATE        	,
     DATE_DEBUT  	 DATE        	,
+    LIEUX       	 VARCHAR(250)	,
     FOR_ID      	 BIGINT      	not null,
     ETA_CODE    	 VARCHAR(30) 	not null,
     UTI_ID      	 BIGINT      	not null,
@@ -311,6 +312,9 @@ comment on column SESSION_FORMATION.DATE_FIN is
 
 comment on column SESSION_FORMATION.DATE_DEBUT is
 'DateDebut';
+
+comment on column SESSION_FORMATION.LIEUX is
+'Lieux';
 
 comment on column SESSION_FORMATION.FOR_ID is
 'Formation';

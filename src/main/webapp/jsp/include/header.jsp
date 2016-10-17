@@ -13,7 +13,7 @@
 		<img src="./static/images/logo2.jpg" alt="Image" />
 	</s:a>
 	<p style="line-height:65px;">
- 	 <h1>L'application de gestions de formations</h1>
+ 	 <h1>L'application de gestion de formations</h1>
 	</p>	
 	 
 </div>

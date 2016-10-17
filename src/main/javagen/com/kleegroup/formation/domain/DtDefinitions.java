@@ -267,6 +267,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		DATE_FIN,
 		/** Propriété 'DateDebut'. */
 		DATE_DEBUT,
+		/** Propriété 'Lieux'. */
+		LIEUX,
 		/** Propriété 'Formation'. */
 		FOR_ID,
 		/** Propriété 'Etat'. */

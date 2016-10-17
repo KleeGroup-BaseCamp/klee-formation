@@ -53,7 +53,6 @@
 		<dependency>
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-tempo-impl</artifactId>
-			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertigo</groupId>
@@ -199,4 +198,13 @@
 			</plugin>
 		</plugins>
 	</build>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.vertigo</groupId>
+				<artifactId>vertigo-tempo-impl</artifactId>
+				<version>${vertigo.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

@@ -24,6 +24,7 @@ public final class SessionFormation implements DtObject {
 	private Long duree;
 	private java.util.Date dateFin;
 	private java.util.Date dateDebut;
+	private String lieux;
 	private Long forId;
 	private String etaCode;
 	private Long utiId;
@@ -223,6 +224,25 @@ public final class SessionFormation implements DtObject {
 	 */
 	public void setDateDebut(final java.util.Date dateDebut) {
 		this.dateDebut = dateDebut;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Lieux'. 
+	 * @return String lieux 
+	 */
+	@Field(domain = "DO_LIBELLE_LONG", label = "Lieux")
+	public String getLieux() {
+		return lieux;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Lieux'.
+	 * @param lieux String 
+	 */
+	public void setLieux(final String lieux) {
+		this.lieux = lieux;
 	}
 
 	/**

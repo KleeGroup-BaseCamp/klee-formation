@@ -46,14 +46,17 @@
 		<div class="span3">
 		</div>
 		<div class="span3">
-		<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum" theme="xhtml_read"/>
+			<s:textfield name="sessionTest.lieux" label="default" theme="xhtml_read"/>
+			</br>
 			<s:textfield name="sessionTest.dateDebut" label="Début" theme="xhtml_read" />
 			</br>
+			<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum" theme="xhtml_read"/>
 			<s:textfield name="sessionTest.esuCode" label="La session est" theme="xhtml_read"/>
 				</div>	
 			<div class="span1">
 		</div>
 		<div class="span2">
+
 			<s:textfield name="sessionTest.duree" label="Durée(jours) " theme="xhtml_read"/>
 			</br>
 			<s:textfield name="sessionTest.dateFin" label="Fin" theme="xhtml_read" />

@@ -7,7 +7,7 @@
 	<s:param name="subtitle">${pageName}</s:param>
 </s:include>
 
-
+Appuyer sur "MOI" pour s'inscrire, pour inscrire un autre utilisateur entrait le nom de l'utilisateur et cliquer qur "OK".
 <s:form >
 	<div class="button-bar">
 		<div>

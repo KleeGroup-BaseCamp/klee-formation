@@ -64,6 +64,11 @@ public final class MesDetailAction extends AbstractKleeFormationActionSupport {
 
 	public String doDelete() {
 		inscriptionServices.deleteInscription(inscriptionServices.InscriptionByUtiSesId(utilisateurServices.getCurrentUtilisateur().getUtiId(), sesIdRef.get()).getInsId());
+		final SessionFormation session_modif = sessionServices.loadSessionbyId(session.readDto().getSesId());
+		if (session_modif.getEsuCode() == "Complete") {
+			session_modif.setEsuCode("Ouverte");
+			sessionServices.saveSessionFormation(session_modif);
+		}
 		return "success_delete";
 	}
 

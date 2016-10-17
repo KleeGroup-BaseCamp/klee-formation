@@ -46,8 +46,12 @@
 		<div class="span3">
 		</div>
 		<div class="span3">
-		<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum" theme="xhtml_read"/>
+			<s:textfield name="sessionTest.lieux" label="default" theme="xhtml_read"/>
+			</br>
 			<s:textfield name="sessionTest.dateDebut" label="Début" theme="xhtml_read" />
+			</br>
+			<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum" theme="xhtml_read"/>
+				</div>	
 				</div>	
 			<div class="span1">
 		</div>

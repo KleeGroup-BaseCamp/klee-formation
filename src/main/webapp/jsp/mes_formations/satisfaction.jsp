@@ -9,7 +9,7 @@
 
 <s:form>
 
-<h3>Evalutation de la satisfaction </h3>
+<h3>Evaluation de la satisfaction </h3>
 
 	<s:div layout="table">
 		<s:radio list="#{'1':'1', '2':'2', '3':'3', '4':'4', '5':'5'}" label="La durée du stage( temps) est-elle suffisante?" name="statistique.duree"

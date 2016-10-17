@@ -64,11 +64,12 @@
 		<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
 	</div>
 		</s:if>
-		 <s:div layout="table" cols="2">
+		 <s:div layout="table" cols="4">
 		  <s:if test="%{modeReadOnly}">
 			<s:textfield name="sessionTest.duree" label="Durée(jours)"/>
 			</s:if>
 			<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>
+			<s:textfield name="sessionTest.lieux" label="default"/>
 		</s:div>
 			<s:div layout="table" cols="4">		
 			<sj:datepicker name="sessionTest.dateDebut" label="Début" displayFormat="dd/mm/yy" changeMonth="true" changeYear="true" showOn="button"/>
@@ -80,7 +81,7 @@
 				</div>
 			<s:if test="%{modeCreate}">
 			</br>
-			    <s:submit action="HorairemodifSessionDetail" value="valider les dates" cssClass="add" />
+			    <s:submit action="HorairemodifSessionDetail" value="Horaires" cssClass="add" />
 			    </br>
 			</s:if>
 			<s:if test="%{modeEdit}">

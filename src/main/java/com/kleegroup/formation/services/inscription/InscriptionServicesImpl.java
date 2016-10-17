@@ -95,7 +95,6 @@ public class InscriptionServicesImpl implements InscriptionServices {
 			if (session.getInscriptionList().size() + 1 == session.getNbPersonne()) {
 				session.setEsuCode("Complete");
 				sessionServices.saveSessionFormation(session);
-
 			}
 			inscriptionDAO.save(inscription);
 

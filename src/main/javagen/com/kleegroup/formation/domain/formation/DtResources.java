@@ -216,6 +216,10 @@ public enum DtResources implements MessageKey {
 	 */
 	FLD_SESSION_FORMATION$DATE_DEBUT,
 	/**
+	 * Lieux.
+	 */
+	FLD_SESSION_FORMATION$LIEUX,
+	/**
 	 * Formation.
 	 */
 	FLD_SESSION_FORMATION$FOR_ID,
