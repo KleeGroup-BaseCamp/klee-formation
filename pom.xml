@@ -144,6 +144,11 @@
 			<artifactId>jsp-api</artifactId>
 			<version>2.2</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.directory.api</groupId>
+		    <artifactId>api-all</artifactId>
+		    <version>1.0.0-RC1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
