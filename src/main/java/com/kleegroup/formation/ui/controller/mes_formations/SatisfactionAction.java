@@ -13,7 +13,7 @@ import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
-import io.vertigo.lang.Option;
+import java.util.Optional;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextRef;
 
@@ -34,7 +34,7 @@ public final class SatisfactionAction extends AbstractKleeFormationActionSupport
 	private final ContextForm<Inscription> statistique = new ContextForm<>("statistique", this);
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 
-	public void initContext(@Named("sesId") final Option<Long> sesId) {
+	public void initContext(@Named("sesId") final Optional<Long> sesId) {
 		final BigDecimal zero = new BigDecimal(0);
 		if (inscriptionServices.InscriptionByUtiSesId(utilisateurServices.getCurrentUtilisateur().getUtiId(), sesId.get()).getSatisfaction().compareTo(zero) == 0) {
 			statistique.publish(inscriptionServices.InscriptionByUtiSesId(utilisateurServices.getCurrentUtilisateur().getUtiId(), sesId.get()));

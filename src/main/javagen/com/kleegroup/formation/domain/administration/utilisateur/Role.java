@@ -1,15 +1,14 @@
 package com.kleegroup.formation.domain.administration.utilisateur;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
-import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.model.Entity;
+import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Role
  */
-@DtDefinition
-public final class Role implements DtObject {
+public final class Role implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -17,6 +16,12 @@ public final class Role implements DtObject {
 	private String rolCode;
 	private String libelle;
 
+	/** {@inheritDoc} */
+	@Override
+	public URI<Role> getURI() {
+		return DtObjectUtil.createURI(this);
+	}
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'ROL_CODE'. 

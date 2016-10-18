@@ -1,25 +1,21 @@
 package com.kleegroup.formation.domain.referentiel
 
 create DtDefinition DT_OUI_NON_CHOICE {
-    persistent : "false",
-	key KEY {domain : DO_OUI_NON, label :"Valeur", notNull:"false",},
+    field KEY {domain : DO_OUI_NON, label :"Valeur", notNull:"false",},
 	field LIBELLE {domain : DO_LIBELLE, label : "Libell�", notNull : "true",},
 },
 
 create DtDefinition DT_ACTIF_CHOICE {
-    persistent : "false",
-	key KEY {domain : DO_ACTIF, label :"Valeur", notNull:"false",},
+    field KEY {domain : DO_ACTIF, label :"Valeur", notNull:"false",},
 	field LIBELLE {domain : DO_LIBELLE, label : "Libell�", notNull : "true",},
 },
 
 create DtDefinition DT_REFERENTIEL_CRITERE {
-    persistent : "false",
-	field REFERENTIEL_NAME {domain : DO_LIBELLE, label : "R�f�rentiel", notNull : "true",},
+    field REFERENTIEL_NAME {domain : DO_LIBELLE, label : "R�f�rentiel", notNull : "true",},
 },
 
 
 create DtDefinition DT_REFERENTIEL_CHOICE {
-    persistent : "true",
-	key REFERENTIEL_NAME {domain : DO_LIBELLE, label :"R�f�rentiel", notNull:"true",},
+  	key REFERENTIEL_NAME {domain : DO_LIBELLE, label :"R�f�rentiel", notNull:"true",},
 	field LIBELLE {domain : DO_LIBELLE, label :"R�f�rentiel", notNull:"true",},	
 },

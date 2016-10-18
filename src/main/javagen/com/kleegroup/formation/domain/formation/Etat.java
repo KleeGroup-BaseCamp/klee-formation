@@ -1,15 +1,14 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
-import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.model.Entity;
+import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Etat
  */
-@DtDefinition
-public final class Etat implements DtObject {
+public final class Etat implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -17,6 +16,12 @@ public final class Etat implements DtObject {
 	private String etaCode;
 	private String libelle;
 
+	/** {@inheritDoc} */
+	@Override
+	public URI<Etat> getURI() {
+		return DtObjectUtil.createURI(this);
+	}
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Code'. 

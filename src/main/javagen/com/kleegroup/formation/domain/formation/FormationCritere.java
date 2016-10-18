@@ -1,6 +1,5 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -8,7 +7,6 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  * Attention cette classe est générée automatiquement !
  * Objet de données FormationCritere
  */
-@DtDefinition(persistent = false)
 public final class FormationCritere implements DtObject {
 
 	/** SerialVersionUID. */
@@ -17,12 +15,13 @@ public final class FormationCritere implements DtObject {
 	private String intitule;
 	private String nivCode;
 
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Libellé court'. 
 	 * @return String intitule 
 	 */
-	@Field(domain = "DO_LIBELLE_COURT", persistent = false, label = "Libellé court")
+	@Field(domain = "DO_LIBELLE_COURT", label = "Libellé court")
 	public String getIntitule() {
 		return intitule;
 	}
@@ -41,7 +40,7 @@ public final class FormationCritere implements DtObject {
 	 * Récupère la valeur de la propriété 'Code'. 
 	 * @return String nivCode 
 	 */
-	@Field(domain = "DO_CODE", persistent = false, label = "Code")
+	@Field(domain = "DO_CODE", label = "Code")
 	public String getNivCode() {
 		return nivCode;
 	}

@@ -1,15 +1,14 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
-import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.model.Entity;
+import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Niveau
  */
-@DtDefinition
-public final class Niveau implements DtObject {
+public final class Niveau implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -17,6 +16,12 @@ public final class Niveau implements DtObject {
 	private String nivCode;
 	private String libelle;
 
+	/** {@inheritDoc} */
+	@Override
+	public URI<Niveau> getURI() {
+		return DtObjectUtil.createURI(this);
+	}
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Niv_Code'. 

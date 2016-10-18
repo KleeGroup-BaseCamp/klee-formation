@@ -1,6 +1,5 @@
 package com.kleegroup.formation.domain.session;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -8,7 +7,6 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  * Attention cette classe est générée automatiquement !
  * Objet de données SessionView
  */
-@DtDefinition(persistent = false)
 public final class SessionView implements DtObject {
 
 	/** SerialVersionUID. */
@@ -26,12 +24,13 @@ public final class SessionView implements DtObject {
 	private String statusUtilisateur;
 	private java.math.BigDecimal satisfaction;
 
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SesId'. 
 	 * @return Long sesId 
 	 */
-	@Field(domain = "DO_IDENTIFIANT", persistent = false, label = "SesId")
+	@Field(domain = "DO_IDENTIFIANT", label = "SesId")
 	public Long getSesId() {
 		return sesId;
 	}
@@ -50,7 +49,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Libellé court'. 
 	 * @return String formationName 
 	 */
-	@Field(domain = "DO_LIBELLE_COURT", persistent = false, label = "Libellé court")
+	@Field(domain = "DO_LIBELLE_COURT", label = "Libellé court")
 	public String getFormationName() {
 		return formationName;
 	}
@@ -69,7 +68,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Début'. 
 	 * @return java.util.Date dateDebut 
 	 */
-	@Field(domain = "DO_DATE", persistent = false, label = "Début")
+	@Field(domain = "DO_DATE", label = "Début")
 	public java.util.Date getDateDebut() {
 		return dateDebut;
 	}
@@ -88,7 +87,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Fin'. 
 	 * @return java.util.Date dateFin 
 	 */
-	@Field(domain = "DO_DATE", persistent = false, label = "Fin")
+	@Field(domain = "DO_DATE", label = "Fin")
 	public java.util.Date getDateFin() {
 		return dateFin;
 	}
@@ -107,7 +106,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Horaires'. 
 	 * @return String horaires 
 	 */
-	@Field(domain = "DO_LIBELLE_LONG", persistent = false, label = "Horaires")
+	@Field(domain = "DO_LIBELLE_LONG", label = "Horaires")
 	public String getHoraires() {
 		return horaires;
 	}
@@ -126,7 +125,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Durée'. 
 	 * @return Long duree 
 	 */
-	@Field(domain = "DO_IDENTIFIANT", persistent = false, label = "Durée")
+	@Field(domain = "DO_IDENTIFIANT", label = "Durée")
 	public Long getDuree() {
 		return duree;
 	}
@@ -145,7 +144,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Niveau'. 
 	 * @return String niveau 
 	 */
-	@Field(domain = "DO_LIBELLE_COURT", persistent = false, label = "Niveau")
+	@Field(domain = "DO_LIBELLE_COURT", label = "Niveau")
 	public String getNiveau() {
 		return niveau;
 	}
@@ -164,7 +163,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Descriptif'. 
 	 * @return String commentaire 
 	 */
-	@Field(domain = "DO_LIBELLE_LONG", persistent = false, label = "Descriptif")
+	@Field(domain = "DO_LIBELLE_LONG", label = "Descriptif")
 	public String getCommentaire() {
 		return commentaire;
 	}
@@ -183,7 +182,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Etat'. 
 	 * @return String status 
 	 */
-	@Field(domain = "DO_LIBELLE_COURT", persistent = false, label = "Etat")
+	@Field(domain = "DO_LIBELLE_COURT", label = "Etat")
 	public String getStatus() {
 		return status;
 	}
@@ -202,7 +201,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Etat'. 
 	 * @return String statusUtilisateur 
 	 */
-	@Field(domain = "DO_LIBELLE_COURT", persistent = false, label = "Etat")
+	@Field(domain = "DO_LIBELLE_COURT", label = "Etat")
 	public String getStatusUtilisateur() {
 		return statusUtilisateur;
 	}
@@ -221,7 +220,7 @@ public final class SessionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Satisfaction'. 
 	 * @return java.math.BigDecimal satisfaction 
 	 */
-	@Field(domain = "DO_STATIQUE", persistent = false, label = "Satisfaction")
+	@Field(domain = "DO_STATIQUE", label = "Satisfaction")
 	public java.math.BigDecimal getSatisfaction() {
 		return satisfaction;
 	}

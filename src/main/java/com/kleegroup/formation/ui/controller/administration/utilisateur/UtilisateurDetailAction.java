@@ -19,7 +19,7 @@ import com.kleegroup.formation.ui.controller.menu.Menu;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
-import io.vertigo.lang.Option;
+import java.util.Optional;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextRef;
@@ -48,7 +48,7 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 	/**
 	 * @param utiId Id de l'élément a afficher.
 	 */
-	public void initContext(@Named("utiId") final Option<Long> utiId) {
+	public void initContext(@Named("utiId") final Optional<Long> utiId) {
 		SecurityUtil.checkRole(com.kleegroup.formation.security.Role.R_ADMIN, com.kleegroup.formation.security.Role.R_RESPONSSABLE);
 		//-----
 		if (utiId.isPresent()) {

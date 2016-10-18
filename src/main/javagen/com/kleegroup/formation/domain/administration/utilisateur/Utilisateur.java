@@ -1,15 +1,14 @@
 package com.kleegroup.formation.domain.administration.utilisateur;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
-import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.model.Entity;
+import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Utilisateur
  */
-@DtDefinition
-public final class Utilisateur implements DtObject {
+public final class Utilisateur implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -24,6 +23,12 @@ public final class Utilisateur implements DtObject {
 	private io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Login> login;
 	private io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Role> role;
 
+	/** {@inheritDoc} */
+	@Override
+	public URI<Utilisateur> getURI() {
+		return DtObjectUtil.createURI(this);
+	}
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'UTI_ID'. 
@@ -191,20 +196,6 @@ public final class Utilisateur implements DtObject {
 	 * Association : Login.
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Login>
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_UTI_LOG",
-    	fkFieldName = "UTI_ID",
-    	primaryDtDefinitionName = "DT_UTILISATEUR",
-    	primaryIsNavigable = false,
-    	primaryRole = "Utilisateur",
-    	primaryLabel = "Utilisateur",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_LOGIN",
-    	foreignIsNavigable = true,
-    	foreignRole = "Login",
-    	foreignLabel = "Login",
-    	foreignMultiplicity = "0..*"
-    )
 	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Login> getLoginList() {
 //		return this.<com.kleegroup.formation.domain.administration.utilisateur.Login> getList(getLoginListURI());
 		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide
@@ -250,18 +241,6 @@ public final class Utilisateur implements DtObject {
 	 * Association : Rôle.
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Role>
 	 */
-    @io.vertigo.dynamo.domain.stereotype.AssociationNN (
-    	name = "ANN_UTI_ROL",
-    	tableName = "UTI_ROL",
-    	dtDefinitionA = "DT_UTILISATEUR",
-    	dtDefinitionB = "DT_ROLE",
-    	navigabilityA = false,
-    	navigabilityB = true,
-    	roleA = "Utilisateur",
-    	roleB = "Role",
-    	labelA = "Utilisateur",
-    	labelB = "Rôle"
-    )
 	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Role> getRoleList() {
 //		return this.<com.kleegroup.formation.domain.administration.utilisateur.Role> getList(getRoleListURI());
 		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide

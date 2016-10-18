@@ -9,7 +9,7 @@ import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
-import io.vertigo.lang.Option;
+import java.util.Optional;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextMdl;
 
@@ -29,7 +29,7 @@ public final class CatalogueDetailAction extends AbstractKleeFormationActionSupp
 	/**
 	 * @param forId Id de l'élément a afficher.
 	 */
-	public void initContext(@Named("forId") final Option<Long> forId) {
+	public void initContext(@Named("forId") final Optional<Long> forId) {
 		if (forId.isPresent()) {
 			formation.publish(formationServices.loadFormation(forId.get()));
 		} else {

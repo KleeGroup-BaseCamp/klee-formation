@@ -11,7 +11,7 @@ import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
-import io.vertigo.lang.Option;
+import java.util.Optional;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextRef;
@@ -32,7 +32,7 @@ public final class UtilisateurAction extends AbstractKleeFormationActionSupport 
 	private final ContextForm<Inscription> inscriptionForm = new ContextForm<>("inscription", this);
 	private final ContextList<Utilisateur> utilisateurs = new ContextList<>("utilisateurs", this);
 
-	public void initContext(@Named("sesId") final Option<Long> sesId) {
+	public void initContext(@Named("sesId") final Optional<Long> sesId) {
 		final UtilisateurCritere utilisateurcritere = new UtilisateurCritere();
 		utilisateurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurcritere));
 		inscriptionForm.publish(new Inscription());

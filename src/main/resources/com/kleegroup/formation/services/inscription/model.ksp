@@ -1,7 +1,6 @@
 package com.kleegroup.formation.domain.inscription
 
 create DtDefinition DT_INSCRIPTION_VIEW {
-    persistent : "false"
     field SES_ID {domain : DO_IDENTIFIANT, label : "SesId", notNull : "false"}
 	field FORMATION_NAME {domain : DO_LIBELLE_COURT, label : "Libellé court", notNull : "false"}
 	field DATE_DEBUT {domain : DO_DATE_MINUTE, label : "Début", notNull : "false"}

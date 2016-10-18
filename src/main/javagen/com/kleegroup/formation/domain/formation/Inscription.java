@@ -1,15 +1,14 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
-import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.model.Entity;
+import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Inscription
  */
-@DtDefinition
-public final class Inscription implements DtObject {
+public final class Inscription implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -32,6 +31,12 @@ public final class Inscription implements DtObject {
 	private com.kleegroup.formation.domain.formation.SessionFormation sessionFormation;
 	private com.kleegroup.formation.domain.administration.utilisateur.Utilisateur utilisateur;
 
+	/** {@inheritDoc} */
+	@Override
+	public URI<Inscription> getURI() {
+		return DtObjectUtil.createURI(this);
+	}
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'INS_ID'. 
@@ -321,20 +326,6 @@ public final class Inscription implements DtObject {
 	 * Association : Session formation.
 	 * @return com.kleegroup.formation.domain.formation.SessionFormation
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_LCO_CMD",
-    	fkFieldName = "SES_ID",
-    	primaryDtDefinitionName = "DT_SESSION_FORMATION",
-    	primaryIsNavigable = true,
-    	primaryRole = "SessionFormation",
-    	primaryLabel = "Session formation",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_INSCRIPTION",
-    	foreignIsNavigable = true,
-    	foreignRole = "Inscription",
-    	foreignLabel = "Inscription",
-    	foreignMultiplicity = "0..*"
-    )
 	public com.kleegroup.formation.domain.formation.SessionFormation getSessionFormation() {
 		final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.SessionFormation> fkURI = getSessionFormationURI();
 		if (fkURI == null) {
@@ -343,9 +334,7 @@ public final class Inscription implements DtObject {
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
 		if (sessionFormation != null) {
 			// On s'assure que l'objet correspond à la bonne clé
-			final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.SessionFormation> uri;
-			uri = new io.vertigo.dynamo.domain.model.URI<>(io.vertigo.dynamo.domain.util.DtObjectUtil.findDtDefinition(sessionFormation), io.vertigo.dynamo.domain.util.DtObjectUtil.getId(sessionFormation));
-			if (!fkURI.urn().equals(uri.urn())) {
+			if (!fkURI.equals(sessionFormation.getURI())) {
 				sessionFormation = null;
 			}
 		}		
@@ -380,20 +369,6 @@ public final class Inscription implements DtObject {
 	 * Association : Utilisateur.
 	 * @return com.kleegroup.formation.domain.administration.utilisateur.Utilisateur
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ASSOCIATION3",
-    	fkFieldName = "UTI_ID",
-    	primaryDtDefinitionName = "DT_UTILISATEUR",
-    	primaryIsNavigable = true,
-    	primaryRole = "Utilisateur",
-    	primaryLabel = "Utilisateur",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_INSCRIPTION",
-    	foreignIsNavigable = false,
-    	foreignRole = "Inscription",
-    	foreignLabel = "Inscription",
-    	foreignMultiplicity = "0..*"
-    )
 	public com.kleegroup.formation.domain.administration.utilisateur.Utilisateur getUtilisateur() {
 		final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> fkURI = getUtilisateurURI();
 		if (fkURI == null) {
@@ -402,9 +377,7 @@ public final class Inscription implements DtObject {
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
 		if (utilisateur != null) {
 			// On s'assure que l'objet correspond à la bonne clé
-			final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> uri;
-			uri = new io.vertigo.dynamo.domain.model.URI<>(io.vertigo.dynamo.domain.util.DtObjectUtil.findDtDefinition(utilisateur), io.vertigo.dynamo.domain.util.DtObjectUtil.getId(utilisateur));
-			if (!fkURI.urn().equals(uri.urn())) {
+			if (!fkURI.equals(utilisateur.getURI())) {
 				utilisateur = null;
 			}
 		}		

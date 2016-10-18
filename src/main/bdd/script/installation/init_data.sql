@@ -35,7 +35,7 @@ VALUES (
 	1, 'Administrateur', '--', 'npiedeloup@kleegroup.com');
 
 INSERT INTO LOGIN (LOG_ID, LOGIN, PASSWORD, UTI_ID)
-VALUES (1,'admin', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij-IX290SyiX9TxlKsbQ=', 1);
+VALUES (1,'admin', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij_IX290SyiX9TxlKsbQ=', 1);
 
 
 INSERT INTO UTILISATEUR (
@@ -45,7 +45,7 @@ VALUES (
 	2, 'Moutte', 'Camille', 'moutte.camille@kleegroup.com');
 
 INSERT INTO LOGIN (LOG_ID, LOGIN, PASSWORD, UTI_ID)
-VALUES (2,'camille', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij-IX290SyiX9TxlKsbQ=', 2);
+VALUES (2,'camille', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij_IX290SyiX9TxlKsbQ=', 2);
 
 INSERT INTO UTILISATEUR (
 	UTI_ID, NOM, PRENOM,
@@ -54,7 +54,7 @@ VALUES (
 	3, 'utilisateur', 'utilisateur', 'utilisateure@kleegroup.com');
 
 INSERT INTO LOGIN (LOG_ID, LOGIN, PASSWORD, UTI_ID)
-VALUES (3,'utilisateur', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij-IX290SyiX9TxlKsbQ=', 3);
+VALUES (3,'utilisateur', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij_IX290SyiX9TxlKsbQ=', 3);
 
 
 
@@ -65,7 +65,7 @@ VALUES (
 	4, 'admin', 'admin', 'admin@kleegroup.com');
 
 INSERT INTO LOGIN (LOG_ID, LOGIN, PASSWORD, UTI_ID)
-VALUES (4,'Admin', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij-IX290SyiX9TxlKsbQ=', 4);
+VALUES (4,'Admin', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij_IX290SyiX9TxlKsbQ=', 4);
 
 INSERT INTO UTILISATEUR (
 	UTI_ID, NOM, PRENOM,
@@ -74,7 +74,7 @@ VALUES (
 	5, 'formateur', 'formateur', 'formateur@kleegroup.com');
 
 INSERT INTO LOGIN (LOG_ID, LOGIN, PASSWORD, UTI_ID)
-VALUES (5,'formateur', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij-IX290SyiX9TxlKsbQ=', 5);
+VALUES (5,'formateur', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij_IX290SyiX9TxlKsbQ=', 5);
 
 
 INSERT INTO UTILISATEUR (
@@ -84,7 +84,7 @@ VALUES (
 	6, 'responsable', 'responsable', 'responsable@kleegroup.com');
 
 INSERT INTO LOGIN (LOG_ID, LOGIN, PASSWORD, UTI_ID)
-VALUES (6,'responsable', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij-IX290SyiX9TxlKsbQ=', 6);
+VALUES (6,'responsable', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij_IX290SyiX9TxlKsbQ=', 6);
 
 
 /*==============================================================*/

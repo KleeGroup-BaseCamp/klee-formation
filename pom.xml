@@ -13,7 +13,7 @@
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<maven.test.error.ignore>true</maven.test.error.ignore>
 		<project.build.sourceEncoding>utf8</project.build.sourceEncoding>
-		<vertigo.version>0.9.2</vertigo.version>
+		<vertigo.version>0.9.3</vertigo.version>
 	</properties>
 
 	<name>KleeFormation</name>
@@ -99,7 +99,6 @@
 			<groupId>org.codehaus.janino</groupId>
 			<artifactId>janino</artifactId>
 			<version>2.7.8</version>
-			<optional>false</optional><!-- pour JaninoExpressionEvaluatorPlugin -->
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -111,19 +110,17 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-core</artifactId>
-			<version>4.10.4</version> <!-- 4.10.4 compatible with ElasticSearch 1.5.2 -->
-			<optional>true</optional>
+			<version>5.5.0</version>			
 		</dependency>
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-analyzers-common</artifactId>
-			<version>4.10.4</version> <!-- 4.10.4 compatible with ElasticSearch 1.5.2 -->
-			<optional>true</optional>
+			<version>5.5.0</version>						
 		</dependency>
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-queryparser</artifactId>
-			<version>4.10.4</version>
+			<version>5.5.0</version>			
 		</dependency>
 
 

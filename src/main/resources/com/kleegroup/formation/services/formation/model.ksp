@@ -1,8 +1,7 @@
 package com.kleegroup.formation.domain.formation
 
 create DtDefinition DT_FORMATION_CRITERE {
-    persistent : "false"
-	field INTITULE {domain : DO_LIBELLE_COURT, label : "Libellé court", notNull : "false"}
+    field INTITULE {domain : DO_LIBELLE_COURT, label : "Libellé court", notNull : "false"}
 	field NIV_CODE {domain : DO_CODE, label : "Code", notNull : "false"}
 }
 

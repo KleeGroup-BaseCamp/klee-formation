@@ -1,15 +1,14 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
-import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.model.Entity;
+import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Horaires
  */
-@DtDefinition
-public final class Horaires implements DtObject {
+public final class Horaires implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -22,6 +21,12 @@ public final class Horaires implements DtObject {
 	private Integer finAprem;
 	private Long sesId;
 
+	/** {@inheritDoc} */
+	@Override
+	public URI<Horaires> getURI() {
+		return DtObjectUtil.createURI(this);
+	}
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'DatId'. 

@@ -1,15 +1,14 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
-import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.model.Entity;
+import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données SessionFormation
  */
-@DtDefinition
-public final class SessionFormation implements DtObject {
+public final class SessionFormation implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -36,6 +35,12 @@ public final class SessionFormation implements DtObject {
 	private com.kleegroup.formation.domain.administration.utilisateur.Utilisateur utilisateur;
 	private com.kleegroup.formation.domain.formation.EtatSessionUtilisateur etatSessionUtilisateur;
 
+	/** {@inheritDoc} */
+	@Override
+	public URI<SessionFormation> getURI() {
+		return DtObjectUtil.createURI(this);
+	}
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'. 
@@ -325,20 +330,6 @@ public final class SessionFormation implements DtObject {
 	 * Association : Inscription.
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription>
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_LCO_CMD",
-    	fkFieldName = "SES_ID",
-    	primaryDtDefinitionName = "DT_SESSION_FORMATION",
-    	primaryIsNavigable = true,
-    	primaryRole = "SessionFormation",
-    	primaryLabel = "Session formation",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_INSCRIPTION",
-    	foreignIsNavigable = true,
-    	foreignRole = "Inscription",
-    	foreignLabel = "Inscription",
-    	foreignMultiplicity = "0..*"
-    )
 	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> getInscriptionList() {
 //		return this.<com.kleegroup.formation.domain.formation.Inscription> getList(getInscriptionListURI());
 		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide
@@ -380,20 +371,6 @@ public final class SessionFormation implements DtObject {
 	 * Association : Formation.
 	 * @return com.kleegroup.formation.domain.formation.Formation
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_FOR_SES",
-    	fkFieldName = "FOR_ID",
-    	primaryDtDefinitionName = "DT_FORMATION",
-    	primaryIsNavigable = true,
-    	primaryRole = "Formation",
-    	primaryLabel = "Formation",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_SESSION_FORMATION",
-    	foreignIsNavigable = true,
-    	foreignRole = "SessionFormation",
-    	foreignLabel = "Session formation",
-    	foreignMultiplicity = "0..*"
-    )
 	public com.kleegroup.formation.domain.formation.Formation getFormation() {
 		final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Formation> fkURI = getFormationURI();
 		if (fkURI == null) {
@@ -402,9 +379,7 @@ public final class SessionFormation implements DtObject {
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
 		if (formation != null) {
 			// On s'assure que l'objet correspond à la bonne clé
-			final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Formation> uri;
-			uri = new io.vertigo.dynamo.domain.model.URI<>(io.vertigo.dynamo.domain.util.DtObjectUtil.findDtDefinition(formation), io.vertigo.dynamo.domain.util.DtObjectUtil.getId(formation));
-			if (!fkURI.urn().equals(uri.urn())) {
+			if (!fkURI.equals(formation.getURI())) {
 				formation = null;
 			}
 		}		
@@ -439,20 +414,6 @@ public final class SessionFormation implements DtObject {
 	 * Association : Etat.
 	 * @return com.kleegroup.formation.domain.formation.Etat
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ASSOCIATION5",
-    	fkFieldName = "ETA_CODE",
-    	primaryDtDefinitionName = "DT_ETAT",
-    	primaryIsNavigable = true,
-    	primaryRole = "Etat",
-    	primaryLabel = "Etat",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_SESSION_FORMATION",
-    	foreignIsNavigable = false,
-    	foreignRole = "SessionFormation",
-    	foreignLabel = "Session formation",
-    	foreignMultiplicity = "0..*"
-    )
 	public com.kleegroup.formation.domain.formation.Etat getEtat() {
 		final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Etat> fkURI = getEtatURI();
 		if (fkURI == null) {
@@ -461,9 +422,7 @@ public final class SessionFormation implements DtObject {
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
 		if (etat != null) {
 			// On s'assure que l'objet correspond à la bonne clé
-			final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Etat> uri;
-			uri = new io.vertigo.dynamo.domain.model.URI<>(io.vertigo.dynamo.domain.util.DtObjectUtil.findDtDefinition(etat), io.vertigo.dynamo.domain.util.DtObjectUtil.getId(etat));
-			if (!fkURI.urn().equals(uri.urn())) {
+			if (!fkURI.equals(etat.getURI())) {
 				etat = null;
 			}
 		}		
@@ -498,20 +457,6 @@ public final class SessionFormation implements DtObject {
 	 * Association : Horaires.
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Horaires>
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ASSOCIATION7",
-    	fkFieldName = "SES_ID",
-    	primaryDtDefinitionName = "DT_SESSION_FORMATION",
-    	primaryIsNavigable = false,
-    	primaryRole = "SessionFormation",
-    	primaryLabel = "Session formation",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_HORAIRES",
-    	foreignIsNavigable = true,
-    	foreignRole = "Horaires",
-    	foreignLabel = "Horaires",
-    	foreignMultiplicity = "0..*"
-    )
 	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Horaires> getHorairesList() {
 //		return this.<com.kleegroup.formation.domain.formation.Horaires> getList(getHorairesListURI());
 		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide
@@ -553,20 +498,6 @@ public final class SessionFormation implements DtObject {
 	 * Association : Utilisateur.
 	 * @return com.kleegroup.formation.domain.administration.utilisateur.Utilisateur
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_UTI_SES",
-    	fkFieldName = "UTI_ID",
-    	primaryDtDefinitionName = "DT_UTILISATEUR",
-    	primaryIsNavigable = true,
-    	primaryRole = "Utilisateur",
-    	primaryLabel = "Utilisateur",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_SESSION_FORMATION",
-    	foreignIsNavigable = false,
-    	foreignRole = "SessionFormation",
-    	foreignLabel = "Session formation",
-    	foreignMultiplicity = "0..*"
-    )
 	public com.kleegroup.formation.domain.administration.utilisateur.Utilisateur getUtilisateur() {
 		final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> fkURI = getUtilisateurURI();
 		if (fkURI == null) {
@@ -575,9 +506,7 @@ public final class SessionFormation implements DtObject {
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
 		if (utilisateur != null) {
 			// On s'assure que l'objet correspond à la bonne clé
-			final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> uri;
-			uri = new io.vertigo.dynamo.domain.model.URI<>(io.vertigo.dynamo.domain.util.DtObjectUtil.findDtDefinition(utilisateur), io.vertigo.dynamo.domain.util.DtObjectUtil.getId(utilisateur));
-			if (!fkURI.urn().equals(uri.urn())) {
+			if (!fkURI.equals(utilisateur.getURI())) {
 				utilisateur = null;
 			}
 		}		
@@ -612,20 +541,6 @@ public final class SessionFormation implements DtObject {
 	 * Association : Etat session utilisateur.
 	 * @return com.kleegroup.formation.domain.formation.EtatSessionUtilisateur
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ESUSES",
-    	fkFieldName = "ESU_CODE",
-    	primaryDtDefinitionName = "DT_ETAT_SESSION_UTILISATEUR",
-    	primaryIsNavigable = true,
-    	primaryRole = "EtatSessionUtilisateur",
-    	primaryLabel = "Etat session utilisateur",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_SESSION_FORMATION",
-    	foreignIsNavigable = false,
-    	foreignRole = "SessionFormation",
-    	foreignLabel = "Session formation",
-    	foreignMultiplicity = "0..*"
-    )
 	public com.kleegroup.formation.domain.formation.EtatSessionUtilisateur getEtatSessionUtilisateur() {
 		final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.EtatSessionUtilisateur> fkURI = getEtatSessionUtilisateurURI();
 		if (fkURI == null) {
@@ -634,9 +549,7 @@ public final class SessionFormation implements DtObject {
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
 		if (etatSessionUtilisateur != null) {
 			// On s'assure que l'objet correspond à la bonne clé
-			final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.EtatSessionUtilisateur> uri;
-			uri = new io.vertigo.dynamo.domain.model.URI<>(io.vertigo.dynamo.domain.util.DtObjectUtil.findDtDefinition(etatSessionUtilisateur), io.vertigo.dynamo.domain.util.DtObjectUtil.getId(etatSessionUtilisateur));
-			if (!fkURI.urn().equals(uri.urn())) {
+			if (!fkURI.equals(etatSessionUtilisateur.getURI())) {
 				etatSessionUtilisateur = null;
 			}
 		}		

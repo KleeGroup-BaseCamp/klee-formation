@@ -1,6 +1,5 @@
 package com.kleegroup.formation.domain.administration.utilisateur;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -8,7 +7,6 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  * Attention cette classe est générée automatiquement !
  * Objet de données UtilisateurCritere
  */
-@DtDefinition(persistent = false)
 public final class UtilisateurCritere implements DtObject {
 
 	/** SerialVersionUID. */
@@ -20,12 +18,13 @@ public final class UtilisateurCritere implements DtObject {
 	private String role;
 	private Boolean isActif;
 
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'. 
 	 * @return String nom 
 	 */
-	@Field(domain = "DO_LIBELLE", persistent = false, label = "Nom")
+	@Field(domain = "DO_LIBELLE", label = "Nom")
 	public String getNom() {
 		return nom;
 	}
@@ -44,7 +43,7 @@ public final class UtilisateurCritere implements DtObject {
 	 * Récupère la valeur de la propriété 'Nom'. 
 	 * @return String prenom 
 	 */
-	@Field(domain = "DO_LIBELLE", persistent = false, label = "Nom")
+	@Field(domain = "DO_LIBELLE", label = "Nom")
 	public String getPrenom() {
 		return prenom;
 	}
@@ -63,7 +62,7 @@ public final class UtilisateurCritere implements DtObject {
 	 * Récupère la valeur de la propriété 'Indentifiant'. 
 	 * @return String login 
 	 */
-	@Field(domain = "DO_LOGIN", persistent = false, label = "Indentifiant")
+	@Field(domain = "DO_LOGIN", label = "Indentifiant")
 	public String getLogin() {
 		return login;
 	}
@@ -82,7 +81,7 @@ public final class UtilisateurCritere implements DtObject {
 	 * Récupère la valeur de la propriété 'Rôle'. 
 	 * @return String role 
 	 */
-	@Field(domain = "DO_LIBELLE", persistent = false, label = "Rôle")
+	@Field(domain = "DO_LIBELLE", label = "Rôle")
 	public String getRole() {
 		return role;
 	}
@@ -101,7 +100,7 @@ public final class UtilisateurCritere implements DtObject {
 	 * Récupère la valeur de la propriété 'Seulement les utilisateurs actifs'. 
 	 * @return Boolean isActif 
 	 */
-	@Field(domain = "DO_ACTIF", persistent = false, label = "Seulement les utilisateurs actifs")
+	@Field(domain = "DO_ACTIF", label = "Seulement les utilisateurs actifs")
 	public Boolean getIsActif() {
 		return isActif;
 	}

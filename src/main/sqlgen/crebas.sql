@@ -95,7 +95,6 @@ comment on column FORMATION.COMMENTAIRE is
 comment on column FORMATION.NIV_CODE is
 'Niveau';
 
-create index FORMATION_NIV_CODE_FK on FORMATION (NIV_CODE asc);
 -- ============================================================
 --   Table : HORAIRES                                        
 -- ============================================================
@@ -132,7 +131,6 @@ comment on column HORAIRES.FIN_APREM is
 comment on column HORAIRES.SES_ID is
 'Session formation';
 
-create index HORAIRES_SES_ID_FK on HORAIRES (SES_ID asc);
 -- ============================================================
 --   Table : INSCRIPTION                                        
 -- ============================================================
@@ -198,11 +196,9 @@ comment on column INSCRIPTION.ETAT is
 comment on column INSCRIPTION.SES_ID is
 'Session formation';
 
-create index INSCRIPTION_SES_ID_FK on INSCRIPTION (SES_ID asc);
 comment on column INSCRIPTION.UTI_ID is
 'Utilisateur';
 
-create index INSCRIPTION_UTI_ID_FK on INSCRIPTION (UTI_ID asc);
 -- ============================================================
 --   Table : LOGIN                                        
 -- ============================================================
@@ -227,7 +223,6 @@ comment on column LOGIN.PASSWORD is
 comment on column LOGIN.UTI_ID is
 'Utilisateur';
 
-create index LOGIN_UTI_ID_FK on LOGIN (UTI_ID asc);
 -- ============================================================
 --   Table : NIVEAU                                        
 -- ============================================================
@@ -319,19 +314,15 @@ comment on column SESSION_FORMATION.LIEUX is
 comment on column SESSION_FORMATION.FOR_ID is
 'Formation';
 
-create index SESSION_FORMATION_FOR_ID_FK on SESSION_FORMATION (FOR_ID asc);
 comment on column SESSION_FORMATION.ETA_CODE is
 'Etat';
 
-create index SESSION_FORMATION_ETA_CODE_FK on SESSION_FORMATION (ETA_CODE asc);
 comment on column SESSION_FORMATION.UTI_ID is
 'Utilisateur';
 
-create index SESSION_FORMATION_UTI_ID_FK on SESSION_FORMATION (UTI_ID asc);
 comment on column SESSION_FORMATION.ESU_CODE is
 'Etat session utilisateur';
 
-create index SESSION_FORMATION_ESU_CODE_FK on SESSION_FORMATION (ESU_CODE asc);
 -- ============================================================
 --   Table : UTILISATEUR                                        
 -- ============================================================
@@ -369,6 +360,62 @@ comment on column UTILISATEUR.FORMATEUR is
 'formateur';
 
 
+
+alter table INSCRIPTION
+	add constraint FK_ASSOCIATION3_UTILISATEUR foreign key (UTI_ID)
+	references UTILISATEUR (UTI_ID);
+
+create index ASSOCIATION3_UTILISATEUR_FK on INSCRIPTION (UTI_ID asc);
+
+alter table SESSION_FORMATION
+	add constraint FK_ASSOCIATION5_ETAT foreign key (ETA_CODE)
+	references ETAT (ETA_CODE);
+
+create index ASSOCIATION5_ETAT_FK on SESSION_FORMATION (ETA_CODE asc);
+
+alter table FORMATION
+	add constraint FK_ASSOCIATION6_NIVEAU foreign key (NIV_CODE)
+	references NIVEAU (NIV_CODE);
+
+create index ASSOCIATION6_NIVEAU_FK on FORMATION (NIV_CODE asc);
+
+alter table HORAIRES
+	add constraint FK_ASSOCIATION7_SESSION_FORMATION foreign key (SES_ID)
+	references SESSION_FORMATION (SES_ID);
+
+create index ASSOCIATION7_SESSION_FORMATION_FK on HORAIRES (SES_ID asc);
+
+alter table SESSION_FORMATION
+	add constraint FK_ESUSES_ETAT_SESSION_UTILISATEUR foreign key (ESU_CODE)
+	references ETAT_SESSION_UTILISATEUR (ESU_CODE);
+
+create index ESUSES_ETAT_SESSION_UTILISATEUR_FK on SESSION_FORMATION (ESU_CODE asc);
+
+alter table SESSION_FORMATION
+	add constraint FK_FOR_SES_FORMATION foreign key (FOR_ID)
+	references FORMATION (FOR_ID);
+
+create index FOR_SES_FORMATION_FK on SESSION_FORMATION (FOR_ID asc);
+
+alter table INSCRIPTION
+	add constraint FK_LCO_CMD_SESSION_FORMATION foreign key (SES_ID)
+	references SESSION_FORMATION (SES_ID);
+
+create index LCO_CMD_SESSION_FORMATION_FK on INSCRIPTION (SES_ID asc);
+
+alter table LOGIN
+	add constraint FK_UTI_LOG_UTILISATEUR foreign key (UTI_ID)
+	references UTILISATEUR (UTI_ID);
+
+create index UTI_LOG_UTILISATEUR_FK on LOGIN (UTI_ID asc);
+
+alter table SESSION_FORMATION
+	add constraint FK_UTI_SES_UTILISATEUR foreign key (UTI_ID)
+	references UTILISATEUR (UTI_ID);
+
+create index UTI_SES_UTILISATEUR_FK on SESSION_FORMATION (UTI_ID asc);
+
+
 create table UTI_ROL
 (
 	UTI_ID      	 BIGINT      	 not null,
@@ -385,41 +432,4 @@ create table UTI_ROL
 create index UTI_ROL_UTILISATEUR_FK on UTI_ROL (UTI_ID asc);
 
 create index UTI_ROL_ROLE_FK on UTI_ROL (ROL_CODE asc);
-
-
-alter table INSCRIPTION
-	add constraint FK_ASSOCIATION3 foreign key (UTI_ID)
-	references UTILISATEUR (UTI_ID);
-
-alter table SESSION_FORMATION
-	add constraint FK_ASSOCIATION5 foreign key (ETA_CODE)
-	references ETAT (ETA_CODE);
-
-alter table FORMATION
-	add constraint FK_ASSOCIATION6 foreign key (NIV_CODE)
-	references NIVEAU (NIV_CODE);
-
-alter table HORAIRES
-	add constraint FK_ASSOCIATION7 foreign key (SES_ID)
-	references SESSION_FORMATION (SES_ID);
-
-alter table SESSION_FORMATION
-	add constraint FK_ESUSES foreign key (ESU_CODE)
-	references ETAT_SESSION_UTILISATEUR (ESU_CODE);
-
-alter table SESSION_FORMATION
-	add constraint FK_FOR_SES foreign key (FOR_ID)
-	references FORMATION (FOR_ID);
-
-alter table INSCRIPTION
-	add constraint FK_LCO_CMD foreign key (SES_ID)
-	references SESSION_FORMATION (SES_ID);
-
-alter table LOGIN
-	add constraint FK_UTI_LOG foreign key (UTI_ID)
-	references UTILISATEUR (UTI_ID);
-
-alter table SESSION_FORMATION
-	add constraint FK_UTI_SES foreign key (UTI_ID)
-	references UTILISATEUR (UTI_ID);
 

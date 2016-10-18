@@ -26,7 +26,7 @@ import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.MessageText;
-import io.vertigo.lang.Option;
+import java.util.Optional;
 import io.vertigo.lang.VUserException;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
@@ -65,7 +65,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
 	private final ContextMdl<Utilisateur> utilisateurs = new ContextMdl<>("utilisateurs", this);
 
-	public void initContext(@Named("sesId") final Option<Long> sesId) {
+	public void initContext(@Named("sesId") final Optional<Long> sesId) {
 		niveaux.publish(Niveau.class, null);
 		utilisateurs.publish(Utilisateur.class, null);
 		if (sesId.isPresent()) {

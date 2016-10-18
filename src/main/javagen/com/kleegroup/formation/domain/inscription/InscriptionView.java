@@ -1,6 +1,5 @@
 package com.kleegroup.formation.domain.inscription;
 
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -8,7 +7,6 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  * Attention cette classe est générée automatiquement !
  * Objet de données InscriptionView
  */
-@DtDefinition(persistent = false)
 public final class InscriptionView implements DtObject {
 
 	/** SerialVersionUID. */
@@ -27,12 +25,13 @@ public final class InscriptionView implements DtObject {
 	private String nom;
 	private String prenom;
 
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SesId'. 
 	 * @return Long sesId 
 	 */
-	@Field(domain = "DO_IDENTIFIANT", persistent = false, label = "SesId")
+	@Field(domain = "DO_IDENTIFIANT", label = "SesId")
 	public Long getSesId() {
 		return sesId;
 	}
@@ -51,7 +50,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Libellé court'. 
 	 * @return String formationName 
 	 */
-	@Field(domain = "DO_LIBELLE_COURT", persistent = false, label = "Libellé court")
+	@Field(domain = "DO_LIBELLE_COURT", label = "Libellé court")
 	public String getFormationName() {
 		return formationName;
 	}
@@ -70,7 +69,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Début'. 
 	 * @return java.util.Date dateDebut 
 	 */
-	@Field(domain = "DO_DATE_MINUTE", persistent = false, label = "Début")
+	@Field(domain = "DO_DATE_MINUTE", label = "Début")
 	public java.util.Date getDateDebut() {
 		return dateDebut;
 	}
@@ -89,7 +88,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Fin'. 
 	 * @return java.util.Date dateFin 
 	 */
-	@Field(domain = "DO_DATE_MINUTE", persistent = false, label = "Fin")
+	@Field(domain = "DO_DATE_MINUTE", label = "Fin")
 	public java.util.Date getDateFin() {
 		return dateFin;
 	}
@@ -108,7 +107,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Horaires'. 
 	 * @return String horaires 
 	 */
-	@Field(domain = "DO_LIBELLE_LONG", persistent = false, label = "Horaires")
+	@Field(domain = "DO_LIBELLE_LONG", label = "Horaires")
 	public String getHoraires() {
 		return horaires;
 	}
@@ -127,7 +126,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Durée'. 
 	 * @return Long duree 
 	 */
-	@Field(domain = "DO_IDENTIFIANT", persistent = false, label = "Durée")
+	@Field(domain = "DO_IDENTIFIANT", label = "Durée")
 	public Long getDuree() {
 		return duree;
 	}
@@ -146,7 +145,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Niveau'. 
 	 * @return String niveau 
 	 */
-	@Field(domain = "DO_LIBELLE_COURT", persistent = false, label = "Niveau")
+	@Field(domain = "DO_LIBELLE_COURT", label = "Niveau")
 	public String getNiveau() {
 		return niveau;
 	}
@@ -165,7 +164,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Descriptif'. 
 	 * @return String commentaire 
 	 */
-	@Field(domain = "DO_LIBELLE_LONG", persistent = false, label = "Descriptif")
+	@Field(domain = "DO_LIBELLE_LONG", label = "Descriptif")
 	public String getCommentaire() {
 		return commentaire;
 	}
@@ -184,7 +183,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Satisfaction'. 
 	 * @return java.math.BigDecimal satisfaction 
 	 */
-	@Field(domain = "DO_STATIQUE", persistent = false, label = "Satisfaction")
+	@Field(domain = "DO_STATIQUE", label = "Satisfaction")
 	public java.math.BigDecimal getSatisfaction() {
 		return satisfaction;
 	}
@@ -203,7 +202,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Présence'. 
 	 * @return Boolean presence 
 	 */
-	@Field(domain = "DO_OUI_NON", persistent = false, label = "Présence")
+	@Field(domain = "DO_OUI_NON", label = "Présence")
 	public Boolean getPresence() {
 		return presence;
 	}
@@ -222,7 +221,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Nom'. 
 	 * @return String nom 
 	 */
-	@Field(domain = "DO_LIBELLE", persistent = false, label = "Nom")
+	@Field(domain = "DO_LIBELLE", label = "Nom")
 	public String getNom() {
 		return nom;
 	}
@@ -241,7 +240,7 @@ public final class InscriptionView implements DtObject {
 	 * Récupère la valeur de la propriété 'Prénom'. 
 	 * @return String prenom 
 	 */
-	@Field(domain = "DO_LIBELLE", persistent = false, label = "Prénom")
+	@Field(domain = "DO_LIBELLE", label = "Prénom")
 	public String getPrenom() {
 		return prenom;
 	}

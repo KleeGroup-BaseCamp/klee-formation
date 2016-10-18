@@ -1,7 +1,6 @@
 package com.kleegroup.formation.domain.session
 
 create DtDefinition DT_SESSION_VIEW {
-    persistent : "false"
     field SES_ID {domain : DO_IDENTIFIANT, label : "SesId", notNull : "false"}
 	field FORMATION_NAME {domain : DO_LIBELLE_COURT, label : "Libellé court", notNull : "false"}
 	field DATE_DEBUT {domain : DO_DATE, label : "Début", notNull : "false"}
@@ -17,8 +16,7 @@ create DtDefinition DT_SESSION_VIEW {
 
 
 create DtDefinition DT_CRITERE_SESSION {
-    persistent : "false"
-	field INTITULE {domain : DO_LIBELLE_COURT, label : "Libellé court", notNull : "false"}
+    field INTITULE {domain : DO_LIBELLE_COURT, label : "Libellé court", notNull : "false"}
 	
 }
 
