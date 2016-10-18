@@ -90,14 +90,6 @@ VALUES (6,'responsable', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij-IX290SyiX9TxlKsbQ=',
 /*==============================================================*/
 /* Table: UTI_ROL                                                  */
 /*==============================================================*/
-/*
-INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_REF_PAY_CONS');
-INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_REF_PAY_CREA');
-INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_REF_PAY_MODIF');
-INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_REF_PRF_CONS');
-INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_REF_PRF_CREA');
-INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_REF_PRF_MODIF');
-*/
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_ADMIN');
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_FORMATTEUR');
 INSERT INTO UTI_ROL (UTI_ID, ROL_CODE) VALUES (1, 'R_RESPONSSABLE');
