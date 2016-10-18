@@ -14,6 +14,7 @@
 		<maven.test.error.ignore>true</maven.test.error.ignore>
 		<project.build.sourceEncoding>utf8</project.build.sourceEncoding>
 		<vertigo.version>0.9.3</vertigo.version>
+		<vertigo-struts.version>0.9.3a</vertigo-struts.version>
 	</properties>
 
 	<name>KleeFormation</name>
@@ -57,7 +58,7 @@
 		<dependency>
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-struts2</artifactId>
-			<version>${vertigo.version}</version>
+			<version>${vertigo-struts.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertigo</groupId>
