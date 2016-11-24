@@ -3,10 +3,14 @@
 <s:include value="/jsp/include/pageHeader.jsp">
 	<s:param name="subtitle" value="param.subtitle" />
 </s:include>
-
 	<div class ="action">
-		<s:a action="Login" Class="logout">Déconnexion</s:a>
+		<a href="logout" Class="logout">${connectedUser.nom} ${connectedUser.prenom}</a>
 	</div>
+	
+	<%-- <div class ="action">
+		<a href="logout" Class="logout">${connectedUser.nom} ${connectedUser.prenom}</a>
+	</div> --%>
+	
 		<div class="container">
 <div id="header">
 <s:a action="VenirList" id="logo">

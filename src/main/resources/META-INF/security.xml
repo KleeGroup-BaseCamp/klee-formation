@@ -1,0 +1,9 @@
+<?xml version =	'1.0' encoding = 'ISO-8859-1'?>
+<config>
+
+	<module name="security" api="false">
+		<component class="com.kleegroup.formation.saml.SamlTokenManager"/>
+		<component class="com.kleegroup.formation.saml.SamlHelper" />
+		<component class="com.kleegroup.formation.saml.SamlFilter"/>
+	</module>
+</config>

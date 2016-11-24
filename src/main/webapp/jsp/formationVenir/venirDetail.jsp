@@ -92,7 +92,7 @@
 		<display:column  property="nom" title="Nom" sortable="true"/>
 		<display:column  property="prenom" title="Prénom" sortable="true"/>
 	</display:table>
-		
+	
 <s:form>
 <div class="button-bar">
 	<div class="right">

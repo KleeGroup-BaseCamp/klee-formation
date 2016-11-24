@@ -22,8 +22,20 @@
 		Task/MDM de execution.kpr -->
 	<context-param>
 		<param-name>boot.applicationConfiguration</param-name>
-		<param-value>/META-INF/managers.xml;/META-INF/kleeFormation-services.xml</param-value>
+		<param-value>/META-INF/managers.xml;/META-INF/kleeFormation-services.xml;/META-INF/security.xml</param-value>
 	</context-param>
+	
+	
+	 <!-- Filtre de sécurité SAML2 SSO/SLO -->
+	<filter>
+		<filter-name>SamlSecurityFilter</filter-name>
+		<filter-class>com.kleegroup.formation.saml.SamlFilter</filter-class>    
+		<init-param>
+			<param-name>url-exclude-pattern</param-name>
+			<!-- On autorise l'accès aux ressources statiques (sauf pour les fichiers JS), à la servlet de reception de la réponse SAML de Login et à la page de deconnexion OK -->
+			<param-value>/static/(fonts|img|stylesheets)/*;/saml2/acs;/logoutSuccess</param-value>
+		</init-param>
+	</filter>
 	
 	<filter>
 		<filter-name>Character Encoding Filter</filter-name>
@@ -83,6 +95,7 @@
 		<filter-name>client-24h-cache</filter-name>
 		<url-pattern>/static/*</url-pattern>
 	</filter-mapping>
+	
 	<filter>	
 		<description>
 			Filtre de sécurisation des URLs et de conservation des sessions.
@@ -93,13 +106,20 @@
 		<filter-class>io.vertigo.struts2.impl.servlet.filter.SecurityFilter</filter-class>
 		<init-param>
 			<param-name>url-no-authentification</param-name>
-			<param-value>/tutorial/*;/*Login.do;/ListAutocomplete.do;</param-value>
+			<param-value>/tutorial/*;/*Login.do;/ListAutocomplete.do;/saml2/acs;/logoutSuccess</param-value>
 		</init-param>
 		<init-param>
 			<param-name>url-exclude-pattern</param-name>
 			<param-value>/;/index.html;/static/*;/struts/*;/jsp/dev-*.jsp</param-value>
 		</init-param>
 	</filter>
+	
+	
+	<filter-mapping>
+		<filter-name>SamlSecurityFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<filter-mapping>
 		<filter-name>Security Filter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -143,8 +163,67 @@
 		<mime-type>text/css</mime-type>
 	</mime-mapping>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<!-- <welcome-file>index.html</welcome-file> -->
+		<welcome-file>home</welcome-file>
 	</welcome-file-list>
+
+ 	<!-- DEBUT - SSO/SLO via SAML -->
+ 	<servlet>
+      <servlet-name>homeServlet</servlet-name>
+      <servlet-class>com.kleegroup.formation.saml.HomeServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>homeServlet</servlet-name>
+      <url-pattern>/home</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	
+ 	<!-- SSO -->
+ 	<servlet>
+      <servlet-name>acsServlet</servlet-name>
+      <servlet-class>com.kleegroup.formation.saml.AcsServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>acsServlet</servlet-name>
+      <url-pattern>/saml2/acs</url-pattern>
+ 	</servlet-mapping>
+	<!-- SLO -->
+ 	<servlet>
+      <servlet-name>slsServlet</servlet-name>
+      <servlet-class>com.kleegroup.formation.saml.SLSRequestServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>slsServlet</servlet-name>
+      <url-pattern>/saml2/sls</url-pattern>
+ 	</servlet-mapping>
+ 	<servlet>
+      <servlet-name>slsResponseServlet</servlet-name>
+      <servlet-class>com.kleegroup.formation.saml.SLSResponseServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>slsResponseServlet</servlet-name>
+      <url-pattern>/saml2/slsResponse</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	<servlet>
+      <servlet-name>logout</servlet-name>
+      <servlet-class>com.kleegroup.formation.saml.LogoutServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>logout</servlet-name>
+      <url-pattern>/logout</url-pattern>
+ 	</servlet-mapping>
+ 	
+	<servlet>
+      <servlet-name>logoutSuccess</servlet-name>
+      <jsp-file>/jsp/accueil/accueil.jsp</jsp-file>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>logoutSuccess</servlet-name>
+      <url-pattern>/logoutSuccess</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	<!-- FIN -->
 
 	<error-page>
 		<exception-type>java.lang.Exception</exception-type>

@@ -183,3 +183,26 @@ create Task TK_DELETE_SESSION_CASCADE {
                Where SES_ID = #SES_ID#",
   attribute SES_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
 }
+
+
+create Task TK_HORAIRE_DEBUT {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "SELECT CASE WHEN HOR.DEBUT IS NOT NULL THEN HOR.DEBUT ELSE HOR.DEBUT_APREM END 
+               FROM	HORAIRES HOR
+               WHERE HOR.SES_ID = #SES_ID#
+               	 AND HOR.JOUR = (SELECT MIN(HMIN.JOUR) FROM HORAIRES HMIN WHERE HMIN.SES_ID = #SES_ID#)",
+  attribute SES_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DT_HORAIRE {domain : DO_HEURE, notNull:"true", inOut :"out",}
+}
+
+
+create Task TK_HORAIRE_FIN {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "SELECT CASE WHEN HOR.FIN_APREM IS NOT NULL THEN HOR.FIN_APREM ELSE HOR.FIN END 
+               FROM	HORAIRES HOR
+               WHERE HOR.SES_ID = #SES_ID#
+               	 AND HOR.JOUR = (SELECT MAX(HMAX.JOUR) FROM HORAIRES HMAX WHERE HMAX.SES_ID = #SES_ID#)",
+  attribute SES_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
+  attribute DT_HORAIRE {domain : DO_HEURE, notNull:"true", inOut :"out",}
+}
+

@@ -1,14 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
-<s:include value="/jsp/include/pageHeader.jsp">
+ <s:include value="/jsp/include/pageHeader.jsp">
 	<s:param name="subtitle">${pageName}</s:param>
 </s:include>
+
 <s:form>
 	<s:actionmessage/>
 	<s:div layout="table">
-		<s:textfield name="utilisateur.login" label="default" />
-		<s:textfield name="utilisateur.password"	label="default"  AUTOCOMPLETE="off" />
+		<s:textfield name="utilisateur.mail" label="default" />
+		<!-- s:textfield name="utilisateur.password"	label="default"  AUTOCOMPLETE="off" /-->
 	</s:div>
 	Connectez-vous avec admin/admin ou demo/demo<br />
 	<div class="buttonbar">

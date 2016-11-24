@@ -23,15 +23,20 @@ public interface HorairesServices extends Component {
 	String saveHoraires(DtList<Horaires> horairess, Long sesId);
 
 	/**
+	 * Renvoie une liste d'horaire à partir d'une session de formation
 	 * @param sessionFormation
-	 * @return
+	 * @return une liste d'horaires
 	 */
 	DtList<Horaires> getHoraires(SessionFormation sessionFormation);
 
 	/**
 	 * Supprime en base une horaire.
-	 *
+	 * @param id session
 	 */
 	void deleteHoraires(final Long sesId);
+
+	public int horaireDebut(final Long sesId);
+
+	public int horaireFin(final Long sesId);
 
 }

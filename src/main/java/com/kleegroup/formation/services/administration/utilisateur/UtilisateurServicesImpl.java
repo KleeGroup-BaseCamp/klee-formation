@@ -1,7 +1,9 @@
 package com.kleegroup.formation.services.administration.utilisateur;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -32,8 +34,9 @@ import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.MessageText;
 import io.vertigo.lang.VUserException;
+import io.vertigo.persona.ldap.LdapManager;
+import io.vertigo.persona.ldap.LdapUser;
 import io.vertigo.persona.security.VSecurityManager;
-//import io.vertigo.util.DateUtil;
 
 /**
  * Impl�mentation des services associ�s � la gestion des utilisateurs.
@@ -53,15 +56,18 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 	private VSecurityManager securityManager;
 	@Inject
 	private StoreManager storeManager;
+	@Inject
+	private LdapManager ldapManager;
 
 	private final PasswordHelper passwordHelper = new PasswordHelper();
 
 	/** {@inheritDoc} */
 	@Override
-	public Utilisateur connecterUtilisateur(final UtilisateurLogin utilisateurLogin) {
+	public Utilisateur connecterUtilisateur(final String email) {
 		// Authentification de l'utilisateur auprès de la base de données
-		final Utilisateur utilisateur = loadUtilisateurByLogin(utilisateurLogin);
+		final Utilisateur utilisateur = loadUtilisateurByMail(email);
 		// Charge la collection car la transaction est au niveau de la couche service
+
 		utilisateur.getRoleList();
 		return utilisateur;
 	}
@@ -93,6 +99,12 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 	public DtList<Utilisateur> getUtilisateurListByCritere(final UtilisateurCritere criteres) {
 		return utilisateurDAO.listUtilisateurByCritere(criteres);
 
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public DtList<Utilisateur> listUtilisateur() {
+		return utilisateurDAO.listUtilisateur();
 	}
 
 	/** {@inheritDoc} */
@@ -150,11 +162,9 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 		final Utilisateur utilisateur = utilisateurDAO.get(utiId);
 		/*int i = 0;
 		while (i < utilisateur.getRoleList().size()) {
-			System.out.println(Integer.toString(utilisateur.getRoleList().size()));
-			System.out.println(Integer.toString(i));
 			utilisateur.getRoleList().remove(i);
 			i = i + 1;
-
+		
 		}*/
 
 		final List<URI> roles = new ArrayList<>();
@@ -201,4 +211,87 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 
 		return utilisateur;
 	}
+
+	private Utilisateur loadUtilisateurByMail(final String mail) {
+		Assertion.checkNotNull(mail);
+		//-----
+		/*final Criteria<Utilisateur> critere = new FilterCriteriaBuilder<Utilisateur>()
+				.withFilter(DtDefinitions.UtilisateurFields.MAIL, mail)
+				.build();
+
+		final DtList<Utilisateur> emails = utilisateurDAO.getList(critere, 1);*/
+		//On effectue le même traitement si le login est incorrect pour éviter l'analyse par le temps
+
+		final Utilisateur utilisateur = utilisateurDAO.listUtilisateurByEmail(mail);
+
+		final KleeFormationUserSession session = securityManager.<KleeFormationUserSession> getCurrentUserSession().get();
+		session.setUtilisateur(utilisateur);
+		session.authenticate();
+
+		for (final Role role : utilisateur.getRoleList()) {
+			session.addRole(Home.getApp().getDefinitionSpace().resolve(role.getRolCode(), io.vertigo.persona.security.metamodel.Role.class));
+		}
+
+		return utilisateur;
+	}
+
+	@Override
+	public void importLdapUtilisateur() {
+		final Map<String, Utilisateur> utilisateurPerEmail = loadIndexedUtilisateurs();
+
+		for (final LdapUser ldapUser : ldapManager.loadAllUsers()) {
+			final String email = ldapUser.getEmail();
+			Assertion.checkArgNotEmpty(email);
+			//-----
+			final Utilisateur utilisateur = utilisateurPerEmail.get(email);
+			if (utilisateur == null) {
+				createNewUtilisateur(ldapUser);
+			}
+			//sinon on touche pas
+
+			//on retire l'utilisateur importé de l'index
+			utilisateurPerEmail.remove(email);
+		}
+
+		//si il reste des gens, on les désactive
+		for (final Utilisateur utilisateur : utilisateurPerEmail.values()) {
+			if (!utilisateur.getNom().contains("<RETIRED>")) {
+				desactivateUtilisateur(utilisateur);
+			}
+		}
+
+	}
+
+	private Map<String, Utilisateur> loadIndexedUtilisateurs() {
+		final DtList<Utilisateur> utilisateurs = utilisateurDAO.findAll(new FilterCriteriaBuilder().build(), 1000);
+		final Map<String, Utilisateur> utilisateurPerEmail = new HashMap<>();
+		for (final Utilisateur utilisateur : utilisateurs) {
+			utilisateurPerEmail.put(utilisateur.getMail(), utilisateur);
+		}
+		return utilisateurPerEmail;
+	}
+
+	private void createNewUtilisateur(final LdapUser ldapUser) {
+		//c'est un nouvel utilisteur
+		final Utilisateur newUtilisateur = new Utilisateur();
+		newUtilisateur.setMail(ldapUser.getEmail());
+		newUtilisateur.setNom(ldapUser.getName());
+		newUtilisateur.setPrenom(ldapUser.getFirstName());
+		newUtilisateur.setFormateur(false);
+		newUtilisateur.setResponsable(false);
+		newUtilisateur.setAdmin(false);
+		final List<URI> roles = new ArrayList<>();
+		roles.add(DtObjectUtil.createURI(com.kleegroup.formation.domain.administration.utilisateur.Role.class, com.kleegroup.formation.security.Role.R_ANONYMOUS.name()));
+		saveUtilisateur(newUtilisateur, roles);
+	}
+
+	private void desactivateUtilisateur(final Utilisateur utilisateur) {
+		final List<URI> roles = new ArrayList<>();
+		utilisateur.setNom(utilisateur.getNom() + " <RETIRED>");
+		utilisateur.setFormateur(false);
+		utilisateur.setResponsable(false);
+		utilisateur.setAdmin(false);
+		saveUtilisateur(utilisateur, roles);
+	}
+
 }

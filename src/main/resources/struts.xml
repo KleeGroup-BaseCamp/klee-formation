@@ -104,9 +104,10 @@
     <action name="*VenirDetail" class="com.kleegroup.formation.ui.controller.formationVenir.VenirDetailAction" method="{1}">
       <result name="none">/jsp/formationVenir/venirDetail.jsp</result>
       <result name="success" type="redirectAction">VenirDetail</result>
-      <result name="success_inscription" type="redirectAction">
-      	<param name="actionName">VenirList</param>
-   	 </result>
+   	 <result name="success_inscription" type="redirectAction">
+        <param name="actionName">VenirDetail</param>
+        <param name="sesId">${sessionTest.sesId}</param>
+			</result>
     </action>
 
     <action name="*Utilisateur" class="com.kleegroup.formation.ui.controller.formationVenir.UtilisateurAction" method="{1}">

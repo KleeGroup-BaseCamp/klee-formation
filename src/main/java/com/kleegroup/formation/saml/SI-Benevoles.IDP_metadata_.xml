@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" ID="I210576ad72e4ac6f" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://id.authentification.croix-rouge.fr">
+	<IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+		<KeyDescriptor>
+			<ds:KeyInfo>
+				<ds:X509Data>
+					<ds:X509Certificate>MIIFhjCCBG6gAwIBAgIQD7Qahap8f1Vji7kcBxsH+zANBgkqhkiG9w0BAQsFADBwMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3d3cuZGlnaWNlcnQuY29tMS8wLQYDVQQDEyZEaWdpQ2VydCBTSEEyIEhpZ2ggQXNzdXJhbmNlIFNlcnZlciBDQTAeFw0xNDEwMjMwMDAwMDBaFw0xNzEwMjcxMjAwMDBaMHkxCzAJBgNVBAYTAkZSMQ4wDAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxHjAcBgNVBAoTFUNyb2l4IFJvdWdlIEZyYW5jYWlzZTEqMCgGA1UEAwwhKi5hdXRoZW50aWZpY2F0aW9uLmNyb2l4LXJvdWdlLmZyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA067rIB3eZ7Gx3E2UQxWucbzE0zRndWfBIwwTcJsIweddXDbyDcVKs+mPfURsWsb+8neprHL/X8EA2m8o7b7e+gcOnLT9JlxpzWWadK9KIkgylidplVy3yDKsNTFMj8/hijalwNioJysjFG/FUEyZA/r5lnw10pPlTjKxEnLatbOvQj2whxAlHWYf14wpEcIppUyXfpmkTPWeWBAy0h3hMO3cajhadaplSmPibqmco3RLbfoAsDoJg7Rt5HAUD8gbuYoybfvygpwHW2Tn+IvEi58cVLkLJgrflezOiAkfAZ0MqN7HDsPXQpdyGksHz6g/e9Gjbtg5ooFF/nCk2opa8wIDAQABo4ICETCCAg0wHwYDVR0jBBgwFoAUUWj/kK8CB3U8zNllZGKiErhZcjswHQYDVR0OBBYEFNXX/GrC9T7ahvGDS4FIVI1hFkseME0GA1UdEQRGMESCISouYXV0aGVudGlmaWNhdGlvbi5jcm9peC1yb3VnZS5mcoIfYXV0aGVudGlmaWNhdGlvbi5jcm9peC1yb3VnZS5mcjAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMHUGA1UdHwRuMGwwNKAyoDCGLmh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9zaGEyLWhhLXNlcnZlci1nMy5jcmwwNKAyoDCGLmh0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNvbS9zaGEyLWhhLXNlcnZlci1nMy5jcmwwQgYDVR0gBDswOTA3BglghkgBhv1sAQEwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzCBgwYIKwYBBQUHAQEEdzB1MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wTQYIKwYBBQUHMAKGQWh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFNIQTJIaWdoQXNzdXJhbmNlU2VydmVyQ0EuY3J0MAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcNAQELBQADggEBABvkglJqaZAuV4rNhiUwufmLp5II1dN2pqtLcO3XtuW1ipzHx9QSMFp9fJbH2K8acSPOXsznGEdpfIDRYrWCQs81G4XI65/CmXOlsAMYbIfyop+R8Ep3h0cWX9obzBb/hpbzEmQFKgcErBSNNJdOCKjS1hjrZKz/duzhR5vrTo0eON/su3E133Ue+LdHwR/Zrg6zF9lEbaVSU+MlmbrTvr0+SBS/O4UesJQgx9RxoYIuyWXzfQvxDPDctzBqbFxS3beAidg5FVSWJsduUdnbFgBcqvezZ0xCdr5OTvPCD/FXrbzj59pTj04SI8cFNCkZvYNpsJ6Exn78EOsm0wfuKPw=</ds:X509Certificate>
+				</ds:X509Data>
+			</ds:KeyInfo>
+		</KeyDescriptor>
+		<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+		<saml:Attribute NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified" Name="sAMAccountName">
+		</saml:Attribute>
+		<saml:Attribute NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified" Name="mail">
+		</saml:Attribute>
+		<saml:Attribute NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified" Name="cRFnivol">
+		</saml:Attribute>
+		<SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://id.authentification.croix-rouge.fr/saml/idp/profile/redirectorpost/sso" index="0" isDefault="true">
+		</SingleSignOnService>
+		<SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://id.authentification.croix-rouge.fr/saml/idp/profile/redirectorpost/sso" index="1">
+		</SingleSignOnService>
+		<SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://id.authentification.croix-rouge.fr/saml/idp/profile/post/sls" ResponseLocation="https://id.authentification.croix-rouge.fr/saml/idp/profile/post/slr" isDefault="true">
+		</SingleLogoutService>
+	</IDPSSODescriptor>
+</EntityDescriptor>

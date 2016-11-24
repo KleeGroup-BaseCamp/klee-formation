@@ -1,11 +1,18 @@
 package com.kleegroup.formation.ui.controller;
 
+import java.io.Serializable;
+
+import javax.inject.Inject;
+
 import org.apache.struts2.ServletActionContext;
 
+import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
+import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 import com.kleegroup.formation.ui.controller.menu.NavigationItem;
 
 import io.vertigo.struts2.core.AbstractActionSupport;
+import io.vertigo.struts2.core.UiObject;
 import io.vertigo.struts2.impl.MethodUtil;
 import io.vertigo.struts2.impl.servlet.RequestContainerWrapper;
 
@@ -18,6 +25,9 @@ import io.vertigo.struts2.impl.servlet.RequestContainerWrapper;
 public abstract class AbstractKleeFormationActionSupport extends AbstractActionSupport {
 
 	private static final long serialVersionUID = 374760712087148984L;
+
+	@Inject
+	private UtilisateurServices utilisateurServices;
 
 	/**
 	* Constructeur.
@@ -39,6 +49,10 @@ public abstract class AbstractKleeFormationActionSupport extends AbstractActionS
 	@Override
 	protected final void preInitContext() {
 		super.preInitContext();
+		final Utilisateur utilisateur = utilisateurServices.getCurrentUtilisateur();
+		if (utilisateur != null) {
+			getModel().put("connectedUser", new UiObject<>(utilisateur));
+		}
 		getModel().put("menuItems", Menu.ROOT_MENU.getChildren());
 		getModel().put("activeMenu", getActiveMenu());
 		// Enregistrement des informations des sous-menus si besoin.
@@ -79,5 +93,9 @@ public abstract class AbstractKleeFormationActionSupport extends AbstractActionS
 	 * @return Nom de la page.
 	 */
 	public abstract String getPageName();
+
+	public Serializable CurrentUtilisateur() {
+		return getModel().put("connectedUser", new UiObject<>(utilisateurServices.getCurrentUtilisateur()));
+	}
 
 }

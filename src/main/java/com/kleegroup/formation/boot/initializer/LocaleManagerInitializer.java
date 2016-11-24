@@ -7,7 +7,7 @@ import io.vertigo.core.spaces.component.ComponentInitializer;
 
 /**
  * Initializer de LocaleManager.
- * @author dchallas
+ * @author
  * @version $Id: LocaleManagerInitializer.java,v 1.4 2014/02/07 16:48:27 npiedeloup Exp $
  */
 public final class LocaleManagerInitializer implements ComponentInitializer {
@@ -23,6 +23,7 @@ public final class LocaleManagerInitializer implements ComponentInitializer {
 
 		// Messages Ui vertigo
 		localeManager.add("io.vertigo.struts2.resources.Resources", io.vertigo.struts2.resources.Resources.values());
+		localeManager.add("com.kleegroup.formation.mails.MailResources", com.kleegroup.formation.mails.MailResources.values());
 
 		localeManager.add("com.kleegroup.formation.resources.Resources", com.kleegroup.formation.resources.Resources.values());
 

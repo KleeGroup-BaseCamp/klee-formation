@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import javax.inject.Inject;
 
 import com.kleegroup.formation.dao.formation.HorairesDAO;
+import com.kleegroup.formation.dao.services.session.SessionPAO;
 import com.kleegroup.formation.domain.formation.Horaires;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.services.session.SessionServices;
@@ -27,10 +28,11 @@ public class HorairesServicesImpl implements HorairesServices {
 
 	@Inject
 	private HorairesDAO horairesDAO;
+	@Inject
+	private SessionPAO horairesPAO;
 
 	@Override
 	public String saveHoraires(final DtList<Horaires> horairess, final Long sesId) {
-
 		final SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yy");
 		final SessionFormation session = sessionServices.loadSessionbyId(sesId);
 		for (final Horaires horaires : horairess) {
@@ -68,5 +70,15 @@ public class HorairesServicesImpl implements HorairesServices {
 			horairesDAO.delete(horaires.getDatId());
 		}
 		sessionServices.saveSessionFormation(session);
+	}
+
+	@Override
+	public int horaireDebut(final Long sesId) {
+		return horairesPAO.horaireDebut(sesId);
+	}
+
+	@Override
+	public int horaireFin(final Long sesId) {
+		return horairesPAO.horaireFin(sesId);
 	}
 }

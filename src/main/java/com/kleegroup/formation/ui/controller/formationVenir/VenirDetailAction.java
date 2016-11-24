@@ -1,5 +1,7 @@
 package com.kleegroup.formation.ui.controller.formationVenir;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -9,17 +11,20 @@ import com.kleegroup.formation.domain.formation.Horaires;
 import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.domain.inscription.InscriptionView;
+import com.kleegroup.formation.resources.Resources;
 import com.kleegroup.formation.security.Role;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.services.horaires.HorairesServices;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
+import com.kleegroup.formation.services.mail.MailServices;
 import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.services.util.SecurityUtil;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.dynamo.domain.model.DtList;
+import io.vertigo.lang.MessageText;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextListModifiable;
@@ -43,6 +48,9 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 	@Inject
 	private HorairesServices horairesServices;
 
+	@Inject
+	private MailServices mailServices;
+
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
 	private final ContextForm<SessionFormation> session = new ContextForm<>("sessionTest", this);
@@ -58,7 +66,6 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 		sesIdRef.set(sesId);
 		niveaux.publish(Niveau.class, null);
 		utilisateurs.publish(Utilisateur.class, null);
-
 		final SessionFormation sessionFormation = sessionServices.loadSessionFormation(sesId);
 		session.publish(sessionFormation);
 		formation.publish(formationServices.loadFormation(sessionFormation.getForId()));
@@ -66,8 +73,13 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 		horaires.publish(horairesServices.getHoraires(sessionFormation));
 	}
 
-	public String doInscrire() {
+	public String doInscrire() throws IOException {
 		inscriptionServices.inscrireUtilisateurASession(sesIdRef.get());
+		mailServices.genererFichierIcvs(formation.readDto(), session.readDto());
+		//mailServices.envoyerInvitation(, utilisateurServices.getCurrentUtilisateur().getMail());
+
+		mailServices.envoyerInvitation(formation.readDto(), session.readDto(), utilisateurServices.getCurrentUtilisateur().getMail());
+		new MessageText(Resources.CONFIRMATION_INSCRIPTION);
 		return "success_inscription";
 	}
 

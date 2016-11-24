@@ -43,6 +43,7 @@
 		<permission ref="PRM_MES_FORMATION" />
 		<permission ref="PRM_SUIVI_RH" />
 		<permission ref="PRM_VENIR" />
+		<permission ref="PRM_ADMINISTRATION" />
 	</role>
 
 	<role name="R_ANONYMOUS" description="Anonyme">

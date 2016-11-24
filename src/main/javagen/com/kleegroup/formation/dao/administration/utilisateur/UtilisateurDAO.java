@@ -39,6 +39,18 @@ public final class UtilisateurDAO extends DAO<Utilisateur, java.lang.Long> imple
 	}
 
 	/**
+	 * Execute la tache TK_LIST_UTILISATEUR.
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> dtcUtilisateur
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> listUtilisateur() {
+		final Task task = createTaskBuilder("TK_LIST_UTILISATEUR")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TK_LIST_UTILISATEUR_BY_CRITERE.
 	 * @param dtoUtilisateurCritere com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere 
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> dtcUtilisateur
@@ -46,6 +58,20 @@ public final class UtilisateurDAO extends DAO<Utilisateur, java.lang.Long> imple
 	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> listUtilisateurByCritere(final com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere dtoUtilisateurCritere) {
 		final Task task = createTaskBuilder("TK_LIST_UTILISATEUR_BY_CRITERE")
 				.addValue("DTO_UTILISATEUR_CRITERE", dtoUtilisateurCritere)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_LIST_UTILISATEUR_BY_EMAIL.
+	 * @param email String 
+	 * @return com.kleegroup.formation.domain.administration.utilisateur.Utilisateur dtcUtilisateur
+	*/
+	public com.kleegroup.formation.domain.administration.utilisateur.Utilisateur listUtilisateurByEmail(final String email) {
+		final Task task = createTaskBuilder("TK_LIST_UTILISATEUR_BY_EMAIL")
+				.addValue("EMAIL", email)
 				.build();
 		return getTaskManager()
 				.execute(task)

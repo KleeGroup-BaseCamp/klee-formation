@@ -2,8 +2,8 @@ package com.kleegroup.formation.ui.controller.sessionFormation;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,19 +14,22 @@ import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCrit
 import com.kleegroup.formation.domain.formation.Formation;
 import com.kleegroup.formation.domain.formation.FormationCritere;
 import com.kleegroup.formation.domain.formation.Horaires;
+import com.kleegroup.formation.domain.formation.Inscription;
 import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.formation.SessionFormation;
+import com.kleegroup.formation.domain.inscription.InscriptionView;
 import com.kleegroup.formation.resources.Resources;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.services.horaires.HorairesServices;
+import com.kleegroup.formation.services.inscription.InscriptionServices;
+import com.kleegroup.formation.services.mail.MailServices;
 import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.MessageText;
-import java.util.Optional;
 import io.vertigo.lang.VUserException;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
@@ -53,6 +56,10 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 
 	@Inject
 	private UtilisateurServices utilisateurServices;
+	@Inject
+	private MailServices mailServices;
+	@Inject
+	private InscriptionServices inscriptionServices;
 
 	private final ContextForm<SessionFormation> session = new ContextForm<>("sessionTest", this);
 	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
@@ -61,9 +68,9 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	private final ContextList<Utilisateur> formatteurs = new ContextList<>("formatteurs", this);
 	private final ContextList<Formation> formations = new ContextList<>("formations", this);
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
-
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
 	private final ContextMdl<Utilisateur> utilisateurs = new ContextMdl<>("utilisateurs", this);
+	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", this);
 
 	public void initContext(@Named("sesId") final Optional<Long> sesId) {
 		niveaux.publish(Niveau.class, null);
@@ -72,40 +79,32 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			final SessionFormation sessionFormation = sessionServices.loadSessionFormation(sesId.get());
 			session.publish(sessionFormation);
 			formation.publish(formationServices.loadFormation(sessionFormation.getForId()));
-			//System.out.println(sessionFormation.getHorairesList().size());
-
 			horaires.publish(horairesServices.getHoraires(sessionFormation));
+			inscriptions.publish(inscriptionServices.getListInscriptionsViewBySessionId(sesId.get()));
 		} else {
 			final UtilisateurCritere utilisateurcritere = new UtilisateurCritere();
 			final com.kleegroup.formation.security.Role role = com.kleegroup.formation.security.Role.R_FORMATTEUR;
 			utilisateurcritere.setRole(role.toString());
 			session.publish(new SessionFormation());
 			horaires.publish(new DtList<>(Horaires.class));
-			//horaire.publish(new Horaires());
 			loadListsForEdit();
-
 			toModeCreate();
-
 		}
 	}
 
 	private void loadListsForEdit() {
-
 		final UtilisateurCritere utilisateurcritere = new UtilisateurCritere();
 		final com.kleegroup.formation.security.Role role = com.kleegroup.formation.security.Role.R_FORMATTEUR;
 		utilisateurcritere.setRole(role.toString());
 		formatteurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurcritere));
-
 		final FormationCritere formationcritere = new FormationCritere();
 		formations.publish(formationServices.getFormationListByCritere(formationcritere));
-
 	}
 
 	public String doEdit() {
 		final SessionFormation my_session = sessionServices.loadSessionFormation(sesIdRef.get());
 		session.publish(my_session);
 		horaires.publish(horairesServices.getHoraires(my_session));
-		//horaire.publish(new Horaires());
 		loadListsForEdit();
 		toModeEdit();
 		return NONE;
@@ -117,12 +116,9 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			final BigDecimal satisfaction = new BigDecimal(0);
 			sessions.setStatus("Brouillon");
 			sessions.setEtaCode("Brouillon");
-
 			doSaveSession(satisfaction, sessions);
-
 		} else if (isModeEdit()) {
 			final BigDecimal satisfaction = null;
-
 			doSaveSession(satisfaction, sessions);
 
 		}
@@ -136,27 +132,36 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			sessions.setEtaCode("Publier");
 			sessions.setStatus("Publier");
 			sessions.setEsuCode("Ouverte");
-
 			sessionServices.saveSessionFormation(sessions);
 			doSaveSession(satisfaction, sessions);
-
 		} else if (isModeEdit()) {
 			final BigDecimal satisfaction = null;
-
 			doSaveSession(satisfaction, sessions);
 
+			final DtList<Inscription> insc = inscriptionServices.getListInscriptionsBySessionId(session.readDto().getSesId());
+			if (insc != null) {
+				int i = 0;
+				while (i < insc.size()) {
+
+					final Utilisateur uti = utilisateurServices.loadUtilisateurWithRoles(insc.get(i).getUtiId());
+					mailServices.envoyerModification(formation.readDto(), session.readDto(), uti.getMail());
+					i = i + 1;
+				}
+
+			}
 		}
 		return SUCCESS;
 	}
 
-	private void DateIsCorrect(final SessionFormation session) {
-		if (DateUtil.newDate().after(session.getDateDebut())) {
-			throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
-		}
-		if (session.getDateDebut().compareTo(session.getDateFin()) > 0) {
-			throw new VUserException(new MessageText(Resources.SESSION_DATE_FIN_MUST_BE_IN_FUTURE));
-		}
-	}
+	/*
+		private void DateIsCorrect(final SessionFormation session) {
+			if (DateUtil.newDate().after(session.getDateDebut())) {
+				throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
+			}
+			if (session.getDateDebut().compareTo(session.getDateFin()) > 0) {
+				throw new VUserException(new MessageText(Resources.SESSION_DATE_FIN_MUST_BE_IN_FUTURE));
+			}
+		}*/
 
 	private void HoraireIsCorrect(final DtList<Horaires> horairess) {
 		int i = 0;
@@ -192,7 +197,6 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			sessions.setI(satisfaction);
 			sessions.setEsuCode("Ouverte");
 			sessionServices.saveSessionFormation(sessions);
-
 		}
 		if (!horairess.isEmpty()) {
 			HoraireIsCorrect(horairess);
@@ -201,31 +205,19 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			sessions.setDateFin(horairess.get(horairess.size() - 1).getJour());
 			final Long durée = (horairess.get(horairess.size() - 1).getJour().getTime() - horairess.get(0).getJour().getTime()) / 3600000 / 24;
 			sessions.setDuree(durée + 1);
-
 			sessionServices.saveSessionFormation(sessions);
 		} else {
 			final Date date_début = sessions.getDateDebut();
 			final Date date_fin = sessions.getDateFin();
 			final DtList<Horaires> horaires_no_modif = new DtList<>(Horaires.class);
 			while (date_début.compareTo(date_fin) <= 0) {
-				final Horaires horaire = new Horaires();
-				horaire.setJour(new Date(date_début.getTime()));
-				horaire.setDebut(9 * 60);
-				horaire.setFin(12 * 60);
-				horaire.setDebutAprem(14 * 60);
-				horaire.setFinAprem(18 * 60);
-				horaires_no_modif.add(horaire);
+				horaires_no_modif.add(defaultHoraire(new Date(date_début.getTime())));
 				date_début.setDate(date_début.getDate() + 1);
 			}
 			sessions.setDateDebut(horaires_no_modif.get(0).getJour());
 			sessions.setDateFin(horaires_no_modif.get(horaires_no_modif.size() - 1).getJour());
 			sessions.setHoraire(horairesServices.saveHoraires(horaires_no_modif, sessions.getSesId()));
-			//final int durée = DateUtil.daysBetween(horairess.get(0).getJour(), horairess.get(horairess.size()).getJour());
-			//System.out.println(horaires_no_modif.size());
-
 			final Long durée = (horaires_no_modif.get(horaires_no_modif.size() - 1).getJour().getTime() - horaires_no_modif.get(0).getJour().getTime()) / 3600000 / 24;
-			//sessions.setDuree(Long.valueOf(durée + 1));
-
 			sessions.setDuree(durée + 1);
 			sessionServices.saveSessionFormation(sessions);
 		}
@@ -247,6 +239,17 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			//sessions.setIsOuvert("Annuler");
 			sessions.setEsuCode("Annulée");
 			sessionServices.saveSessionFormation(sessions);
+			final DtList<Inscription> insc = inscriptionServices.getListInscriptionsBySessionId(session.readDto().getSesId());
+			if (insc != null) {
+				int i = 0;
+				while (i < insc.size()) {
+
+					final Utilisateur uti = utilisateurServices.loadUtilisateurWithRoles(insc.get(i).getUtiId());
+					mailServices.envoyersupression(formation.readDto(), session.readDto(), uti.getMail());
+					i = i + 1;
+				}
+
+			}
 			return SUCCESS;
 		}
 		/*	if (etat.equals("Brouillon")) {
@@ -260,7 +263,6 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	@SuppressWarnings("deprecation")
 	public String doDatemodif() throws ParseException {
 		final SessionFormation session_modif = session.readDto();
-
 		if (DateUtil.newDate().after(session_modif.getDateDebut())) {
 			throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
 		}
@@ -277,21 +279,13 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			final Date jour = horairess.get(i - 1).getJour();
 			jour.setDate(jour.getDate() + 1);
 			while (i < durée) {
-				final Horaires horaire = new Horaires();
-				horaire.setJour(new Date(jour.getTime()));
-				horaire.setDebut(9 * 60);
-				horaire.setFin(12 * 60);
-				horaire.setDebutAprem(14 * 60);
-				horaire.setFinAprem(18 * 60);
-				horairess.add(horaire);
+				horairess.add(defaultHoraire(new Date(jour.getTime())));
 				jour.setDate(jour.getDate() + 1);
 				i = i + 1;
 			}
 			horaires.publish(horairess);
 			return NONE;
-		}
-
-		else if (durée == horairess.size()) {
+		} else if (durée == horairess.size()) {
 			int i = 0;
 			while (i < horairess.size()) {
 				horairess.get(i).setJour(new Date(date_début.getTime()));
@@ -305,13 +299,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			int i = horairess.size();
 			final Date jour = date_début;
 			while (i < durée) {
-				final Horaires horaire = new Horaires();
-				horaire.setJour(new Date(jour.getTime()));
-				horaire.setDebut(9 * 60);
-				horaire.setFin(12 * 60);
-				horaire.setDebutAprem(14 * 60);
-				horaire.setFinAprem(18 * 60);
-				horaires_new.add(horaire);
+				horaires_new.add(defaultHoraire(new Date(jour.getTime())));
 				jour.setDate(jour.getDate() + 1);
 				i = i + 1;
 			}
@@ -328,23 +316,13 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			int i = 0;
 			final Date jour = date_début;
 			while (i < durée) {
-				System.out.println(Integer.toString(i));
 				if (i < horairess.size()) {
-					System.out.println("cc");
 					if (horairess.get(i).getJour().compareTo(jour) == 0) {
 						horaires_new.add(horairess.get(i));
-						System.out.println("cc");
 					}
 
 				} else {
-					final Horaires horaire = new Horaires();
-					horaire.setJour(new Date(jour.getTime()));
-					horaire.setDebut(9 * 60);
-					horaire.setFin(12 * 60);
-					horaire.setDebutAprem(14 * 60);
-					horaire.setFinAprem(18 * 60);
-					horaires_new.add(horaire);
-
+					horaires_new.add(defaultHoraire(new Date(jour.getTime())));
 				}
 				jour.setDate(jour.getDate() + 1);
 				i = i + 1;
@@ -352,14 +330,15 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			horaires.publish(horaires_new);
 			return NONE;
 		}
-
 	}
 
 	@SuppressWarnings("deprecation")
-	public String doHorairemodif() throws ParseException {
+	public String doHoraire() throws ParseException {
 
 		final UiObject<SessionFormation> session_date = session.getUiObject();
-
+		if (session_date.getDate(SessionFormationFields.DATE_DEBUT.name()) == null || session_date.getDate(SessionFormationFields.DATE_FIN.name()) == null) {
+			throw new VUserException(new MessageText(Resources.DATES_INCORRECTS));
+		}
 		if (DateUtil.newDate().after(session_date.getDate(SessionFormationFields.DATE_DEBUT.name()))) {
 			throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
 		}
@@ -372,34 +351,24 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		final DtList<Horaires> horairess = new DtList<>(Horaires.class);
 		Date date = new DateBuilder(dateDebut)
 				.build();
-
-		System.out.println(date.toString());
 		while (date.compareTo(date_fin) <= 0) {
-			final Horaires horaire = new Horaires();
-			final SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yy");
-			//System.out.println(formater.format(date_début));
-			horaire.setJour(new Date(date.getTime()));
-			//System.out.println(horaire.getJour());
-
-			horaire.setDebut(9 * 60);
-			horaire.setFin(12 * 60);
-			horaire.setDebutAprem(14 * 60);
-			horaire.setFinAprem(18 * 60);
-			horairess.add(horaire);
-			//date_debut.
-			//Calendar.
+			horairess.add(defaultHoraire(new Date(date.getTime())));
 			date = new DateBuilder(date)
 					.addDays(1)
 					.build();
-
-			//final Calendar c1 = GregorianCalendar.getInstance();
-
-			//c1.set(date_début.getDate(), 1);
-			//date_début.setDate(date_début.getDate() + 1);
 		}
-		//session.readDto().setDateDebut(horairess.get(0).getJour());
 		horaires.publish(horairess);
 		return NONE;
+	}
+
+	private Horaires defaultHoraire(final Date jour) {
+		final Horaires horaire = new Horaires();
+		horaire.setJour(new Date(jour.getTime()));
+		horaire.setDebut(9 * 60);
+		horaire.setFin(12 * 60);
+		horaire.setDebutAprem(14 * 60);
+		horaire.setFinAprem(18 * 60);
+		return horaire;
 	}
 
 	@Override

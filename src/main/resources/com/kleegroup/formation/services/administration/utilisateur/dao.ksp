@@ -12,7 +12,7 @@ alter Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
     request : "Select uti.*
                From UTILISATEUR uti, LOGIN log
                Where uti.uti_id = log.uti_id
-                  and log.LOGIN = #LOGIN#
+                  and uti.mail = #LOGIN#
                     and log.PASSWORD = #CRYPTED_PASSWORD#
                     and uti.SI_ACTIF = 1"
 }
@@ -52,6 +52,22 @@ create Task TK_LIST_UTILISATEUR_BY_CRITERE {
               		order by uti.NOM, uti.PRENOM",
    	attribute DTO_UTILISATEUR_CRITERE {domain : DO_DT_UTILISATEUR_CRITERE_DTO, notNull:"true", inOut :"in",}
  	attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTC, notNull:"true", inOut :"out",}
+}
+
+
+create Task TK_LIST_UTILISATEUR{
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select uti.*
+               From	UTILISATEUR uti",
+ 	attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTC, notNull:"true", inOut :"out",}
+}
+create Task TK_LIST_UTILISATEUR_BY_EMAIL{
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "Select uti.*
+               From	UTILISATEUR uti
+               where uti.MAIL = #EMAIL#",
+    attribute EMAIL {domain : DO_EMAIL, notNull:"true", inOut :"in",}
+ 	attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTO, notNull:"true", inOut :"out",}
 }
 
 create Task TK_LIST_UTILISATEUR_BY_ROLE {

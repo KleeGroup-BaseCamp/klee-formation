@@ -45,13 +45,17 @@
 	<display:column property="utiId" title="${util.label('utilisateurs.utiId')}" sortable="true"/>
 </display:table>
 
+<s:form>
 <div class="button-bar">
 	<div class="right">
 		<s:if test="%{isAdministrateur()}">
+		<s:submit action="loadLdapUtilisateurList" value="IMPORTER UTILISATEURS" cssClass="supprimer" />
+	
 		<s:a action="UtilisateurDetail" cssClass="creer">NOUVEAU</s:a>
 		</s:if>
 	</div>
 </div>
+</s:form>
 <s:include value="/jsp/include/footer.jsp" />
 
 	

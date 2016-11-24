@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://sso.kleegroup.com/saml2/idp/metadata.php">
+  <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIICuDCCAiGgAwIBAgIJAMx/WHmVskPJMA0GCSqGSIb3DQEBBQUAMHUxCzAJBgNVBAYTAkZSMQwwCgYDVQQIDANJREYxHDAaBgNVBAcME0xlIFBsZXNzaXMgUm9iaW5zb24xEDAOBgNVBAoMB0tMRUUgU0ExDDAKBgNVBAsMA0RTSTEaMBgGA1UEAwwRc3NvLmtsZWVncm91cC5jb20wHhcNMTIwNDE3MjEzODQ4WhcNMjIwNDE1MjEzODQ4WjB1MQswCQYDVQQGEwJGUjEMMAoGA1UECAwDSURGMRwwGgYDVQQHDBNMZSBQbGVzc2lzIFJvYmluc29uMRAwDgYDVQQKDAdLTEVFIFNBMQwwCgYDVQQLDANEU0kxGjAYBgNVBAMMEXNzby5rbGVlZ3JvdXAuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD1V3koJuVIPpeBlT8xBdaXmgsScFgqvpnLm6T1GwzGabcTiBgmd9DV6B4ou6xUIGnpXnN0gVgDel/SMJYCW3kNOjrn5gbGGWmsr8qNBOPjMZGVaGxW+0h/6Bcu7soOhP4duMmzMpmiaZMf4fyZ1jwVL2VO5yfYR14VeQVBPCzJJQIDAQABo1AwTjAdBgNVHQ4EFgQUYptc042cL/gt0dzNqL8ST226fX0wHwYDVR0jBBgwFoAUYptc042cL/gt0dzNqL8ST226fX0wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOBgQBjd6eQ8pPLMbXeGue5T+ywIrx/q9KNxlGK56T/yWytL5A+1RjCU5I/sgx/MWLrn1aflutIf5mZHIDf7NtmWhFMJ6wyHU5k3jrSjqkIiHiC7dqJimapgnwdgWmKPJPnxcDXYOkTjP/edu7sWbjqEF/EsF/RSAMGIlMjM8vawUGS2Q==</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="encryption">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIICuDCCAiGgAwIBAgIJAMx/WHmVskPJMA0GCSqGSIb3DQEBBQUAMHUxCzAJBgNVBAYTAkZSMQwwCgYDVQQIDANJREYxHDAaBgNVBAcME0xlIFBsZXNzaXMgUm9iaW5zb24xEDAOBgNVBAoMB0tMRUUgU0ExDDAKBgNVBAsMA0RTSTEaMBgGA1UEAwwRc3NvLmtsZWVncm91cC5jb20wHhcNMTIwNDE3MjEzODQ4WhcNMjIwNDE1MjEzODQ4WjB1MQswCQYDVQQGEwJGUjEMMAoGA1UECAwDSURGMRwwGgYDVQQHDBNMZSBQbGVzc2lzIFJvYmluc29uMRAwDgYDVQQKDAdLTEVFIFNBMQwwCgYDVQQLDANEU0kxGjAYBgNVBAMMEXNzby5rbGVlZ3JvdXAuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD1V3koJuVIPpeBlT8xBdaXmgsScFgqvpnLm6T1GwzGabcTiBgmd9DV6B4ou6xUIGnpXnN0gVgDel/SMJYCW3kNOjrn5gbGGWmsr8qNBOPjMZGVaGxW+0h/6Bcu7soOhP4duMmzMpmiaZMf4fyZ1jwVL2VO5yfYR14VeQVBPCzJJQIDAQABo1AwTjAdBgNVHQ4EFgQUYptc042cL/gt0dzNqL8ST226fX0wHwYDVR0jBBgwFoAUYptc042cL/gt0dzNqL8ST226fX0wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOBgQBjd6eQ8pPLMbXeGue5T+ywIrx/q9KNxlGK56T/yWytL5A+1RjCU5I/sgx/MWLrn1aflutIf5mZHIDf7NtmWhFMJ6wyHU5k3jrSjqkIiHiC7dqJimapgnwdgWmKPJPnxcDXYOkTjP/edu7sWbjqEF/EsF/RSAMGIlMjM8vawUGS2Q==</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://sso.kleegroup.com/saml2/idp/SingleLogoutService.php"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://sso.kleegroup.com/saml2/idp/SingleLogoutService.php"/>
+    <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://sso.kleegroup.com/saml2/idp/SSOService.php"/>
+    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://sso.kleegroup.com/saml2/idp/SSOService.php"/>
+  </md:IDPSSODescriptor>
+  <md:ContactPerson contactType="technical">
+    <md:GivenName>Nicolas</md:GivenName>
+    <md:SurName>BOUCHARD</md:SurName>
+    <md:EmailAddress>nicolas.bouchard@kleegroup.com</md:EmailAddress>
+  </md:ContactPerson>
+</md:EntityDescriptor>

@@ -30,7 +30,7 @@ public enum MailResources implements MessageKey {
 	 * Bonjour,<br/>
 	 * <br/>
 	 * Ceci est un mail automatique envoy� depuis l''application de gestions des formations.<br/>
-	 * Vous êtes inscrit à la formation : " <b>{0}</b> ", du <b>{1}</b> au <b>{2}</b> dans la salle <b>{3}</b>  à l'étage <b>{4}</b> du batiment <b>{5}</b> par <b>{6}</b>
+	 * Vous êtes inscrit à la formation : " <b>{0}</b> ", du <b>{1}</b> au <b>{2}</b> à lieu <b>{3}</b> par <b>{4}</b>
 	 * Afin d'obtenir plus d'informations vous pouvez vous connecter sur l'application .
 	 */
 	MAIL_VAL_MESSAGE_INSCRIPTION_MOI,
@@ -44,7 +44,7 @@ public enum MailResources implements MessageKey {
 	*Bonjour,<br/>
 	*<br/>
 	*Ceci est un mail automatique envoy� depuis l''application de gestions des formations.<br/>
-	*Vous êtes inscrit à la formation : " <b>{0}</b> ", du <b>{1}</b> au <b>{2}</b> dans la salle <b>{3}</b>  à l'étage <b>{4}</b> du batiment <b>{5}</b> par <b>{6}</b>.</br>
+	*Vous êtes inscrit à la formation : " <b>{0}</b> ", du <b>{1}</b> au <b>{2}</b> à lieu <b>{3}</b> par <b>{4}</b>.</br>
 	*Afin d'obtenir plus d'informations vous pouvez vous connecter sur l'application .
 	*/
 	MAIL_MESSAGE_INSCRIPTION_AUTRE,
@@ -56,7 +56,7 @@ public enum MailResources implements MessageKey {
 	*Bonjour,<br/>
 	*<br/>
 	*Ceci est un mail automatique envoy� depuis l''application de gestions des formations.<br/>
-	*La formation est annulée: " <b>{0}</b> ", qui avait lieux du <b>{1}</b> au <b>{2}</b> dans la salle <b>{3}</b>  à l'étage <b>{4}</b> du batiment <b>{5}</b> par <b>{6}</b>.
+	*La formation est annulée: " <b>{0}</b> ", qui avait lieux du <b>{1}</b> au <b>{2}</b> à lieu <b>{3}</b> par <b>{4}</b>.
 	*/
 	MAIL_MESSAGE_ANNULATION,
 
@@ -69,7 +69,7 @@ public enum MailResources implements MessageKey {
 		*Bonjour,<br/>
 		*<br/>
 		*Ceci est un mail automatique envoy� depuis l''application de gestions des formations.
-		*<br/>La formation : " <b>{0}</b> " a été modifié, du <b>{1}</b> au <b>{2}</b> dans la salle <b>{3}</b> à l'étage <b>{4}</b> du batiment <b>{5}</b> par <b>{6}</b>.</br>
+		*<br/>La formation : " <b>{0}</b> " a été modifié, du <b>{1}</b> au <b>{2}</b> à lieu <b>{3}</b> par <b>{4}</b>.</br>
 		 *Afin d'obtenir plus d'informations vous pouvez vous connecter sur l'application .
 	*/
 	MAIL_VAL_MESSAGE_MODIFICATION,

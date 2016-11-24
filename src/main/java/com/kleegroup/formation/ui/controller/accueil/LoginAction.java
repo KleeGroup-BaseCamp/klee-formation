@@ -3,7 +3,6 @@ package com.kleegroup.formation.ui.controller.accueil;
 import javax.inject.Inject;
 
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
-import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurLogin;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
@@ -21,14 +20,14 @@ public final class LoginAction extends AbstractKleeFormationActionSupport {
 	@Inject
 	private UtilisateurServices utilisateurServices;
 
-	private final ContextForm<UtilisateurLogin> utilisateurLoginRef = new ContextForm<>("utilisateur", this);
+	private final ContextForm<Utilisateur> utilisateurLoginRef = new ContextForm<>("utilisateur", this);
 
 	/** {@inheritDoc} */
 	@Override
 	public void initContext() {
-		final UtilisateurLogin utilisateurLogin = new UtilisateurLogin();
-		utilisateurLogin.setLogin("admin");
-		utilisateurLogin.setPassword("adminadmin");
+		final Utilisateur utilisateurLogin = new Utilisateur();
+		//utilisateurLogin.setLogin("admin");
+		//utilisateurLogin.setPassword("adminadmin");
 		utilisateurLoginRef.publish(utilisateurLogin);
 		toModeEdit();
 	}
@@ -38,7 +37,7 @@ public final class LoginAction extends AbstractKleeFormationActionSupport {
 	 * @return outcome du login
 	 */
 	public String doLogin() {
-		final UtilisateurLogin utilisateurLogin = utilisateurLoginRef.readDto();
+		final String utilisateurLogin = utilisateurLoginRef.readDto().getMail();
 		final Utilisateur utilisateur = utilisateurServices.connecterUtilisateur(utilisateurLogin);
 		return SUCCESS; //success va sur accueil
 	}

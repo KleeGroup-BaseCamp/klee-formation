@@ -35,7 +35,6 @@ public final class CatalogueListAction extends AbstractKleeFormationActionSuppor
 		niveaux.publish(Niveau.class, null);
 		formationCritere.publish(new FormationCritere());
 		formations.publish(formationServices.getFormationListByCritere(formationCritere.readDto()));
-
 		toModeEdit();
 
 	}

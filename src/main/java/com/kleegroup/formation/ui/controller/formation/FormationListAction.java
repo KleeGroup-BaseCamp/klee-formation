@@ -35,9 +35,7 @@ public final class FormationListAction extends AbstractKleeFormationActionSuppor
 		niveaux.publish(Niveau.class, null);
 		formationCritere.publish(new FormationCritere());
 		formations.publish(formationServices.getFormationListByCritere(formationCritere.readDto()));
-
 		toModeEdit();
-
 	}
 
 	public String doRechercher() {

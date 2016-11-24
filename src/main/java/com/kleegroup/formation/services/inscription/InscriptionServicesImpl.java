@@ -14,7 +14,6 @@ import com.kleegroup.formation.services.administration.utilisateur.UtilisateurSe
 import com.kleegroup.formation.services.session.SessionServices;
 
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.domain.model.DtListURIForCriteria;
 import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.Assertion;
 
@@ -39,11 +38,11 @@ public class InscriptionServicesImpl implements InscriptionServices {
 		return inscription;
 	}
 
-	/** {@inheritDoc} */
-	@Override
+	/*/** {@inheritDoc} */
+	/*@Override
 	public DtList<Inscription> getInscriptionListByCritere(final Inscription inscription) {
 		return inscriptionDAO.getList(DtListURIForCriteria.createCriteria(inscription), 100);
-	}
+	}*/
 
 	/** {@inheritDoc} */
 	@Override
@@ -99,10 +98,7 @@ public class InscriptionServicesImpl implements InscriptionServices {
 			inscriptionDAO.save(inscription);
 
 		}
-		/*else {
-			session.setEsuCode("Complete");
-			sessionServices.saveSessionFormation(session);
-		}*/
+
 	}
 
 	@Override

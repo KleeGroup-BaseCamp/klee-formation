@@ -5,6 +5,6 @@
 	<%--<s:param name="subtitle">${pageName}</s:param>--%>
 
 </s:include>	
-
+Vous êtes déconnecté. 
 
 <%@include file="/jsp/include/footer.jsp"%>

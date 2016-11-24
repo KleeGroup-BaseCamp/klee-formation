@@ -23,7 +23,7 @@ public interface UtilisateurServices extends Component {
 	 * @param utilisateurLogin informations de login
 	 * @return utilisateur connect�
 	 */
-	Utilisateur connecterUtilisateur(UtilisateurLogin utilisateurLogin);
+	Utilisateur connecterUtilisateur(String utilisateurLogin);
 
 	/**
 	 * Charge un utilisateur par son id technique.
@@ -56,6 +56,14 @@ public interface UtilisateurServices extends Component {
 	DtList<Utilisateur> getUtilisateurListByCritere(UtilisateurCritere criteres);
 
 	/**
+	 * Retourne la liste de tous utilisateurs.
+	 *
+	 * @return liste des utilisateurs
+	 */
+
+	DtList<Utilisateur> listUtilisateur();
+
+	/**
 	 * Sauvegarde en base un utilisateur.
 	 *
 	 * @param utilisateur utilisateur � persister en base
@@ -77,6 +85,17 @@ public interface UtilisateurServices extends Component {
 	 */
 	void deleteUtilisateur(Long utiId);
 
+	/**
+	 * Renvoie l'utilisateur connecter sur l'application de gestion des formations
+	 *
+	 */
+
 	Utilisateur getCurrentUtilisateur();
+
+	/**
+	 * synchronise la liste des utilisateur avec celle de la liste des utilisateur de klee
+	 *
+	 */
+	void importLdapUtilisateur();
 
 }

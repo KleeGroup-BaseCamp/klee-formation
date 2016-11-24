@@ -31,15 +31,11 @@ public final class MesDetailAction extends AbstractKleeFormationActionSupport {
 
 	@Inject
 	private SessionServices sessionServices;
-
 	private final ContextForm<SessionFormation> session = new ContextForm<>("sessionTest", this);
-
 	@Inject
 	private InscriptionServices inscriptionServices;
-
 	@Inject
 	private UtilisateurServices utilisateurServices;
-
 	@Inject
 	private FormationServices formationServices;
 	@Inject

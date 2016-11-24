@@ -22,4 +22,8 @@ public enum Resources implements MessageKey {
 
 	/** Vous n'avez pas entré des horaires corrects. */
 	HORAIRES_INCORRECTS,
+	/** Vous n'avez pas entré les deux dates. */
+	DATES_INCORRECTS,
+	/**Votre inscription à bien été prise en compte*/
+	CONFIRMATION_INSCRIPTION
 }

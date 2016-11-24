@@ -29,13 +29,10 @@
 		<component api="ScriptManager" class="io.vertigo.commons.impl.script.ScriptManagerImpl">
 			<plugin class="io.vertigo.commons.plugins.script.janino.JaninoExpressionEvaluatorPlugin" />
 		</component>
-
 		<component api="AnalyticsManager" class="io.vertigo.commons.impl.analytics.AnalyticsManagerImpl" />
-
 		<component api="VSecurityManager" class="io.vertigo.persona.impl.security.VSecurityManagerImpl">
 			<param name="userSessionClassName" value="com.kleegroup.formation.services.KleeFormationUserSession" />
 		</component>
-
 		<component api="CodecManager" class="io.vertigo.commons.impl.codec.CodecManagerImpl" />
 		<component api="CacheManager" class="io.vertigo.commons.impl.cache.CacheManagerImpl">
 			<plugin class="io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin">
@@ -63,7 +60,17 @@
 		</component>
 		<component api="EventBusManager" class="io.vertigo.commons.impl.eventbus.EventBusManagerImpl" />
 		<component api="DaemonManager" class="io.vertigo.commons.impl.daemon.DaemonManagerImpl" />
-
+		<component api="FileManager" class="io.vertigo.dynamo.impl.file.FileManagerImpl" />
+	</module>
+	
+	<module name="ldap">
+		<component api="LdapManager" class="io.vertigo.persona.ldap.LdapManagerImpl">
+			<param name="host" value="172.20.100.10"/>
+			<param name="port" value="3268"/>
+			<param name="username" value="klee\msa-KNOCK-Search"/>
+			<param name="password" value="vRQmEPjPi9byJjx1A3TdGFj4"/>
+			<param name="dn" value="ou=Utilisateurs,dc=klee,dc=lan,dc=net"/>
+		</component>
 	</module>
 
 	<module name="ui">
@@ -74,6 +81,18 @@
 			</plugin>
 		</component>
 	</module>
+	<module name="vertigo-labs">
+			<component api="MailManager" class="io.vertigo.tempo.impl.mail.MailManagerImpl">
+				<plugin class="io.vertigo.tempo.plugins.mail.javaxmail.JavaxSendMailPlugin">
+					<param name="storeProtocol" value="smtp" />
+					<param name="host" value="localdelivery.klee.lan.net" />
+					<param name="developmentMode" value="true" />
+					<param name="developmentMailTo" value="camille.moutte@kleegroup.com" />
+					<!-- pour prod -->
+					<!-- <param name="developmentMode" value="false" /> -->
+				</plugin>
+			</component>
+		</module>
 
 	<init>
 		<initializer class="com.kleegroup.formation.boot.initializer.LocaleManagerInitializer"/>

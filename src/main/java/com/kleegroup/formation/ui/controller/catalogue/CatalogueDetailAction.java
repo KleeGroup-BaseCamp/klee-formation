@@ -1,5 +1,7 @@
 package com.kleegroup.formation.ui.controller.catalogue;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -9,7 +11,6 @@ import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
-import java.util.Optional;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextMdl;
 
@@ -46,7 +47,6 @@ public final class CatalogueDetailAction extends AbstractKleeFormationActionSupp
 
 	public String doSave() {
 		if (isModeCreate() || isModeEdit()) {
-			formationServices.saveFormation(formation.readDto());
 			formationServices.saveFormation(formation.readDto());
 		}
 		return SUCCESS;

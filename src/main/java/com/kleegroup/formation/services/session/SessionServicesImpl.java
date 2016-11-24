@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import com.kleegroup.formation.dao.formation.EtatSessionUtilisateurDAO;
 import com.kleegroup.formation.dao.formation.SessionFormationDAO;
 import com.kleegroup.formation.dao.services.session.SessionPAO;
-import com.kleegroup.formation.domain.formation.EtatSessionUtilisateur;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.domain.session.CritereSession;
 import com.kleegroup.formation.domain.session.SessionView;
@@ -67,11 +66,11 @@ public class SessionServicesImpl implements SessionServices {
 
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void saveEtatSessionUtilisateur(final EtatSessionUtilisateur etat) {
-		etatSessionUtilisateurDAO.save(etat);
-	}
+	/*/** {@inheritDoc} */
+	/*	@Override
+		public void saveEtatSessionUtilisateur(final EtatSessionUtilisateur etat) {
+			etatSessionUtilisateurDAO.save(etat);
+		}*/
 
 	/** {@inheritDoc} */
 	@Override

@@ -27,11 +27,8 @@ public final class SessionListAction extends AbstractKleeFormationActionSupport 
 	/** {@inheritDoc} */
 	@Override
 	public void initContext() {
-
 		critere.publish(new CritereSession());
-
 		sessions.publish(sessionServices.getSessionListByCritere(critere.readDto()));
-
 		toModeEdit();
 	}
 

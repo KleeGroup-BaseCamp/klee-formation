@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" ID="I9e71128cae7711e6" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="http://cmoutte:8080">
+	<SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+		<KeyDescriptor use="signing">
+			<ds:KeyInfo>
+			    <ds:X509Data>
+			        <ds:X509Certificate>MIIDgDCCAmigAwIBAgIEDCJ3PzANBgkqhkiG9w0BAQsFADCBgTELMAkGA1UEBhMCRlIxDDAKBgNVBAgTA0lERjEOMAwGA1UEBxMFUGFyaXMxHjAcBgNVBAoTFUNyb2l4LVJvdWdlIEZyYW5jYWlzZTESMBAGA1UECxMJRm9ybWF0aW9uMSAwHgYDVQQDExdmb3IuZ2FpYS5jcm9peC1yb3VnZS5mcjAeFw0xNjA2MTQxNTI5MDNaFw0xNzA2MTQxNTI5MDNaMIGBMQswCQYDVQQGEwJGUjEMMAoGA1UECBMDSURGMQ4wDAYDVQQHEwVQYXJpczEeMBwGA1UEChMVQ3JvaXgtUm91Z2UgRnJhbmNhaXNlMRIwEAYDVQQLEwlGb3JtYXRpb24xIDAeBgNVBAMTF2Zvci5nYWlhLmNyb2l4LXJvdWdlLmZyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1CEFowHaJwfkdjgv9zVDde8dxrvrsrc0bu30hRFruDwqRa6p/TfFOZPCd4OLdH5LlPyzGhU1TrV9uPjXaUDLKhAbNnhZVbjlBVxPqxMD79nfLmGyFWCyhlHyzlhC6la2EV3IrjiN5a6FXflKnioMirO8Lamn+fENY4yDyryS9ADxI+7SRBgSEXabtBq57USWBgkWDluAAaSKCWWbEoYwCcXx+7Fqb2mq2BIVp65X6q0NBYd7ghWQ83bFbVYia9E5ZC9dHK3LxCkTvepIfG9sZThuGyB3TqxCpUvKw56Nj4ieqc3JH7RuocB826JK5M0DZ2eGNOi1Hhylm28cMoVLcQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQA6cd+JmQ8/Y/dlR9S8Wq3jX5ZIQcXTsb55W69ijzAaDGrBZ704rVDWSgOa1vbWnVkS1hET9DvizfegO8tnHPVTs4sUKpU+exe3ZAWApom16hxhV+G5ycYNRZ17byUpK4C6rJIryRQroLF2prwhl12Iv7sUavIX/0WD7FyhHFShTMnRo4C3RgZZUuFx4gTYRq6ALEobPkKLeKOdfhZM5pbpH2TWAzQWe7cc5saRVnhd3heVFlUIkmaAlPtW2318ihv+Oqh16m+Tg/v5Ll6Dflt3tefgWGkqtXsHkAVDIkTIaVokxIHJirphYtqWqpk3spNS+dWQUR4vuH9KX9l47/eB</ds:X509Certificate>
+			    </ds:X509Data>
+			</ds:KeyInfo>
+		</KeyDescriptor>
+		<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+		<AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://cmoutte:8080/formation/saml2/acs" index="0" isDefault="true"/>
+		<SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://cmoutte:8080/formation/saml2/sls" ResponseLocation="http://cmoutte:8080/formation/saml2/slsResponse"/>
+	</SPSSODescriptor>
+</EntityDescriptor>

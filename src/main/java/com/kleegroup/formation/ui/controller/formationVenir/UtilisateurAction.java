@@ -1,17 +1,27 @@
 package com.kleegroup.formation.ui.controller.formationVenir;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere;
+import com.kleegroup.formation.domain.formation.Formation;
 import com.kleegroup.formation.domain.formation.Inscription;
+import com.kleegroup.formation.domain.formation.SessionFormation;
+import com.kleegroup.formation.resources.Resources;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
+import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
+import com.kleegroup.formation.services.mail.MailServices;
+import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
-import java.util.Optional;
+import io.vertigo.dynamo.file.model.VFile;
+import io.vertigo.lang.MessageText;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextRef;
@@ -25,6 +35,12 @@ public final class UtilisateurAction extends AbstractKleeFormationActionSupport 
 
 	@Inject
 	private UtilisateurServices utilisateurServices;
+	@Inject
+	private MailServices mailServices;
+	@Inject
+	private SessionServices sessionServices;
+	@Inject
+	private FormationServices formationServices;
 
 	@Inject
 	private InscriptionServices inscriptionServices;
@@ -41,13 +57,25 @@ public final class UtilisateurAction extends AbstractKleeFormationActionSupport 
 
 	}
 
-	public String doInscrireMoi() {
+	public String doInscrireMoi() throws IOException {
 		inscriptionServices.inscrireUtilisateurASession(sesIdRef.get());
+		final Formation formation = formationServices.loadFormation(sessionServices.loadSessionbyId(sesIdRef.get()).getForId());
+		final SessionFormation session = sessionServices.loadSessionbyId(sesIdRef.get());
+		final VFile invitCalendar = mailServices.genererFichierIcvs(formation, session);
+		new MessageText(Resources.CONFIRMATION_INSCRIPTION);
+		mailServices.envoyerInvitationManager(formation, session, utilisateurServices.getCurrentUtilisateur().getMail(), invitCalendar);
 		return "success_inscription";
 	}
 
-	public String doInscrire() {
+	public String doInscrire() throws IOException {
 		inscriptionServices.inscrireUtilisateur(sesIdRef.get(), inscriptionForm.readDto().getUtiId());
+		final Utilisateur uti = utilisateurServices.loadUtilisateurWithRoles(inscriptionForm.readDto().getUtiId());
+		final Formation formation = formationServices.loadFormation(sessionServices.loadSessionbyId(sesIdRef.get()).getForId());
+		final SessionFormation session = sessionServices.loadSessionbyId(sesIdRef.get());
+		final VFile invitCalendar = mailServices.genererFichierIcvs(formation, session);
+		new MessageText(Resources.CONFIRMATION_INSCRIPTION);
+		mailServices.envoyerInvitationManager(formation, session, uti.getMail(), invitCalendar);
+
 		return "success_inscription";
 	}
 

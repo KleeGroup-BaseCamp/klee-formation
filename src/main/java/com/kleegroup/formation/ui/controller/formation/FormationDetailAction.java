@@ -1,5 +1,7 @@
 package com.kleegroup.formation.ui.controller.formation;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -12,7 +14,6 @@ import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.dynamo.domain.model.DtList;
-import java.util.Optional;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextMdl;
@@ -32,7 +33,6 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 	public Long test;
 
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
-
 	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
 	private final ContextList<SessionView> sessions = new ContextList<>("sessions", this);
 
@@ -70,13 +70,6 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 			return "success_delete";
 		} else {
 			formationServices.deleteFormationCascade(forId);
-			/*int i = 0;
-			while (i <= sessionView.size()) {
-				sessionView.remove(sessionView.get(0).getSesId());
-				sessionServices.deleteSessionCascade(sessionView.get(0).getSesId());
-				i = i + 1;
-			}
-			//formationServices.deleteFormation(forId);*/
 			return "success_delete";
 		}
 

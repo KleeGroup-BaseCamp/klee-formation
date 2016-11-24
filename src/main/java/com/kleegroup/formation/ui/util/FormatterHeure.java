@@ -39,10 +39,10 @@ public final class FormatterHeure implements Formatter {
 
 	private Integer stringToDate(final String sValue) {
 		if (sValue.length() == 5) {
-			final int i = Integer.parseInt(sValue.substring(0, 2)) * 60 + Integer.parseInt(sValue.substring(4, 5));
+			final int i = Integer.parseInt(sValue.substring(0, 2)) * 60 + Integer.parseInt(sValue.substring(3, 5));
 			return i;
 		} else {
-			final int i = Integer.parseInt(sValue.substring(0, 1)) * 60 + Integer.parseInt(sValue.substring(3, 4));
+			final int i = Integer.parseInt(sValue.substring(0, 1)) * 60 + Integer.parseInt(sValue.substring(2, 4));
 			return i;
 		}
 	}
@@ -50,6 +50,14 @@ public final class FormatterHeure implements Formatter {
 	private String dateToString(final Integer objValue) {
 		String str = new String();
 		final float i = (float) objValue / (float) 60;
+		/*int tmp = String.valueOf(i).length();
+		if (tmp == 1 || tmp == 2 || tmp == 3) {
+			tmp = tmp - 1;
+		}
+		if (tmp > 3 && tmp < 6) {
+			tmp = tmp - 2;
+		}*/
+		//tmp
 		str = (int) i + ":" + String.valueOf(i).substring(String.valueOf(i).length() - 1, String.valueOf(i).length()) + "0";
 		return str;
 	}

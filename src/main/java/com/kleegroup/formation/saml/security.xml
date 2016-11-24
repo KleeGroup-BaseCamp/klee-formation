@@ -1,0 +1,9 @@
+<?xml version =	'1.0' encoding = 'ISO-8859-1'?>
+<config>
+
+	<module name="security" api="false">
+		<component class="fr.croixrouge.security.saml.SamlTokenManager"/>
+		<component class="fr.croixrouge.helper.saml.SamlHelper" />
+		<component class="fr.croixrouge.ui.saml.SamlFilter"/>
+	</module>
+</config>

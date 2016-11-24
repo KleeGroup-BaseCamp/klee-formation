@@ -39,8 +39,6 @@
 	</div>
 </div>
 	</s:if>
-	
-	
 	<s:div layout="table" cols="4">
 		<tr><td colspan="2">&nbsp;</td></tr>
 	 <s:if test="%{modeCreate}" >
@@ -65,11 +63,12 @@
 	</div>
 		</s:if>
 		 <s:div layout="table" cols="4">
-		  <s:if test="%{modeReadOnly}">
+		  <s:textfield name="sessionTest.lieux" label="lieu"/>
+			<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>
+			
+			<s:if test="%{modeReadOnly}">
 			<s:textfield name="sessionTest.duree" label="Durée(jours)"/>
 			</s:if>
-			<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>
-			<s:textfield name="sessionTest.lieux" label="default"/>
 		</s:div>
 			<s:div layout="table" cols="4">		
 			<sj:datepicker name="sessionTest.dateDebut" label="Début" displayFormat="dd/mm/yy" changeMonth="true" changeYear="true" showOn="button"/>
@@ -81,7 +80,7 @@
 				</div>
 			<s:if test="%{modeCreate}">
 			</br>
-			    <s:submit action="HorairemodifSessionDetail" value="Horaires" cssClass="add" />
+			    <s:submit action="HoraireSessionDetail" value="Horaires" cssClass="add" />
 			    </br>
 			</s:if>
 			<s:if test="%{modeEdit}">
@@ -99,7 +98,8 @@
 					<s:textfield name="%{util.contextKey(#attr.item)}.debut"/>		
 				</display:column>
 				<display:column title="Fin" sortable="true">
-					<s:textfield name="%{util.contextKey(#attr.item)}.fin"/>		
+					<s:textfield name="%{util.contextKey(#attr.item)}.fin"/>
+				 	<%--<sj:datepicker name="%{util.contextKey(#attr.item)}.fin" timepickerFormat="HH:mm" timepicker="true" timepickerOnly="true"/>--%>	
 				</display:column>
 				<display:column title="Début" sortable="true">
 					<s:textfield name="%{util.contextKey(#attr.item)}.debutAprem"/>		

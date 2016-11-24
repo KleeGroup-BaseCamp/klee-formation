@@ -30,10 +30,10 @@ public final class UtilisateurListAction extends AbstractKleeFormationActionSupp
 	/** {@inheritDoc} */
 	@Override
 	protected void initContext() {
-		SecurityUtil.checkRole(com.kleegroup.formation.security.Role.R_ADMIN, com.kleegroup.formation.security.Role.R_RESPONSSABLE);
+		SecurityUtil.checkRole(com.kleegroup.formation.security.Role.R_RESPONSSABLE, com.kleegroup.formation.security.Role.R_ADMIN);
 		roles.publish(Role.class, null);
 		utilisateurCritereForm.publish(new UtilisateurCritere());
-		utilisateurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurCritereForm.readDto()));
+		utilisateurs.publish(utilisateurServices.listUtilisateur());
 		toModeEdit();
 	}
 
@@ -47,8 +47,12 @@ public final class UtilisateurListAction extends AbstractKleeFormationActionSupp
 		return NONE;
 	}
 
+	public String doLoadLdap() {
+		utilisateurServices.importLdapUtilisateur();
+		return NONE;
+	}
+
 	/** {@inheritDoc} */
-	//@Override
 	@Override
 	public Menu getActiveMenu() {
 		return Menu.ADMINISTRATION;

@@ -26,6 +26,7 @@
 	    <component api="InscriptionServices" class="com.kleegroup.formation.services.inscription.InscriptionServicesImpl" />
 	    <component api="FormationServices" class="com.kleegroup.formation.services.formation.FormationServicesImpl" />
 	   	<component api="HorairesServices" class="com.kleegroup.formation.services.horaires.HorairesServicesImpl" />
+	   	<component api="MailServices" class="com.kleegroup.formation.services.mail.MailServicesImpl" />
 	   	
 	</module>
 	

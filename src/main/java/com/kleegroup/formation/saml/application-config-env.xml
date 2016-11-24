@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+	<path name="search.elastic">
+		<param name="urls" value="172.20.171.71:9300" />
+		<param name="cluster" value="sibenevole-dev" />
+		<param name="embbededpath" value="fr/croixrouge" />
+	</path>
+	
+	<path name="file.store">
+		<param name="path" value="\\SIGCGED\Ged\CRF-ROOT\GED/" />
+	</path>
+	
+	<path name="servers">
+		<param name="connectTimeOut" value="2000" />
+		<param name="readTimeOut" value="5000" />
+		<param name="population" value="http://localhost:8080/crf-population" />
+	</path>
+	
+	<path name="mail.smtp">
+		<param name="host" value="localdelivery.klee.lan.net" />
+	</path>
+	
+	<path name="mail">
+		<param name="from" value="no-reply@croixrouge.fr" />
+		<param name="devMode" value="true" />
+			<param name="devMailTo" value="giovanny.pierre-nicolas@kleegroup.com" />
+		<param name="mailToHomonyme" value="xavier.durand@kleegroup.com" />
+	</path>
+	
+	<path name="job">
+		<param name="indexerDemarrage" value="true" />
+	</path>
+	
+	<path name="saml">
+		<param name="activer" value="false" />
+		<param name="pathIDPMetadata" value="D:\\Projets\\SIBenevoles\\CRf_SIBenevoles\\Main\\crf-benevoles\\api\\src\\main\\resources\\SI-Benevoles.IDP_metadata_.xml" />
+		<param name="entityIdIDP" value="https://id.authentification.croix-rouge.fr" />
+		<param name="recipentSP" value="https://recsso.sibenevoles.croix-rouge.fr/crf-benevoles/saml2/acs" />
+		<param name="audienceSP" value="https://recsso.sibenevoles.croix-rouge.fr" />
+		<param name="pathKeyPKCS8" value="D:\\data\\CRf_SIBenevole\\conf\\sp.recsso.sibenevoles.croix-rouge.fr-SELF.key.der" />
+	</path>
+	
+	<path name="tbab">
+		<param name="scriptJSTableau" value="https://sid.croix-rouge.fr/javascripts/api/tableau_v8.js" />
+		<param name="tableauAccueilUL" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_BANDEAU_STRUCTURE/bandeau_structure?Structure=" />
+		<param name="tableauAccueilAL" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_BANDEAU_STRUCTURE/bandeau_structure?Structure=" />
+		<param name="tableauAccueilEQ" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_BANDEAU_STRUCTURE/bandeau_structure?Structure=" />
+		<param name="tableauAccueilDD" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_BANDEAU_STRUCTURE/bandeau_structure?Structure=" />
+		<param name="tableauAccueilDT" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_BANDEAU_STRUCTURE/bandeau_structure?Structure=" />
+		<param name="tableauOngletUL" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_PUL_0/Accueil?Structure=" />
+		<param name="tableauOngletAL" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_PUL_0/Accueil?Structure=" />
+		<param name="tableauOngletEQ" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_PUL_0/Accueil?Structure=" />
+		<param name="tableauOngletDD" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_PDD/Accueil?Structure=" />
+		<param name="tableauOngletDT" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_PDD/Accueil?Structure=" />
+		<param name="tableauAccueilBnvles" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_BANDEAU_BEN/bandeau_ben?IDNIVOL=" />
+		<param name="tableauOngletBnvles" value="https://sid.croix-rouge.fr/#/site/SIB/views/TBAB_BEN/Activits?IDNIVOL=" />
+	</path>
+	
+	<path name="editions.model">
+		<param name="recuFiscal" value="file:/D:\\Projets\\SIBenevoles\\CRf_SIBenevoles\\Main\\crf-benevoles\\api\\src\\main\\resources\\fr\\croixrouge\\modeles\\recu_fiscal_list.odt" />
+		<param name="carteAdherent" value="file:/D:\\Projets\\SIBenevoles\\CRf_SIBenevoles\\Main\\crf-benevoles\\api\\src\\main\\resources\\fr\\croixrouge\\modeles\\carte_adherent_list.odt" />
+		<param name="courrierStandard" value="file:/D:\\Projets\\SIBenevoles\\CRf_SIBenevoles\\Main\\crf-benevoles\\api\\src\\main\\resources\\fr\\croixrouge\\modeles\\courrier_standard_list.odt" />
+	</path>
+	
+	<path name="traitementsMasse">
+		<param name="devMode" value="true" />
+	</path>
+
+	<path name="piwik">
+		<param name="activer" value="true" />
+		<param name="siteIdDesktop" value="XX" />
+		<param name="siteIdMobile" value="YY" />
+	</path>
+	
+</config>

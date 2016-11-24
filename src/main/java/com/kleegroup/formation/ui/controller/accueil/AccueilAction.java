@@ -13,6 +13,7 @@ public final class AccueilAction extends AbstractKleeFormationActionSupport {
 
 	@Override
 	protected void initContext() {
+		//SecurityUtil.checkRole(com.kleegroup.formation.security.Role.R_ANONYMOUS);
 		//rien
 	}
 
