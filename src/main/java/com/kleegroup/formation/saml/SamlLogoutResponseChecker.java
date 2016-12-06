@@ -47,9 +47,6 @@ public class SamlLogoutResponseChecker {
 		}
 	}
 
-	/**
-	 * @return
-	 */
 	public boolean isSamlValid() {
 		return statusValid;//&& signatureValid;
 	}

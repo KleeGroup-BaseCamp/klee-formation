@@ -55,9 +55,6 @@ public class SamlLogoutRequestChecker {
 		issuerValid = true;
 	}
 
-	/**
-	 * @return
-	 */
 	public boolean isSamlValid() {
 		return destinationValid && issuerValid && signatureValid;
 	}

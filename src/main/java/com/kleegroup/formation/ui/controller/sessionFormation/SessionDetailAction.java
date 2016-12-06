@@ -1,7 +1,6 @@
 package com.kleegroup.formation.ui.controller.sessionFormation;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.Optional;
 
@@ -261,7 +260,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	}
 
 	@SuppressWarnings("deprecation")
-	public String doDatemodif() throws ParseException {
+	public String doDatemodif() {
 		final SessionFormation session_modif = session.readDto();
 		if (DateUtil.newDate().after(session_modif.getDateDebut())) {
 			throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
@@ -333,7 +332,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	}
 
 	@SuppressWarnings("deprecation")
-	public String doHoraire() throws ParseException {
+	public String doHoraire() {
 
 		final UiObject<SessionFormation> session_date = session.getUiObject();
 		if (session_date.getDate(SessionFormationFields.DATE_DEBUT.name()) == null || session_date.getDate(SessionFormationFields.DATE_FIN.name()) == null) {
@@ -362,13 +361,13 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	}
 
 	private Horaires defaultHoraire(final Date jour) {
-		final Horaires horaire = new Horaires();
-		horaire.setJour(new Date(jour.getTime()));
-		horaire.setDebut(9 * 60);
-		horaire.setFin(12 * 60);
-		horaire.setDebutAprem(14 * 60);
-		horaire.setFinAprem(18 * 60);
-		return horaire;
+		final Horaires myHoraire = new Horaires();
+		myHoraire.setJour(new Date(jour.getTime()));
+		myHoraire.setDebut(9 * 60);
+		myHoraire.setFin(12 * 60);
+		myHoraire.setDebutAprem(14 * 60);
+		myHoraire.setFinAprem(18 * 60);
+		return myHoraire;
 	}
 
 	@Override

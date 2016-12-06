@@ -11,7 +11,6 @@ import com.kleegroup.formation.domain.formation.Horaires;
 import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.domain.inscription.InscriptionView;
-import com.kleegroup.formation.resources.Resources;
 import com.kleegroup.formation.security.Role;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.formation.FormationServices;
@@ -24,7 +23,6 @@ import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.lang.MessageText;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextListModifiable;
@@ -60,7 +58,7 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 	private final ContextMdl<Utilisateur> utilisateurs = new ContextMdl<>("utilisateurs", this);
 
 	/**insciptionServices
-	 * @param forId Id de l'élément a afficher.
+	 * @param sesId Id de l'élément a afficher.
 	 */
 	public void initContext(@Named("sesId") final Long sesId) {
 		sesIdRef.set(sesId);
@@ -79,7 +77,7 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 		//mailServices.envoyerInvitation(, utilisateurServices.getCurrentUtilisateur().getMail());
 
 		mailServices.envoyerInvitation(formation.readDto(), session.readDto(), utilisateurServices.getCurrentUtilisateur().getMail());
-		new MessageText(Resources.CONFIRMATION_INSCRIPTION);
+		//TODO : virer new MessageText(Resources.CONFIRMATION_INSCRIPTION);
 		return "success_inscription";
 	}
 

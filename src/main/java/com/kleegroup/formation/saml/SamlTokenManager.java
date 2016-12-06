@@ -30,9 +30,6 @@ public class SamlTokenManager implements Component {
 	 */
 	private final SecureRandom random = new SecureRandom();
 
-	/**
-	 * @return
-	 */
 	public String generateAndRegisterToken() {
 		final String token = generateToken();
 		addToken(token);
@@ -57,10 +54,6 @@ public class SamlTokenManager implements Component {
 		VALID_TOKENS.add(token);
 	}
 
-	/**
-	 * @param tokenToCheck
-	 * @return
-	 */
 	public static boolean isTokenValid(final String tokenToCheck) {
 		return VALID_TOKENS.contains(tokenToCheck);
 	}

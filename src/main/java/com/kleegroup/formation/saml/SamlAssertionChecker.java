@@ -47,7 +47,6 @@ public class SamlAssertionChecker {
 	 * Construct an instance of SamlChecker.
 	 *
 	 * @param allowedIssuer
-	 * @param statusCodeSucces
 	 * @param allowedAudience
 	 * @param allowedRecipient
 	 */
@@ -205,7 +204,7 @@ public class SamlAssertionChecker {
 	}
 
 	/**
-	 * @return
+	 * @return true is Saml is Valid.
 	 */
 	public boolean isSamlValid() {
 		return statusValid && signatureValid && subjectValid && conditionsValid && authnStatementValid

@@ -26,7 +26,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.namespace.QName;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
@@ -85,7 +84,6 @@ import org.opensaml.xml.util.XMLHelper;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
 
 import io.vertigo.core.param.ParamManager;
 import io.vertigo.lang.Activeable;
@@ -229,7 +227,6 @@ public class SamlHelper implements Component, Activeable {
 	}
 
 	/**
-	 * @return
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @throws MetadataProviderException
@@ -258,7 +255,6 @@ public class SamlHelper implements Component, Activeable {
 
 	/**
 	 * @param filePath
-	 * @return
 	 * @throws XMLParserException
 	 * @throws UnmarshallingException
 	 * @throws FileNotFoundException
@@ -275,10 +271,6 @@ public class SamlHelper implements Component, Activeable {
 	 * @param is
 	 * @return XmlObject
 	 * @throws UnmarshallingException
-	 * @throws ParserConfigurationException
-	 * @throws IOException
-	 * @throws SAXException
-	 * @throws InitializationException
 	 * @throws org.opensaml.xml.io.UnmarshallingException
 	 * @throws org.opensaml.xml.parse.XMLParserException
 	 */
@@ -289,10 +281,6 @@ public class SamlHelper implements Component, Activeable {
 		return unmarshaller.unmarshall(elmDoc);
 	}
 
-	/**
-	 * @param requestedUrl
-	 * @return
-	 */
 	public AuthnRequest createSAMLAuthnRequest(final String requestedUrl) {
 		final AuthnRequest authnRequest = createXMLObject(AuthnRequest.class, AuthnRequest.DEFAULT_ELEMENT_NAME);
 		authnRequest.setAssertionConsumerServiceURL(metadataDescriptor.getRecipientSP());
@@ -303,10 +291,6 @@ public class SamlHelper implements Component, Activeable {
 		return authnRequest;
 	}
 
-	/**
-	 * @param userId
-	 * @return
-	 */
 	public LogoutRequest createSAMLLogoutRequest(final String userId) {
 		final LogoutRequest logoutRequest = createXMLObject(LogoutRequest.class, LogoutRequest.DEFAULT_ELEMENT_NAME);
 		final DateTime dateTime = DateTime.now();
@@ -322,10 +306,6 @@ public class SamlHelper implements Component, Activeable {
 		return logoutRequest;
 	}
 
-	/**
-	 * @param credential
-	 * @return
-	 */
 	public static Signature createSignature(final Credential credential) {
 		final Signature sig = SamlHelper.createXMLObject(Signature.class, Signature.DEFAULT_ELEMENT_NAME);
 		sig.setSigningCredential(credential);
@@ -365,11 +345,6 @@ public class SamlHelper implements Component, Activeable {
 		}
 	}
 
-	/**
-	 * @param path
-	 * @return
-	 * @throws IOException
-	 */
 	public static Credential createCredentialFromPkcs8(final String path) throws IOException {
 		final Path keyFile = Paths.get(path);
 		final byte[] keyData = Files.readAllBytes(keyFile);
@@ -391,19 +366,12 @@ public class SamlHelper implements Component, Activeable {
 		return credential;
 	}
 
-	/**
-	 * @return
-	 */
 	private Issuer generateIssuer() {
 		final Issuer issuer = createXMLObject(Issuer.class, Issuer.DEFAULT_ELEMENT_NAME);
 		issuer.setValue(metadataDescriptor.getAudienceSP());
 		return issuer;
 	}
 
-	/**
-	 * @param requestedUrl
-	 * @return
-	 */
 	public SingleSignOnServiceImpl createSingleSignOnEndpoint() {
 		final QName qName = new QName(SAMLConstants.SAML20MD_NS, "SingleSignOnService", SAMLConstants.SAML20MD_PREFIX);
 		final SingleSignOnServiceImpl endpoint = SamlHelper.createXMLObject(SingleSignOnServiceImpl.class, qName);
@@ -411,10 +379,6 @@ public class SamlHelper implements Component, Activeable {
 		return endpoint;
 	}
 
-	/**
-	 * @param requestedUrl
-	 * @return
-	 */
 	public SingleLogoutService createSingleLogoutRequestEndpoint() {
 		final QName qName = new QName(SAMLConstants.SAML20MD_NS, "SingleLogoutService", SAMLConstants.SAML20MD_PREFIX);
 		final SingleLogoutService endpoint = SamlHelper.createXMLObject(SingleLogoutService.class, qName);
@@ -422,10 +386,6 @@ public class SamlHelper implements Component, Activeable {
 		return endpoint;
 	}
 
-	/**
-	 * @param requestedUrl
-	 * @return
-	 */
 	public SingleLogoutService createSingleLogoutResponseEndpoint() {
 		final QName qName = new QName(SAMLConstants.SAML20MD_NS, "SingleLogoutService", SAMLConstants.SAML20MD_PREFIX);
 		final SingleLogoutService endpoint = SamlHelper.createXMLObject(SingleLogoutService.class, qName);
@@ -443,10 +403,6 @@ public class SamlHelper implements Component, Activeable {
 		return document.getDocumentElement();
 	}
 
-	/**
-	 * @param assertion
-	 * @return
-	 */
 	public static String getNameFromPrincipal(final Assertion assertion) {
 		final AttributeStatement attributeStatement = assertion.getAttributeStatements().get(0);
 
@@ -457,24 +413,15 @@ public class SamlHelper implements Component, Activeable {
 		return nivol.orElseThrow(() -> new VSecurityException(new MessageText("NameID", null)));
 	}
 
-	/**
-	 * @return
-	 */
 	public SamlAssertionChecker createSamlAssertionChecker() {
 		return new SamlAssertionChecker(metadataDescriptor.getEntityIdIDP(), metadataDescriptor.getAudienceSP(),
 				metadataDescriptor.getRecipientSP());
 	}
 
-	/**
-	 * @return
-	 */
 	public static SamlLogoutResponseChecker createSamlLogoutResponseChecker() {
 		return new SamlLogoutResponseChecker();
 	}
 
-	/**
-	 * @return
-	 */
 	public static SamlLogoutRequestChecker createSamlLogoutRequestChecker() {
 		return new SamlLogoutRequestChecker();
 	}
@@ -511,7 +458,6 @@ public class SamlHelper implements Component, Activeable {
 
 	/**
 	 * @param req
-	 * @return
 	 */
 	public Optional<Cookie> findSamlCookie(final HttpServletRequest req) {
 		final Cookie cookies[] = req.getCookies();
@@ -526,7 +472,6 @@ public class SamlHelper implements Component, Activeable {
 
 	/**
 	 * @param req
-	 * @return
 	 */
 	public static String getSamlRequestBase64(final HttpServletRequest req) {
 		final String samlRequest = req.getParameter(SAML_REQUEST);
@@ -534,19 +479,11 @@ public class SamlHelper implements Component, Activeable {
 		return samlRequest;
 	}
 
-	/**
-	 * @param req
-	 * @return
-	 */
 	public static byte[] getSamlRequestByteArray(final HttpServletRequest req) {
 		final String samlRequestBase64 = getSamlRequestBase64(req);
 		return Base64.getDecoder().decode(samlRequestBase64);
 	}
 
-	/**
-	 * @param req
-	 * @return
-	 */
 	public static String getSamlResponseBase64(final HttpServletRequest req) {
 		final String samlResponse = req.getParameter(SAML_RESPONSE);
 		if (LOG.isDebugEnabled()) {
@@ -555,10 +492,6 @@ public class SamlHelper implements Component, Activeable {
 		return samlResponse;
 	}
 
-	/**
-	 * @param req
-	 * @return
-	 */
 	public static byte[] getSamlResponseByteArray(final HttpServletRequest req) {
 		final String samlResponseBase64 = getSamlResponseBase64(req);
 		return Base64.getDecoder().decode(samlResponseBase64);
@@ -628,7 +561,6 @@ public class SamlHelper implements Component, Activeable {
 
 	/**
 	 * @param request
-	 * @return
 	 */
 	public static Optional<String> extractRequestedUrl(final HttpServletRequest request) {
 		//return Optional.<String> ofNullable((String) request.getAttribute(RELAY_STATE));

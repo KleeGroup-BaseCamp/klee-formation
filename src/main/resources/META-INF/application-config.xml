@@ -20,7 +20,7 @@
 
   	
   	<path name="saml">
-		<param name="activer" value="true" />
+		<param name="activer" value="false" />
 		<param name="pathIDPMetadata" value="C:\\Users\\CMOUTTE\\Documents\\GitHub\\klee-formation\\src\\main\\java\\com\\kleegroup\\formation\\saml\\KleeFormation.IDP_metadata.xml" />
 		<param name="entityIdIDP" value="https://sso.kleegroup.com/saml2/idp/metadata.php" />
 		<param name="recipentSP" value="http://cmoutte:8080/formation/saml2/acs" />
