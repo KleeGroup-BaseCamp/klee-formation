@@ -30,7 +30,7 @@ public final class UtilisateurListAction extends AbstractKleeFormationActionSupp
 	/** {@inheritDoc} */
 	@Override
 	protected void initContext() {
-		SecurityUtil.checkRole(com.kleegroup.formation.security.Role.R_RESPONSSABLE, com.kleegroup.formation.security.Role.R_ADMIN);
+		SecurityUtil.checkRole(com.kleegroup.formation.security.Roles.R_RESPONSSABLE, com.kleegroup.formation.security.Roles.R_ADMIN);
 		roles.publish(Role.class, null);
 		utilisateurCritereForm.publish(new UtilisateurCritere());
 		utilisateurs.publish(utilisateurServices.listUtilisateur());
@@ -59,7 +59,7 @@ public final class UtilisateurListAction extends AbstractKleeFormationActionSupp
 	}
 
 	public boolean isAdministrateur() {
-		return SecurityUtil.hasRole(com.kleegroup.formation.security.Role.R_ADMIN);
+		return SecurityUtil.hasRole(com.kleegroup.formation.security.Roles.R_ADMIN);
 	}
 
 	@Override

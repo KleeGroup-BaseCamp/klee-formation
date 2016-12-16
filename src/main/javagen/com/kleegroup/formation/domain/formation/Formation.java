@@ -1,9 +1,10 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Formation
@@ -25,10 +26,10 @@ public final class Formation implements Entity {
 	public URI<Formation> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
-	 * Récupère la valeur de la propriété 'Id'. 
+	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long forId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_IDENTIFIANT", type = "ID", required = true, label = "Id")
@@ -47,8 +48,8 @@ public final class Formation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'intitule'. 
-	 * @return String intitule 
+	 * Récupère la valeur de la propriété 'intitule'.
+	 * @return String intitule
 	 */
 	@Field(domain = "DO_LIBELLE_COURT", label = "intitule")
 	public String getIntitule() {
@@ -58,7 +59,7 @@ public final class Formation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'intitule'.
-	 * @param intitule String 
+	 * @param intitule String
 	 */
 	public void setIntitule(final String intitule) {
 		this.intitule = intitule;
@@ -66,8 +67,8 @@ public final class Formation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'commentaire'. 
-	 * @return String commentaire 
+	 * Récupère la valeur de la propriété 'commentaire'.
+	 * @return String commentaire
 	 */
 	@Field(domain = "DO_LIBELLE_LONG", label = "commentaire")
 	public String getCommentaire() {
@@ -77,7 +78,7 @@ public final class Formation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'commentaire'.
-	 * @param commentaire String 
+	 * @param commentaire String
 	 */
 	public void setCommentaire(final String commentaire) {
 		this.commentaire = commentaire;
@@ -85,7 +86,7 @@ public final class Formation implements Entity {
 
 	/**
 	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Niveau'. 
+	 * Récupère la valeur de la propriété 'Niveau'.
 	 * @return String nivCode <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", required = true, label = "Niveau")
@@ -126,20 +127,19 @@ public final class Formation implements Entity {
 	 * Association URI: Session formation.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_FOR_SES",
-    	fkFieldName = "FOR_ID",
-    	primaryDtDefinitionName = "DT_FORMATION",
-    	primaryIsNavigable = true,
-    	primaryRole = "Formation",
-    	primaryLabel = "Formation",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_SESSION_FORMATION",
-    	foreignIsNavigable = true,
-    	foreignRole = "SessionFormation",
-    	foreignLabel = "Session formation",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association (
+			name = "A_FOR_SES",
+			fkFieldName = "FOR_ID",
+			primaryDtDefinitionName = "DT_FORMATION",
+			primaryIsNavigable = true,
+			primaryRole = "Formation",
+			primaryLabel = "Formation",
+			primaryMultiplicity = "1..1",
+			foreignDtDefinitionName = "DT_SESSION_FORMATION",
+			foreignIsNavigable = true,
+			foreignRole = "SessionFormation",
+			foreignLabel = "Session formation",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getSessionFormationDtListURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_FOR_SES", "SessionFormation");
 	}
@@ -153,14 +153,8 @@ public final class Formation implements Entity {
 			return null;
 		}
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
-		if (niveau != null) {
-			// On s'assure que l'objet correspond à la bonne clé
-			if (!fkURI.equals(niveau.getURI())) {
-				niveau = null;
-			}
-		}		
-		if (niveau == null) {
-			niveau = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().read(fkURI);
+		if (niveau == null || !fkURI.equals(niveau.getURI())) {
+			niveau = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().readOne(fkURI);
 		}
 		return niveau;
 	}
@@ -169,20 +163,19 @@ public final class Formation implements Entity {
 	 * Retourne l'URI: Niveau.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ASSOCIATION6",
-    	fkFieldName = "NIV_CODE",
-    	primaryDtDefinitionName = "DT_NIVEAU",
-    	primaryIsNavigable = true,
-    	primaryRole = "Niveau",
-    	primaryLabel = "Niveau",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_FORMATION",
-    	foreignIsNavigable = false,
-    	foreignRole = "Formation",
-    	foreignLabel = "Formation",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association (
+			name = "A_ASSOCIATION6",
+			fkFieldName = "NIV_CODE",
+			primaryDtDefinitionName = "DT_NIVEAU",
+			primaryIsNavigable = true,
+			primaryRole = "Niveau",
+			primaryLabel = "Niveau",
+			primaryMultiplicity = "1..1",
+			foreignDtDefinitionName = "DT_FORMATION",
+			foreignIsNavigable = false,
+			foreignRole = "Formation",
+			foreignLabel = "Formation",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Niveau> getNiveauURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_ASSOCIATION6", com.kleegroup.formation.domain.formation.Niveau.class);
 	}

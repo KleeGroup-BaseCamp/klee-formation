@@ -1,8 +1,9 @@
 package com.kleegroup.formation.domain.administration.utilisateur;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données RoleInput
@@ -14,10 +15,9 @@ public final class RoleInput implements DtObject {
 
 	private String rolCode;
 
-	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Role'. 
+	 * Récupère la valeur de la propriété 'Role'.
 	 * @return String rolCode <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_CODE", required = true, label = "Role")

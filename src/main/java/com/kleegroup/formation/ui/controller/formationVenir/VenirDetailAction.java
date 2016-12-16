@@ -11,7 +11,7 @@ import com.kleegroup.formation.domain.formation.Horaires;
 import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.domain.inscription.InscriptionView;
-import com.kleegroup.formation.security.Role;
+import com.kleegroup.formation.security.Roles;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.formation.FormationServices;
 import com.kleegroup.formation.services.horaires.HorairesServices;
@@ -82,7 +82,7 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 	}
 
 	public boolean isManager() {
-		return SecurityUtil.hasRole(Role.R_RESPONSSABLE);
+		return SecurityUtil.hasRole(Roles.R_RESPONSSABLE);
 	}
 
 	public boolean isComplet() {

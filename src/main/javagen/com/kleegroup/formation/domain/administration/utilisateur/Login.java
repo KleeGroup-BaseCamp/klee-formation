@@ -1,9 +1,10 @@
 package com.kleegroup.formation.domain.administration.utilisateur;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Login
@@ -23,10 +24,10 @@ public final class Login implements Entity {
 	public URI<Login> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
-	 * Récupère la valeur de la propriété 'LOG ID'. 
+	 * Récupère la valeur de la propriété 'LOG ID'.
 	 * @return Long logId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_IDENTIFIANT", type = "ID", required = true, label = "LOG ID")
@@ -45,7 +46,7 @@ public final class Login implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Login'. 
+	 * Récupère la valeur de la propriété 'Login'.
 	 * @return String login <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_LOGIN", required = true, label = "Login")
@@ -64,7 +65,7 @@ public final class Login implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Mot de passe'. 
+	 * Récupère la valeur de la propriété 'Mot de passe'.
 	 * @return String password <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_PASSWORD", required = true, label = "Mot de passe")
@@ -83,7 +84,7 @@ public final class Login implements Entity {
 
 	/**
 	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Utilisateur'. 
+	 * Récupère la valeur de la propriété 'Utilisateur'.
 	 * @return Long utiId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_IDENTIFIANT", type = "FOREIGN_KEY", required = true, label = "Utilisateur")

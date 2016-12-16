@@ -31,7 +31,7 @@ public final class CatalogueListAction extends AbstractKleeFormationActionSuppor
 	/** {@inheritDoc} */
 	@Override
 	public void initContext() {
-		SecurityUtil.checkRole(com.kleegroup.formation.security.Role.R_ADMIN, com.kleegroup.formation.security.Role.R_FORMATTEUR);
+		SecurityUtil.checkRole(com.kleegroup.formation.security.Roles.R_ADMIN, com.kleegroup.formation.security.Roles.R_FORMATTEUR);
 		niveaux.publish(Niveau.class, null);
 		formationCritere.publish(new FormationCritere());
 		formations.publish(formationServices.getFormationListByCritere(formationCritere.readDto()));

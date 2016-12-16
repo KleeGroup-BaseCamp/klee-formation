@@ -156,7 +156,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 	@Override
 	public void deleteUtilisateur(final Long utiId) {
 		//throw new UnsupportedOperationException("operation not supported yet !!!");
-		final FilterCriteria<Login> filter = new FilterCriteriaBuilder<Login>().withFilter(LoginFields.UTI_ID, utiId).build();
+		final FilterCriteria<Login> filter = new FilterCriteriaBuilder<Login>().addFilter(LoginFields.UTI_ID, utiId).build();
 		final DtList<Login> logins = loginDAO.getList(filter, 1);
 		loginDAO.delete(logins.get(0).getLogId());
 		final Utilisateur utilisateur = utilisateurDAO.get(utiId);
@@ -187,7 +187,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 		Assertion.checkNotNull(utilisateurLogin);
 		//-----
 		final Criteria<Login> critere = new FilterCriteriaBuilder<Login>()
-				.withFilter(DtDefinitions.LoginFields.LOGIN, utilisateurLogin.getLogin())
+				.addFilter(DtDefinitions.LoginFields.LOGIN, utilisateurLogin.getLogin())
 				.build();
 		final DtList<Login> logins = loginDAO.getList(critere, 1);
 		//On effectue le même traitement si le login est incorrect pour éviter l'analyse par le temps
@@ -281,7 +281,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 		newUtilisateur.setResponsable(false);
 		newUtilisateur.setAdmin(false);
 		final List<URI> roles = new ArrayList<>();
-		roles.add(DtObjectUtil.createURI(com.kleegroup.formation.domain.administration.utilisateur.Role.class, com.kleegroup.formation.security.Role.R_ANONYMOUS.name()));
+		roles.add(DtObjectUtil.createURI(com.kleegroup.formation.domain.administration.utilisateur.Role.class, com.kleegroup.formation.security.Roles.R_ANONYMOUS.name()));
 		saveUtilisateur(newUtilisateur, roles);
 	}
 

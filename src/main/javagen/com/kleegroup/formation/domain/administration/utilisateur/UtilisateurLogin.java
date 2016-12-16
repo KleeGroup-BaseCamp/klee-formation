@@ -1,8 +1,9 @@
 package com.kleegroup.formation.domain.administration.utilisateur;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données UtilisateurLogin
@@ -18,11 +19,10 @@ public final class UtilisateurLogin implements DtObject {
 	private String newPassword;
 	private String newPasswordCheck;
 
-	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Nom'. 
-	 * @return String nom 
+	 * Récupère la valeur de la propriété 'Nom'.
+	 * @return String nom
 	 */
 	@Field(domain = "DO_LIBELLE", label = "Nom")
 	public String getNom() {
@@ -32,7 +32,7 @@ public final class UtilisateurLogin implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Nom'.
-	 * @param nom String 
+	 * @param nom String
 	 */
 	public void setNom(final String nom) {
 		this.nom = nom;
@@ -40,7 +40,7 @@ public final class UtilisateurLogin implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Identifiant utilisateur'. 
+	 * Récupère la valeur de la propriété 'Identifiant utilisateur'.
 	 * @return String login <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_LOGIN", required = true, label = "Identifiant utilisateur")
@@ -59,7 +59,7 @@ public final class UtilisateurLogin implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Mot de passe'. 
+	 * Récupère la valeur de la propriété 'Mot de passe'.
 	 * @return String password <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_PASSWORD", required = true, label = "Mot de passe")
@@ -78,7 +78,7 @@ public final class UtilisateurLogin implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Nouveau mot de passe'. 
+	 * Récupère la valeur de la propriété 'Nouveau mot de passe'.
 	 * @return String newPassword <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_PASSWORD", required = true, label = "Nouveau mot de passe")
@@ -97,7 +97,7 @@ public final class UtilisateurLogin implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Resaisir le mot de passe'. 
+	 * Récupère la valeur de la propriété 'Resaisir le mot de passe'.
 	 * @return String newPasswordCheck <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_PASSWORD", required = true, label = "Resaisir le mot de passe")

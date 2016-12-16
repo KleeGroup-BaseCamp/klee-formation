@@ -12,7 +12,7 @@ import com.kleegroup.formation.ui.controller.menu.Menu;
 import com.kleegroup.formation.ui.controller.menu.NavigationItem;
 
 import io.vertigo.struts2.core.AbstractActionSupport;
-import io.vertigo.struts2.core.UiObject;
+import io.vertigo.struts2.core.StrutsUiObject;
 import io.vertigo.struts2.impl.MethodUtil;
 import io.vertigo.struts2.impl.servlet.RequestContainerWrapper;
 
@@ -51,7 +51,7 @@ public abstract class AbstractKleeFormationActionSupport extends AbstractActionS
 		super.preInitContext();
 		final Utilisateur utilisateur = utilisateurServices.getCurrentUtilisateur();
 		if (utilisateur != null) {
-			getModel().put("connectedUser", new UiObject<>(utilisateur));
+			getModel().put("connectedUser", new StrutsUiObject<>(utilisateur));
 		}
 		getModel().put("menuItems", Menu.ROOT_MENU.getChildren());
 		getModel().put("activeMenu", getActiveMenu());
@@ -95,7 +95,7 @@ public abstract class AbstractKleeFormationActionSupport extends AbstractActionS
 	public abstract String getPageName();
 
 	public Serializable CurrentUtilisateur() {
-		return getModel().put("connectedUser", new UiObject<>(utilisateurServices.getCurrentUtilisateur()));
+		return getModel().put("connectedUser", new StrutsUiObject<>(utilisateurServices.getCurrentUtilisateur()));
 	}
 
 }

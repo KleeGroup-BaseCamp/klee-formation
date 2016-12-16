@@ -120,7 +120,7 @@ public final class SessionPAO implements StoreServices {
 	/**
 	 * Execute la tache TK_HORAIRE_DEBUT.
 	 * @param sesId Long 
-	 * @return Integer dtcHoraire
+	 * @return Integer dtHoraire
 	*/
 	public Integer horaireDebut(final Long sesId) {
 		final Task task = createTaskBuilder("TK_HORAIRE_DEBUT")
@@ -134,7 +134,7 @@ public final class SessionPAO implements StoreServices {
 	/**
 	 * Execute la tache TK_HORAIRE_FIN.
 	 * @param sesId Long 
-	 * @return Integer dtcHoraire
+	 * @return Integer dtHoraire
 	*/
 	public Integer horaireFin(final Long sesId) {
 		final Task task = createTaskBuilder("TK_HORAIRE_FIN")

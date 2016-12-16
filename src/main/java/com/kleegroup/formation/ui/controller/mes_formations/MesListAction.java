@@ -6,7 +6,7 @@ import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.domain.inscription.InscriptionView;
 import com.kleegroup.formation.domain.session.SessionView;
-import com.kleegroup.formation.security.Role;
+import com.kleegroup.formation.security.Roles;
 import com.kleegroup.formation.services.administration.utilisateur.UtilisateurServices;
 import com.kleegroup.formation.services.inscription.InscriptionServices;
 import com.kleegroup.formation.services.session.SessionServices;
@@ -53,7 +53,7 @@ public final class MesListAction extends AbstractKleeFormationActionSupport {
 	}
 
 	public boolean isformateur() {
-		return SecurityUtil.hasRole(Role.R_FORMATTEUR);
+		return SecurityUtil.hasRole(Roles.R_FORMATTEUR);
 	}
 
 	/** {@inheritDoc} */
