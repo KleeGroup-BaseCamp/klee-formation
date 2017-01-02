@@ -52,7 +52,7 @@ create Task TK_GET_INSCRIPTION_VIEW_VENIR_FORMATION {
                join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
                join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
                Where ins.UTI_ID = #UTILISATEUR_ID#
-								 and ses.DATE_FIN >= CURRENT_DATE()",
+								 and ses.DATE_FIN >= CURRENT_DATE",
   attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
   attribute DTC {domain : DO_DT_INSCRIPTION_VIEW_DTC, notNull:"true", inOut :"out",}
 }
@@ -77,7 +77,7 @@ create Task TK_GET_INSCRIPTION_VIEW_PASSER_FORMATION {
                join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
                join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
                Where ins.UTI_ID = #UTILISATEUR_ID#
-			and ses.DATE_DEBUT < CURRENT_DATE()",
+			and ses.DATE_DEBUT < CURRENT_DATE",
   attribute UTILISATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
   attribute DTC {domain : DO_DT_INSCRIPTION_VIEW_DTC, notNull:"true", inOut :"out",}
 }

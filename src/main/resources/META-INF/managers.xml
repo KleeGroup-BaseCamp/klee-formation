@@ -42,7 +42,8 @@
 		<component api="SqlDataBaseManager" class="io.vertigo.dynamo.impl.database.SqlDataBaseManagerImpl">
 			<plugin class="io.vertigo.dynamo.plugins.database.connection.datasource.DataSourceConnectionProviderPlugin">
 				<param name="source" value="java:/comp/env/jdbc/DataSource" />
-				<param name="classname" value="io.vertigo.dynamo.impl.database.vendor.h2.H2Database" />
+<!-- 				<param name="classname" value="io.vertigo.dynamo.impl.database.vendor.h2.H2Database" /> -->
+				<param name="classname" value="io.vertigo.dynamo.impl.database.vendor.sqlserver.SqlServerDataBase" />
 			</plugin>
 		</component>
 

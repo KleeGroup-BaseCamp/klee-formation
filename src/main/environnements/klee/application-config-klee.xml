@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE application-config PUBLIC "-//Kasper//DTD Kasper Application Config 1.0//EN"
+                              "http://www.kleegroup.com/dtd/kasper-application-config_1_0.dtd"> 
+
+<application-config>
+  	<config name="admin.user">
+  		<property name="nbRowPage" value="15"/>
+  		<property name="nbDossierEnCours" value="10"/>
+  		<property name="nbAlerteEnCours" value="5"/>
+  		<property name="nbDossierFinAppel" value="5"/>
+  		<property name="nbDossiersTransferesCDN" value="10"/>
+  		<property name="nbDecisionsNotifiees" value="5"/>
+  		<property name="delaiJoursDossiersTranferesCDN" value="30"/>
+  		<property name="delaiJoursDecisionsNotifiees" value="60"/>
+  		<property name="confidentialite" value="Les données présentes dans l'application sont confidentielles et ne doivent en aucun cas être divulguées à un tiers de la société. "/>
+  	</config>
+  	
+  	<config name="admin.upload">
+  		<property name="size_limit" value="5242880"/>
+  		<property name="mime_types" value="/(\.|\/)(pdf|gif|jpe?g|png|docx?|xlsx?|txt)$/"/>
+  	</config>
+
+  	<config name="admin.search">
+  		<property name="avancedSearchMaxRows" value="50"/>
+  		<property name="defaultMaxRows" value="500"/>
+  	</config>
+  	
+  	<config name="admin.clamav">
+  		<property name="enabled" value="true"/>
+  		<property name="host" value="icdpi2.dev.klee.lan.net"/>
+  		<property name="port" value="3310"/>
+  		<property name="timeout" value="15000"/>
+  	</config>
+  	
+  	<config name="admin.ldap">
+  		<property name="enabled" value="false"/>
+  		<property name="host" value="KLEE-DC01"/>
+  		<property name="port" value="389"/>
+  		<property name="sslEnabled" value="false"/>
+  		<property name="searchFilter" value="(&amp;(objectClass=user)(userPrincipalName=%u@KLEE.LAN.NET))"/>
+  		<property name="searchBase" value="dc=klee,dc=lan,dc=net"/>
+  		<property name="searchLogin" value="CN=Matthieu LAROCHE,OU=La Boursidiere,OU=Utilisateurs,DC=KLEE,DC=LAN,DC=NET"/>
+  		<property name="searchPassword" value="searchPassword"/>
+  	</config>
+  	
+  	<config name="admin.sso">
+  		<property name="enabled" value="true"/>
+  		<property name="redirectPage" value="/pages/pendingPurchaseList.jsf" />
+  	</config>
+  	
+  	
+<!-- ################################################################################################################## -->
+<!-- MAIL                                    ########################################################################## -->
+<!-- ################################################################################################################## -->	
+	
+	<config name="admin.mail">
+		<property name="enabled" value="true"/>
+		<property name="host" value="localdelivery.klee.lan.net"/>
+		<property name="timeout" value="1000"/>
+		<property name="from" value="noreply-da@kleegroup.com"/>
+		<property name="support" value="ticket@kleegroup.com"/>
+		<property name="supportDa" value="support_da@kleegroup.com"/>
+		<property name="rh" value="amandine.lefevre@kleegroup.com"/>
+		<property name="rhCC" value="Laurence.EYRAUDJOLY@kleegroup.com"/>
+	</config>
+
+
+<!-- ################################################################################################################## -->
+<!-- PROXY                                   ########################################################################## -->
+<!-- ################################################################################################################## -->	
+	
+	<config name="admin.proxy">
+		<property name="enabled" value="false"/>
+		<property name="host" value="172.20.0.9"/>
+		<property name="port" value="3128"/>
+	</config>
+	
+<!-- ################################################################################################################## -->
+<!-- REPPORT                                   ########################################################################## -->
+<!-- ################################################################################################################## -->	
+	
+	<config name="admin.repport">
+		<property name="receivers" value="thibaud.viala@kleegroup.com"/>
+	</config>
+	
+	
+</application-config>

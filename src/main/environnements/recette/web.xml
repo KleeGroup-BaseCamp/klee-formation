@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<display-name>KleeFormation Recette</display-name>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>io.vertigo.struts2.impl.servlet.ApplicationServletContextListener</listener-class>
+	</listener>
+	
+	<!-- Paramètrage des variables du managers.xml -->
+	<context-param>
+		<param-name>boot.configXmlInterne</param-name>
+		<param-value>/META-INF/application-config.xml</param-value>
+	</context-param>
+
+	<!-- Paramètrage des composants : assemblage de : - Dt de DtDefinitions; 
+		- Managers de managers.xml - Services de KleeFormation-services.xml - Autres éléments 
+		Task/MDM de execution.kpr -->
+	<context-param>
+		<param-name>boot.applicationConfiguration</param-name>
+		<param-value>/META-INF/managers.xml;/META-INF/kleeFormation-services.xml;/META-INF/security.xml</param-value>
+	</context-param>
+	
+	
+	 <!-- Filtre de sécurité SAML2 SSO/SLO -->
+	<filter>
+		<filter-name>SamlSecurityFilter</filter-name>
+		<filter-class>com.kleegroup.formation.saml.SamlFilter</filter-class>    
+		<init-param>
+			<param-name>url-exclude-pattern</param-name>
+			<!-- On autorise l'accès aux ressources statiques (sauf pour les fichiers JS), à la servlet de reception de la réponse SAML de Login et à la page de deconnexion OK -->
+			<param-value>/static/(fonts|img|stylesheets)/*;/saml2/acs;/logoutSuccess</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>Character Encoding Filter</filter-name>
+		<filter-class>io.vertigo.struts2.impl.servlet.filter.SetCharsetEncodingFilter</filter-class>
+		<init-param>
+			<param-name>charset</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Character Encoding Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<description>
+			Filtre de modification des entétes HTTP pour gérer le cache.
+			Désactive le cache navigateur et proxy sur toutes les URLs sauf les /static/* et /struts/*
+		</description>
+		<filter-name>client-no-cache</filter-name>
+		<filter-class>io.vertigo.struts2.impl.servlet.filter.CacheControlFilter</filter-class>
+		<init-param>
+			<param-name>Cache-Control</param-name>
+			<param-value>no-cache</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Pragma</param-name>
+			<param-value>no-cache</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Expires</param-name>
+			<param-value>-1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>url-exclude-pattern</param-name>
+			<param-value>/static/*;/struts/*</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>client-no-cache</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<description>
+			Filtre de modification des entétes HTTP pour gérer le cache.
+			Place un cache public (navigateur et proxy) de 24h sur les URLs /static/*
+			Pour un site très grand public, voir à placer un cache plus long (15j => 1209600)
+		</description>
+		<filter-name>client-24h-cache</filter-name>
+		<filter-class>io.vertigo.struts2.impl.servlet.filter.CacheControlFilter</filter-class>
+		<init-param>
+			<param-name>Cache-Control</param-name>
+			<param-value>max-age=86400, public</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>client-24h-cache</filter-name>
+		<url-pattern>/static/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>	
+		<description>
+			Filtre de sécurisation des URLs et de conservation des sessions.
+			Limite l'accés aux URLs (sauf celles de url-exclude-pattern) aux utilisateurs authentifiés.
+			Authentifié = isAuthentified true dans la UserSession.
+		</description>
+		<filter-name>Security Filter</filter-name>
+		<filter-class>io.vertigo.struts2.impl.servlet.filter.SecurityFilter</filter-class>
+		<init-param>
+			<param-name>url-no-authentification</param-name>
+			<param-value>/tutorial/*;/*Login.do;/ListAutocomplete.do;/saml2/acs;/logoutSuccess</param-value>
+		</init-param>
+		<init-param>
+			<param-name>url-exclude-pattern</param-name>
+			<param-value>/;/index.html;/static/*;/struts/*;/jsp/dev-*.jsp</param-value>
+		</init-param>
+	</filter>
+	
+	
+	<filter-mapping>
+		<filter-name>SamlSecurityFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>Security Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<description>
+			Filtre pour les exports de table avec le displaytag.	
+		</description>
+		<filter-name>ResponseOverrideFilter</filter-name>
+		<filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ResponseOverrideFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<description>Filtre Struts2.</description>
+		<filter-name>Struts2 Filter</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Struts2 Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+
+	<mime-mapping>
+		<extension>html</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>txt</extension>
+		<mime-type>text/plain</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>css</extension>
+		<mime-type>text/css</mime-type>
+	</mime-mapping>
+	<welcome-file-list>
+		<!-- <welcome-file>index.html</welcome-file> -->
+		<welcome-file>home</welcome-file>
+	</welcome-file-list>
+
+ 	<!-- DEBUT - SSO/SLO via SAML -->
+ 	<servlet>
+      <servlet-name>homeServlet</servlet-name>
+      <servlet-class>com.kleegroup.formation.saml.HomeServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>homeServlet</servlet-name>
+      <url-pattern>/home</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	
+ 	<!-- SSO -->
+ 	<servlet>
+      <servlet-name>acsServlet</servlet-name>
+      <servlet-class>com.kleegroup.formation.saml.AcsServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>acsServlet</servlet-name>
+      <url-pattern>/saml2/acs</url-pattern>
+ 	</servlet-mapping>
+	<!-- SLO -->
+ 	<servlet>
+      <servlet-name>slsServlet</servlet-name>
+      <servlet-class>com.kleegroup.formation.saml.SLSRequestServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>slsServlet</servlet-name>
+      <url-pattern>/saml2/sls</url-pattern>
+ 	</servlet-mapping>
+ 	<servlet>
+      <servlet-name>slsResponseServlet</servlet-name>
+      <servlet-class>com.kleegroup.formation.saml.SLSResponseServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>slsResponseServlet</servlet-name>
+      <url-pattern>/saml2/slsResponse</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	<servlet>
+      <servlet-name>logout</servlet-name>
+      <servlet-class>com.kleegroup.formation.saml.LogoutServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>logout</servlet-name>
+      <url-pattern>/logout</url-pattern>
+ 	</servlet-mapping>
+ 	
+	<servlet>
+      <servlet-name>logoutSuccess</servlet-name>
+      <jsp-file>/jsp/accueil/accueil.jsp</jsp-file>
+ 	</servlet>
+ 	<servlet-mapping>
+      <servlet-name>logoutSuccess</servlet-name>
+      <url-pattern>/logoutSuccess</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	<!-- FIN -->
+
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/jsp/application-error.jsp</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/jsp/application-error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/jsp/application-error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/jsp/application-error.jsp</location>
+	</error-page>
+	<resource-ref>
+		<description>
+			Resource reference to a factory for java.sql.Connection
+			instances that may be used for talking to a particular
+			database that is configured in the server.xml file.
+		</description>
+		<res-ref-name>jdbc/DataSource</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+</web-app>

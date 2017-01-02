@@ -6,3 +6,4 @@
 .project
 .classpath
 /src/main/webapp/WEB-INF/lib/
+/livraison/*.zip

@@ -22,7 +22,7 @@ create Task TK_LIST_SESSION_BY_DATE {
                join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
                join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
                
-               Where ses.DATE_DEBUT >= CURRENT_DATE()
+               Where ses.DATE_DEBUT >= CURRENT_DATE
                AND ses.STATUS = 'Publier'",
   attribute DTC_SESSION_FORMATION {domain : DO_DT_SESSION_VIEW_DTC, notNull:"true", inOut :"out",}
 }
@@ -59,7 +59,7 @@ create Task TK_LIST_SESSION_BROUILLON {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "Delete ses.*
                From	SESSION_FORMATION ses
-               Where ses.DATE_DEBUT >= CURRENT_DATE()
+               Where ses.DATE_DEBUT >= CURRENT_DATE
                AND ses.STATUS = 'Brouillon'",
   attribute DTC_SESSION_FORMATION {domain : DO_DT_SESSION_FORMATION_DTC, notNull:"true", inOut :"out",}
 }
@@ -115,7 +115,7 @@ create Task TK_GET_LIST_SESSION_FORMATEUR_VENIR {
                join ETAT_SESSION_UTILISATEUR esu on ses.ESU_CODE = esu.ESU_CODE
                join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
                Where ses.UTI_ID = #FORMATEUR_ID#
-               and ses.DATE_FIN >= CURRENT_DATE()",
+               and ses.DATE_FIN >= CURRENT_DATE",
   attribute FORMATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
   attribute DTC_ {domain : DO_DT_SESSION_VIEW_DTC, notNull:"true", inOut :"out",}
   }
@@ -145,7 +145,7 @@ create Task TK_GET_LIST_SESSION_FORMATEUR_VENIR {
                join NIVEAU as niv on form.NIV_CODE = niv.NIV_CODE
                join INSCRIPTION as ins on ses.SES_ID = ins.SES_ID
                Where ses.UTI_ID = #FORMATEUR_ID#
-               and ses.DATE_FIN < CURRENT_DATE()",
+               and ses.DATE_FIN < CURRENT_DATE",
   attribute FORMATEUR_ID {domain : DO_IDENTIFIANT, notNull:"true", inOut :"in",}
   attribute DTC_ {domain : DO_DT_SESSION_VIEW_DTC, notNull:"true", inOut :"out",}
   }

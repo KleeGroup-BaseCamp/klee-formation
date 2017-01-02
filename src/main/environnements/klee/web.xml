@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<display-name>KleeFormation Prod</display-name>
+	
+	<listener>
+		<listener-class>com.kleegroup.da.boot.ApplicationServletContextListener</listener-class>
+	</listener> 
+	
+	<!-- <listener>
+		<listener-class>kasperimpl.jsf.conversation.BasicLifecycleListener</listener-class>
+	</listener>  -->
+	<context-param>
+    	<param-name>com.sun.faces.injectionProvider</param-name>
+    	<param-value>kasperimpl.jsf.component.ComponentInjectionProvider</param-value>
+	</context-param>
+	
+	
+	
+	
+	
+	
+	
+	<!-- Application configuration -->
+		<context-param>
+        <param-name>db.source</param-name>
+        <param-value>java:/comp/env/jdbc/DataSource</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db.classname</param-name>
+        <param-value>kasperimpl.database.ext.sqlserver.SqlServerDataBase</param-value>
+    </context-param>
+    <context-param>
+  	 	<param-name>dtDefinitionsClassName</param-name>
+        <param-value>com.kleegroup.da.domain.DtDefinitions</param-value>
+    </context-param>
+    <context-param>
+        <param-name>applicationConfiguration</param-name>
+        <param-value>/META-INF/managers.xml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>componentConfiguration</param-name>
+        <param-value>/META-INF/components-config.xml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>kpr</param-name>
+        <param-value>/com/kleegroup/da/execution.kpr</param-value>
+    </context-param>
+    
+    <!-- Nombre par défaut de lignes par page dans les tableaux -->
+    <context-param>
+        <param-name>jsp.defaultNbRowsPerPage</param-name>
+        <param-value>10</param-value>
+    </context-param>
+        
+	<!-- JSF configuration -->
+	<context-param>
+      <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+      <param-value>.xhtml</param-value>
+   </context-param>
+	<context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>server</param-value>
+    </context-param>
+    <context-param>    
+		<param-name>javax.faces.PROJECT_STAGE</param-name>       
+		<param-value>Development</param-value>  
+	</context-param>
+	<context-param>    
+		<param-name>javax.faces.CONFIG_FILES</param-name>       
+		<param-value>/WEB-INF/faces-config.xml</param-value>  
+	</context-param>
+	
+	<!--  primefaces configuration -->
+	<context-param>  
+    	<param-name>primefaces.THEME</param-name>  
+     	<param-value>da</param-value>  
+ 	</context-param>
+ 	
+ 	
+	
+	<filter>
+        <filter-name>Analytics Filter</filter-name>
+        <filter-class>kasperimpl.jsf.servlet.analytics.AnalyticsUIFilter</filter-class>
+    </filter> 
+    <filter-mapping>
+        <filter-name>Analytics Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+	<filter>
+        <filter-name>Security Filter</filter-name>
+        <filter-class>kasperimpl.jsf.servlet.SecurityFilter</filter-class>
+        <init-param>
+        	<param-name>url-exclude-pattern</param-name>
+        	<param-value>/pages/applicationError\.jsf;/javax\.faces\.resource/.*;/static/.*;/resources/.*;/pages/accueil/login\.jsf;/pages/checkRunning\.jsf;/pages/userCheck/check\.jsf</param-value>
+        </init-param>
+    </filter> 
+    <filter-mapping>
+        <filter-name>Security Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+  <filter>
+       <filter-name>Character Encoding Filter</filter-name>
+       <filter-class>com.kleegroup.da.jsfui.util.CharacterEncodingFilter</filter-class>
+   </filter>
+   <filter-mapping>
+       <filter-name>Character Encoding Filter</filter-name>
+       <servlet-name>Faces Servlet</servlet-name>
+   </filter-mapping>
+
+
+	<filter>
+		<filter-name>client-no-cache</filter-name>
+		<filter-class>kasperx.commons.filter.CacheControlFilter</filter-class>
+		<init-param>
+			<param-name>Cache-Control</param-name>
+			<param-value>no-cache</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Pragma</param-name>
+			<param-value>no-cache</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Expires</param-name>
+			<param-value>-1</param-value>
+		</init-param>
+        <init-param>
+        	<param-name>url-exclude-pattern</param-name>
+        	<param-value>/javax\.faces\.resource/.*;/static/.*;/resources/.*</param-value>
+        </init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>client-no-cache</filter-name>
+       <servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+  
+     
+     <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <init-param>
+        	<description>Maximum file size in bytes to keep uploaded files in memory. If 
+        	a file exceeds this limit, it'll be temporarily written to disk</description>
+        	<param-name>thresholdSize</param-name>
+        	<param-value>51200</param-value> <!-- 50kb -->
+        </init-param>         
+        <!-- <init-param>
+        	<description>Disk repository path to keep temporary files that exceeds the
+        	threshold size. By default it is System.getProperty("java.io.tmpdir")</description>
+        	<param-name>uploadDirectory</param-name>
+        	<param-value></param-value>
+        </init-param>  -->
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping> 
+	<!--
+    <filter>
+        <filter-name>Character Encoding Filter</filter-name>
+        <filter-class>kasperx.commons.ui.filter.CharacterEncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Character Encoding Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping> -->
+    
+    <!--  filtre authentification auto 
+ 	<filter>
+        <filter-name>Ntml Filter</filter-name>
+        <filter-class>jcifs.http.NtlmHttpFilter</filter-class>
+        <init-param>
+        	<param-name>jcifs.filtered_url</param-name>
+        	<param-value>/pages/accueil/login.jsf</param-value>
+        </init-param> 
+	    <init-param>
+	        <param-name>jcifs.http.domainController</param-name>
+	        <param-value>klee-file01.klee.lan.net</param-value>
+	    </init-param>
+	    <init-param>
+	        <param-name>jcifs.smb.client.domain</param-name>
+	        <param-value>KLEE</param-value>
+	    </init-param>
+	    <init-param>
+	        <param-name>jcifs.util.loglevel</param-name>
+	        <param-value>3</param-value>
+	    </init-param>        
+    </filter> 
+    <filter-mapping>
+        <filter-name>Ntml Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+ 	fin filtre authentification auto -->
+ 	<!-- filtre authentification v2 
+ 	<filter>
+                <filter-name>ntlmv2-auth</filter-name>
+                <filter-class>org.ntlmv2.filter.NtlmFilter</filter-class>
+                <init-param>
+                        <param-name>ntlm-domain</param-name>
+                        <param-value>KLEE.LAN.NET</param-value>
+                </init-param>
+                <init-param>
+                        <param-name>ntlm-dc</param-name>
+                        <param-value>klee-dc01.klee.lan.net</param-value>
+                </init-param>
+                <init-param>
+						<param-name>ntlm-dc-name</param-name>
+						<param-value>klee-dc01</param-value>
+				</init-param>
+                <init-param>
+                        <param-name>ntlm-account</param-name>
+                        <param-value>MLAROCHE2.KLEE.LAN.NET$@KLEE.LAN.NET</param-value>
+                </init-param>
+                <init-param>
+                        <param-name>ntlm-password</param-name>
+                        <param-value>toto</param-value>
+                </init-param>
+        </filter>
+        <filter-mapping>
+	        <filter-name>ntlmv2-auth</filter-name>
+	        <servlet-name>Faces Servlet</servlet-name>
+	    </filter-mapping>
+	    
+	    <welcome-file-list>
+			<welcome-file>/pages/accueil/login.jsf</welcome-file>
+		</welcome-file-list>
+        
+        
+     filtre authentification v2 -->
+		<filter>
+		    <filter-name>CAS Authentication Filter</filter-name>
+		    <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+		    <init-param>
+		        <param-name>casServerLoginUrl</param-name>
+		        <param-value>https://sso.kleegroup.com/login</param-value>
+		    </init-param>
+		    <init-param>
+			    <param-name>serverName</param-name>
+			    <param-value>https://da.klee.lan.net</param-value>
+			  </init-param>
+		</filter>
+		
+		<filter>
+		  <filter-name>CAS Validation Filter</filter-name>
+		  <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
+		  <init-param>
+		      <param-name>casServerUrlPrefix</param-name>
+		      <param-value>https://sso.kleegroup.com</param-value>
+		  </init-param>
+			<init-param>
+				<param-name>serverName</param-name>
+				<param-value>https://da.klee.lan.net</param-value>
+			</init-param>
+			<init-param>
+				<param-name>exceptionOnValidationFailure</param-name>
+				<param-value>false</param-value>
+			</init-param>
+		</filter>
+		   
+		<filter>
+		  <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+		  <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
+		</filter>
+		   
+		<filter-mapping>
+		    <filter-name>CAS Authentication Filter</filter-name>
+		    <servlet-name>Faces Servlet</servlet-name>
+		</filter-mapping>
+		
+		 <filter-mapping>
+		    <filter-name>CAS Validation Filter</filter-name>
+		    <servlet-name>Faces Servlet</servlet-name>
+		</filter-mapping>
+		 
+		<filter-mapping>
+		    <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+		    <servlet-name>Faces Servlet</servlet-name>
+		</filter-mapping>
+     
+     
+     
+     
+ 	
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	
+	<session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
+
+    <mime-mapping>
+        <extension>html</extension>
+        <mime-type>text/html</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>txt</extension>
+        <mime-type>text/plain</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>css</extension>
+        <mime-type>text/css</mime-type>
+    </mime-mapping>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+	   
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/pages/viewExpired.xhtml</location>
+    </error-page>
+    
+    <error-page>
+		<error-code>403</error-code>
+		<location>/pages/sessionExpired.jsf</location>
+	</error-page>
+    
+    <!-- =======================================================
+       A ajouter pour supprimer l'accès direct au document xhtml
+       =========================================================
+    	<security-constraint> 
+    	<web-resource-collection> 
+        	<web-resource-name>Protect XHTML Templates</web-resource-name> 
+        	<url-pattern>*.xhtml</url-pattern>     
+		</web-resource-collection> 
+		<auth-constraint/> 
+	</security-constraint>  
+		======================================================= -->
+    
+    <resource-ref>
+        <description>
+			Resource reference to a factory for java.sql.Connection
+			instances that may be used for talking to a particular
+			database that is configured in the server.xml file.
+		</description>
+        <res-ref-name>jdbc/DataSource</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    
+	
+	<filter>
+        <filter-name>Servlet File Filter</filter-name>
+        <filter-class>kasperimpl.ui.controller.filter.FileFilter</filter-class>
+    </filter> 
+    <filter-mapping>
+        <filter-name>Servlet File Filter</filter-name>
+        <servlet-name>Servlet File Handler</servlet-name>
+    </filter-mapping>
+    
+</web-app>

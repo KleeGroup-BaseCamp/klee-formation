@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project default="livraison" name="KLEE-Formation">
+	<!--
+			Tâche de génération de l'ensemble des livraisons de l'application ICDPI pour
+			les différents environnements (production, recette et klee).
+		   
+			Il est nécessaire de paramétrer le fichier livraison.properties avant de lancer la tâche ANT
+		   
+			La tâche à lancer par l'exploitant est :
+			- compilation et livraison de tous les environnements à partir des sources fournies : "client"
+		   
+			Les différentes tâches à lancer sont :
+			- livraison environnement de recette : "recette"
+			- livraison environnement de klee : "klee"
+			- livraison de tous les environnements : "livraison" (tâche par défaut)
+		   
+			@author : Steven KERDUDOU
+	-->
+
+	<tstamp><format property="date" pattern="yyyy-MM-dd" /></tstamp>
+	<tstamp><format property="date.creation" pattern="dd/MM/yyyy HH:mm" /></tstamp>
+       
+	<!--
+	===================================================================
+	Paramétrage du script
+	===================================================================
+	-->
+	<property file="livraison.properties"/>
+	<property name="travail.dir" location="travail" />
+	<property name="livraison.dir" location="livrable" />
+	<property name="application.name" value="KleeFormation" />
+	<property name="livraison.appli.dir" location="${application.name}-v${application.version.current}-${date}" />
+	<property name="livraison.appli.zip" location="${application.name}-v${application.version.current}-${date}.zip" />
+	<property name="livraison.sources.zip" location="${application.name}-sources-v${application.version.current}-${date}.zip" />
+	<property name="livraison.modeles.zip" location="${application.name}-modeles-v${application.version.current}-${date}.zip" />
+	<property name="svn.tag" value="0.0.1" />
+	<property name="svn.tag.url" value="http://subversion.dev.klee.lan.net/svn/KLEE_DA/tags/${svn.tag}/KleeFormation" />
+	<property name="client.src.dir" location="../src" />
+	<property name="client.base.dir" location="../base" />
+	
+	<property name="src.dir" location="${travail.dir}/src" />
+	<property name="src.main.dir" location="${src.dir}/main" />
+	<property name="src.base.dir" location="${src.main.dir}/bdd" />
+	<property name="src.base.modeles.dir" location="${src.base.dir}/modele" />
+	<property name="src.webapp.dir" location="${src.main.dir}/webapp" />
+	<property name="src.webinf.dir" location="${src.webapp.dir}/WEB-INF" />
+	
+	<property name="src.test.dir" location="${src.dir}/test" />
+	<property name="classes.dir" location="${src.webinf.dir}/classes" />
+	<property name="test.classes.dir" location="${src.webinf.dir}/test-classes" />
+	
+	<property name="environnements.dir" location="${src.main.dir}/environnements" />
+	<property name="environnements.klee.dir" location="${environnements.dir}/klee" />
+	<property name="environnements.recette.dir" location="${environnements.dir}/recette" />
+	
+	<property name="war.dir" location="${livraison.dir}/war" />
+	<property name="war.recette.dir" location="${war.dir}/recette" />
+	<property name="war.klee.dir" location="${war.dir}/klee" />
+	
+	<path id="build.classpath">
+		<fileset dir="${src.webinf.dir}/lib" includes="*.jar"/>
+	</path>
+                      
+	<!--
+	===================================================================
+	Information
+	===================================================================
+	-->    
+	<target name="info" description="Configuration description">
+		<echo level="info" message="************************************** " />
+		<echo level="info" message="*  KLEE-DA Ant script de livraison   *" />
+		<echo level="info" message="**************************************" />
+		<echo level="info" message="Author                    : Steven KERDUDOU" />  
+		<echo level="info" message="Script version            : 1.1.0" />
+		<echo level="info" message="Ant  home                 : ${ant.home}" />
+		<echo level="info" message="Ant  version              : ${ant.version}" />
+		<echo level="info" message="Java version              : ${ant.java.version}" />
+		<echo level="info" message="Java home directory       : ${java.home}" />       
+		<echo level="info" message=" ______________" />
+		<echo level="info" message="|     _      / | -------------------" />           
+		<echo level="info" message="|#   / \\   / /|  Kasper V6  - 2012" />
+		<echo level="info" message="|  __\\ /__/ / |" />
+		<echo level="info" message="| / _       /  |" />
+		<echo level="info" message="|/ / \\  ()/  *|" />
+		<echo level="info" message="| /  |   |     |  www.kleegroup.com" />            
+		<echo level="info" message="|/___|____\\___| -------------------" />
+		<echo level="warning" message="!! Ce script ne fonctionne qu'avec la version 1.7.1 ou supérieure d'Apache Ant !!" />
+		<echo level="warning" message="!! La version de compilation du JDK java doit être 1.6.0.18 ou supérieur !!" />
+	</target>
+              
+	<!--
+	===================================================================
+	Nettoyage des répertoires
+	===================================================================
+	-->            
+	<target name="clean" description="Nettoyage des repertoires">
+		<delete dir="${travail.dir}" />
+		<delete dir="${livraison.dir}" />
+	</target>
+              
+	<!--
+	===================================================================
+	Export des sources de SVN
+	===================================================================
+	-->    
+	<target name="svnExport" description="Export des fichiers sources du projet à partir de SVN">
+		<!--
+		===================================================================
+		Import de la librairie svnAnt pour s'interfacer avec Subversion
+		===================================================================
+		-->
+		<property name="ant.svn.dir" location="lib/svn" />
+		<taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask">
+			<classpath>
+				<fileset dir="${ant.svn.dir}">
+					<include name="**/svn*.jar"/>
+				</fileset>
+			</classpath>
+		</taskdef>
+
+		<svn username="${svn.username}" password="${svn.password}">
+			<export srcUrl="${svn.tag.url}" destpath="${travail.dir}" revision="HEAD"/>
+		</svn>
+	</target>
+
+              
+	<!--
+	========================================================================================================
+	Copie des sources livrés dans un répertoire de travail pour compilation et génération des fichiers war
+	========================================================================================================
+	-->
+	<target name="copySources" description="Copie des sources pour la préparation de la livraison cliente">
+		<copy todir="${travail.dir}/src">
+			<fileset dir="${client.src.dir}"/>
+		</copy>
+		<!--copy todir="${travail.dir}/base">
+			<fileset dir="${client.base.dir}"/>
+		</copy-->
+	</target>
+   
+	<!--
+	===================================================================
+	Coompilation des classes du projet
+	===================================================================
+	--> 
+	<target name="compile" description="Compilation des classes">
+		<!-- Compilation kasper -->
+		<javac destdir="${classes.dir}" 
+			   srcdir="${src.main.dir}"
+	           includes="java/kasperx/**/*.java" 
+	           excludes="**/trash/**" 
+	           nowarn="false" 
+	           debug="true" 
+	           optimize="false" 
+	           deprecation="true" 
+	           target="1.6" 
+	           verbose="false" 
+	           fork="false" 
+	           source="1.6"
+			   includeantruntime="false">
+	    	<classpath refid="build.classpath"/>
+	    </javac>
+		
+		<!-- Génération kasper des fichiers -->
+		<!--<ant antfile="${travail.dir}/build-mda.xml" dir="${travail.dir}" target="generate-clean" />
+		<ant antfile="${travail.dir}/build-mda.xml" dir="${travail.dir}" target="generate-sources" />
+		-->
+		
+		<!-- Compilation -->
+		<javac destdir="${classes.dir}" 
+			   srcdir="${src.dir}"
+	           includes="**/java/**/*.java,**/javagen/**/*.java" 
+	           excludes="**/trash/**" 
+	           nowarn="false" 
+	           debug="true" 
+	           optimize="false" 
+	           deprecation="true" 
+	           target="1.6" 
+	           verbose="false" 
+	           fork="false" 
+	           source="1.6"
+			   includeantruntime="false">
+	    	<classpath refid="build.classpath"/>
+	    </javac>
+	</target>
+	
+	<!--
+	===================================================================
+	Construction d'une archive WAR
+	===================================================================
+	--> 
+	<macrodef name="build-war">
+		<attribute name="destdir" />
+		<attribute name="warname" />
+		<attribute name="envdir" />
+		<attribute name="envname" />
+		<sequential>
+			<mkdir dir="@{destdir}" />
+
+			<echo file="${src.main.dir}/resources/META-INF/version.properties" message="version=Version ${svn.tag}${line.separator}date.creation=${date.creation}" />
+			
+			<!-- Configuration log4j de l'environnement -->
+			<copy file="@{envdir}/log4j-@{envname}.xml" overwrite="yes" tofile="${src.main.dir}/resources/log4j.xml" />
+			<!-- Configuration du application-config.xml de l'environnement -->
+			<copy file="@{envdir}/application-config-@{envname}.xml" overwrite="yes" tofile="${src.main.dir}/resources/META-INF/application-config.xml" />
+			
+			<copy todir="${classes.dir}">
+				<fileset dir="${src.main.dir}/resources"/>
+		    </copy>
+			
+			<!-- packaging dans le war -->
+			<war destfile="@{destdir}/@{warname}" 
+		         compress="true" 
+		         webxml="@{envdir}/web.xml">
+		      <!--<lib dir="${src.webinf.dir}/lib"/>
+		      <classes dir="${classes.dir}"/>-->
+		      <fileset dir="${src.webapp.dir}" 
+		               excludes="WEB-INF/web.xml"/>
+		    </war>
+		</sequential>
+	</macrodef>
+         
+	<!--
+	===================================================================
+	Création de l'archive WAR de l'environnement de test klee
+	===================================================================
+	-->    
+	<target name="war.klee" description="Création du fichier war pour l'environnement de tests klee">
+		<build-war destdir="${war.klee.dir}" warname="${application.name}-v${application.version.current}.war" envdir="${environnements.klee.dir}" envname="klee" />
+	</target>       
+       
+	<!--
+	===================================================================
+	Création de l'archive WAR pour la recette
+	===================================================================
+	-->    
+	<target name="war.recette" description="Création du fichier war pour la recette">
+		<build-war destdir="${war.recette.dir}" warname="${application.name}-v${application.version.current}.war" envdir="${environnements.recette.dir}" envname="recette" />
+	</target>       
+       
+	<!--
+	===================================================================
+	Création de l'ensemble des archives WAR
+	===================================================================
+	-->
+	<target name="war.livraison" description="Création des fichiers war pour tous les envrionnement">
+		<antcall target="war.klee" />
+		<antcall target="war.recette" />
+	</target>
+	
+	<!--
+	===================================================================
+	Lancement des TNR
+	===================================================================
+	-->
+	<path id="lib.junit.path">
+		<fileset dir="lib/junit" includes="junit*.jar"/>
+	</path>
+	<target name="test" description="Lancement des tests junit de non régression">
+		<junit printsummary="yes">
+			<classpath refid="lib.junit.path"/>
+			<classpath>
+				<pathelement path="${classes.dir}"/>
+				<pathelement path="${test.classes.dir}"/>
+			</classpath>
+			<classpath refid="build.classpath"/>
+			<formatter type="plain"/>
+			<batchtest>
+				<fileset dir="${test.classes.dir}" includes="**/*.class" excludes="**/All*.class"/>
+			</batchtest>
+		</junit>
+	</target>
+	<target name="compile-test" description="Compilation des classes de test">
+		<mkdir dir="${test.classes.dir}" />
+		<javac srcdir="${src.test.dir}"
+			   destdir="${test.classes.dir}"
+			   debug="on"
+			   nowarn="false" 
+	           optimize="false" 
+	           deprecation="true" 
+	           target="1.6" 
+	           verbose="false" 
+	           fork="false" 
+	           source="1.6"
+			   includeantruntime="false">
+			<classpath refid="build.classpath"/>
+			<classpath>
+				<pathelement path="${classes.dir}"/>
+			</classpath>
+		</javac>
+		
+		<copy todir="${test.classes.dir}/resources/">
+	    	<fileset dir="${src.test.dir}/resources"/>
+	    </copy>
+	</target>
+
+	<!--
+	===================================================================
+	Archivage des applications à déployer
+	===================================================================
+	-->    
+	<target name="zipAppli" description="Archive l'applications à livrer">
+		<zip destfile="${livraison.appli.zip}" basedir="${livraison.dir}" />
+	</target>
+	
+	<!--
+	===================================================================
+	Archivage des applications à déployer
+	===================================================================
+	-->    
+	<target name="moveWar" description="Déplace le war sans le zipper">
+		<move file="${livraison.dir}" tofile="${livraison.appli.dir}"/>
+	</target>
+        
+	<!--
+	===================================================================
+	Archivage des sources de l'application
+	===================================================================
+	-->            
+	<target name="zipSources" description="Archive les sources de l'application">
+		<zip destfile="${livraison.sources.zip}" basedir="${travail.dir}">
+			<include name="src/main/java/**/*" />
+			<include name="src/main/javagen/**/*" />
+			<include name="src/main/resources/**/*" />
+			<include name="src/main/webapp/**/*" />
+			<include name="base/script/**/*" />
+			<include name="base/livraisons/**/*" />
+			<include name="base/*" />
+			
+			<exclude name="base/modele/**" />
+			<exclude name="src/main/webapp/WEB-INF/classes/**" />
+			<exclude name="src/main/webapp/META-INF/context.xml" />
+		</zip>
+		
+	</target>
+         
+	<!--
+	===================================================================
+	Archivage des modèles de l'application
+	===================================================================
+	-->            
+	<target name="zipModeles" description="Archive des modèles de l'application">
+		<zip destfile="${livraison.modeles.zip}" basedir="${src.base.modeles.dir}">
+			<include name="*.oom" />
+			<include name="*.pdm" />
+		</zip>
+	</target>
+    
+	<!--
+	===================================================================
+	Preparation de la livraison : environnement de klee
+	===================================================================
+	-->    
+	<target name="klee" description="Creation des archives de livraison de l'environnement de klee">
+		<antcall target="info" />
+		<antcall target="clean" />
+		<antcall target="svnExport" />
+		<antcall target="compile" />
+		<antcall target="war.klee" />
+		<antcall target="moveWar" />
+	</target>
+    
+	<!--
+	===================================================================
+	Preparation de la livraison : environnement de recette
+	===================================================================
+	-->    
+	<target name="recette" description="Creation des archives de livraison de l'environnement de recette">
+		<antcall target="info" />
+		<antcall target="clean" />
+		<antcall target="svnExport" />
+		<antcall target="compile" />
+		<antcall target="war.recette" />
+		<antcall target="moveWar" />
+	</target>      
+    
+	<!--
+	===================================================================
+	Livraison de tous les environnements
+	===================================================================
+	-->    
+    <target name="livraison" description="Création des archives de livraison de tous les environnements">
+        <antcall target="info" />
+        <antcall target="clean" />
+        <antcall target="svnExport" />
+        <antcall target="war.livraison" />
+        <antcall target="zipAppli" />
+        <antcall target="zipSources" />
+        <antcall target="zipModeles" />
+    </target>
+    
+	<!--
+	===================================================================
+	Livraison à partir d'un poste chez le client
+	===================================================================
+	-->    
+	<target name="client" description="Création des archives de livraison de tous les environnements pour le client">
+		<antcall target="info" />
+		<antcall target="clean" />             
+		<antcall target="copySources" />
+		<antcall target="war.livraison" />
+		<antcall target="zipAppli" />
+	</target>
+
+</project>
