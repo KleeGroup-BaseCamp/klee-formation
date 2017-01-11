@@ -77,7 +77,7 @@
 	<module name="ui">
 		<component api="ContextCacheManager" class="io.vertigo.struts2.impl.context.ContextCacheManagerImpl">
 			<plugin class="io.vertigo.struts2.plugins.context.berkeley.BerkeleyContextCachePlugin">
-				<param name="cachePath" value="java.io.tmpdir/ehcache/KleeFormationVActionContext" />
+				<param name="cachePath" value="${java.io.tmpdir}/ehcache/KleeFormationVActionContext" />
 				<param name="timeToLiveSeconds" value="86400" /> <!-- 24h -->
 			</plugin>
 		</component>

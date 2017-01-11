@@ -187,7 +187,6 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	private void doSaveSession(final BigDecimal satisfaction, final SessionFormation sessions) {
 
 		final DtList<Horaires> horairess = horaires.readDtList();
@@ -206,17 +205,17 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			sessions.setDuree(durée + 1);
 			sessionServices.saveSessionFormation(sessions);
 		} else {
-			final Date date_début = sessions.getDateDebut();
-			final Date date_fin = sessions.getDateFin();
-			final DtList<Horaires> horaires_no_modif = new DtList<>(Horaires.class);
-			while (date_début.compareTo(date_fin) <= 0) {
-				horaires_no_modif.add(defaultHoraire(new Date(date_début.getTime())));
-				date_début.setDate(date_début.getDate() + 1);
+			final Date dateDebut = sessions.getDateDebut();
+			final Date dateFin = sessions.getDateFin();
+			final DtList<Horaires> horairesNoModif = new DtList<>(Horaires.class);
+			while (dateDebut.compareTo(dateFin) <= 0) {
+				horairesNoModif.add(defaultHoraire(new Date(dateDebut.getTime())));
+				dateDebut.setDate(dateDebut.getDate() + 1);
 			}
-			sessions.setDateDebut(horaires_no_modif.get(0).getJour());
-			sessions.setDateFin(horaires_no_modif.get(horaires_no_modif.size() - 1).getJour());
-			sessions.setHoraire(horairesServices.saveHoraires(horaires_no_modif, sessions.getSesId()));
-			final Long durée = (horaires_no_modif.get(horaires_no_modif.size() - 1).getJour().getTime() - horaires_no_modif.get(0).getJour().getTime()) / 3600000 / 24;
+			sessions.setDateDebut(horairesNoModif.get(0).getJour());
+			sessions.setDateFin(horairesNoModif.get(horairesNoModif.size() - 1).getJour());
+			sessions.setHoraire(horairesServices.saveHoraires(horairesNoModif, sessions.getSesId()));
+			final Long durée = (horairesNoModif.get(horairesNoModif.size() - 1).getJour().getTime() - horairesNoModif.get(0).getJour().getTime()) / 3600000 / 24;
 			sessions.setDuree(durée + 1);
 			sessionServices.saveSessionFormation(sessions);
 		}

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE application-config PUBLIC "-//Kasper//DTD Kasper Application Config 1.0//EN"
-                              "http://www.kleegroup.com/dtd/kasper-application-config_1_0.dtd"> 
-<application-config>
-  	
-  	<path name="KleeFormation">
+<config>
+	<path name="KleeFormation">
 		<param name="version" value="Version 0.0.1" />
 	</path>
 
@@ -23,11 +20,12 @@
   	
   	<path name="saml">
 		<param name="activer" value="false" />
-		<param name="pathIDPMetadata" value="/home/tomcat/kleeFormation/conf/KleeFormation.IDP_metadata.xml" />
+		<param name="pathIDPMetadata" value="/home/tomcat/formation/KleeFormation.IDP_metadata.xml" />
 		<param name="entityIdIDP" value="https://sso.kleegroup.com/saml2/idp/metadata.php" />
 		<param name="recipentSP" value="http://172.20.87.235:8080/formation/saml2/acs" />
 		<param name="audienceSP" value="http://172.20.87.235:8080" />
-		<param name="pathKeyPKCS8" value="/home/tomcat/kleeFormation/conf/KleeFormation-cmoutte-SELF-pkcs8-nocrypt.key.der" />
+		<param name="pathKeyPKCS8" value="/home/tomcat/formation/KleeFormation-cmoutte-SELF-pkcs8-nocrypt.key.der" />
 	</path>
   	
-</application-config>
+</config>
+
