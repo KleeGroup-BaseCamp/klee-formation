@@ -13,8 +13,8 @@
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<maven.test.error.ignore>true</maven.test.error.ignore>
 		<project.build.sourceEncoding>utf8</project.build.sourceEncoding>
-		<vertigo.version>0.9.3</vertigo.version>
-		<vertigo-struts.version>0.9.3a</vertigo-struts.version>
+		<vertigo.version>0.9.4-SNAPSHOT</vertigo.version>
+		<vertigo-struts.version>0.9.4-SNAPSHOT</vertigo-struts.version>
 	</properties>
 
 	<name>KleeFormation</name>
@@ -65,6 +65,12 @@
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-studio</artifactId>
 			<version>${vertigo.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -80,7 +86,11 @@
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
+					<artifactId>jcl104-over-slf4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
@@ -162,6 +172,12 @@
 		    <groupId>org.apache.directory.api</groupId>
 		    <artifactId>api-all</artifactId>
 		    <version>1.0.0-RC1</version>
+		    <exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 	<build>

@@ -35,9 +35,9 @@ import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextListModifiable;
 import io.vertigo.struts2.core.ContextMdl;
 import io.vertigo.struts2.core.ContextRef;
-import io.vertigo.struts2.core.UiObject;
 import io.vertigo.util.DateBuilder;
 import io.vertigo.util.DateUtil;
+import io.vertigo.vega.webservice.model.UiObject;
 
 /**
  */
@@ -82,7 +82,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			inscriptions.publish(inscriptionServices.getListInscriptionsViewBySessionId(sesId.get()));
 		} else {
 			final UtilisateurCritere utilisateurcritere = new UtilisateurCritere();
-			final com.kleegroup.formation.security.Role role = com.kleegroup.formation.security.Role.R_FORMATTEUR;
+			final com.kleegroup.formation.security.Roles role = com.kleegroup.formation.security.Roles.R_FORMATTEUR;
 			utilisateurcritere.setRole(role.toString());
 			session.publish(new SessionFormation());
 			horaires.publish(new DtList<>(Horaires.class));
@@ -93,7 +93,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 
 	private void loadListsForEdit() {
 		final UtilisateurCritere utilisateurcritere = new UtilisateurCritere();
-		final com.kleegroup.formation.security.Role role = com.kleegroup.formation.security.Role.R_FORMATTEUR;
+		final com.kleegroup.formation.security.Roles role = com.kleegroup.formation.security.Roles.R_FORMATTEUR;
 		utilisateurcritere.setRole(role.toString());
 		formatteurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurcritere));
 		final FormationCritere formationcritere = new FormationCritere();

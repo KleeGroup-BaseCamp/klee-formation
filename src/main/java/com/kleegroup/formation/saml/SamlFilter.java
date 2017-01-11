@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 import io.vertigo.app.Home;
 import io.vertigo.core.param.ParamManager;
 import io.vertigo.lang.Component;
-import io.vertigo.struts2.impl.servlet.filter.AbstractFilter;
+import io.vertigo.vega.impl.servlet.filter.AbstractFilter;
 
 /**
  * @author xdurand

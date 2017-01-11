@@ -14,8 +14,6 @@
 		 maxWait="10000" 
 		 removeAbandoned="true" 
 		 logAbandoned="true"/>
-		 
 		 <!-- driverClassName="org.h2.Driver" -->
 		 <!-- url="jdbc:h2:D:\github\klee-formation\database\KleeFormation" -->
-
 </Context>

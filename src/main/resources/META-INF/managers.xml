@@ -3,12 +3,12 @@
 <config>
 	<boot locales="fr_FR">
 		<plugin class="io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin" />
-		<plugin class="io.vertigo.struts2.plugins.resource.servlet.ServletResourceResolverPlugin" />
+		<plugin class="io.vertigo.vega.plugins.webservice.servlet.ServletResourceResolverPlugin" />
 		<plugin class="io.vertigo.core.plugins.param.xml.XmlParamPlugin">
 			<param name="url" value="${boot.configXmlInterne}" />
 		</plugin>
-		<plugin class="io.vertigo.struts2.plugins.config.servlet.WebAppContextParamPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin" />
+		<plugin class="io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin2" />
 		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.kpr.KprLoaderPlugin">
 			<param name='encoding' value='utf8' />
 		</plugin>
@@ -19,8 +19,6 @@
 	</boot>
 	<module name="KleeFormation">
 		<definitions>
-			<resource type="classes" path="com.kleegroup.formation.domain.DtDefinitions" />
-			<resource type="kpr" path="com/kleegroup/formation/execution.kpr" />
 			<resource type="security" path="/META-INF/kleeFormation-auth-config.xml" />
 		</definitions>
 	</module>
@@ -55,6 +53,12 @@
 				<param name="sequencePrefix" value="SEQ_" />
 			</plugin>	
 		</component>
+		<component api="KVStoreManager" class="io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl">
+			<plugin class="io.vertigo.dynamo.plugins.kvstore.berkeley.BerkeleyKVStorePlugin">
+				<param name="collections" value="VActionContext;TTL=86400"/>
+				<param name="dbFilePath" value="${java.io.tmpdir}/ehcache/KleeFormationVActionContext"/>
+			</plugin>
+		</component>
 		<component api="JobManager" class="io.vertigo.tempo.impl.job.JobManagerImpl" />
 		<component api="SchedulerManager" class="io.vertigo.tempo.impl.scheduler.SchedulerManagerImpl" >
 			<plugin class="io.vertigo.tempo.plugins.scheduler.basic.BasicSchedulerPlugin"/>
@@ -62,6 +66,7 @@
 		<component api="EventBusManager" class="io.vertigo.commons.impl.eventbus.EventBusManagerImpl" />
 		<component api="DaemonManager" class="io.vertigo.commons.impl.daemon.DaemonManagerImpl" />
 		<component api="FileManager" class="io.vertigo.dynamo.impl.file.FileManagerImpl" />
+		
 	</module>
 	
 	<module name="ldap">
@@ -95,11 +100,18 @@
 			</component>
 		</module>
 
+	<module name="aspects" >
+		<aspect class="io.vertigo.dynamo.impl.transaction.VTransactionAspect"/>
+	</module>
+	
+	<feature class="io.vertigo.app.config.xml.KleeFormationFeatures" />
+	
 	<init>
 		<initializer class="com.kleegroup.formation.boot.initializer.LocaleManagerInitializer"/>
 		<initializer class="com.kleegroup.formation.boot.initializer.PersistenceManagerInitializer"/>
 		<initializer class="com.kleegroup.formation.boot.initializer.JobManagerInitializer"/>
 		<initializer class="com.kleegroup.formation.boot.initializer.SecurityManagerInitializer"/>
 	</init>
+	
 
 </config>

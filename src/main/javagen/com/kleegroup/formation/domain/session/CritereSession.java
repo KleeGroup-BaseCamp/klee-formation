@@ -1,8 +1,9 @@
 package com.kleegroup.formation.domain.session;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données CritereSession
@@ -14,11 +15,10 @@ public final class CritereSession implements DtObject {
 
 	private String intitule;
 
-	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Libellé court'. 
-	 * @return String intitule 
+	 * Récupère la valeur de la propriété 'Libellé court'.
+	 * @return String intitule
 	 */
 	@Field(domain = "DO_LIBELLE_COURT", label = "Libellé court")
 	public String getIntitule() {
@@ -28,7 +28,7 @@ public final class CritereSession implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Libellé court'.
-	 * @param intitule String 
+	 * @param intitule String
 	 */
 	public void setIntitule(final String intitule) {
 		this.intitule = intitule;

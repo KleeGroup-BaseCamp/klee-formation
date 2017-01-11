@@ -1,9 +1,10 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données EtatSessionUtilisateur
@@ -21,10 +22,10 @@ public final class EtatSessionUtilisateur implements Entity {
 	public URI<EtatSessionUtilisateur> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
-	 * Récupère la valeur de la propriété 'esuCode'. 
+	 * Récupère la valeur de la propriété 'esuCode'.
 	 * @return String esuCode <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_CODE", type = "ID", required = true, label = "esuCode")
@@ -43,8 +44,8 @@ public final class EtatSessionUtilisateur implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Libellé'. 
-	 * @return String libelle 
+	 * Récupère la valeur de la propriété 'Libellé'.
+	 * @return String libelle
 	 */
 	@Field(domain = "DO_LIBELLE", label = "Libellé")
 	public String getLibelle() {
@@ -54,7 +55,7 @@ public final class EtatSessionUtilisateur implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Libellé'.
-	 * @param libelle String 
+	 * @param libelle String
 	 */
 	public void setLibelle(final String libelle) {
 		this.libelle = libelle;

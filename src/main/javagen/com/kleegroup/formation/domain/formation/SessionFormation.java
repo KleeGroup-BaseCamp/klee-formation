@@ -1,9 +1,10 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données SessionFormation
@@ -40,10 +41,10 @@ public final class SessionFormation implements Entity {
 	public URI<SessionFormation> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
-	 * Récupère la valeur de la propriété 'Id'. 
+	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long sesId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_IDENTIFIANT", type = "ID", required = true, label = "Id")
@@ -62,8 +63,8 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Horaire'. 
-	 * @return String horaire 
+	 * Récupère la valeur de la propriété 'Horaire'.
+	 * @return String horaire
 	 */
 	@Field(domain = "DO_LIBELLE_LONG", label = "Horaire")
 	public String getHoraire() {
@@ -73,7 +74,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Horaire'.
-	 * @param horaire String 
+	 * @param horaire String
 	 */
 	public void setHoraire(final String horaire) {
 		this.horaire = horaire;
@@ -81,8 +82,8 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'NbPersonne'. 
-	 * @return Long nbPersonne 
+	 * Récupère la valeur de la propriété 'NbPersonne'.
+	 * @return Long nbPersonne
 	 */
 	@Field(domain = "DO_QUANTITE", label = "NbPersonne")
 	public Long getNbPersonne() {
@@ -92,7 +93,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'NbPersonne'.
-	 * @param nbPersonne Long 
+	 * @param nbPersonne Long
 	 */
 	public void setNbPersonne(final Long nbPersonne) {
 		this.nbPersonne = nbPersonne;
@@ -100,8 +101,8 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Status'. 
-	 * @return String status 
+	 * Récupère la valeur de la propriété 'Status'.
+	 * @return String status
 	 */
 	@Field(domain = "DO_LIBELLE", label = "Status")
 	public String getStatus() {
@@ -111,7 +112,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Status'.
-	 * @param status String 
+	 * @param status String
 	 */
 	public void setStatus(final String status) {
 		this.status = status;
@@ -119,8 +120,8 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Is_ouvert'. 
-	 * @return String isOuvert 
+	 * Récupère la valeur de la propriété 'Is_ouvert'.
+	 * @return String isOuvert
 	 */
 	@Field(domain = "DO_LIBELLE", label = "Is_ouvert")
 	public String getIsOuvert() {
@@ -130,7 +131,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Is_ouvert'.
-	 * @param isOuvert String 
+	 * @param isOuvert String
 	 */
 	public void setIsOuvert(final String isOuvert) {
 		this.isOuvert = isOuvert;
@@ -138,8 +139,8 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Satisfaction'. 
-	 * @return java.math.BigDecimal satisfaction 
+	 * Récupère la valeur de la propriété 'Satisfaction'.
+	 * @return java.math.BigDecimal satisfaction
 	 */
 	@Field(domain = "DO_STATIQUE", label = "Satisfaction")
 	public java.math.BigDecimal getSatisfaction() {
@@ -149,7 +150,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Satisfaction'.
-	 * @param satisfaction java.math.BigDecimal 
+	 * @param satisfaction java.math.BigDecimal
 	 */
 	public void setSatisfaction(final java.math.BigDecimal satisfaction) {
 		this.satisfaction = satisfaction;
@@ -157,8 +158,8 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'i'. 
-	 * @return java.math.BigDecimal i 
+	 * Récupère la valeur de la propriété 'i'.
+	 * @return java.math.BigDecimal i
 	 */
 	@Field(domain = "DO_STATIQUE", label = "i")
 	public java.math.BigDecimal getI() {
@@ -168,7 +169,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'i'.
-	 * @param i java.math.BigDecimal 
+	 * @param i java.math.BigDecimal
 	 */
 	public void setI(final java.math.BigDecimal i) {
 		this.i = i;
@@ -176,8 +177,8 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Duree'. 
-	 * @return Long duree 
+	 * Récupère la valeur de la propriété 'Duree'.
+	 * @return Long duree
 	 */
 	@Field(domain = "DO_IDENTIFIANT", label = "Duree")
 	public Long getDuree() {
@@ -187,7 +188,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Duree'.
-	 * @param duree Long 
+	 * @param duree Long
 	 */
 	public void setDuree(final Long duree) {
 		this.duree = duree;
@@ -195,8 +196,8 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'DateFin'. 
-	 * @return java.util.Date dateFin 
+	 * Récupère la valeur de la propriété 'DateFin'.
+	 * @return java.util.Date dateFin
 	 */
 	@Field(domain = "DO_DATE", label = "DateFin")
 	public java.util.Date getDateFin() {
@@ -206,7 +207,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'DateFin'.
-	 * @param dateFin java.util.Date 
+	 * @param dateFin java.util.Date
 	 */
 	public void setDateFin(final java.util.Date dateFin) {
 		this.dateFin = dateFin;
@@ -214,8 +215,8 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'DateDebut'. 
-	 * @return java.util.Date dateDebut 
+	 * Récupère la valeur de la propriété 'DateDebut'.
+	 * @return java.util.Date dateDebut
 	 */
 	@Field(domain = "DO_DATE", label = "DateDebut")
 	public java.util.Date getDateDebut() {
@@ -225,7 +226,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'DateDebut'.
-	 * @param dateDebut java.util.Date 
+	 * @param dateDebut java.util.Date
 	 */
 	public void setDateDebut(final java.util.Date dateDebut) {
 		this.dateDebut = dateDebut;
@@ -233,8 +234,8 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Lieux'. 
-	 * @return String lieux 
+	 * Récupère la valeur de la propriété 'Lieux'.
+	 * @return String lieux
 	 */
 	@Field(domain = "DO_LIBELLE_LONG", label = "Lieux")
 	public String getLieux() {
@@ -244,7 +245,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Lieux'.
-	 * @param lieux String 
+	 * @param lieux String
 	 */
 	public void setLieux(final String lieux) {
 		this.lieux = lieux;
@@ -252,7 +253,7 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Formation'. 
+	 * Récupère la valeur de la propriété 'Formation'.
 	 * @return Long forId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_IDENTIFIANT", type = "FOREIGN_KEY", required = true, label = "Formation")
@@ -271,7 +272,7 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Etat'. 
+	 * Récupère la valeur de la propriété 'Etat'.
 	 * @return String etaCode <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", required = true, label = "Etat")
@@ -290,7 +291,7 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Utilisateur'. 
+	 * Récupère la valeur de la propriété 'Utilisateur'.
 	 * @return Long utiId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_IDENTIFIANT", type = "FOREIGN_KEY", required = true, label = "Utilisateur")
@@ -309,7 +310,7 @@ public final class SessionFormation implements Entity {
 
 	/**
 	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Etat session utilisateur'. 
+	 * Récupère la valeur de la propriété 'Etat session utilisateur'.
 	 * @return String esuCode <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", required = true, label = "Etat session utilisateur")
@@ -350,20 +351,19 @@ public final class SessionFormation implements Entity {
 	 * Association URI: Inscription.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_LCO_CMD",
-    	fkFieldName = "SES_ID",
-    	primaryDtDefinitionName = "DT_SESSION_FORMATION",
-    	primaryIsNavigable = true,
-    	primaryRole = "SessionFormation",
-    	primaryLabel = "Session formation",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_INSCRIPTION",
-    	foreignIsNavigable = true,
-    	foreignRole = "Inscription",
-    	foreignLabel = "Inscription",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association (
+			name = "A_LCO_CMD",
+			fkFieldName = "SES_ID",
+			primaryDtDefinitionName = "DT_SESSION_FORMATION",
+			primaryIsNavigable = true,
+			primaryRole = "SessionFormation",
+			primaryLabel = "Session formation",
+			primaryMultiplicity = "1..1",
+			foreignDtDefinitionName = "DT_INSCRIPTION",
+			foreignIsNavigable = true,
+			foreignRole = "Inscription",
+			foreignLabel = "Inscription",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getInscriptionDtListURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_LCO_CMD", "Inscription");
 	}
@@ -377,14 +377,8 @@ public final class SessionFormation implements Entity {
 			return null;
 		}
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
-		if (formation != null) {
-			// On s'assure que l'objet correspond à la bonne clé
-			if (!fkURI.equals(formation.getURI())) {
-				formation = null;
-			}
-		}		
-		if (formation == null) {
-			formation = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().read(fkURI);
+		if (formation == null || !fkURI.equals(formation.getURI())) {
+			formation = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().readOne(fkURI);
 		}
 		return formation;
 	}
@@ -393,20 +387,19 @@ public final class SessionFormation implements Entity {
 	 * Retourne l'URI: Formation.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_FOR_SES",
-    	fkFieldName = "FOR_ID",
-    	primaryDtDefinitionName = "DT_FORMATION",
-    	primaryIsNavigable = true,
-    	primaryRole = "Formation",
-    	primaryLabel = "Formation",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_SESSION_FORMATION",
-    	foreignIsNavigable = true,
-    	foreignRole = "SessionFormation",
-    	foreignLabel = "Session formation",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association (
+			name = "A_FOR_SES",
+			fkFieldName = "FOR_ID",
+			primaryDtDefinitionName = "DT_FORMATION",
+			primaryIsNavigable = true,
+			primaryRole = "Formation",
+			primaryLabel = "Formation",
+			primaryMultiplicity = "1..1",
+			foreignDtDefinitionName = "DT_SESSION_FORMATION",
+			foreignIsNavigable = true,
+			foreignRole = "SessionFormation",
+			foreignLabel = "Session formation",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Formation> getFormationURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_FOR_SES", com.kleegroup.formation.domain.formation.Formation.class);
 	}
@@ -420,14 +413,8 @@ public final class SessionFormation implements Entity {
 			return null;
 		}
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
-		if (etat != null) {
-			// On s'assure que l'objet correspond à la bonne clé
-			if (!fkURI.equals(etat.getURI())) {
-				etat = null;
-			}
-		}		
-		if (etat == null) {
-			etat = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().read(fkURI);
+		if (etat == null || !fkURI.equals(etat.getURI())) {
+			etat = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().readOne(fkURI);
 		}
 		return etat;
 	}
@@ -436,20 +423,19 @@ public final class SessionFormation implements Entity {
 	 * Retourne l'URI: Etat.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ASSOCIATION5",
-    	fkFieldName = "ETA_CODE",
-    	primaryDtDefinitionName = "DT_ETAT",
-    	primaryIsNavigable = true,
-    	primaryRole = "Etat",
-    	primaryLabel = "Etat",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_SESSION_FORMATION",
-    	foreignIsNavigable = false,
-    	foreignRole = "SessionFormation",
-    	foreignLabel = "Session formation",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association (
+			name = "A_ASSOCIATION5",
+			fkFieldName = "ETA_CODE",
+			primaryDtDefinitionName = "DT_ETAT",
+			primaryIsNavigable = true,
+			primaryRole = "Etat",
+			primaryLabel = "Etat",
+			primaryMultiplicity = "1..1",
+			foreignDtDefinitionName = "DT_SESSION_FORMATION",
+			foreignIsNavigable = false,
+			foreignRole = "SessionFormation",
+			foreignLabel = "Session formation",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Etat> getEtatURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_ASSOCIATION5", com.kleegroup.formation.domain.formation.Etat.class);
 	}
@@ -477,20 +463,19 @@ public final class SessionFormation implements Entity {
 	 * Association URI: Horaires.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ASSOCIATION7",
-    	fkFieldName = "SES_ID",
-    	primaryDtDefinitionName = "DT_SESSION_FORMATION",
-    	primaryIsNavigable = false,
-    	primaryRole = "SessionFormation",
-    	primaryLabel = "Session formation",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_HORAIRES",
-    	foreignIsNavigable = true,
-    	foreignRole = "Horaires",
-    	foreignLabel = "Horaires",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association (
+			name = "A_ASSOCIATION7",
+			fkFieldName = "SES_ID",
+			primaryDtDefinitionName = "DT_SESSION_FORMATION",
+			primaryIsNavigable = false,
+			primaryRole = "SessionFormation",
+			primaryLabel = "Session formation",
+			primaryMultiplicity = "1..1",
+			foreignDtDefinitionName = "DT_HORAIRES",
+			foreignIsNavigable = true,
+			foreignRole = "Horaires",
+			foreignLabel = "Horaires",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getHorairesDtListURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_ASSOCIATION7", "Horaires");
 	}
@@ -504,14 +489,8 @@ public final class SessionFormation implements Entity {
 			return null;
 		}
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
-		if (utilisateur != null) {
-			// On s'assure que l'objet correspond à la bonne clé
-			if (!fkURI.equals(utilisateur.getURI())) {
-				utilisateur = null;
-			}
-		}		
-		if (utilisateur == null) {
-			utilisateur = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().read(fkURI);
+		if (utilisateur == null || !fkURI.equals(utilisateur.getURI())) {
+			utilisateur = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().readOne(fkURI);
 		}
 		return utilisateur;
 	}
@@ -520,20 +499,19 @@ public final class SessionFormation implements Entity {
 	 * Retourne l'URI: Utilisateur.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_UTI_SES",
-    	fkFieldName = "UTI_ID",
-    	primaryDtDefinitionName = "DT_UTILISATEUR",
-    	primaryIsNavigable = true,
-    	primaryRole = "Utilisateur",
-    	primaryLabel = "Utilisateur",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_SESSION_FORMATION",
-    	foreignIsNavigable = false,
-    	foreignRole = "SessionFormation",
-    	foreignLabel = "Session formation",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association (
+			name = "A_UTI_SES",
+			fkFieldName = "UTI_ID",
+			primaryDtDefinitionName = "DT_UTILISATEUR",
+			primaryIsNavigable = true,
+			primaryRole = "Utilisateur",
+			primaryLabel = "Utilisateur",
+			primaryMultiplicity = "1..1",
+			foreignDtDefinitionName = "DT_SESSION_FORMATION",
+			foreignIsNavigable = false,
+			foreignRole = "SessionFormation",
+			foreignLabel = "Session formation",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> getUtilisateurURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_UTI_SES", com.kleegroup.formation.domain.administration.utilisateur.Utilisateur.class);
 	}
@@ -547,14 +525,8 @@ public final class SessionFormation implements Entity {
 			return null;
 		}
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
-		if (etatSessionUtilisateur != null) {
-			// On s'assure que l'objet correspond à la bonne clé
-			if (!fkURI.equals(etatSessionUtilisateur.getURI())) {
-				etatSessionUtilisateur = null;
-			}
-		}		
-		if (etatSessionUtilisateur == null) {
-			etatSessionUtilisateur = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().read(fkURI);
+		if (etatSessionUtilisateur == null || !fkURI.equals(etatSessionUtilisateur.getURI())) {
+			etatSessionUtilisateur = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().readOne(fkURI);
 		}
 		return etatSessionUtilisateur;
 	}
@@ -563,20 +535,19 @@ public final class SessionFormation implements Entity {
 	 * Retourne l'URI: Etat session utilisateur.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ESUSES",
-    	fkFieldName = "ESU_CODE",
-    	primaryDtDefinitionName = "DT_ETAT_SESSION_UTILISATEUR",
-    	primaryIsNavigable = true,
-    	primaryRole = "EtatSessionUtilisateur",
-    	primaryLabel = "Etat session utilisateur",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_SESSION_FORMATION",
-    	foreignIsNavigable = false,
-    	foreignRole = "SessionFormation",
-    	foreignLabel = "Session formation",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association (
+			name = "A_ESUSES",
+			fkFieldName = "ESU_CODE",
+			primaryDtDefinitionName = "DT_ETAT_SESSION_UTILISATEUR",
+			primaryIsNavigable = true,
+			primaryRole = "EtatSessionUtilisateur",
+			primaryLabel = "Etat session utilisateur",
+			primaryMultiplicity = "1..1",
+			foreignDtDefinitionName = "DT_SESSION_FORMATION",
+			foreignIsNavigable = false,
+			foreignRole = "SessionFormation",
+			foreignLabel = "Session formation",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.EtatSessionUtilisateur> getEtatSessionUtilisateurURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_ESUSES", com.kleegroup.formation.domain.formation.EtatSessionUtilisateur.class);
 	}

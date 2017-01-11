@@ -32,7 +32,7 @@ public final class FormationsListAction extends AbstractKleeFormationActionSuppo
 	/** {@inheritDoc} */
 	@Override
 	public void initContext() {
-		SecurityUtil.checkRole(com.kleegroup.formation.security.Role.R_RESPONSSABLE);
+		SecurityUtil.checkRole(com.kleegroup.formation.security.Roles.R_RESPONSSABLE);
 		utilisateurCritereForm.publish(new UtilisateurCritere());
 		allUserRef.set(true);
 		utilisateurs.publish(new DtList<Utilisateur>(DtObjectUtil.findDtDefinition(Utilisateur.class)));

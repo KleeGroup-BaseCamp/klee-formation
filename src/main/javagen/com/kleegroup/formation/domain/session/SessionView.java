@@ -1,8 +1,9 @@
 package com.kleegroup.formation.domain.session;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données SessionView
@@ -24,11 +25,10 @@ public final class SessionView implements DtObject {
 	private String statusUtilisateur;
 	private java.math.BigDecimal satisfaction;
 
-	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'SesId'. 
-	 * @return Long sesId 
+	 * Récupère la valeur de la propriété 'SesId'.
+	 * @return Long sesId
 	 */
 	@Field(domain = "DO_IDENTIFIANT", label = "SesId")
 	public Long getSesId() {
@@ -38,7 +38,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'SesId'.
-	 * @param sesId Long 
+	 * @param sesId Long
 	 */
 	public void setSesId(final Long sesId) {
 		this.sesId = sesId;
@@ -46,8 +46,8 @@ public final class SessionView implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Libellé court'. 
-	 * @return String formationName 
+	 * Récupère la valeur de la propriété 'Libellé court'.
+	 * @return String formationName
 	 */
 	@Field(domain = "DO_LIBELLE_COURT", label = "Libellé court")
 	public String getFormationName() {
@@ -57,7 +57,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Libellé court'.
-	 * @param formationName String 
+	 * @param formationName String
 	 */
 	public void setFormationName(final String formationName) {
 		this.formationName = formationName;
@@ -65,8 +65,8 @@ public final class SessionView implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Début'. 
-	 * @return java.util.Date dateDebut 
+	 * Récupère la valeur de la propriété 'Début'.
+	 * @return java.util.Date dateDebut
 	 */
 	@Field(domain = "DO_DATE", label = "Début")
 	public java.util.Date getDateDebut() {
@@ -76,7 +76,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Début'.
-	 * @param dateDebut java.util.Date 
+	 * @param dateDebut java.util.Date
 	 */
 	public void setDateDebut(final java.util.Date dateDebut) {
 		this.dateDebut = dateDebut;
@@ -84,8 +84,8 @@ public final class SessionView implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Fin'. 
-	 * @return java.util.Date dateFin 
+	 * Récupère la valeur de la propriété 'Fin'.
+	 * @return java.util.Date dateFin
 	 */
 	@Field(domain = "DO_DATE", label = "Fin")
 	public java.util.Date getDateFin() {
@@ -95,7 +95,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Fin'.
-	 * @param dateFin java.util.Date 
+	 * @param dateFin java.util.Date
 	 */
 	public void setDateFin(final java.util.Date dateFin) {
 		this.dateFin = dateFin;
@@ -103,8 +103,8 @@ public final class SessionView implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Horaires'. 
-	 * @return String horaires 
+	 * Récupère la valeur de la propriété 'Horaires'.
+	 * @return String horaires
 	 */
 	@Field(domain = "DO_LIBELLE_LONG", label = "Horaires")
 	public String getHoraires() {
@@ -114,7 +114,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Horaires'.
-	 * @param horaires String 
+	 * @param horaires String
 	 */
 	public void setHoraires(final String horaires) {
 		this.horaires = horaires;
@@ -122,8 +122,8 @@ public final class SessionView implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Durée'. 
-	 * @return Long duree 
+	 * Récupère la valeur de la propriété 'Durée'.
+	 * @return Long duree
 	 */
 	@Field(domain = "DO_IDENTIFIANT", label = "Durée")
 	public Long getDuree() {
@@ -133,7 +133,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Durée'.
-	 * @param duree Long 
+	 * @param duree Long
 	 */
 	public void setDuree(final Long duree) {
 		this.duree = duree;
@@ -141,8 +141,8 @@ public final class SessionView implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Niveau'. 
-	 * @return String niveau 
+	 * Récupère la valeur de la propriété 'Niveau'.
+	 * @return String niveau
 	 */
 	@Field(domain = "DO_LIBELLE_COURT", label = "Niveau")
 	public String getNiveau() {
@@ -152,7 +152,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Niveau'.
-	 * @param niveau String 
+	 * @param niveau String
 	 */
 	public void setNiveau(final String niveau) {
 		this.niveau = niveau;
@@ -160,8 +160,8 @@ public final class SessionView implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Descriptif'. 
-	 * @return String commentaire 
+	 * Récupère la valeur de la propriété 'Descriptif'.
+	 * @return String commentaire
 	 */
 	@Field(domain = "DO_LIBELLE_LONG", label = "Descriptif")
 	public String getCommentaire() {
@@ -171,7 +171,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Descriptif'.
-	 * @param commentaire String 
+	 * @param commentaire String
 	 */
 	public void setCommentaire(final String commentaire) {
 		this.commentaire = commentaire;
@@ -179,8 +179,8 @@ public final class SessionView implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Etat'. 
-	 * @return String status 
+	 * Récupère la valeur de la propriété 'Etat'.
+	 * @return String status
 	 */
 	@Field(domain = "DO_LIBELLE_COURT", label = "Etat")
 	public String getStatus() {
@@ -190,7 +190,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Etat'.
-	 * @param status String 
+	 * @param status String
 	 */
 	public void setStatus(final String status) {
 		this.status = status;
@@ -198,8 +198,8 @@ public final class SessionView implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Etat'. 
-	 * @return String statusUtilisateur 
+	 * Récupère la valeur de la propriété 'Etat'.
+	 * @return String statusUtilisateur
 	 */
 	@Field(domain = "DO_LIBELLE_COURT", label = "Etat")
 	public String getStatusUtilisateur() {
@@ -209,7 +209,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Etat'.
-	 * @param statusUtilisateur String 
+	 * @param statusUtilisateur String
 	 */
 	public void setStatusUtilisateur(final String statusUtilisateur) {
 		this.statusUtilisateur = statusUtilisateur;
@@ -217,8 +217,8 @@ public final class SessionView implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Satisfaction'. 
-	 * @return java.math.BigDecimal satisfaction 
+	 * Récupère la valeur de la propriété 'Satisfaction'.
+	 * @return java.math.BigDecimal satisfaction
 	 */
 	@Field(domain = "DO_STATIQUE", label = "Satisfaction")
 	public java.math.BigDecimal getSatisfaction() {
@@ -228,7 +228,7 @@ public final class SessionView implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Satisfaction'.
-	 * @param satisfaction java.math.BigDecimal 
+	 * @param satisfaction java.math.BigDecimal
 	 */
 	public void setSatisfaction(final java.math.BigDecimal satisfaction) {
 		this.satisfaction = satisfaction;

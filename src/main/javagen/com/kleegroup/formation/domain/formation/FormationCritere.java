@@ -1,8 +1,9 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données FormationCritere
@@ -15,11 +16,10 @@ public final class FormationCritere implements DtObject {
 	private String intitule;
 	private String nivCode;
 
-	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Libellé court'. 
-	 * @return String intitule 
+	 * Récupère la valeur de la propriété 'Libellé court'.
+	 * @return String intitule
 	 */
 	@Field(domain = "DO_LIBELLE_COURT", label = "Libellé court")
 	public String getIntitule() {
@@ -29,7 +29,7 @@ public final class FormationCritere implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Libellé court'.
-	 * @param intitule String 
+	 * @param intitule String
 	 */
 	public void setIntitule(final String intitule) {
 		this.intitule = intitule;
@@ -37,8 +37,8 @@ public final class FormationCritere implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Code'. 
-	 * @return String nivCode 
+	 * Récupère la valeur de la propriété 'Code'.
+	 * @return String nivCode
 	 */
 	@Field(domain = "DO_CODE", label = "Code")
 	public String getNivCode() {
@@ -48,7 +48,7 @@ public final class FormationCritere implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Code'.
-	 * @param nivCode String 
+	 * @param nivCode String
 	 */
 	public void setNivCode(final String nivCode) {
 		this.nivCode = nivCode;

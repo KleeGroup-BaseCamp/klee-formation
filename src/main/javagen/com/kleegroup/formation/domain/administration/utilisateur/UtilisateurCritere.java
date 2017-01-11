@@ -1,8 +1,9 @@
 package com.kleegroup.formation.domain.administration.utilisateur;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données UtilisateurCritere
@@ -18,11 +19,10 @@ public final class UtilisateurCritere implements DtObject {
 	private String role;
 	private Boolean isActif;
 
-	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Nom'. 
-	 * @return String nom 
+	 * Récupère la valeur de la propriété 'Nom'.
+	 * @return String nom
 	 */
 	@Field(domain = "DO_LIBELLE", label = "Nom")
 	public String getNom() {
@@ -32,7 +32,7 @@ public final class UtilisateurCritere implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Nom'.
-	 * @param nom String 
+	 * @param nom String
 	 */
 	public void setNom(final String nom) {
 		this.nom = nom;
@@ -40,8 +40,8 @@ public final class UtilisateurCritere implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Nom'. 
-	 * @return String prenom 
+	 * Récupère la valeur de la propriété 'Nom'.
+	 * @return String prenom
 	 */
 	@Field(domain = "DO_LIBELLE", label = "Nom")
 	public String getPrenom() {
@@ -51,7 +51,7 @@ public final class UtilisateurCritere implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Nom'.
-	 * @param prenom String 
+	 * @param prenom String
 	 */
 	public void setPrenom(final String prenom) {
 		this.prenom = prenom;
@@ -59,8 +59,8 @@ public final class UtilisateurCritere implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Indentifiant'. 
-	 * @return String login 
+	 * Récupère la valeur de la propriété 'Indentifiant'.
+	 * @return String login
 	 */
 	@Field(domain = "DO_LOGIN", label = "Indentifiant")
 	public String getLogin() {
@@ -70,7 +70,7 @@ public final class UtilisateurCritere implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Indentifiant'.
-	 * @param login String 
+	 * @param login String
 	 */
 	public void setLogin(final String login) {
 		this.login = login;
@@ -78,8 +78,8 @@ public final class UtilisateurCritere implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Rôle'. 
-	 * @return String role 
+	 * Récupère la valeur de la propriété 'Rôle'.
+	 * @return String role
 	 */
 	@Field(domain = "DO_LIBELLE", label = "Rôle")
 	public String getRole() {
@@ -89,7 +89,7 @@ public final class UtilisateurCritere implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Rôle'.
-	 * @param role String 
+	 * @param role String
 	 */
 	public void setRole(final String role) {
 		this.role = role;
@@ -97,8 +97,8 @@ public final class UtilisateurCritere implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Seulement les utilisateurs actifs'. 
-	 * @return Boolean isActif 
+	 * Récupère la valeur de la propriété 'Seulement les utilisateurs actifs'.
+	 * @return Boolean isActif
 	 */
 	@Field(domain = "DO_ACTIF", label = "Seulement les utilisateurs actifs")
 	public Boolean getIsActif() {
@@ -108,7 +108,7 @@ public final class UtilisateurCritere implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Seulement les utilisateurs actifs'.
-	 * @param isActif Boolean 
+	 * @param isActif Boolean
 	 */
 	public void setIsActif(final Boolean isActif) {
 		this.isActif = isActif;

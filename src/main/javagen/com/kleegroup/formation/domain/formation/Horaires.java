@@ -1,9 +1,10 @@
 package com.kleegroup.formation.domain.formation;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Horaires
@@ -26,10 +27,10 @@ public final class Horaires implements Entity {
 	public URI<Horaires> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
-	 * Récupère la valeur de la propriété 'DatId'. 
+	 * Récupère la valeur de la propriété 'DatId'.
 	 * @return Long datId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_IDENTIFIANT", type = "ID", required = true, label = "DatId")
@@ -48,8 +49,8 @@ public final class Horaires implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'debut'. 
-	 * @return Integer debut 
+	 * Récupère la valeur de la propriété 'debut'.
+	 * @return Integer debut
 	 */
 	@Field(domain = "DO_HEURE", label = "debut")
 	public Integer getDebut() {
@@ -59,7 +60,7 @@ public final class Horaires implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'debut'.
-	 * @param debut Integer 
+	 * @param debut Integer
 	 */
 	public void setDebut(final Integer debut) {
 		this.debut = debut;
@@ -67,8 +68,8 @@ public final class Horaires implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'fin'. 
-	 * @return Integer fin 
+	 * Récupère la valeur de la propriété 'fin'.
+	 * @return Integer fin
 	 */
 	@Field(domain = "DO_HEURE", label = "fin")
 	public Integer getFin() {
@@ -78,7 +79,7 @@ public final class Horaires implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'fin'.
-	 * @param fin Integer 
+	 * @param fin Integer
 	 */
 	public void setFin(final Integer fin) {
 		this.fin = fin;
@@ -86,8 +87,8 @@ public final class Horaires implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'jour'. 
-	 * @return java.util.Date jour 
+	 * Récupère la valeur de la propriété 'jour'.
+	 * @return java.util.Date jour
 	 */
 	@Field(domain = "DO_DATE", label = "jour")
 	public java.util.Date getJour() {
@@ -97,7 +98,7 @@ public final class Horaires implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'jour'.
-	 * @param jour java.util.Date 
+	 * @param jour java.util.Date
 	 */
 	public void setJour(final java.util.Date jour) {
 		this.jour = jour;
@@ -105,8 +106,8 @@ public final class Horaires implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'debutAprem'. 
-	 * @return Integer debutAprem 
+	 * Récupère la valeur de la propriété 'debutAprem'.
+	 * @return Integer debutAprem
 	 */
 	@Field(domain = "DO_HEURE", label = "debutAprem")
 	public Integer getDebutAprem() {
@@ -116,7 +117,7 @@ public final class Horaires implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'debutAprem'.
-	 * @param debutAprem Integer 
+	 * @param debutAprem Integer
 	 */
 	public void setDebutAprem(final Integer debutAprem) {
 		this.debutAprem = debutAprem;
@@ -124,8 +125,8 @@ public final class Horaires implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'finAprem'. 
-	 * @return Integer finAprem 
+	 * Récupère la valeur de la propriété 'finAprem'.
+	 * @return Integer finAprem
 	 */
 	@Field(domain = "DO_HEURE", label = "finAprem")
 	public Integer getFinAprem() {
@@ -135,7 +136,7 @@ public final class Horaires implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'finAprem'.
-	 * @param finAprem Integer 
+	 * @param finAprem Integer
 	 */
 	public void setFinAprem(final Integer finAprem) {
 		this.finAprem = finAprem;
@@ -143,7 +144,7 @@ public final class Horaires implements Entity {
 
 	/**
 	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Session formation'. 
+	 * Récupère la valeur de la propriété 'Session formation'.
 	 * @return Long sesId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_IDENTIFIANT", type = "FOREIGN_KEY", required = true, label = "Session formation")

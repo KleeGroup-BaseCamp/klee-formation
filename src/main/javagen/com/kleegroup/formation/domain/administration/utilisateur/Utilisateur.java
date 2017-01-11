@@ -1,9 +1,10 @@
 package com.kleegroup.formation.domain.administration.utilisateur;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Utilisateur
@@ -28,10 +29,10 @@ public final class Utilisateur implements Entity {
 	public URI<Utilisateur> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
-	 * Récupère la valeur de la propriété 'UTI_ID'. 
+	 * Récupère la valeur de la propriété 'UTI_ID'.
 	 * @return Long utiId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_IDENTIFIANT", type = "ID", required = true, label = "UTI_ID")
@@ -50,8 +51,8 @@ public final class Utilisateur implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Nom'. 
-	 * @return String nom 
+	 * Récupère la valeur de la propriété 'Nom'.
+	 * @return String nom
 	 */
 	@Field(domain = "DO_LIBELLE", label = "Nom")
 	public String getNom() {
@@ -61,7 +62,7 @@ public final class Utilisateur implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Nom'.
-	 * @param nom String 
+	 * @param nom String
 	 */
 	public void setNom(final String nom) {
 		this.nom = nom;
@@ -69,8 +70,8 @@ public final class Utilisateur implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Prénom'. 
-	 * @return String prenom 
+	 * Récupère la valeur de la propriété 'Prénom'.
+	 * @return String prenom
 	 */
 	@Field(domain = "DO_LIBELLE", label = "Prénom")
 	public String getPrenom() {
@@ -80,7 +81,7 @@ public final class Utilisateur implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Prénom'.
-	 * @param prenom String 
+	 * @param prenom String
 	 */
 	public void setPrenom(final String prenom) {
 		this.prenom = prenom;
@@ -88,7 +89,7 @@ public final class Utilisateur implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Courriel'. 
+	 * Récupère la valeur de la propriété 'Courriel'.
 	 * @return String mail <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_EMAIL", required = true, label = "Courriel")
@@ -107,8 +108,8 @@ public final class Utilisateur implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'admin'. 
-	 * @return Boolean admin 
+	 * Récupère la valeur de la propriété 'admin'.
+	 * @return Boolean admin
 	 */
 	@Field(domain = "DO_OUI_NON", label = "admin")
 	public Boolean getAdmin() {
@@ -118,7 +119,7 @@ public final class Utilisateur implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'admin'.
-	 * @param admin Boolean 
+	 * @param admin Boolean
 	 */
 	public void setAdmin(final Boolean admin) {
 		this.admin = admin;
@@ -126,8 +127,8 @@ public final class Utilisateur implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'responsable'. 
-	 * @return Boolean responsable 
+	 * Récupère la valeur de la propriété 'responsable'.
+	 * @return Boolean responsable
 	 */
 	@Field(domain = "DO_OUI_NON", label = "responsable")
 	public Boolean getResponsable() {
@@ -137,7 +138,7 @@ public final class Utilisateur implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'responsable'.
-	 * @param responsable Boolean 
+	 * @param responsable Boolean
 	 */
 	public void setResponsable(final Boolean responsable) {
 		this.responsable = responsable;
@@ -145,8 +146,8 @@ public final class Utilisateur implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'formateur'. 
-	 * @return Boolean formateur 
+	 * Récupère la valeur de la propriété 'formateur'.
+	 * @return Boolean formateur
 	 */
 	@Field(domain = "DO_OUI_NON", label = "formateur")
 	public Boolean getFormateur() {
@@ -156,7 +157,7 @@ public final class Utilisateur implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'formateur'.
-	 * @param formateur Boolean 
+	 * @param formateur Boolean
 	 */
 	public void setFormateur(final Boolean formateur) {
 		this.formateur = formateur;
@@ -164,8 +165,8 @@ public final class Utilisateur implements Entity {
 
 	/**
 	 * Champ : COMPUTED.
-	 * Récupère la valeur de la propriété calculée 'Prénom Nom'. 
-	 * @return String prenomNom 
+	 * Récupère la valeur de la propriété calculée 'Prénom Nom'.
+	 * @return String prenomNom
 	 */
 	@Field(domain = "DO_LIBELLE_LONG", type = "COMPUTED", persistent = false, label = "Prénom Nom")
 	public String getPrenomNom() {
@@ -180,8 +181,8 @@ public final class Utilisateur implements Entity {
 
 	/**
 	 * Champ : COMPUTED.
-	 * Récupère la valeur de la propriété calculée 'Nom complet'. 
-	 * @return String nomComplet 
+	 * Récupère la valeur de la propriété calculée 'Nom complet'.
+	 * @return String nomComplet
 	 */
 	@Field(domain = "DO_LIBELLE", type = "COMPUTED", persistent = false, label = "Nom complet")
 	public String getNomComplet() {
@@ -216,20 +217,19 @@ public final class Utilisateur implements Entity {
 	 * Association URI: Login.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_UTI_LOG",
-    	fkFieldName = "UTI_ID",
-    	primaryDtDefinitionName = "DT_UTILISATEUR",
-    	primaryIsNavigable = false,
-    	primaryRole = "Utilisateur",
-    	primaryLabel = "Utilisateur",
-    	primaryMultiplicity = "1..1",
-    	foreignDtDefinitionName = "DT_LOGIN",
-    	foreignIsNavigable = true,
-    	foreignRole = "Login",
-    	foreignLabel = "Login",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association (
+			name = "A_UTI_LOG",
+			fkFieldName = "UTI_ID",
+			primaryDtDefinitionName = "DT_UTILISATEUR",
+			primaryIsNavigable = false,
+			primaryRole = "Utilisateur",
+			primaryLabel = "Utilisateur",
+			primaryMultiplicity = "1..1",
+			foreignDtDefinitionName = "DT_LOGIN",
+			foreignIsNavigable = true,
+			foreignRole = "Login",
+			foreignLabel = "Login",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getLoginDtListURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_UTI_LOG", "Login");
 	}
@@ -261,18 +261,18 @@ public final class Utilisateur implements Entity {
 	 * Association URI: Rôle.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.AssociationNN (
-    	name = "ANN_UTI_ROL",
-    	tableName = "UTI_ROL",
-    	dtDefinitionA = "DT_UTILISATEUR",
-    	dtDefinitionB = "DT_ROLE",
-    	navigabilityA = false,
-    	navigabilityB = true,
-    	roleA = "Utilisateur",
-    	roleB = "Role",
-    	labelA = "Utilisateur",
-    	labelB = "Rôle"
-    )
+	@io.vertigo.dynamo.domain.stereotype.AssociationNN (
+			name = "ANN_UTI_ROL",
+			tableName = "UTI_ROL",
+			dtDefinitionA = "DT_UTILISATEUR",
+			dtDefinitionB = "DT_ROLE",
+			navigabilityA = false,
+			navigabilityB = true,
+			roleA = "Utilisateur",
+			roleB = "Role",
+			labelA = "Utilisateur",
+			labelB = "Rôle"
+	)
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getRoleDtListURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForNNAssociation(this, "ANN_UTI_ROL", "Role");
 	}
