@@ -4,6 +4,5 @@
 	<module name="security" api="false">
 		<component class="com.kleegroup.formation.saml.SamlTokenManager"/>
 		<component class="com.kleegroup.formation.saml.SamlHelper" />
-		<component class="com.kleegroup.formation.saml.SamlFilter"/>
 	</module>
 </config>

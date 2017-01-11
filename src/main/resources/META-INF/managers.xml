@@ -8,7 +8,7 @@
 			<param name="url" value="${boot.configXmlInterne}" />
 		</plugin>
 		<plugin class="io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin2" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin" />
 		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.kpr.KprLoaderPlugin">
 			<param name='encoding' value='utf8' />
 		</plugin>
@@ -19,6 +19,8 @@
 	</boot>
 	<module name="KleeFormation">
 		<definitions>
+			<resource type="classes" path="com.kleegroup.formation.domain.DtDefinitions" />
+			<resource type="kpr" path="com/kleegroup/formation/execution.kpr" />
 			<resource type="security" path="/META-INF/kleeFormation-auth-config.xml" />
 		</definitions>
 	</module>
@@ -95,14 +97,11 @@
 		<aspect class="io.vertigo.dynamo.impl.transaction.VTransactionAspect"/>
 	</module>
 	
-	<feature class="io.vertigo.app.config.xml.KleeFormationFeatures" />
-	
 	<init>
 		<initializer class="com.kleegroup.formation.boot.initializer.LocaleManagerInitializer"/>
 		<initializer class="com.kleegroup.formation.boot.initializer.PersistenceManagerInitializer"/>
 		<initializer class="com.kleegroup.formation.boot.initializer.JobManagerInitializer"/>
 		<initializer class="com.kleegroup.formation.boot.initializer.SecurityManagerInitializer"/>
 	</init>
-	
 
 </config>
