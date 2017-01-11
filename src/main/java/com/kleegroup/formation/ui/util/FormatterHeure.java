@@ -41,10 +41,9 @@ public final class FormatterHeure implements Formatter {
 		if (sValue.length() == 5) {
 			final int i = Integer.parseInt(sValue.substring(0, 2)) * 60 + Integer.parseInt(sValue.substring(3, 5));
 			return i;
-		} else {
-			final int i = Integer.parseInt(sValue.substring(0, 1)) * 60 + Integer.parseInt(sValue.substring(2, 4));
-			return i;
 		}
+		final int i = Integer.parseInt(sValue.substring(0, 1)) * 60 + Integer.parseInt(sValue.substring(2, 4));
+		return i;
 	}
 
 	private String dateToString(final Integer objValue) {

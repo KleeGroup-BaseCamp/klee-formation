@@ -22,7 +22,7 @@
 		Task/MDM de execution.kpr -->
 	<context-param>
 		<param-name>boot.applicationConfiguration</param-name>
-		<param-value>/META-INF/managers.xml;/META-INF/security.xml</param-value>
+		<param-value>/META-INF/managers.xml</param-value>
 	</context-param>
 	
 	

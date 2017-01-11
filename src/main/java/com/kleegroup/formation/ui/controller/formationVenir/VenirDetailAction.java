@@ -88,9 +88,8 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 	public boolean isComplet() {
 		if (session.readDto().getEsuCode().equals("Complete")) {
 			return false;
-		} else {
-			return true;
 		}
+		return true;
 	}
 
 	public boolean isInscrit() {

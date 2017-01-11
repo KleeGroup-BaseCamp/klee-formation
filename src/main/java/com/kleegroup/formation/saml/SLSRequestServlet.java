@@ -73,7 +73,7 @@ public class SLSRequestServlet extends HttpServlet {
 				LOG.info("messageContext.getOutboundSAMLMessage() = " + messageContext.getOutboundSAMLMessage());
 				// SP private key
 				final Credential credential = SamlHelper
-						.createCredentialFromPkcs8(config.getStringValue("saml.pathKeyPKCS8"));
+						.createCredentialFromPkcs8(config.getParam("saml.pathKeyPKCS8").getValueAsString());
 				final Signature sig = SamlHelper.createSignature(credential);
 				logoutRequest.setSignature(sig);
 				samlHelper.signAndSendHttpPostBinding(messageContext, sig, credential);

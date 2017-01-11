@@ -68,10 +68,9 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 		if (sessionView.size() == 0) {
 			formationServices.deleteFormation(forId);
 			return "success_delete";
-		} else {
-			formationServices.deleteFormationCascade(forId);
-			return "success_delete";
 		}
+		formationServices.deleteFormationCascade(forId);
+		return "success_delete";
 
 	}
 

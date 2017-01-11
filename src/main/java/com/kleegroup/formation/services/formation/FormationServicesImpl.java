@@ -30,7 +30,7 @@ public class FormationServicesImpl implements FormationServices {
 	/** {@inheritDoc} */
 	@Override
 	public DtList<Formation> getFormationListByCritere(final FormationCritere criteres) {
-		return formationDAO.getList(DtListURIForCriteria.createCriteria(criteres), 100);
+		return formationDAO.findAll(DtListURIForCriteria.createCriteria(criteres), 100);
 	}
 
 	/** {@inheritDoc} */

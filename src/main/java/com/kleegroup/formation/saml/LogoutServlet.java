@@ -42,7 +42,7 @@ public class LogoutServlet extends HttpServlet {
 			final VSecurityManager securityManager = Home.getApp().getComponentSpace().resolve(VSecurityManager.class);
 			final KleeFormationUserSession session = (KleeFormationUserSession) securityManager.getCurrentUserSession().get();
 			final ParamManager config = Home.getApp().getComponentSpace().resolve(ParamManager.class);
-			final boolean samlEnabled = config.getBooleanValue("saml.activer");
+			final boolean samlEnabled = config.getParam("saml.activer").getValueAsBoolean();
 			if (!samlEnabled) {
 				LoginLogoutHelper.invalidateSession(request);
 				ServletHelper.sendRelativeRedirect(request, response, LoginLogoutHelper.DECONNEXION_SUCCESSFUL_URL);
@@ -60,7 +60,7 @@ public class LogoutServlet extends HttpServlet {
 				LOG.info("messageContext.getOutboundSAMLMessage() = " + messageContext.getOutboundSAMLMessage());
 				// SP private key
 				final Credential credential = SamlHelper
-						.createCredentialFromPkcs8(config.getStringValue("saml.pathKeyPKCS8"));
+						.createCredentialFromPkcs8(config.getParam("saml.pathKeyPKCS8").getValueAsString());
 				final Signature sig = SamlHelper.createSignature(credential);
 				logoutRequest.setSignature(sig);
 				samlHelper.signAndSendHttpPostBinding(messageContext, sig, credential);

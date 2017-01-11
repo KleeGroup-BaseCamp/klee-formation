@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import com.kleegroup.formation.dao.administration.utilisateur.LoginDAO;
 import com.kleegroup.formation.dao.administration.utilisateur.RoleDAO;
 import com.kleegroup.formation.dao.administration.utilisateur.UtilisateurDAO;
-import com.kleegroup.formation.domain.DtDefinitions;
 import com.kleegroup.formation.domain.DtDefinitions.LoginFields;
 import com.kleegroup.formation.domain.administration.utilisateur.Login;
 import com.kleegroup.formation.domain.administration.utilisateur.Role;
@@ -27,9 +26,7 @@ import io.vertigo.dynamo.domain.model.DtListURIForCriteria;
 import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.store.StoreManager;
-import io.vertigo.dynamo.store.criteria.Criteria;
-import io.vertigo.dynamo.store.criteria.FilterCriteria;
-import io.vertigo.dynamo.store.criteria.FilterCriteriaBuilder;
+import io.vertigo.dynamo.store.criteria.Criterions;
 import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.MessageText;
@@ -156,9 +153,8 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 	@Override
 	public void deleteUtilisateur(final Long utiId) {
 		//throw new UnsupportedOperationException("operation not supported yet !!!");
-		final FilterCriteria<Login> filter = new FilterCriteriaBuilder<Login>().addFilter(LoginFields.UTI_ID, utiId).build();
-		final DtList<Login> logins = loginDAO.getList(filter, 1);
-		loginDAO.delete(logins.get(0).getLogId());
+		final Login login = loginDAO.find(Criterions.isEqualTo(LoginFields.UTI_ID, utiId));
+		loginDAO.delete(login.getLogId());
 		final Utilisateur utilisateur = utilisateurDAO.get(utiId);
 		/*int i = 0;
 		while (i < utilisateur.getRoleList().size()) {
@@ -186,10 +182,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 	private Utilisateur loadUtilisateurByLogin(final UtilisateurLogin utilisateurLogin) {
 		Assertion.checkNotNull(utilisateurLogin);
 		//-----
-		final Criteria<Login> critere = new FilterCriteriaBuilder<Login>()
-				.addFilter(DtDefinitions.LoginFields.LOGIN, utilisateurLogin.getLogin())
-				.build();
-		final DtList<Login> logins = loginDAO.getList(critere, 1);
+		final DtList<Login> logins = loginDAO.findAll(Criterions.isEqualTo(LoginFields.LOGIN, utilisateurLogin.getLogin()), 1);
 		//On effectue le même traitement si le login est incorrect pour éviter l'analyse par le temps
 		final String password = logins.isEmpty() ? "UnknownPassword" : logins.get(0).getPassword();
 		final String salt = passwordHelper.extractSalt(password);
@@ -216,7 +209,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 		Assertion.checkNotNull(mail);
 		//-----
 		/*final Criteria<Utilisateur> critere = new FilterCriteriaBuilder<Utilisateur>()
-				.withFilter(DtDefinitions.UtilisateurFields.MAIL, mail)
+				.addFilter(DtDefinitions.UtilisateurFields.MAIL, mail)
 				.build();
 
 		final DtList<Utilisateur> emails = utilisateurDAO.getList(critere, 1);*/
@@ -263,7 +256,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 	}
 
 	private Map<String, Utilisateur> loadIndexedUtilisateurs() {
-		final DtList<Utilisateur> utilisateurs = utilisateurDAO.findAll(new FilterCriteriaBuilder().build(), 1000);
+		final DtList<Utilisateur> utilisateurs = utilisateurDAO.findAll(Criterions.alwaysTrue(), 1000);
 		final Map<String, Utilisateur> utilisateurPerEmail = new HashMap<>();
 		for (final Utilisateur utilisateur : utilisateurs) {
 			utilisateurPerEmail.put(utilisateur.getMail(), utilisateur);

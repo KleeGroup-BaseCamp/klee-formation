@@ -15,13 +15,12 @@ import org.apache.log4j.Logger;
 
 import io.vertigo.app.Home;
 import io.vertigo.core.param.ParamManager;
-import io.vertigo.lang.Component;
 import io.vertigo.vega.impl.servlet.filter.AbstractFilter;
 
 /**
  * @author xdurand
  */
-public class SamlFilter extends AbstractFilter implements Component {
+public class SamlFilter extends AbstractFilter {
 
 	private static final Logger LOGGER = Logger.getLogger(SamlFilter.class);
 	private SamlHelper samlHelper;
@@ -31,7 +30,7 @@ public class SamlFilter extends AbstractFilter implements Component {
 	@Override
 	public void doMyFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
 			throws IOException, ServletException {
-		final boolean samlEnabled = config.getBooleanValue("saml.activer");
+		final boolean samlEnabled = config.getParam("saml.activer").getValueAsBoolean();
 		if (!samlEnabled) {
 			// Lorsque la vérification de sécurité SAML n'est pas activé, on laisse donc passer la requête et nous
 			// chainons avec le filtre suivant.

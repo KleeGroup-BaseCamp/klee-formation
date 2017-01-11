@@ -128,14 +128,14 @@ public class SamlHelper implements Component, Activeable {
 	/** {@inheritDoc} */
 	@Override
 	public void start() {
-		final boolean samlEnabled = config.getBooleanValue("saml.activer");
+		final boolean samlEnabled = config.getParam("saml.activer").getValueAsBoolean();
 		if (!samlEnabled) {
 			LOG.info("OpenSAML désactivé. Authentification/Déconnexion en mode bouchon");
 		} else {
 			try {
 				DefaultBootstrap.bootstrap();
 				samlIdGenerator = new SecureRandomIdentifierGenerator();
-				pathMetadata = Paths.get(config.getStringValue("saml.pathIDPMetadata"));
+				pathMetadata = Paths.get(config.getParam("saml.pathIDPMetadata").getValueAsString());
 				metadataDescriptor = parseIdpMetadata();
 				velocityEngine = new VelocityEngine();
 				velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
@@ -174,9 +174,9 @@ public class SamlHelper implements Component, Activeable {
 	 */
 	private MetadataDescriptor parseIdpMetadata() throws FileNotFoundException, IOException, XMLParserException,
 			MetadataProviderException, SecurityException, XPathExpressionException {
-		final String entityIdIDP = config.getStringValue("saml.entityIdIDP");
-		final String recipientSP = config.getStringValue("saml.recipentSP");
-		final String audienceSP = config.getStringValue("saml.audienceSP");
+		final String entityIdIDP = config.getParam("saml.entityIdIDP").getValueAsString();
+		final String recipientSP = config.getParam("saml.recipentSP").getValueAsString();
+		final String audienceSP = config.getParam("saml.audienceSP").getValueAsString();
 		Element elmDoc;
 		try (InputStream is = new FileInputStream(pathMetadata.toFile())) {
 			elmDoc = getDocumentElement(is);

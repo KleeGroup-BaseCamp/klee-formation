@@ -40,8 +40,7 @@
 		<component api="SqlDataBaseManager" class="io.vertigo.dynamo.impl.database.SqlDataBaseManagerImpl">
 			<plugin class="io.vertigo.dynamo.plugins.database.connection.datasource.DataSourceConnectionProviderPlugin">
 				<param name="source" value="java:/comp/env/jdbc/DataSource" />
-<!-- 				<param name="classname" value="io.vertigo.dynamo.impl.database.vendor.h2.H2Database" /> -->
-				<param name="classname" value="io.vertigo.dynamo.impl.database.vendor.sqlserver.SqlServerDataBase" />
+				<param name="classname" value="io.vertigo.dynamo.impl.database.vendor.postgresql.PostgreSqlDataBase" />
 			</plugin>
 		</component>
 
@@ -79,14 +78,6 @@
 		</component>
 	</module>
 
-	<module name="ui">
-		<component api="ContextCacheManager" class="io.vertigo.struts2.impl.context.ContextCacheManagerImpl">
-			<plugin class="io.vertigo.struts2.plugins.context.berkeley.BerkeleyContextCachePlugin">
-				<param name="cachePath" value="${java.io.tmpdir}/ehcache/KleeFormationVActionContext" />
-				<param name="timeToLiveSeconds" value="86400" /> <!-- 24h -->
-			</plugin>
-		</component>
-	</module>
 	<module name="vertigo-labs">
 			<component api="MailManager" class="io.vertigo.tempo.impl.mail.MailManagerImpl">
 				<plugin class="io.vertigo.tempo.plugins.mail.javaxmail.JavaxSendMailPlugin">

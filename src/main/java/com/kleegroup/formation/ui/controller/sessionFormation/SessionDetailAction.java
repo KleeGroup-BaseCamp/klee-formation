@@ -231,31 +231,24 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 			horairesServices.deleteHoraires(session.readDto().getSesId());
 			sessionServices.deleteSessionFormation(session.readDto().getSesId());
 			return "success_delete";
-		} else {
-			sessions.setStatus("Annulée");
-			sessions.setEtaCode("Annuler");
-			//sessions.setIsOuvert("Annuler");
-			sessions.setEsuCode("Annulée");
-			sessionServices.saveSessionFormation(sessions);
-			final DtList<Inscription> insc = inscriptionServices.getListInscriptionsBySessionId(session.readDto().getSesId());
-			if (insc != null) {
-				int i = 0;
-				while (i < insc.size()) {
-
-					final Utilisateur uti = utilisateurServices.loadUtilisateurWithRoles(insc.get(i).getUtiId());
-					mailServices.envoyersupression(formation.readDto(), session.readDto(), uti.getMail());
-					i = i + 1;
-				}
-
-			}
-			return SUCCESS;
 		}
-		/*	if (etat.equals("Brouillon")) {
-				sessionServices.deleteSessionCascade(sesIdRef.get());
-				horairesServices.deleteHoraires(session.readDto().getSesId());
-				sessionServices.deleteSessionFormation(session.readDto().getSesId());
-				return "success_delete";
-			}*/
+		sessions.setStatus("Annulée");
+		sessions.setEtaCode("Annuler");
+		//sessions.setIsOuvert("Annuler");
+		sessions.setEsuCode("Annulée");
+		sessionServices.saveSessionFormation(sessions);
+		final DtList<Inscription> insc = inscriptionServices.getListInscriptionsBySessionId(session.readDto().getSesId());
+		if (insc != null) {
+			int i = 0;
+			while (i < insc.size()) {
+
+				final Utilisateur uti = utilisateurServices.loadUtilisateurWithRoles(insc.get(i).getUtiId());
+				mailServices.envoyersupression(formation.readDto(), session.readDto(), uti.getMail());
+				i = i + 1;
+			}
+
+		}
+		return SUCCESS;
 	}
 
 	@SuppressWarnings("deprecation")

@@ -69,12 +69,13 @@ public class MailServicesImpl implements MailServices {
 		final VFile texte = UtilMail.createVFile(file, "test.ics", getClass());
 		SimpleDateFormat formater = null;
 		formater = new SimpleDateFormat("dd/MM/yy");
-		final String from = paramManager.getStringValue("mail.from");
+		final String from = paramManager.getParam("mail.from").getValueAsString();
 		final Mail mail = new MailBuilder()
 				.from(from)
 				.to(email)
 				.withSubject(new MessageText(MailResources.MAIL_VAL_SUBJECT_INSCRPITION_MOI, formation.getIntitule()).getDisplay())
-				.withHtmlContent(new MessageText(MailResources.MAIL_VAL_MESSAGE_INSCRIPTION_MOI, formation.getIntitule(), formater.format(session.getDateDebut()).toString(), formater.format(session.getDateFin()).toString(), session.getLieux().toString()).getDisplay())
+				.withHtmlContent(new MessageText(MailResources.MAIL_VAL_MESSAGE_INSCRIPTION_MOI, formation.getIntitule(), formater.format(session.getDateDebut()).toString(),
+						formater.format(session.getDateFin()).toString(), session.getLieux().toString()).getDisplay())
 				.withAttachments(texte)
 				.build();
 		mailManager.sendMail(mail);
@@ -85,12 +86,13 @@ public class MailServicesImpl implements MailServices {
 
 		SimpleDateFormat formater = null;
 		formater = new SimpleDateFormat("dd/MM/yy");
-		final String from = paramManager.getStringValue("mail.from");
+		final String from = paramManager.getParam("mail.from").getValueAsString();
 		final Mail mail = new MailBuilder()
 				.from(from)
 				.to(email)
 				.withSubject(new MessageText(MailResources.MAIL_SUBJECT_INSCRIIPTION_AUTRE, formation.getIntitule()).getDisplay())
-				.withHtmlContent(new MessageText(MailResources.MAIL_VAL_MESSAGE_INSCRIPTION_MOI, formation.getIntitule(), formater.format(session.getDateDebut()).toString(), formater.format(session.getDateFin()).toString(), session.getLieux().toString()).getDisplay())
+				.withHtmlContent(new MessageText(MailResources.MAIL_VAL_MESSAGE_INSCRIPTION_MOI, formation.getIntitule(), formater.format(session.getDateDebut()).toString(),
+						formater.format(session.getDateFin()).toString(), session.getLieux().toString()).getDisplay())
 				.withAttachments(invitCalendar)
 				.build();
 		mailManager.sendMail(mail);
@@ -98,7 +100,7 @@ public class MailServicesImpl implements MailServices {
 
 	@Override
 	public void envoyerModification(final Formation formation, final SessionFormation session, final String email) {
-		final String from = paramManager.getStringValue("mail.from");
+		final String from = paramManager.getParam("mail.from").getValueAsString();
 		SimpleDateFormat formater = null;
 		formater = new SimpleDateFormat("dd/MM/yy");
 		//"camille.moutte@kleegroup.com"
@@ -106,21 +108,23 @@ public class MailServicesImpl implements MailServices {
 				.from(from)
 				.to(email)
 				.withSubject(new MessageText(MailResources.MAIL_VAL_SUBJECT_MODIFICATION, formation.getIntitule()).getDisplay())
-				.withHtmlContent(new MessageText(MailResources.MAIL_VAL_MESSAGE_MODIFICATION, formation.getIntitule(), formater.format(session.getDateDebut()).toString(), formater.format(session.getDateFin()).toString(), session.getLieux().toString()).getDisplay())
+				.withHtmlContent(new MessageText(MailResources.MAIL_VAL_MESSAGE_MODIFICATION, formation.getIntitule(), formater.format(session.getDateDebut()).toString(),
+						formater.format(session.getDateFin()).toString(), session.getLieux().toString()).getDisplay())
 				.build();
 		mailManager.sendMail(mail);
 	}
 
 	@Override
 	public void envoyersupression(final Formation formation, final SessionFormation session, final String email) {
-		final String from = paramManager.getStringValue("mail.from");
+		final String from = paramManager.getParam("mail.from").getValueAsString();
 		SimpleDateFormat formater = null;
 		formater = new SimpleDateFormat("dd/MM/yy");
 		final Mail mail = new MailBuilder()
 				.from(from)
 				.to(email)
 				.withSubject(new MessageText(MailResources.MAIL_SUBJECT_ANNULATION, formation.getIntitule()).getDisplay())
-				.withHtmlContent(new MessageText(MailResources.MAIL_MESSAGE_ANNULATION, formation.getIntitule(), formater.format(session.getDateDebut()).toString(), formater.format(session.getDateFin()).toString()).getDisplay())
+				.withHtmlContent(new MessageText(MailResources.MAIL_MESSAGE_ANNULATION, formation.getIntitule(), formater.format(session.getDateDebut()).toString(),
+						formater.format(session.getDateFin()).toString()).getDisplay())
 				.build();
 		mailManager.sendMail(mail);
 	}

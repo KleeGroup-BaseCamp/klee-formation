@@ -44,7 +44,7 @@ public class HomeServlet extends HttpServlet {
 			throws javax.servlet.ServletException, java.io.IOException {
 		final LoginLogoutHelper loginHelper = LoginLogoutHelper.getLoginHelper(request);
 		final ParamManager config = Home.getApp().getComponentSpace().resolve(ParamManager.class);
-		final boolean samlEnabled = config.getBooleanValue("saml.activer");
+		final boolean samlEnabled = config.getParam("saml.activer").getValueAsBoolean();
 		if (!samlEnabled) {
 			// Mode Bouchon pour l'authentification
 			if (!loginHelper.isUserAuthenticated()) {
