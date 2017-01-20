@@ -17,6 +17,7 @@
 		<plugin class="io.vertigo.persona.plugins.security.loaders.SecurityResourceLoaderPlugin" />
 		<plugin class="io.vertigo.dynamo.plugins.environment.registries.file.FileDynamicRegistryPlugin" />
 	</boot>
+<!-- 	<feature class="io.vertigo.app.config.xml.KleeFormationFeatures"></feature> -->
 	<module name="KleeFormation">
 		<definitions>
 			<resource type="security" path="/META-INF/kleeFormation-auth-config.xml" />
@@ -95,7 +96,8 @@
 		<aspect class="io.vertigo.dynamo.impl.transaction.VTransactionAspect"/>
 	</module>
 	
-	<feature class="io.vertigo.app.config.xml.KleeFormationFeatures" />
+	
+	
 	
 	<init>
 		<initializer class="com.kleegroup.formation.boot.initializer.LocaleManagerInitializer"/>
@@ -103,6 +105,7 @@
 		<initializer class="com.kleegroup.formation.boot.initializer.JobManagerInitializer"/>
 		<initializer class="com.kleegroup.formation.boot.initializer.SecurityManagerInitializer"/>
 	</init>
+	
 	
 
 </config>
