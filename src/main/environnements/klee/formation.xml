@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+    Context configuration file for the SAGA Web App
+    $Id: context.xml,v 1.1 2013/07/18 17:34:48 npiedeloup Exp $
+-->
+<Context debug="0" reloadable="true">
+		<Resource name="jdbc/DataSource" auth="SERVLET" type="javax.sql.DataSource" 
+		 driverClassName="org.postgresql.Driver" 
+		 url="jdbc:postgresql://laura.dev.klee.lan.net:5432/klee-formation-int"
+		 username="klee-formation-int"
+		 password="klee-formation-int"
+		 maxActive="5" 
+		 maxIdle="0" 
+		 maxWait="10000" 
+		 removeAbandoned="true" 
+		 logAbandoned="true"/>
+		 
+		 <!-- driverClassName="org.h2.Driver" -->
+		 <!-- url="jdbc:h2:D:\github\klee-formation\database\KleeFormation" -->
+
+</Context>

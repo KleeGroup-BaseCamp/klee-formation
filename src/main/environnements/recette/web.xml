@@ -8,7 +8,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>io.vertigo.struts2.impl.servlet.ApplicationServletContextListener</listener-class>
+		<listener-class>io.vertigo.vega.impl.webservice.servlet.AppServletContextListener</listener-class>
 	</listener>
 	
 	<!-- Paramètrage des variables du managers.xml -->
@@ -39,7 +39,7 @@
 	
 	<filter>
 		<filter-name>Character Encoding Filter</filter-name>
-		<filter-class>io.vertigo.struts2.impl.servlet.filter.SetCharsetEncodingFilter</filter-class>
+		<filter-class>io.vertigo.vega.impl.servlet.filter.SetCharsetEncodingFilter</filter-class>
 		<init-param>
 			<param-name>charset</param-name>
 			<param-value>UTF-8</param-value>
@@ -55,7 +55,7 @@
 			Désactive le cache navigateur et proxy sur toutes les URLs sauf les /static/* et /struts/*
 		</description>
 		<filter-name>client-no-cache</filter-name>
-		<filter-class>io.vertigo.struts2.impl.servlet.filter.CacheControlFilter</filter-class>
+		<filter-class>io.vertigo.vega.impl.servlet.filter.CacheControlFilter</filter-class>
 		<init-param>
 			<param-name>Cache-Control</param-name>
 			<param-value>no-cache</param-value>
@@ -85,7 +85,7 @@
 			Pour un site très grand public, voir à placer un cache plus long (15j => 1209600)
 		</description>
 		<filter-name>client-24h-cache</filter-name>
-		<filter-class>io.vertigo.struts2.impl.servlet.filter.CacheControlFilter</filter-class>
+		<filter-class>io.vertigo.vega.impl.servlet.filter.CacheControlFilter</filter-class>
 		<init-param>
 			<param-name>Cache-Control</param-name>
 			<param-value>max-age=86400, public</param-value>
@@ -103,7 +103,7 @@
 			Authentifié = isAuthentified true dans la UserSession.
 		</description>
 		<filter-name>Security Filter</filter-name>
-		<filter-class>io.vertigo.struts2.impl.servlet.filter.SecurityFilter</filter-class>
+		<filter-class>io.vertigo.vega.impl.servlet.filter.SecurityFilter</filter-class>
 		<init-param>
 			<param-name>url-no-authentification</param-name>
 			<param-value>/tutorial/*;/*Login.do;/ListAutocomplete.do;/saml2/acs;/logoutSuccess</param-value>

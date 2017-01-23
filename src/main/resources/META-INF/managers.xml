@@ -8,7 +8,7 @@
 			<param name="url" value="${boot.configXmlInterne}" />
 		</plugin>
 		<plugin class="io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin2" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin" />
 		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.kpr.KprLoaderPlugin">
 			<param name='encoding' value='utf8' />
 		</plugin>
@@ -20,6 +20,8 @@
 <!-- 	<feature class="io.vertigo.app.config.xml.KleeFormationFeatures"></feature> -->
 	<module name="KleeFormation">
 		<definitions>
+			<resource type="classes" path="com.kleegroup.formation.domain.DtDefinitions" />
+			<resource type="kpr" path="com/kleegroup/formation/execution.kpr" />
 			<resource type="security" path="/META-INF/kleeFormation-auth-config.xml" />
 		</definitions>
 	</module>
@@ -66,7 +68,6 @@
 		<component api="EventBusManager" class="io.vertigo.commons.impl.eventbus.EventBusManagerImpl" />
 		<component api="DaemonManager" class="io.vertigo.commons.impl.daemon.DaemonManagerImpl" />
 		<component api="FileManager" class="io.vertigo.dynamo.impl.file.FileManagerImpl" />
-		
 	</module>
 	
 	<module name="ldap">
@@ -96,16 +97,11 @@
 		<aspect class="io.vertigo.dynamo.impl.transaction.VTransactionAspect"/>
 	</module>
 	
-	
-	
-	
 	<init>
 		<initializer class="com.kleegroup.formation.boot.initializer.LocaleManagerInitializer"/>
 		<initializer class="com.kleegroup.formation.boot.initializer.PersistenceManagerInitializer"/>
 		<initializer class="com.kleegroup.formation.boot.initializer.JobManagerInitializer"/>
 		<initializer class="com.kleegroup.formation.boot.initializer.SecurityManagerInitializer"/>
 	</init>
-	
-	
 
 </config>

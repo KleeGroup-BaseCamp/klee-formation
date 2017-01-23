@@ -19,12 +19,12 @@
 	</path>
   	
   	<path name="saml">
-		<param name="activer" value="false" />
-		<param name="pathIDPMetadata" value="/home/tomcat/formation/KleeFormation.IDP_metadata.xml" />
+		<param name="activer" value="true" />
+		<param name="pathIDPMetadata" value="/home/tomcat/war/KleeFormation.IDP_metadata.xml" />
 		<param name="entityIdIDP" value="https://sso.kleegroup.com/saml2/idp/metadata.php" />
-		<param name="recipentSP" value="http://172.20.87.235:8080/formation/saml2/acs" />
-		<param name="audienceSP" value="http://172.20.87.235:8080" />
-		<param name="pathKeyPKCS8" value="/home/tomcat/formation/KleeFormation-cmoutte-SELF-pkcs8-nocrypt.key.der" />
+		<param name="recipentSP" value="http://kleeformationre.dev.klee.lan.net:8080/formation/saml2/acs" />
+		<param name="audienceSP" value="http://kleeformationre.dev.klee.lan.net:8080" />
+		<param name="pathKeyPKCS8" value="/home/tomcat/war/KleeFormation-cmoutte-SELF-pkcs8-nocrypt.key.der" />
 	</path>
   	
 </config>
