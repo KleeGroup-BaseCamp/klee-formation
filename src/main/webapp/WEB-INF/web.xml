@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<display-name>KleeFormation Kasper Struts</display-name>
+	<display-name>KleeFormation Dev</display-name>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
@@ -26,7 +26,7 @@
 	</context-param>
 	
 	
-	 <!-- Filtre de sécurité SAML2 SSO/SLO -->
+	<!-- Filtre de sécurité SAML2 SSO/SLO -->
 	<filter>
 		<filter-name>SamlSecurityFilter</filter-name>
 		<filter-class>com.kleegroup.formation.saml.SamlFilter</filter-class>    
@@ -110,7 +110,6 @@
 		</init-param>
 		<init-param>
 			<param-name>url-exclude-pattern</param-name>
-<!-- 			<param-value>/;/index.html;/static/*;/struts/*;/jsp/dev-*.jsp</param-value> -->
 			<param-value>/index.html;/static/*;/struts/*;/jsp/dev-*.jsp</param-value>
 		</init-param>
 	</filter>

@@ -110,7 +110,7 @@
 		</init-param>
 		<init-param>
 			<param-name>url-exclude-pattern</param-name>
-			<param-value>/;/index.html;/static/*;/struts/*;/jsp/dev-*.jsp</param-value>
+			<param-value>/index.html;/static/*;/struts/*;/jsp/dev-*.jsp</param-value>
 		</init-param>
 	</filter>
 	
