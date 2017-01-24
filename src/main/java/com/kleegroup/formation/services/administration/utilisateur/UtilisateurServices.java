@@ -21,9 +21,10 @@ public interface UtilisateurServices extends Component {
 	 * Connecte un utilisateur authentifi� avec un identifiant et un mot de passe.
 	 *
 	 * @param utilisateurLogin informations de login
+	 * @param createIfNotExist create the user if the user is unknow in database
 	 * @return utilisateur connect�
 	 */
-	Utilisateur connecterUtilisateur(String utilisateurLogin);
+	Utilisateur connecterUtilisateur(String utilisateurLogin, boolean createIfNotExist);
 
 	/**
 	 * Charge un utilisateur par son id technique.

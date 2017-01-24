@@ -144,6 +144,8 @@
 	<filter-mapping>
 		<filter-name>Struts2 Filter</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
 	<session-config>

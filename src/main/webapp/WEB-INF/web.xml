@@ -110,7 +110,8 @@
 		</init-param>
 		<init-param>
 			<param-name>url-exclude-pattern</param-name>
-			<param-value>/;/index.html;/static/*;/struts/*;/jsp/dev-*.jsp</param-value>
+<!-- 			<param-value>/;/index.html;/static/*;/struts/*;/jsp/dev-*.jsp</param-value> -->
+			<param-value>/index.html;/static/*;/struts/*;/jsp/dev-*.jsp</param-value>
 		</init-param>
 	</filter>
 	
@@ -144,6 +145,8 @@
 	<filter-mapping>
 		<filter-name>Struts2 Filter</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
 	<session-config>

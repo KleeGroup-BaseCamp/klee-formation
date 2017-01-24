@@ -534,7 +534,7 @@ public class SamlHelper implements Component, Activeable {
 		final String samlCookie = samlTokenManager.generateAndRegisterToken();
 		final Cookie cookie = new Cookie(SAML_COOKIE, samlCookie);
 		cookie.setHttpOnly(true);
-		cookie.setPath(req.getContextPath());
+		cookie.setPath(req.getContextPath() + "/");
 		//cookie.setPath("/");
 		//cookie.setSecure(true);
 		res.addCookie(cookie);

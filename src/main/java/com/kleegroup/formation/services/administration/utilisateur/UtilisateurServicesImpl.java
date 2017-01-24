@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -60,9 +61,9 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 
 	/** {@inheritDoc} */
 	@Override
-	public Utilisateur connecterUtilisateur(final String email) {
+	public Utilisateur connecterUtilisateur(final String email, boolean createIfNotExist) {
 		// Authentification de l'utilisateur auprès de la base de données
-		final Utilisateur utilisateur = loadUtilisateurByMail(email);
+		final Utilisateur utilisateur = loadUtilisateurByMail(email, createIfNotExist);
 		// Charge la collection car la transaction est au niveau de la couche service
 
 		utilisateur.getRoleList();
@@ -94,7 +95,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 	/** {@inheritDoc} */
 	@Override
 	public DtList<Utilisateur> getUtilisateurListByCritere(final UtilisateurCritere criteres) {
-		return utilisateurDAO.listUtilisateurByCritere(criteres);
+		return utilisateurDAO.getUtilisateurByCritere(criteres);
 
 	}
 
@@ -205,18 +206,24 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 		return utilisateur;
 	}
 
-	private Utilisateur loadUtilisateurByMail(final String mail) {
+	private Utilisateur loadUtilisateurByMail(final String mail, boolean createIfNotExist) {
 		Assertion.checkNotNull(mail);
 		//-----
-		/*final Criteria<Utilisateur> critere = new FilterCriteriaBuilder<Utilisateur>()
-				.addFilter(DtDefinitions.UtilisateurFields.MAIL, mail)
-				.build();
+		//On effectue le même traitement si le login est incorrect pour éviter l'analyse par le temps.
 
-		final DtList<Utilisateur> emails = utilisateurDAO.getList(critere, 1);*/
-		//On effectue le même traitement si le login est incorrect pour éviter l'analyse par le temps
-
-		final Utilisateur utilisateur = utilisateurDAO.listUtilisateurByEmail(mail);
-
+		Optional<Utilisateur> optUtilisateur = utilisateurDAO.getUtilisateurByEmail(mail);
+		
+		if (!optUtilisateur.isPresent()) {
+			if (createIfNotExist) {
+				importLdapUtilisateur();
+				optUtilisateur = utilisateurDAO.getUtilisateurByEmail(mail);
+			} else {
+				throw new IllegalArgumentException("User " + mail + " does not exist.");
+			}
+		}
+		
+		final Utilisateur utilisateur = optUtilisateur.orElseThrow(() -> new IllegalArgumentException("User " + mail + " does not exist.")); 
+		
 		final KleeFormationUserSession session = securityManager.<KleeFormationUserSession> getCurrentUserSession().get();
 		session.setUtilisateur(utilisateur);
 		session.authenticate();

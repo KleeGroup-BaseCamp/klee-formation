@@ -1,6 +1,7 @@
 package com.kleegroup.formation.dao.administration.utilisateur;
 
 import javax.inject.Inject;
+import java.util.Optional;
 import io.vertigo.app.Home;
 import io.vertigo.dynamo.task.metamodel.TaskDefinition;
 import io.vertigo.dynamo.task.model.Task;
@@ -51,12 +52,12 @@ public final class UtilisateurDAO extends DAO<Utilisateur, java.lang.Long> imple
 	}
 
 	/**
-	 * Execute la tache TK_LIST_UTILISATEUR_BY_CRITERE.
+	 * Execute la tache TK_GET_UTILISATEUR_BY_CRITERE.
 	 * @param dtoUtilisateurCritere com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere 
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> dtcUtilisateur
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> listUtilisateurByCritere(final com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere dtoUtilisateurCritere) {
-		final Task task = createTaskBuilder("TK_LIST_UTILISATEUR_BY_CRITERE")
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> getUtilisateurByCritere(final com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere dtoUtilisateurCritere) {
+		final Task task = createTaskBuilder("TK_GET_UTILISATEUR_BY_CRITERE")
 				.addValue("DTO_UTILISATEUR_CRITERE", dtoUtilisateurCritere)
 				.build();
 		return getTaskManager()
@@ -65,17 +66,17 @@ public final class UtilisateurDAO extends DAO<Utilisateur, java.lang.Long> imple
 	}
 
 	/**
-	 * Execute la tache TK_LIST_UTILISATEUR_BY_EMAIL.
+	 * Execute la tache TK_GET_UTILISATEUR_BY_EMAIL.
 	 * @param email String 
-	 * @return com.kleegroup.formation.domain.administration.utilisateur.Utilisateur dtcUtilisateur
+	 * @return Option de com.kleegroup.formation.domain.administration.utilisateur.Utilisateur dtoUtilisateur
 	*/
-	public com.kleegroup.formation.domain.administration.utilisateur.Utilisateur listUtilisateurByEmail(final String email) {
-		final Task task = createTaskBuilder("TK_LIST_UTILISATEUR_BY_EMAIL")
+	public Optional<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> getUtilisateurByEmail(final String email) {
+		final Task task = createTaskBuilder("TK_GET_UTILISATEUR_BY_EMAIL")
 				.addValue("EMAIL", email)
 				.build();
-		return getTaskManager()
+		return Optional.ofNullable((com.kleegroup.formation.domain.administration.utilisateur.Utilisateur)getTaskManager()
 				.execute(task)
-				.getResult();
+				.getResult());
 	}
 
 	/**

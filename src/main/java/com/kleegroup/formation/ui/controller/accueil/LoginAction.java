@@ -38,7 +38,7 @@ public final class LoginAction extends AbstractKleeFormationActionSupport {
 	 */
 	public String doLogin() {
 		final String utilisateurLogin = utilisateurLoginRef.readDto().getMail();
-		final Utilisateur utilisateur = utilisateurServices.connecterUtilisateur(utilisateurLogin);
+		final Utilisateur utilisateur = utilisateurServices.connecterUtilisateur(utilisateurLogin, false);
 		return SUCCESS; //success va sur accueil
 	}
 

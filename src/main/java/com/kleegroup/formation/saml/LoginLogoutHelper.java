@@ -17,7 +17,7 @@ import io.vertigo.persona.security.VSecurityManager;
 public final class LoginLogoutHelper {
 
 	private static final Logger LOG = Logger.getLogger(LoginLogoutHelper.class);
-	private static final String USER_SESSION = "vertigo.webservice.Session";
+	private static final String USER_SESSION = "io.vertigo.Session";
 	private final UserSession user;
 	/**
 	 * URL pour une deconnexion OK.

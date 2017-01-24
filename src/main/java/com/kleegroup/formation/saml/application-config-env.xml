@@ -33,7 +33,7 @@
 	</path>
 	
 	<path name="saml">
-		<param name="activer" value="false" />
+		<param name="activer" value="true" />
 		<param name="pathIDPMetadata" value="D:\\Projets\\SIBenevoles\\CRf_SIBenevoles\\Main\\crf-benevoles\\api\\src\\main\\resources\\SI-Benevoles.IDP_metadata_.xml" />
 		<param name="entityIdIDP" value="https://id.authentification.croix-rouge.fr" />
 		<param name="recipentSP" value="https://recsso.sibenevoles.croix-rouge.fr/crf-benevoles/saml2/acs" />

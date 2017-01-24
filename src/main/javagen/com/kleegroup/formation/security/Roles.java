@@ -1,25 +1,52 @@
 package com.kleegroup.formation.security;
 
+import io.vertigo.app.Home;
+import io.vertigo.persona.security.metamodel.Role;
+
 
 /**
- * Attention cette classe est g�n�r�e automatiquement !
+ * Warning. This class is generated automatically !
+ *
+ * Enum of the roles known by the vertigo application.
  */
 public enum Roles {
 
 	/**
-	 * R_ADMIN.
+	 * Administrateur.
 	 */
 	R_ADMIN,
 	/**
-	 * R_FORMATTEUR.
+	 * Formatteur.
 	 */
 	R_FORMATTEUR,
 	/**
-	 * R_RESPONSSABLE.
+	 * Responssable.
 	 */
 	R_RESPONSSABLE,
 	/**
-	 * R_ANONYMOUS.
+	 * Anonyme.
 	 */
-	R_ANONYMOUS,
+	R_ANONYMOUS;
+
+
+	/**
+	 * Get the associated role for Vertigo.
+	 *
+	 * @param code
+	 *            role code
+	 * @return role
+	 */
+	public static Role getSecurityRole(final String code) {
+		return Home.getApp().getDefinitionSpace().resolve(code, Role.class);
+	}
+
+	/**
+	 * Get the associated role for Vertigo.
+	 *
+	 * @return role
+	 */
+	public Role getSecurityRole() {
+		return getSecurityRole(name());
+	}
+
 }

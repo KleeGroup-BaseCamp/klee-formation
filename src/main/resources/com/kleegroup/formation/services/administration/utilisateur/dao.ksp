@@ -5,8 +5,9 @@ package com.kleegroup.formation.dao.administration.utilisateur
  */
 create Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
     className : "io.vertigo.dynamox.task.TaskEngineSelect",
-    attribute LOGIN {domain : DO_LOGIN, notNull:"true", inOut :"in",}
+    attribute LOGIN 					{domain : DO_LOGIN, notNull:"true", inOut :"in"}
 }
+
 /** Exemple d'utilisation de templating */
 alter Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
     request : "Select uti.*
@@ -19,17 +20,15 @@ alter Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
 
 
 alter Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
-    attribute CRYPTED_PASSWORD {domain : DO_PASSWORD, notNull:"true", inOut :"in",}
+    attribute CRYPTED_PASSWORD 			{domain : DO_PASSWORD, notNull:"true", inOut :"in"}
 }
-
-
 
 
 /**
  * R�cup�re la liste des utilisateurs correspondant � des crit�res de recherche saisis par l'utilisateur
  * Ces crit�res sont: le nom, l'identifiant, la structure d'appartenance, le r�le et le fait que l'utilisateur est actif ou pas
  */
-create Task TK_LIST_UTILISATEUR_BY_CRITERE {
+create Task TK_GET_UTILISATEUR_BY_CRITERE {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "Select uti.*
                From	UTILISATEUR uti, LOGIN log
@@ -50,24 +49,24 @@ create Task TK_LIST_UTILISATEUR_BY_CRITERE {
                			And uti.SI_ACTIF = #DTO_UTILISATEUR_CRITERE.IS_ACTIF#
                		<%}%>
               		order by uti.NOM, uti.PRENOM",
-   	attribute DTO_UTILISATEUR_CRITERE {domain : DO_DT_UTILISATEUR_CRITERE_DTO, notNull:"true", inOut :"in",}
- 	attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTC, notNull:"true", inOut :"out",}
+   	attribute DTO_UTILISATEUR_CRITERE 	{domain : DO_DT_UTILISATEUR_CRITERE_DTO, notNull:"true", inOut :"in"}
+ 	attribute DTC_UTILISATEUR 			{domain : DO_DT_UTILISATEUR_DTC, notNull:"true", inOut :"out"}
 }
 
 
-create Task TK_LIST_UTILISATEUR{
+create Task TK_LIST_UTILISATEUR {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "Select uti.*
                From	UTILISATEUR uti",
- 	attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTC, notNull:"true", inOut :"out",}
+ 	attribute DTC_UTILISATEUR 			{domain : DO_DT_UTILISATEUR_DTC, notNull:"true", inOut :"out"}
 }
-create Task TK_LIST_UTILISATEUR_BY_EMAIL{
+create Task TK_GET_UTILISATEUR_BY_EMAIL {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "Select uti.*
                From	UTILISATEUR uti
                where uti.MAIL = #EMAIL#",
-    attribute EMAIL {domain : DO_EMAIL, notNull:"true", inOut :"in",}
- 	attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTO, notNull:"true", inOut :"out",}
+    attribute EMAIL 					{domain : DO_EMAIL, notNull:"true", inOut :"in"}
+ 	attribute DTO_UTILISATEUR 			{domain : DO_DT_UTILISATEUR_DTO, notNull:"false", inOut :"out"}
 }
 
 create Task TK_LIST_UTILISATEUR_BY_ROLE {
@@ -76,7 +75,7 @@ create Task TK_LIST_UTILISATEUR_BY_ROLE {
                From	UTILISATEUR uti
                Join UTI_ROL pro on pro.UTI_ID = usr.UTI_ID
                Where pro.ROL_CODE = #ROL_CODE#",
-    attribute ROL_CODE {domain : DO_CODE, 						notNull:"true", inOut :"in",}
-    attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTC, 		notNull:"true", inOut :"out",}
+    attribute ROL_CODE 					{domain : DO_CODE, 						notNull:"true", inOut :"in"}
+    attribute DTC_UTILISATEUR 			{domain : DO_DT_UTILISATEUR_DTC, 		notNull:"true", inOut :"out"}
 }
 

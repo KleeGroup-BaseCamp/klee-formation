@@ -102,7 +102,7 @@ public class AcsServlet extends HttpServlet {
 					ul.setLogin(name);
 					utilisateurServices.connecterUtilisateur(ul);
 					*/
-					utilisateurServices.connecterUtilisateur(name);
+					utilisateurServices.connecterUtilisateur(name, true);
 
 					if (LOG.isDebugEnabled()) {
 						LOG.debug("Authentification de l'utilisateur " + name + " effectué.");
