@@ -51,9 +51,8 @@
 			<plugin class="io.vertigo.dynamo.plugins.collections.lucene.LuceneIndexPlugin" />
 		</component>
 		<component api="StoreManager" class="io.vertigo.dynamo.impl.store.StoreManagerImpl">
-			<plugin class="io.vertigo.dynamo.plugins.store.datastore.postgresql.PostgreSqlDataStorePlugin">
-				<param name="sequencePrefix" value="SEQ_" />
-			</plugin>	
+			<plugin class="io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin">
+			</plugin>
 		</component>
 		<component api="KVStoreManager" class="io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl">
 			<plugin class="io.vertigo.dynamo.plugins.kvstore.berkeley.BerkeleyKVStorePlugin">
