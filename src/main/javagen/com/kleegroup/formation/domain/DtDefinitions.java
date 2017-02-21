@@ -257,10 +257,6 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		STATUS,
 		/** Propriété 'Is_ouvert'. */
 		IS_OUVERT,
-		/** Propriété 'Satisfaction'. */
-		SATISFACTION,
-		/** Propriété 'i'. */
-		I,
 		/** Propriété 'Duree'. */
 		DUREE,
 		/** Propriété 'DateFin'. */

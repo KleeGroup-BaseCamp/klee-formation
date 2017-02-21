@@ -196,14 +196,6 @@ public enum DtResources implements MessageKey {
 	 */
 	FLD_SESSION_FORMATION$IS_OUVERT,
 	/**
-	 * Satisfaction.
-	 */
-	FLD_SESSION_FORMATION$SATISFACTION,
-	/**
-	 * i.
-	 */
-	FLD_SESSION_FORMATION$I,
-	/**
 	 * Duree.
 	 */
 	FLD_SESSION_FORMATION$DUREE,

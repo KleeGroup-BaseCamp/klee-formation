@@ -46,16 +46,14 @@ public final class SatisfactionAction extends AbstractKleeFormationActionSupport
 
 	public String doSave() {
 
-		final Inscription ins = statistique.readDto();
+		final Inscription inscription = statistique.readDto();
 		final BigDecimal neuf = new BigDecimal(9);
-		final BigDecimal test = ins.getContact().add(ins.getDuree()).add(ins.getApprofondir()).add(ins.getBenefices()).add(ins.getAttentes()).add(ins.getExplication()).add(ins.getProgression()).add(ins.getContenu()).add(ins.getTheme()).divide(neuf, 10, BigDecimal.ROUND_HALF_DOWN);
-		ins.setSatisfaction(test);
+		final BigDecimal satisfactionMoyenne = inscription.getContact().add(inscription.getDuree()).add(inscription.getApprofondir())
+				.add(inscription.getBenefices()).add(inscription.getAttentes()).add(inscription.getExplication()).add(inscription.getProgression())
+				.add(inscription.getContenu()).add(inscription.getTheme()).divide(neuf, 10, BigDecimal.ROUND_HALF_DOWN);
+		inscription.setSatisfaction(satisfactionMoyenne);
 		final SessionFormation session = sessionServices.loadSessionbyId(sesIdRef.get());
-
-		final BigDecimal un = new BigDecimal(1);
-		session.setI(session.getI().add(un));
-		session.setSatisfaction(session.getSatisfaction().add(test));
-		session.setSatisfaction(session.getSatisfaction().divideToIntegralValue(session.getI()));
+		
 		sessionServices.saveSessionFormation(session);
 		inscriptionServices.saveInscription(statistique.readDto());
 
@@ -66,7 +64,7 @@ public final class SatisfactionAction extends AbstractKleeFormationActionSupport
 	@Override
 	public String getPageName() {
 		if (isModeCreate()) {
-			return "creation d'une session de formation";
+			return "Création d'une session de formation";
 		} else if (isModeEdit()) {
 			return "Modification d'une session deformation";
 		}

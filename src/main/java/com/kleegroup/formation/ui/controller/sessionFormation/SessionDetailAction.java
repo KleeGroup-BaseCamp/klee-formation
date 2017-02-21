@@ -190,12 +190,8 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	private void doSaveSession(final BigDecimal satisfaction, final SessionFormation sessions) {
 
 		final DtList<Horaires> horairess = horaires.readDtList();
-		if (satisfaction != null) {
-			sessions.setSatisfaction(satisfaction);
-			sessions.setI(satisfaction);
-			sessions.setEsuCode("Ouverte");
-			sessionServices.saveSessionFormation(sessions);
-		}
+		sessions.setEsuCode("Ouverte");
+		sessionServices.saveSessionFormation(sessions);
 		if (!horairess.isEmpty()) {
 			HoraireIsCorrect(horairess);
 			sessions.setHoraire(horairesServices.saveHoraires(horairess, sessions.getSesId()));

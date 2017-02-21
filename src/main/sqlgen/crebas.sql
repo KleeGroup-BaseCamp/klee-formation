@@ -265,8 +265,6 @@ create table SESSION_FORMATION
     NB_PERSONNE 	 BIGINT      	,
     STATUS      	 VARCHAR(100)	,
     IS_OUVERT   	 VARCHAR(100)	,
-    SATISFACTION	 NUMERIC(5,2)	,
-    I           	 NUMERIC(5,2)	,
     DUREE       	 BIGINT      	,
     DATE_FIN    	 DATE        	,
     DATE_DEBUT  	 DATE        	,
@@ -292,12 +290,6 @@ comment on column SESSION_FORMATION.STATUS is
 
 comment on column SESSION_FORMATION.IS_OUVERT is
 'Is_ouvert';
-
-comment on column SESSION_FORMATION.SATISFACTION is
-'Satisfaction';
-
-comment on column SESSION_FORMATION.I is
-'i';
 
 comment on column SESSION_FORMATION.DUREE is
 'Duree';

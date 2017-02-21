@@ -19,8 +19,6 @@ public final class SessionFormation implements Entity {
 	private Long nbPersonne;
 	private String status;
 	private String isOuvert;
-	private java.math.BigDecimal satisfaction;
-	private java.math.BigDecimal i;
 	private Long duree;
 	private java.util.Date dateFin;
 	private java.util.Date dateDebut;
@@ -135,44 +133,6 @@ public final class SessionFormation implements Entity {
 	 */
 	public void setIsOuvert(final String isOuvert) {
 		this.isOuvert = isOuvert;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Satisfaction'.
-	 * @return java.math.BigDecimal satisfaction
-	 */
-	@Field(domain = "DO_STATIQUE", label = "Satisfaction")
-	public java.math.BigDecimal getSatisfaction() {
-		return satisfaction;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Satisfaction'.
-	 * @param satisfaction java.math.BigDecimal
-	 */
-	public void setSatisfaction(final java.math.BigDecimal satisfaction) {
-		this.satisfaction = satisfaction;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'i'.
-	 * @return java.math.BigDecimal i
-	 */
-	@Field(domain = "DO_STATIQUE", label = "i")
-	public java.math.BigDecimal getI() {
-		return i;
-	}
-
-	/**
-	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'i'.
-	 * @param i java.math.BigDecimal
-	 */
-	public void setI(final java.math.BigDecimal i) {
-		this.i = i;
 	}
 
 	/**
