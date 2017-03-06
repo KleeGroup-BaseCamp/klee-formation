@@ -16,17 +16,17 @@ public enum Roles {
 	 */
 	R_ADMIN,
 	/**
+	 * Anonyme.
+	 */
+	R_ANONYMOUS,
+	/**
 	 * Formatteur.
 	 */
 	R_FORMATTEUR,
 	/**
 	 * Responssable.
 	 */
-	R_RESPONSSABLE,
-	/**
-	 * Anonyme.
-	 */
-	R_ANONYMOUS;
+	R_RESPONSSABLE;
 
 
 	/**

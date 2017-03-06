@@ -12,7 +12,7 @@ import com.kleegroup.formation.domain.administration.utilisateur.Role;
  * RoleDAO
  */
 public final class RoleDAO extends DAO<Role, java.lang.String> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -22,6 +22,5 @@ public final class RoleDAO extends DAO<Role, java.lang.String> implements StoreS
 	public RoleDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Role.class, storeManager, taskManager);
 	}
-	
 
 }

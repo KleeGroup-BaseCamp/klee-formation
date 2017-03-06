@@ -61,7 +61,6 @@ public final class Etat implements Entity {
 		this.libelle = libelle;
 	}
 
-
 	// Association : Session formation non navigable
 
 	/** {@inheritDoc} */

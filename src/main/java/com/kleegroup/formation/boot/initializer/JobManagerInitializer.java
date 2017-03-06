@@ -4,8 +4,9 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import io.vertigo.core.spaces.component.ComponentInitializer;
 import com.kleegroup.formation.jobs.job.ReloadMdCacheJob;
+
+import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.tempo.job.metamodel.JobDefinition;
 import io.vertigo.tempo.scheduler.SchedulerManager;
 

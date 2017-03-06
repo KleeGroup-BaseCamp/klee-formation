@@ -8,65 +8,66 @@ import io.vertigo.dynamo.domain.metamodel.DtFieldName;
  * Attention cette classe est générée automatiquement !
  */
 public final class DtDefinitions implements Iterable<Class<?>> {
-	
+
 	/**
 	 * Enumération des DtDefinitions.
 	 */
 	public enum Definitions {
-			/** Objet de données CritereSession. */
-			CritereSession(com.kleegroup.formation.domain.session.CritereSession.class),
-			/** Objet de données Etat. */
-			Etat(com.kleegroup.formation.domain.formation.Etat.class),
-			/** Objet de données EtatSessionUtilisateur. */
-			EtatSessionUtilisateur(com.kleegroup.formation.domain.formation.EtatSessionUtilisateur.class),
-			/** Objet de données Formation. */
-			Formation(com.kleegroup.formation.domain.formation.Formation.class),
-			/** Objet de données FormationCritere. */
-			FormationCritere(com.kleegroup.formation.domain.formation.FormationCritere.class),
-			/** Objet de données Horaires. */
-			Horaires(com.kleegroup.formation.domain.formation.Horaires.class),
-			/** Objet de données Inscription. */
-			Inscription(com.kleegroup.formation.domain.formation.Inscription.class),
-			/** Objet de données InscriptionView. */
-			InscriptionView(com.kleegroup.formation.domain.inscription.InscriptionView.class),
-			/** Objet de données Login. */
-			Login(com.kleegroup.formation.domain.administration.utilisateur.Login.class),
-			/** Objet de données Niveau. */
-			Niveau(com.kleegroup.formation.domain.formation.Niveau.class),
-			/** Objet de données Role. */
-			Role(com.kleegroup.formation.domain.administration.utilisateur.Role.class),
-			/** Objet de données RoleInput. */
-			RoleInput(com.kleegroup.formation.domain.administration.utilisateur.RoleInput.class),
-			/** Objet de données SessionFormation. */
-			SessionFormation(com.kleegroup.formation.domain.formation.SessionFormation.class),
-			/** Objet de données SessionView. */
-			SessionView(com.kleegroup.formation.domain.session.SessionView.class),
-			/** Objet de données Utilisateur. */
-			Utilisateur(com.kleegroup.formation.domain.administration.utilisateur.Utilisateur.class),
-			/** Objet de données UtilisateurCritere. */
-			UtilisateurCritere(com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere.class),
-			/** Objet de données UtilisateurLogin. */
-			UtilisateurLogin(com.kleegroup.formation.domain.administration.utilisateur.UtilisateurLogin.class),
+		/** Objet de données CritereSession. */
+		CritereSession(com.kleegroup.formation.domain.session.CritereSession.class),
+		/** Objet de données Etat. */
+		Etat(com.kleegroup.formation.domain.formation.Etat.class),
+		/** Objet de données EtatSessionUtilisateur. */
+		EtatSessionUtilisateur(com.kleegroup.formation.domain.formation.EtatSessionUtilisateur.class),
+		/** Objet de données Formation. */
+		Formation(com.kleegroup.formation.domain.formation.Formation.class),
+		/** Objet de données FormationCritere. */
+		FormationCritere(com.kleegroup.formation.domain.formation.FormationCritere.class),
+		/** Objet de données Horaires. */
+		Horaires(com.kleegroup.formation.domain.formation.Horaires.class),
+		/** Objet de données Inscription. */
+		Inscription(com.kleegroup.formation.domain.formation.Inscription.class),
+		/** Objet de données InscriptionView. */
+		InscriptionView(com.kleegroup.formation.domain.inscription.InscriptionView.class),
+		/** Objet de données Login. */
+		Login(com.kleegroup.formation.domain.administration.utilisateur.Login.class),
+		/** Objet de données Niveau. */
+		Niveau(com.kleegroup.formation.domain.formation.Niveau.class),
+		/** Objet de données Role. */
+		Role(com.kleegroup.formation.domain.administration.utilisateur.Role.class),
+		/** Objet de données RoleInput. */
+		RoleInput(com.kleegroup.formation.domain.administration.utilisateur.RoleInput.class),
+		/** Objet de données SessionFormation. */
+		SessionFormation(com.kleegroup.formation.domain.formation.SessionFormation.class),
+		/** Objet de données SessionView. */
+		SessionView(com.kleegroup.formation.domain.session.SessionView.class),
+		/** Objet de données Utilisateur. */
+		Utilisateur(com.kleegroup.formation.domain.administration.utilisateur.Utilisateur.class),
+		/** Objet de données UtilisateurCritere. */
+		UtilisateurCritere(com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere.class),
+		/** Objet de données UtilisateurLogin. */
+		UtilisateurLogin(com.kleegroup.formation.domain.administration.utilisateur.UtilisateurLogin.class),
 		;
-		
+
 		private final Class<?> clazz;
+
 		private Definitions(final Class<?> clazz) {
 			this.clazz = clazz;
 		}
-		
+
 		/** 
-		  * Classe associée.
-		  * @return Class d'implémentation de l'objet 
-		  */
+		 * Classe associée.
+		 * @return Class d'implémentation de l'objet 
+		 */
 		public Class<?> getDtClass() {
 			return clazz;
 		}
-    }
+	}
 
 	/**
 	 * Enumération des champs de CritereSession.
 	 */
-	public enum CritereSessionFields implements DtFieldName {
+	public enum CritereSessionFields implements DtFieldName<com.kleegroup.formation.domain.session.CritereSession> {
 		/** Propriété 'Libellé court'. */
 		INTITULE,
 	}
@@ -74,7 +75,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Etat.
 	 */
-	public enum EtatFields implements DtFieldName {
+	public enum EtatFields implements DtFieldName<com.kleegroup.formation.domain.formation.Etat> {
 		/** Propriété 'Code'. */
 		ETA_CODE,
 		/** Propriété 'Libelle'. */
@@ -84,7 +85,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de EtatSessionUtilisateur.
 	 */
-	public enum EtatSessionUtilisateurFields implements DtFieldName {
+	public enum EtatSessionUtilisateurFields implements DtFieldName<com.kleegroup.formation.domain.formation.EtatSessionUtilisateur> {
 		/** Propriété 'esuCode'. */
 		ESU_CODE,
 		/** Propriété 'Libellé'. */
@@ -94,7 +95,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Formation.
 	 */
-	public enum FormationFields implements DtFieldName {
+	public enum FormationFields implements DtFieldName<com.kleegroup.formation.domain.formation.Formation> {
 		/** Propriété 'Id'. */
 		FOR_ID,
 		/** Propriété 'intitule'. */
@@ -108,7 +109,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de FormationCritere.
 	 */
-	public enum FormationCritereFields implements DtFieldName {
+	public enum FormationCritereFields implements DtFieldName<com.kleegroup.formation.domain.formation.FormationCritere> {
 		/** Propriété 'Libellé court'. */
 		INTITULE,
 		/** Propriété 'Code'. */
@@ -118,7 +119,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Horaires.
 	 */
-	public enum HorairesFields implements DtFieldName {
+	public enum HorairesFields implements DtFieldName<com.kleegroup.formation.domain.formation.Horaires> {
 		/** Propriété 'DatId'. */
 		DAT_ID,
 		/** Propriété 'debut'. */
@@ -138,7 +139,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Inscription.
 	 */
-	public enum InscriptionFields implements DtFieldName {
+	public enum InscriptionFields implements DtFieldName<com.kleegroup.formation.domain.formation.Inscription> {
 		/** Propriété 'INS_ID'. */
 		INS_ID,
 		/** Propriété 'PRESENCE'. */
@@ -174,7 +175,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de InscriptionView.
 	 */
-	public enum InscriptionViewFields implements DtFieldName {
+	public enum InscriptionViewFields implements DtFieldName<com.kleegroup.formation.domain.inscription.InscriptionView> {
 		/** Propriété 'SesId'. */
 		SES_ID,
 		/** Propriété 'Libellé court'. */
@@ -204,7 +205,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Login.
 	 */
-	public enum LoginFields implements DtFieldName {
+	public enum LoginFields implements DtFieldName<com.kleegroup.formation.domain.administration.utilisateur.Login> {
 		/** Propriété 'LOG ID'. */
 		LOG_ID,
 		/** Propriété 'Login'. */
@@ -218,7 +219,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Niveau.
 	 */
-	public enum NiveauFields implements DtFieldName {
+	public enum NiveauFields implements DtFieldName<com.kleegroup.formation.domain.formation.Niveau> {
 		/** Propriété 'Niv_Code'. */
 		NIV_CODE,
 		/** Propriété 'Libellé'. */
@@ -228,7 +229,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Role.
 	 */
-	public enum RoleFields implements DtFieldName {
+	public enum RoleFields implements DtFieldName<com.kleegroup.formation.domain.administration.utilisateur.Role> {
 		/** Propriété 'ROL_CODE'. */
 		ROL_CODE,
 		/** Propriété 'Libellé'. */
@@ -238,7 +239,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de RoleInput.
 	 */
-	public enum RoleInputFields implements DtFieldName {
+	public enum RoleInputFields implements DtFieldName<com.kleegroup.formation.domain.administration.utilisateur.RoleInput> {
 		/** Propriété 'Role'. */
 		ROL_CODE,
 	}
@@ -246,7 +247,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de SessionFormation.
 	 */
-	public enum SessionFormationFields implements DtFieldName {
+	public enum SessionFormationFields implements DtFieldName<com.kleegroup.formation.domain.formation.SessionFormation> {
 		/** Propriété 'Id'. */
 		SES_ID,
 		/** Propriété 'Horaire'. */
@@ -278,7 +279,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de SessionView.
 	 */
-	public enum SessionViewFields implements DtFieldName {
+	public enum SessionViewFields implements DtFieldName<com.kleegroup.formation.domain.session.SessionView> {
 		/** Propriété 'SesId'. */
 		SES_ID,
 		/** Propriété 'Libellé court'. */
@@ -306,7 +307,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Utilisateur.
 	 */
-	public enum UtilisateurFields implements DtFieldName {
+	public enum UtilisateurFields implements DtFieldName<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> {
 		/** Propriété 'UTI_ID'. */
 		UTI_ID,
 		/** Propriété 'Nom'. */
@@ -330,7 +331,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de UtilisateurCritere.
 	 */
-	public enum UtilisateurCritereFields implements DtFieldName {
+	public enum UtilisateurCritereFields implements DtFieldName<com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere> {
 		/** Propriété 'Nom'. */
 		NOM,
 		/** Propriété 'Nom'. */
@@ -346,7 +347,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de UtilisateurLogin.
 	 */
-	public enum UtilisateurLoginFields implements DtFieldName {
+	public enum UtilisateurLoginFields implements DtFieldName<com.kleegroup.formation.domain.administration.utilisateur.UtilisateurLogin> {
 		/** Propriété 'Nom'. */
 		NOM,
 		/** Propriété 'Identifiant utilisateur'. */
@@ -359,30 +360,29 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		NEW_PASSWORD_CHECK,
 	}
 
-	    
-    /** {@inheritDoc} */
-    @Override
-    public Iterator<Class<?>> iterator() {
-        return new Iterator<Class<?>>() {
-            private Iterator<Definitions> it = Arrays.asList(Definitions.values()).iterator();
+	/** {@inheritDoc} */
+	@Override
+	public Iterator<Class<?>> iterator() {
+		return new Iterator<Class<?>>() {
+			private Iterator<Definitions> it = Arrays.asList(Definitions.values()).iterator();
 
-            /** {@inheritDoc} */
-            @Override
-            public boolean hasNext() {
+			/** {@inheritDoc} */
+			@Override
+			public boolean hasNext() {
 				return it.hasNext();
-            }
+			}
 
-            /** {@inheritDoc} */
-            @Override
-            public Class<?> next() {
-            	return it.next().getDtClass();
-            }
+			/** {@inheritDoc} */
+			@Override
+			public Class<?> next() {
+				return it.next().getDtClass();
+			}
 
-            /** {@inheritDoc} */
-            @Override
-            public void remove() {
-            	//unsupported
-            }
-        };
-    }                      
+			/** {@inheritDoc} */
+			@Override
+			public void remove() {
+				//unsupported
+			}
+		};
+	}
 }

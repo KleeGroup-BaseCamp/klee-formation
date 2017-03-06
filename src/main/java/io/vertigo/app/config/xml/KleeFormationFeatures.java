@@ -1,5 +1,7 @@
 package io.vertigo.app.config.xml;
 
+import io.vertigo.app.config.discovery.ModuleDiscoveryFeatures;
+
 public class KleeFormationFeatures extends ModuleDiscoveryFeatures {
 
 	public KleeFormationFeatures() {

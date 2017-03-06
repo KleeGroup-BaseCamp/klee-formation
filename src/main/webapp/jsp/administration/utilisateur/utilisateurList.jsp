@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="v" uri="/vertigo-tags"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 
 <s:include value="/jsp/include/header.jsp">
 	<s:param name="subtitle">${pageName}</s:param>
 </s:include>
 <s:form>
-	<s:div layout="table" cols="6">
+	<v:div layout="table" cols="6">
 		<s:textfield name="utilisateurCritere.nom" label="default"/>
 		<s:textfield name="utilisateurCritere.prenom" label="Prénom"/>
 		<%--<s:textfield name="utilisateurCritere.role" label="default"/> --%>
 		<s:select name="utilisateurCritere.role" label="default" list="roles"/>	
-	</s:div>
+	</v:div>
 	<div class="button-bar">
 		<div class="right">
 			<s:submit action="rechercherUtilisateurList" value="RECHERCHER" cssClass="rechercher" />

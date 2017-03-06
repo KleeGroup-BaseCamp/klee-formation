@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.kleegroup.formation.domain.DtDefinitions.SessionViewFields;
 import com.kleegroup.formation.domain.formation.Formation;
 import com.kleegroup.formation.domain.formation.Niveau;
 import com.kleegroup.formation.domain.session.SessionView;
@@ -34,7 +35,7 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
 	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
-	private final ContextList<SessionView> sessions = new ContextList<>("sessions", this);
+	private final ContextList<SessionView> sessions = new ContextList<>("sessions", SessionViewFields.SES_ID, this);
 
 	/**
 	 * @param forId Id de l'élément a afficher.
@@ -50,19 +51,19 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 		niveaux.publish(Niveau.class, null);
 	}
 
-	public String doEdit() {
+	public String edit() {
 		toModeEdit();
 		return NONE;
 	}
 
-	public String doSave() {
+	public String save() {
 		if (isModeCreate() || isModeEdit()) {
 			formationServices.saveFormation(formation.readDto());
 		}
 		return SUCCESS;
 	}
 
-	public String doDelete() {
+	public String delete() {
 		final Long forId = formation.readDto().getForId();
 		final DtList<SessionView> sessionView = sessionServices.ListSessionByForId(forId);
 		if (sessionView.size() == 0) {

@@ -2,6 +2,7 @@ package com.kleegroup.formation.ui.controller.sessionFormation;
 
 import javax.inject.Inject;
 
+import com.kleegroup.formation.domain.DtDefinitions.SessionViewFields;
 import com.kleegroup.formation.domain.session.CritereSession;
 import com.kleegroup.formation.domain.session.SessionView;
 import com.kleegroup.formation.services.session.SessionServices;
@@ -22,7 +23,7 @@ public final class SessionListAction extends AbstractKleeFormationActionSupport 
 	private SessionServices sessionServices;
 
 	private final ContextForm<CritereSession> critere = new ContextForm<>("critere", this);
-	private final ContextList<SessionView> sessions = new ContextList<>("sessions", this);
+	private final ContextList<SessionView> sessions = new ContextList<>("sessions", SessionViewFields.SES_ID, this);
 
 	/** {@inheritDoc} */
 	@Override
@@ -32,7 +33,7 @@ public final class SessionListAction extends AbstractKleeFormationActionSupport 
 		toModeEdit();
 	}
 
-	public String doRechercher() {
+	public String rechercher() {
 		sessions.publish(sessionServices.getSessionListByCritere(critere.readDto()));
 		return NONE;
 	}

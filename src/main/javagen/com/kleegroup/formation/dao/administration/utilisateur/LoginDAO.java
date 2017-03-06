@@ -12,7 +12,7 @@ import com.kleegroup.formation.domain.administration.utilisateur.Login;
  * LoginDAO
  */
 public final class LoginDAO extends DAO<Login, java.lang.Long> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -22,6 +22,5 @@ public final class LoginDAO extends DAO<Login, java.lang.Long> implements StoreS
 	public LoginDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Login.class, storeManager, taskManager);
 	}
-	
 
 }

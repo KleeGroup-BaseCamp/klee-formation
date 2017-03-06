@@ -51,8 +51,7 @@ public final class UtilisateurPAO implements StoreServices {
 		getTaskManager().execute(task);
 	}
 
-    
-    private TaskManager getTaskManager(){
-    	return taskManager;
-    } 
+	private TaskManager getTaskManager() {
+		return taskManager;
+	}
 }

@@ -40,19 +40,19 @@ public final class CatalogueDetailAction extends AbstractKleeFormationActionSupp
 		niveaux.publish(Niveau.class, null);
 	}
 
-	public String doEdit() {
+	public String edit() {
 		toModeEdit();
 		return NONE;
 	}
 
-	public String doSave() {
+	public String save() {
 		if (isModeCreate() || isModeEdit()) {
 			formationServices.saveFormation(formation.readDto());
 		}
 		return SUCCESS;
 	}
 
-	public String doDelete() {
+	public String delete() {
 		formationServices.deleteFormation(formation.readDto().getForId());
 		return "success_delete";
 	}

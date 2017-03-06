@@ -39,12 +39,12 @@ public final class InscriptionPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_GET_LIST_INSCRIPTION_VIEW_BY_UTI_ID.
+	 * Execute la tache TK_GET_INSCRIPTION_VIEW_PASSER_FORMATION.
 	 * @param utilisateurId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.inscription.InscriptionView> dtc
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.inscription.InscriptionView> getListInscriptionViewByUtiId(final Long utilisateurId) {
-		final Task task = createTaskBuilder("TK_GET_LIST_INSCRIPTION_VIEW_BY_UTI_ID")
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.inscription.InscriptionView> getInscriptionViewPasserFormation(final Long utilisateurId) {
+		final Task task = createTaskBuilder("TK_GET_INSCRIPTION_VIEW_PASSER_FORMATION")
 				.addValue("UTILISATEUR_ID", utilisateurId)
 				.build();
 		return getTaskManager()
@@ -67,20 +67,6 @@ public final class InscriptionPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_GET_INSCRIPTION_VIEW_PASSER_FORMATION.
-	 * @param utilisateurId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.inscription.InscriptionView> dtc
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.inscription.InscriptionView> getInscriptionViewPasserFormation(final Long utilisateurId) {
-		final Task task = createTaskBuilder("TK_GET_INSCRIPTION_VIEW_PASSER_FORMATION")
-				.addValue("UTILISATEUR_ID", utilisateurId)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
 	 * Execute la tache TK_GET_LIST_INSCRIPTIONS_VIEW_BY_SESSION_ID.
 	 * @param sessionId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.inscription.InscriptionView> dtcInscriptions
@@ -94,8 +80,21 @@ public final class InscriptionPAO implements StoreServices {
 				.getResult();
 	}
 
-    
-    private TaskManager getTaskManager(){
-    	return taskManager;
-    } 
+	/**
+	 * Execute la tache TK_GET_LIST_INSCRIPTION_VIEW_BY_UTI_ID.
+	 * @param utilisateurId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.inscription.InscriptionView> dtc
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.inscription.InscriptionView> getListInscriptionViewByUtiId(final Long utilisateurId) {
+		final Task task = createTaskBuilder("TK_GET_LIST_INSCRIPTION_VIEW_BY_UTI_ID")
+				.addValue("UTILISATEUR_ID", utilisateurId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	private TaskManager getTaskManager() {
+		return taskManager;
+	}
 }

@@ -39,8 +39,8 @@ public abstract class AbstractKleeFormationActionSupport extends AbstractActionS
 	/** {@inheritDoc} */
 	@Override
 	protected void initContext() {
-		final RequestContainerWrapper container = new RequestContainerWrapper(ServletActionContext.getRequest());
-		MethodUtil.invoke(this, "initContext", container);
+		final RequestContainerWrapper myContainer = new RequestContainerWrapper(ServletActionContext.getRequest());
+		MethodUtil.invoke(this, "initContext", myContainer);
 	}
 
 	/**

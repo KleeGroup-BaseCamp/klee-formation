@@ -18,8 +18,8 @@ public final class Formation implements Entity {
 	private String intitule;
 	private String commentaire;
 	private String nivCode;
-	private io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> sessionFormation;
 	private com.kleegroup.formation.domain.formation.Niveau niveau;
+	private io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> sessionFormation;
 
 	/** {@inheritDoc} */
 	@Override
@@ -104,6 +104,43 @@ public final class Formation implements Entity {
 	}
 
 	/**
+	 * Association : Niveau.
+	 * @return com.kleegroup.formation.domain.formation.Niveau
+	 */
+	public com.kleegroup.formation.domain.formation.Niveau getNiveau() {
+		final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Niveau> fkURI = getNiveauURI();
+		if (fkURI == null) {
+			return null;
+		}
+		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
+		if (niveau == null || !fkURI.equals(niveau.getURI())) {
+			niveau = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().readOne(fkURI);
+		}
+		return niveau;
+	}
+
+	/**
+	 * Retourne l'URI: Niveau.
+	 * @return URI de l'association
+	 */
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_ASSOCIATION6",
+			fkFieldName = "NIV_CODE",
+			primaryDtDefinitionName = "DT_NIVEAU",
+			primaryIsNavigable = true,
+			primaryRole = "Niveau",
+			primaryLabel = "Niveau",
+			primaryMultiplicity = "1..1",
+			foreignDtDefinitionName = "DT_FORMATION",
+			foreignIsNavigable = false,
+			foreignRole = "Formation",
+			foreignLabel = "Formation",
+			foreignMultiplicity = "0..*")
+	public io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Niveau> getNiveauURI() {
+		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_ASSOCIATION6", com.kleegroup.formation.domain.formation.Niveau.class);
+	}
+
+	/**
 	 * Association : Session formation.
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation>
 	 */
@@ -127,7 +164,7 @@ public final class Formation implements Entity {
 	 * Association URI: Session formation.
 	 * @return URI de l'association
 	 */
-	@io.vertigo.dynamo.domain.stereotype.Association (
+	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_FOR_SES",
 			fkFieldName = "FOR_ID",
 			primaryDtDefinitionName = "DT_FORMATION",
@@ -143,42 +180,7 @@ public final class Formation implements Entity {
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getSessionFormationDtListURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_FOR_SES", "SessionFormation");
 	}
-	/**
-	 * Association : Niveau.
-	 * @return com.kleegroup.formation.domain.formation.Niveau
-	 */
-	public com.kleegroup.formation.domain.formation.Niveau getNiveau() {
-		final io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Niveau> fkURI = getNiveauURI();
-		if (fkURI == null) {
-			return null;
-		}
-		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
-		if (niveau == null || !fkURI.equals(niveau.getURI())) {
-			niveau = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().readOne(fkURI);
-		}
-		return niveau;
-	}
 
-	/**
-	 * Retourne l'URI: Niveau.
-	 * @return URI de l'association
-	 */
-	@io.vertigo.dynamo.domain.stereotype.Association (
-			name = "A_ASSOCIATION6",
-			fkFieldName = "NIV_CODE",
-			primaryDtDefinitionName = "DT_NIVEAU",
-			primaryIsNavigable = true,
-			primaryRole = "Niveau",
-			primaryLabel = "Niveau",
-			primaryMultiplicity = "1..1",
-			foreignDtDefinitionName = "DT_FORMATION",
-			foreignIsNavigable = false,
-			foreignRole = "Formation",
-			foreignLabel = "Formation",
-			foreignMultiplicity = "0..*")
-	public io.vertigo.dynamo.domain.model.URI<com.kleegroup.formation.domain.formation.Niveau> getNiveauURI() {
-		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_ASSOCIATION6", com.kleegroup.formation.domain.formation.Niveau.class);
-	}
 
 	/** {@inheritDoc} */
 	@Override

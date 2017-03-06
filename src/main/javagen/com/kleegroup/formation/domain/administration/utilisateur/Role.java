@@ -61,7 +61,6 @@ public final class Role implements Entity {
 		this.libelle = libelle;
 	}
 
-
 	// Association : Utilisateur non navigable
 
 	/** {@inheritDoc} */

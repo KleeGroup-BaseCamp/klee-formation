@@ -39,17 +39,6 @@ public final class FormationPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_GET_DELETE_FORMATION_CASCADE.
-	 * @param formationId Long 
-	*/
-	public void getDeleteFormationCascade(final Long formationId) {
-		final Task task = createTaskBuilder("TK_GET_DELETE_FORMATION_CASCADE")
-				.addValue("FORMATION_ID", formationId)
-				.build();
-		getTaskManager().execute(task);
-	}
-
-	/**
 	 * Execute la tache TK_DELETE_HORAIRES.
 	 * @param forId Long 
 	*/
@@ -71,8 +60,18 @@ public final class FormationPAO implements StoreServices {
 		getTaskManager().execute(task);
 	}
 
-    
-    private TaskManager getTaskManager(){
-    	return taskManager;
-    } 
+	/**
+	 * Execute la tache TK_GET_DELETE_FORMATION_CASCADE.
+	 * @param formationId Long 
+	*/
+	public void getDeleteFormationCascade(final Long formationId) {
+		final Task task = createTaskBuilder("TK_GET_DELETE_FORMATION_CASCADE")
+				.addValue("FORMATION_ID", formationId)
+				.build();
+		getTaskManager().execute(task);
+	}
+
+	private TaskManager getTaskManager() {
+		return taskManager;
+	}
 }

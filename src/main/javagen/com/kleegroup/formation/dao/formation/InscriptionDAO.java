@@ -16,7 +16,7 @@ import com.kleegroup.formation.domain.formation.Inscription;
  * InscriptionDAO
  */
 public final class InscriptionDAO extends DAO<Inscription, java.lang.Long> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -26,7 +26,7 @@ public final class InscriptionDAO extends DAO<Inscription, java.lang.Long> imple
 	public InscriptionDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Inscription.class, storeManager, taskManager);
 	}
-	
+
 
 	/**
 	 * Creates a taskBuilder.
@@ -36,20 +36,6 @@ public final class InscriptionDAO extends DAO<Inscription, java.lang.Long> imple
 	private static TaskBuilder createTaskBuilder(final String name) {
 		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
 		return new TaskBuilder(taskDefinition);
-	}
-
-	/**
-	 * Execute la tache TK_GET_LIST_UTILISATEUR_BY_INSCRIPTION.
-	 * @param utilisateurId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> dtc
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> getListUtilisateurByInscription(final Long utilisateurId) {
-		final Task task = createTaskBuilder("TK_GET_LIST_UTILISATEUR_BY_INSCRIPTION")
-				.addValue("UTILISATEUR_ID", utilisateurId)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
 	}
 
 	/**
@@ -82,5 +68,18 @@ public final class InscriptionDAO extends DAO<Inscription, java.lang.Long> imple
 				.getResult();
 	}
 
+	/**
+	 * Execute la tache TK_GET_LIST_UTILISATEUR_BY_INSCRIPTION.
+	 * @param utilisateurId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> dtc
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.Inscription> getListUtilisateurByInscription(final Long utilisateurId) {
+		final Task task = createTaskBuilder("TK_GET_LIST_UTILISATEUR_BY_INSCRIPTION")
+				.addValue("UTILISATEUR_ID", utilisateurId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
 
 }

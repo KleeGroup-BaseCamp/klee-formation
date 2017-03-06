@@ -161,7 +161,6 @@ public final class Horaires implements Entity {
 		this.sesId = sesId;
 	}
 
-
 	// Association : Session formation non navigable
 
 	/** {@inheritDoc} */

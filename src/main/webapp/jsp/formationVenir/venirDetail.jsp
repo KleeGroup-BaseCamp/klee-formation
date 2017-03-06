@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="v" uri="/vertigo-tags"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 
 <s:include value="/jsp/include/header.jsp">
@@ -27,9 +28,9 @@
 	<div class="row">
 		<div class="span1">
 		</div>
-		<s:div cssClass="span2 %{formation.nivCode == 'DEBUT' ? 'debutant': formation.nivCode == 'INTER' ?  'intermediaire' : 'expert'}">
+		<v:div cssClass="span2 %{formation.nivCode == 'DEBUT' ? 'debutant': formation.nivCode == 'INTER' ?  'intermediaire' : 'expert'}">
 			<s:select name="formation.nivCode" list="niveaux" label="" theme="xhtml_read" />
-		</s:div>
+		</v:div>
 		<div class="span6">
 			<s:textfield name="formation.intitule" label="" cssClass="h3" theme="xhtml_read"/>
 			</br>

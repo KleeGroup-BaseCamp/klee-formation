@@ -38,7 +38,7 @@ public final class FormationListAction extends AbstractKleeFormationActionSuppor
 		toModeEdit();
 	}
 
-	public String doRechercher() {
+	public String rechercher() {
 		formations.publish(formationServices.getFormationListByCritere(formationCritere.readDto()));
 		return NONE;
 

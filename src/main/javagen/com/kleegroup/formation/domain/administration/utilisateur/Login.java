@@ -101,7 +101,6 @@ public final class Login implements Entity {
 		this.utiId = utiId;
 	}
 
-
 	// Association : Utilisateur non navigable
 
 	/** {@inheritDoc} */

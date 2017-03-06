@@ -42,12 +42,12 @@ public final class UtilisateurListAction extends AbstractKleeFormationActionSupp
 		utilisateurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurCritere));
 	}
 
-	public String doRechercher() {
+	public String rechercher() {
 		reloadList();
 		return NONE;
 	}
 
-	public String doLoadLdap() {
+	public String loadLdap() {
 		utilisateurServices.importLdapUtilisateur();
 		return NONE;
 	}

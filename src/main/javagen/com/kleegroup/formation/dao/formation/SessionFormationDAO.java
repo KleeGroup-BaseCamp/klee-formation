@@ -16,7 +16,7 @@ import com.kleegroup.formation.domain.formation.SessionFormation;
  * SessionFormationDAO
  */
 public final class SessionFormationDAO extends DAO<SessionFormation, java.lang.Long> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -26,7 +26,7 @@ public final class SessionFormationDAO extends DAO<SessionFormation, java.lang.L
 	public SessionFormationDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(SessionFormation.class, storeManager, taskManager);
 	}
-	
+
 
 	/**
 	 * Creates a taskBuilder.
@@ -36,6 +36,20 @@ public final class SessionFormationDAO extends DAO<SessionFormation, java.lang.L
 	private static TaskBuilder createTaskBuilder(final String name) {
 		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
 		return new TaskBuilder(taskDefinition);
+	}
+
+	/**
+	 * Execute la tache TK_GET_LIST_SESSION_BY_FORMATEUR_ID.
+	 * @param formateurId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> dtc
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> getListSessionByFormateurId(final Long formateurId) {
+		final Task task = createTaskBuilder("TK_GET_LIST_SESSION_BY_FORMATEUR_ID")
+				.addValue("FORMATEUR_ID", formateurId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
 	}
 
 	/**
@@ -61,20 +75,5 @@ public final class SessionFormationDAO extends DAO<SessionFormation, java.lang.L
 				.execute(task)
 				.getResult();
 	}
-
-	/**
-	 * Execute la tache TK_GET_LIST_SESSION_BY_FORMATEUR_ID.
-	 * @param formateurId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> dtc
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.formation.SessionFormation> getListSessionByFormateurId(final Long formateurId) {
-		final Task task = createTaskBuilder("TK_GET_LIST_SESSION_BY_FORMATEUR_ID")
-				.addValue("FORMATEUR_ID", formateurId)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
 
 }

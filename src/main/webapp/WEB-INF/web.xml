@@ -22,7 +22,7 @@
 		Task/MDM de execution.kpr -->
 	<context-param>
 		<param-name>boot.applicationConfiguration</param-name>
-		<param-value>/META-INF/managers.xml;/META-INF/kleeFormation-services.xml;/META-INF/security.xml</param-value>
+		<param-value>/META-INF/managers.xml</param-value>
 	</context-param>
 	
 	
@@ -139,7 +139,7 @@
 	<filter>
 		<description>Filtre Struts2.</description>
 		<filter-name>Struts2 Filter</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>Struts2 Filter</filter-name>

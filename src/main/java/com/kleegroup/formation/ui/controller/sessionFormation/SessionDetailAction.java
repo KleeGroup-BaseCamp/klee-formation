@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.kleegroup.formation.domain.DtDefinitions.InscriptionViewFields;
 import com.kleegroup.formation.domain.DtDefinitions.SessionFormationFields;
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurCritere;
@@ -69,7 +70,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
 	private final ContextMdl<Utilisateur> utilisateurs = new ContextMdl<>("utilisateurs", this);
-	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", this);
+	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", InscriptionViewFields.SES_ID, this);
 
 	public void initContext(@Named("sesId") final Optional<Long> sesId) {
 		niveaux.publish(Niveau.class, null);
@@ -100,7 +101,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		formations.publish(formationServices.getFormationListByCritere(formationcritere));
 	}
 
-	public String doEdit() {
+	public String edit() {
 		final SessionFormation my_session = sessionServices.loadSessionFormation(sesIdRef.get());
 		session.publish(my_session);
 		horaires.publish(horairesServices.getHoraires(my_session));
@@ -109,7 +110,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		return NONE;
 	}
 
-	public String doSave() {
+	public String save() {
 		final SessionFormation sessions = session.readDto();
 		if (isModeCreate()) {
 			final BigDecimal satisfaction = new BigDecimal(0);
@@ -124,7 +125,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		return SUCCESS;
 	}
 
-	public String doPublish() {
+	public String publish() {
 		final SessionFormation sessions = session.readDto();
 		if (isModeCreate()) {
 			final BigDecimal satisfaction = new BigDecimal(0);
@@ -218,7 +219,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 
 	}
 
-	public String doDelete() {
+	public String delete() {
 		final SessionFormation sessions = session.readDto();
 		final String status = sessions.getStatus();
 		//final String etat = sessions.getEtat().getEtaCode();
@@ -248,7 +249,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	}
 
 	@SuppressWarnings("deprecation")
-	public String doDatemodif() {
+	public String datemodif() {
 		final SessionFormation session_modif = session.readDto();
 		if (DateUtil.newDate().after(session_modif.getDateDebut())) {
 			throw new VUserException(new MessageText(Resources.SESSION_DATE_MUST_BE_IN_FUTURE));
@@ -320,7 +321,7 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 	}
 
 	@SuppressWarnings("deprecation")
-	public String doHoraire() {
+	public String Horaire() {
 
 		final UiObject<SessionFormation> session_date = session.getUiObject();
 		if (session_date.getDate(SessionFormationFields.DATE_DEBUT.name()) == null || session_date.getDate(SessionFormationFields.DATE_FIN.name()) == null) {

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="v" uri="/vertigo-tags"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 
 <s:include value="/jsp/include/header.jsp">
@@ -10,7 +11,7 @@
 
 <s:form>
 	<!--   mode création / modification ----------------------------------------------------------------------------------- -->
-	<s:div layout="table" cols="4">
+	<v:div layout="table" cols="4">
 		<s:if test="%{!modeReadOnly}">
 			<s:textfield name="utilisateurLogin.login" label="default"/>
 			<s:if test="%{modeEdit}">
@@ -39,7 +40,7 @@
 		<s:checkbox name="utilisateur.responsable" label="Responsable"/>
 		</tr>
 		</s:if>
-	</s:div>
+	</v:div>
 	
 <h5>Inscrit aux sessions suivantes :</h5>
 <display:table  name="inscriptions" class="tableau" id="item" export="true" sort="list" requestURI="#" pagesize="20">

@@ -17,7 +17,7 @@ import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
  * UtilisateurDAO
  */
 public final class UtilisateurDAO extends DAO<Utilisateur, java.lang.Long> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -27,7 +27,7 @@ public final class UtilisateurDAO extends DAO<Utilisateur, java.lang.Long> imple
 	public UtilisateurDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Utilisateur.class, storeManager, taskManager);
 	}
-	
+
 
 	/**
 	 * Creates a taskBuilder.
@@ -37,18 +37,6 @@ public final class UtilisateurDAO extends DAO<Utilisateur, java.lang.Long> imple
 	private static TaskBuilder createTaskBuilder(final String name) {
 		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
 		return new TaskBuilder(taskDefinition);
-	}
-
-	/**
-	 * Execute la tache TK_LIST_UTILISATEUR.
-	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> dtcUtilisateur
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> listUtilisateur() {
-		final Task task = createTaskBuilder("TK_LIST_UTILISATEUR")
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
 	}
 
 	/**
@@ -74,9 +62,21 @@ public final class UtilisateurDAO extends DAO<Utilisateur, java.lang.Long> imple
 		final Task task = createTaskBuilder("TK_GET_UTILISATEUR_BY_EMAIL")
 				.addValue("EMAIL", email)
 				.build();
-		return Optional.ofNullable((com.kleegroup.formation.domain.administration.utilisateur.Utilisateur)getTaskManager()
+		return Optional.ofNullable((com.kleegroup.formation.domain.administration.utilisateur.Utilisateur) getTaskManager()
 				.execute(task)
 				.getResult());
+	}
+
+	/**
+	 * Execute la tache TK_LIST_UTILISATEUR.
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> dtcUtilisateur
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Utilisateur> listUtilisateur() {
+		final Task task = createTaskBuilder("TK_LIST_UTILISATEUR")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
 	}
 
 	/**
@@ -92,6 +92,5 @@ public final class UtilisateurDAO extends DAO<Utilisateur, java.lang.Long> imple
 				.execute(task)
 				.getResult();
 	}
-
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="v" uri="/vertigo-tags"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 
 <s:include value="/jsp/include/header.jsp">
@@ -11,7 +12,7 @@
 
 <h3>Evaluation de la satisfaction </h3>
 
-	<s:div layout="table">
+	<v:div layout="table">
 		<s:radio list="#{'1':'1', '2':'2', '3':'3', '4':'4', '5':'5'}" label="La durée du stage( temps) est-elle suffisante?" name="statistique.duree"
 						listKey="key" listValue="value" />
 		<s:radio list="#{'1':'1', '2':'2', '3':'3', '4':'4', '5':'5'}" label="le thème est-il adapté?" name="statistique.theme"
@@ -30,14 +31,14 @@
 						listKey="key" listValue="value" />
 		<s:radio list="#{'1':'1', '2':'2', '3':'3', '4':'4', '5':'5'}" label="explications claires et compréhensibles?" name="statistique.explication"
 						listKey="key" listValue="value" />
-	</s:div>
+	</v:div>
 	
 <s:if test="%{!modeReadOnly}">
-	<s:div cssClass="button-bar">
+	<v:div cssClass="button-bar">
 		<div class="right">
 			<s:submit action="saveSatisfaction" cssClass="enregistrer" value="ENREGISTRER" />
 		</div>
-	</s:div>
+	</v:div>
 	</s:if>
 </s:form>	
 

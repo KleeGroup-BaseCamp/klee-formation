@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import com.kleegroup.formation.ui.controller.menu.NavigationItem;
 
-import io.vertigo.core.spaces.component.ComponentInitializer;
+import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.persona.impl.security.BeanResourceNameFactory;
 import io.vertigo.persona.security.VSecurityManager;
 

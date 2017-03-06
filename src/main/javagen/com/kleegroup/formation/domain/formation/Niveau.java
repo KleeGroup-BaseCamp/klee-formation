@@ -61,7 +61,6 @@ public final class Niveau implements Entity {
 		this.libelle = libelle;
 	}
 
-
 	// Association : Formation non navigable
 
 	/** {@inheritDoc} */

@@ -70,7 +70,7 @@ public final class FormationDetailAction extends AbstractKleeFormationActionSupp
 
 	}
 
-	public String doSave() {
+	public String save() {
 		final SessionFormation sessionFormation = sessionServices.loadSessionbyId(sesIdRef.get());
 		sessionFormation.setEtaCode("Realiser");
 		sessionServices.saveSessionFormation(sessionFormation);

@@ -12,7 +12,7 @@ import com.kleegroup.formation.domain.formation.Niveau;
  * NiveauDAO
  */
 public final class NiveauDAO extends DAO<Niveau, java.lang.String> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -22,6 +22,5 @@ public final class NiveauDAO extends DAO<Niveau, java.lang.String> implements St
 	public NiveauDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Niveau.class, storeManager, taskManager);
 	}
-	
 
 }

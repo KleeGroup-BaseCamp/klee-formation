@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="v" uri="/vertigo-tags"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 
 <s:include value="/jsp/include/header.jsp">
@@ -10,12 +11,12 @@
 
 <s:form>
 	<!--   mode création / modification ----------------------------------------------------------------------------------- -->
-	<s:div layout="table" cols="3">
+	<v:div layout="table" cols="3">
 		<s:textfield name="formation.intitule" label="Intitulé" />
 		<tr><td colspan="2">&nbsp;</td></tr>
 		<s:select name="formation.nivCode" label="default" list="niveaux"/>	
 		<s:textarea name="formation.commentaire" label="Descriptif"/>
-	</s:div>
+	</v:div>
 		
 	<div class="button-bar">
 		<s:if test="%{modeReadOnly}">

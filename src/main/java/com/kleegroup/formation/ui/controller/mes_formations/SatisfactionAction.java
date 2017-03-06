@@ -1,6 +1,7 @@
 package com.kleegroup.formation.ui.controller.mes_formations;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,7 +14,6 @@ import com.kleegroup.formation.services.session.SessionServices;
 import com.kleegroup.formation.ui.controller.AbstractKleeFormationActionSupport;
 import com.kleegroup.formation.ui.controller.menu.Menu;
 
-import java.util.Optional;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextRef;
 
@@ -44,7 +44,7 @@ public final class SatisfactionAction extends AbstractKleeFormationActionSupport
 
 	}
 
-	public String doSave() {
+	public String save() {
 
 		final Inscription inscription = statistique.readDto();
 		final BigDecimal neuf = new BigDecimal(9);
@@ -53,7 +53,7 @@ public final class SatisfactionAction extends AbstractKleeFormationActionSupport
 				.add(inscription.getContenu()).add(inscription.getTheme()).divide(neuf, 10, BigDecimal.ROUND_HALF_DOWN);
 		inscription.setSatisfaction(satisfactionMoyenne);
 		final SessionFormation session = sessionServices.loadSessionbyId(sesIdRef.get());
-		
+
 		sessionServices.saveSessionFormation(session);
 		inscriptionServices.saveInscription(statistique.readDto());
 

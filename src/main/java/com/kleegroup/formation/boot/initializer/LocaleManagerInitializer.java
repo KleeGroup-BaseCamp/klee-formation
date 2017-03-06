@@ -2,8 +2,8 @@ package com.kleegroup.formation.boot.initializer;
 
 import javax.inject.Inject;
 
+import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.core.locale.LocaleManager;
-import io.vertigo.core.spaces.component.ComponentInitializer;
 
 /**
  * Initializer de LocaleManager.

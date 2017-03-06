@@ -39,7 +39,7 @@ public final class CatalogueListAction extends AbstractKleeFormationActionSuppor
 
 	}
 
-	public String doRechercher() {
+	public String rechercher() {
 		formations.publish(formationServices.getFormationListByCritere(formationCritere.readDto()));
 		return NONE;
 

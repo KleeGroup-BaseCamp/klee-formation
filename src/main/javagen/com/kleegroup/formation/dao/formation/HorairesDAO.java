@@ -12,7 +12,7 @@ import com.kleegroup.formation.domain.formation.Horaires;
  * HorairesDAO
  */
 public final class HorairesDAO extends DAO<Horaires, java.lang.Long> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -22,6 +22,5 @@ public final class HorairesDAO extends DAO<Horaires, java.lang.Long> implements 
 	public HorairesDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Horaires.class, storeManager, taskManager);
 	}
-	
 
 }

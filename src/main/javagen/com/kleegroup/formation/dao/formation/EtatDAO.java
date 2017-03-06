@@ -12,7 +12,7 @@ import com.kleegroup.formation.domain.formation.Etat;
  * EtatDAO
  */
 public final class EtatDAO extends DAO<Etat, java.lang.String> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -22,6 +22,5 @@ public final class EtatDAO extends DAO<Etat, java.lang.String> implements StoreS
 	public EtatDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Etat.class, storeManager, taskManager);
 	}
-	
 
 }

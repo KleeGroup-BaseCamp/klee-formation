@@ -12,7 +12,7 @@ import com.kleegroup.formation.domain.formation.Formation;
  * FormationDAO
  */
 public final class FormationDAO extends DAO<Formation, java.lang.Long> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -22,6 +22,5 @@ public final class FormationDAO extends DAO<Formation, java.lang.Long> implement
 	public FormationDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Formation.class, storeManager, taskManager);
 	}
-	
 
 }

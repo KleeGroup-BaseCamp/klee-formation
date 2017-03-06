@@ -55,7 +55,7 @@ public final class UtilisateurAction extends AbstractKleeFormationActionSupport 
 
 	}
 
-	public String doInscrireMoi() throws IOException {
+	public String inscrireMoi() throws IOException {
 		inscriptionServices.inscrireUtilisateurASession(sesIdRef.get());
 		final Formation formation = formationServices.loadFormation(sessionServices.loadSessionbyId(sesIdRef.get()).getForId());
 		final SessionFormation session = sessionServices.loadSessionbyId(sesIdRef.get());
@@ -65,7 +65,7 @@ public final class UtilisateurAction extends AbstractKleeFormationActionSupport 
 		return "success_inscription";
 	}
 
-	public String doInscrire() throws IOException {
+	public String inscrire() throws IOException {
 		inscriptionServices.inscrireUtilisateur(sesIdRef.get(), inscriptionForm.readDto().getUtiId());
 		final Utilisateur uti = utilisateurServices.loadUtilisateurWithRoles(inscriptionForm.readDto().getUtiId());
 		final Formation formation = formationServices.loadFormation(sessionServices.loadSessionbyId(sesIdRef.get()).getForId());

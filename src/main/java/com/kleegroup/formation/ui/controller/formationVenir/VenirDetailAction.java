@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.kleegroup.formation.domain.DtDefinitions.InscriptionViewFields;
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.formation.Formation;
 import com.kleegroup.formation.domain.formation.Horaires;
@@ -52,7 +53,7 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
 	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
 	private final ContextForm<SessionFormation> session = new ContextForm<>("sessionTest", this);
-	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", this);
+	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", InscriptionViewFields.SES_ID, this);
 	private final ContextListModifiable<Horaires> horaires = new ContextListModifiable<>("horaires", this);
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
 	private final ContextMdl<Utilisateur> utilisateurs = new ContextMdl<>("utilisateurs", this);
@@ -71,7 +72,7 @@ public final class VenirDetailAction extends AbstractKleeFormationActionSupport 
 		horaires.publish(horairesServices.getHoraires(sessionFormation));
 	}
 
-	public String doInscrire() throws IOException {
+	public String inscrire() throws IOException {
 		inscriptionServices.inscrireUtilisateurASession(sesIdRef.get());
 		mailServices.genererFichierIcvs(formation.readDto(), session.readDto());
 		//mailServices.envoyerInvitation(, utilisateurServices.getCurrentUtilisateur().getMail());

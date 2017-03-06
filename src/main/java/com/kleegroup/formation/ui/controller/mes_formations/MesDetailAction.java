@@ -3,6 +3,7 @@ package com.kleegroup.formation.ui.controller.mes_formations;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.kleegroup.formation.domain.DtDefinitions.InscriptionViewFields;
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.formation.Formation;
 import com.kleegroup.formation.domain.formation.Horaires;
@@ -43,7 +44,7 @@ public final class MesDetailAction extends AbstractKleeFormationActionSupport {
 
 	private final ContextForm<Formation> formation = new ContextForm<>("formation", this);
 	private final ContextRef<Long> sesIdRef = new ContextRef<>("sesId", Long.class, this);
-	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", this);
+	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", InscriptionViewFields.SES_ID, this);
 	private final ContextMdl<Utilisateur> utilisateursList = new ContextMdl<>("utilisateurs", this);
 	private final ContextMdl<Niveau> niveaux = new ContextMdl<>("niveaux", this);
 	private final ContextListModifiable<Horaires> horaires = new ContextListModifiable<>("horaires", this);
@@ -58,7 +59,7 @@ public final class MesDetailAction extends AbstractKleeFormationActionSupport {
 		horaires.publish(horairesServices.getHoraires(sessionFormation));
 	}
 
-	public String doDelete() {
+	public String delete() {
 		inscriptionServices.deleteInscription(inscriptionServices.InscriptionByUtiSesId(utilisateurServices.getCurrentUtilisateur().getUtiId(), sesIdRef.get()).getInsId());
 		final SessionFormation session_modif = sessionServices.loadSessionbyId(session.readDto().getSesId());
 		if (session_modif.getEsuCode() == "Complete") {

@@ -47,7 +47,7 @@ public final class FormationsListAction extends AbstractKleeFormationActionSuppo
 		utilisateurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurCritere));
 	}
 
-	public String doUtilisateurRechercher() {
+	public String utilisateurRechercher() {
 		reloadList();
 		return NONE;
 	}

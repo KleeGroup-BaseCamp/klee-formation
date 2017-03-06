@@ -12,7 +12,7 @@ import com.kleegroup.formation.domain.formation.EtatSessionUtilisateur;
  * EtatSessionUtilisateurDAO
  */
 public final class EtatSessionUtilisateurDAO extends DAO<EtatSessionUtilisateur, java.lang.String> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -22,6 +22,5 @@ public final class EtatSessionUtilisateurDAO extends DAO<EtatSessionUtilisateur,
 	public EtatSessionUtilisateurDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(EtatSessionUtilisateur.class, storeManager, taskManager);
 	}
-	
 
 }

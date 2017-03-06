@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.kleegroup.formation.domain.DtDefinitions.InscriptionViewFields;
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.administration.utilisateur.UtilisateurLogin;
 import com.kleegroup.formation.domain.inscription.InscriptionView;
@@ -38,7 +39,7 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 	@Inject
 	private InscriptionServices inscriptionServices;
 
-	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", this);
+	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", InscriptionViewFields.SES_ID, this);
 	private final ContextForm<UtilisateurLogin> utilisateurLogin = new ContextForm<>("utilisateurLogin", this);
 	private final ContextForm<Utilisateur> utilisateur = new ContextForm<>("utilisateur", this);
 	private final ContextRef<Boolean> roleAdmin = new ContextRef<>("roleAdmin", Boolean.class, this);
@@ -83,7 +84,7 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 	/**
 	 * @return Outcome d'enregistrement
 	 */
-	public String doSave() {
+	public String save() {
 		utilisateur.checkErrors();
 		final Utilisateur uti = utilisateur.readDto();
 		uti.setAdmin(false);
@@ -115,7 +116,7 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 	/**
 	 * @return Outcome de suppression
 	 */
-	public String doDelete() {
+	public String delete() {
 		utilisateurServices.deleteUtilisateur(utilisateur.readDto().getUtiId());
 		return "success_delete";
 	}
@@ -123,7 +124,7 @@ public final class UtilisateurDetailAction extends AbstractKleeFormationActionSu
 	/**
 	 * @return Outcome du passage en edition
 	 */
-	public String doEdit() {
+	public String edit() {
 		toModeEdit();
 		return NONE;
 	}

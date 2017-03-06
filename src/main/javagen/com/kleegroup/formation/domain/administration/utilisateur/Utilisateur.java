@@ -193,6 +193,7 @@ public final class Utilisateur implements Entity {
                         return builder.toString();
 	}
 
+	// Association : Inscription non navigable
 	/**
 	 * Association : Login.
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.administration.utilisateur.Login>
@@ -217,7 +218,7 @@ public final class Utilisateur implements Entity {
 	 * Association URI: Login.
 	 * @return URI de l'association
 	 */
-	@io.vertigo.dynamo.domain.stereotype.Association (
+	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_UTI_LOG",
 			fkFieldName = "UTI_ID",
 			primaryDtDefinitionName = "DT_UTILISATEUR",
@@ -233,8 +234,6 @@ public final class Utilisateur implements Entity {
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getLoginDtListURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_UTI_LOG", "Login");
 	}
-
-	// Association : Inscription non navigable
 
 	// Association : Session formation non navigable
 	/**
@@ -261,7 +260,7 @@ public final class Utilisateur implements Entity {
 	 * Association URI: Rôle.
 	 * @return URI de l'association
 	 */
-	@io.vertigo.dynamo.domain.stereotype.AssociationNN (
+	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
 			name = "ANN_UTI_ROL",
 			tableName = "UTI_ROL",
 			dtDefinitionA = "DT_UTILISATEUR",
@@ -276,6 +275,7 @@ public final class Utilisateur implements Entity {
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getRoleDtListURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForNNAssociation(this, "ANN_UTI_ROL", "Role");
 	}
+
 
 	/** {@inheritDoc} */
 	@Override

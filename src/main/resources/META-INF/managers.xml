@@ -8,21 +8,18 @@
 			<param name="url" value="${boot.configXmlInterne}" />
 		</plugin>
 		<plugin class="io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.kpr.KprLoaderPlugin">
-			<param name='encoding' value='utf8' />
-		</plugin>
-		<plugin class="io.vertigo.dynamo.plugins.environment.registries.domain.DomainDynamicRegistryPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.registries.task.TaskDynamicRegistryPlugin" />
-		<plugin class="io.vertigo.persona.plugins.security.loaders.SecurityResourceLoaderPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.registries.file.FileDynamicRegistryPlugin" />
 	</boot>
 <!-- 	<feature class="io.vertigo.app.config.xml.KleeFormationFeatures"></feature> -->
 	<module name="KleeFormation">
 		<definitions>
-			<resource type="classes" path="com.kleegroup.formation.domain.DtDefinitions" />
-			<resource type="kpr" path="com/kleegroup/formation/execution.kpr" />
-			<resource type="security" path="/META-INF/kleeFormation-auth-config.xml" />
+			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
+				<param name='encoding' value='utf8' />
+				<resource type="classes" path="com.kleegroup.formation.domain.DtDefinitions" />
+				<resource type="kpr" path="com/kleegroup/formation/execution.kpr" />
+			</provider>
+			<provider class="io.vertigo.persona.plugins.security.loaders.SecurityDefinitionProvider" >
+				<resource type="security" path="/META-INF/kleeFormation-auth-config.xml" />
+			</provider>
 		</definitions>
 	</module>
 	<module name="commons">
@@ -41,10 +38,14 @@
 		</component>
 		<component api="VTransactionManager" class="io.vertigo.dynamo.impl.transaction.VTransactionManagerImpl" />
 		<component api="SqlDataBaseManager" class="io.vertigo.dynamo.impl.database.SqlDataBaseManagerImpl">
-			<plugin class="io.vertigo.dynamo.plugins.database.connection.datasource.DataSourceConnectionProviderPlugin">
+			 <plugin class="io.vertigo.dynamo.plugins.database.connection.datasource.DataSourceConnectionProviderPlugin">
 				<param name="source" value="java:/comp/env/jdbc/DataSource" />
 				<param name="classname" value="io.vertigo.dynamo.impl.database.vendor.postgresql.PostgreSqlDataBase" />
-			</plugin>
+			</plugin>  
+			<!--<plugin class="io.vertigo.dynamo.plugins.database.connection.datasource.DataSourceConnectionProviderPlugin">
+				<param name="source" value="java:/comp/env/jdbc/DataSource" />
+				<param name="classname" value="io.vertigo.dynamo.impl.database.vendor.h2.H2DataBase" />
+			</plugin> -->
 		</component>
 
 		<component api="CollectionsManager" class="io.vertigo.dynamo.impl.collections.CollectionsManagerImpl">
@@ -95,6 +96,8 @@
 	<module name="aspects" >
 		<aspect class="io.vertigo.dynamo.impl.transaction.VTransactionAspect"/>
 	</module>
+	
+	<feature class="io.vertigo.app.config.xml.KleeFormationFeatures" />
 	
 	<init>
 		<initializer class="com.kleegroup.formation.boot.initializer.LocaleManagerInitializer"/>

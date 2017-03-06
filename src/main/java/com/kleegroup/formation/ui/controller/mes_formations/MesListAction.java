@@ -2,6 +2,8 @@ package com.kleegroup.formation.ui.controller.mes_formations;
 
 import javax.inject.Inject;
 
+import com.kleegroup.formation.domain.DtDefinitions.InscriptionViewFields;
+import com.kleegroup.formation.domain.DtDefinitions.SessionViewFields;
 import com.kleegroup.formation.domain.administration.utilisateur.Utilisateur;
 import com.kleegroup.formation.domain.formation.SessionFormation;
 import com.kleegroup.formation.domain.inscription.InscriptionView;
@@ -28,10 +30,10 @@ public final class MesListAction extends AbstractKleeFormationActionSupport {
 	private SessionServices sessionServices;
 
 	private final ContextForm<SessionFormation> session = new ContextForm<>("session", this);
-	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", this);
-	private final ContextList<SessionView> sessions = new ContextList<>("sessions", this);
-	private final ContextList<InscriptionView> inscriptions2 = new ContextList<>("inscriptions2", this);
-	private final ContextList<SessionView> sessions2 = new ContextList<>("sessions2", this);
+	private final ContextList<InscriptionView> inscriptions = new ContextList<>("inscriptions", InscriptionViewFields.SES_ID, this);
+	private final ContextList<SessionView> sessions = new ContextList<>("sessions", SessionViewFields.SES_ID, this);
+	private final ContextList<InscriptionView> inscriptions2 = new ContextList<>("inscriptions2", InscriptionViewFields.SES_ID, this);
+	private final ContextList<SessionView> sessions2 = new ContextList<>("sessions2", SessionViewFields.SES_ID, this);
 
 	@Inject
 	private UtilisateurServices utilisateurServices;

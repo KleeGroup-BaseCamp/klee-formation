@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="v" uri="/vertigo-tags"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <s:include value="/jsp/include/header.jsp">
 	<s:param name="subtitle">${pageName}</s:param>
@@ -23,15 +24,15 @@
 </head>
 <s:form>
 	<!--   mode création / modification ----------------------------------------------------------------------------------- -->
-	<%-- <s:div layout="table" cols="4">--%>
+	<%-- <v:div layout="table" cols="4">--%>
 	
 	<s:if test="%{!modeCreate}">
 	<div class="row">
 	<div class="span1">
 	</div>
-	<s:div cssClass="span2 %{formation.nivCode == 'DEBUT' ? 'debutant': formation.nivCode == 'INTER' ?  'intermediaire' : 'expert'}">
+	<v:div cssClass="span2 %{formation.nivCode == 'DEBUT' ? 'debutant': formation.nivCode == 'INTER' ?  'intermediaire' : 'expert'}">
 		<s:select name="formation.nivCode" list="niveaux" label="" theme="xhtml_read" />
-	</s:div>
+	</v:div>
 	<div class="span6">
 	<s:textfield name="formation.intitule" label="" cssClass="h3" theme="xhtml_read"/>
 	</br>
@@ -39,7 +40,7 @@
 	</div>
 </div>
 	</s:if>
-	<s:div layout="table" cols="4">
+	<v:div layout="table" cols="4">
 		<tr><td colspan="2">&nbsp;</td></tr>
 	 <s:if test="%{modeCreate}" >
 		<sj:autocompleter list="formations" listKey="forId"  listValue="intitule"
@@ -54,7 +55,7 @@
 				label="Formateur" name="sessionTest.utiId" headerKey="" headerValue=""
 				href="ListAutocomplete.do" />
 		</s:if>
-		</s:div>
+		</v:div>
 		<s:if test="%{modeReadOnly}">
 		<div class="row">
 		<div class="span3">
@@ -62,18 +63,18 @@
 		<s:select name="sessionTest.utiId" label="Formateur" list="utilisateurs" />
 	</div>
 		</s:if>
-		 <s:div layout="table" cols="4">
+		 <v:div layout="table" cols="4">
 		  <s:textfield name="sessionTest.lieux" label="lieu"/>
 			<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>
 			
 			<s:if test="%{modeReadOnly}">
 			<s:textfield name="sessionTest.duree" label="Durée(jours)"/>
 			</s:if>
-		</s:div>
-			<s:div layout="table" cols="4">		
+		</v:div>
+			<v:div layout="table" cols="4">		
 			<sj:datepicker name="sessionTest.dateDebut" label="Début" displayFormat="dd/mm/yy" changeMonth="true" changeYear="true" showOn="button"/>
 		    <sj:datepicker name="sessionTest.dateFin" label="Fin" displayFormat="dd/mm/yy"  changeMonth="true" changeYear="true" showOn="button"/>
-		  </s:div>
+		  </v:div>
 		 
 		  <div class="row">
 				<div class="span10">

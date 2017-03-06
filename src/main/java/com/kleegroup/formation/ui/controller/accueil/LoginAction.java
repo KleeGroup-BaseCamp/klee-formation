@@ -36,7 +36,7 @@ public final class LoginAction extends AbstractKleeFormationActionSupport {
 	 * Connexion.
 	 * @return outcome du login
 	 */
-	public String doLogin() {
+	public String login() {
 		final String utilisateurLogin = utilisateurLoginRef.readDto().getMail();
 		final Utilisateur utilisateur = utilisateurServices.connecterUtilisateur(utilisateurLogin, false);
 		return SUCCESS; //success va sur accueil
@@ -46,7 +46,7 @@ public final class LoginAction extends AbstractKleeFormationActionSupport {
 	 * Déconnexion.
 	 * @return outcome du logout
 	 */
-	public String doLogout() {
+	public String logout() {
 		UiRequestUtil.invalidateHttpSession();
 		return "reload"; // reload la page
 	}
