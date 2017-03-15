@@ -125,7 +125,7 @@
 		</action>
 
 		<action name="*FormationList" class="com.kleegroup.formation.ui.controller.formation.FormationListAction" method="{1}">
-			<result name="none">/jsp/formation/formationList.jsp</result>
+			<result name="none">/jsp/catalogue/catalogueList.jsp</result>
 			<result name="success" type="redirectAction">FormationList</result>
 		</action>
 
