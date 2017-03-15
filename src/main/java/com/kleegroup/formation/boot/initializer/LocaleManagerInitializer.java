@@ -20,12 +20,14 @@ public final class LocaleManagerInitializer implements ComponentInitializer {
 	public void init() {
 		localeManager.add("io.vertigo.dynamox.domain.constraint.Constraint", io.vertigo.dynamox.domain.constraint.Resources.values());
 		localeManager.add("io.vertigo.dynamox.domain.formatter.Formatter", io.vertigo.dynamox.domain.formatter.Resources.values());
-
+		localeManager.add("com.kleegroup.formation.domain.formation.DtResources", com.kleegroup.formation.domain.formation.DtResources.values());
+		localeManager.add("com.kleegroup.formation.domain.session.DtResources", com.kleegroup.formation.domain.session.DtResources.values());
+		localeManager.add("com.kleegroup.formation.domain.administration.utilisateur.DtResources", com.kleegroup.formation.domain.administration.utilisateur.DtResources.values());
+		localeManager.add("com.kleegroup.formation.domain.inscription.DtResources", com.kleegroup.formation.domain.inscription.DtResources.values());
+		
 		// Messages Ui vertigo
 		localeManager.add("io.vertigo.struts2.resources.Resources", io.vertigo.struts2.resources.Resources.values());
 		localeManager.add("com.kleegroup.formation.mails.MailResources", com.kleegroup.formation.mails.MailResources.values());
-
 		localeManager.add("com.kleegroup.formation.resources.Resources", com.kleegroup.formation.resources.Resources.values());
-
 	}
 }

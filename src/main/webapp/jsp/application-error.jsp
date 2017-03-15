@@ -62,7 +62,7 @@
 	
 	<base href="<%=baseUrl%>"></base>	
     <link href="static/css/error.css" type="text/css" rel="stylesheet"/>
-	<title>TeleDO - Erreur</title>
+	<title>Formation Formation - Erreur</title>
 </head>
 <body>
 <div class="errorPage">
