@@ -13,8 +13,8 @@
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<maven.test.error.ignore>true</maven.test.error.ignore>
 		<project.build.sourceEncoding>utf8</project.build.sourceEncoding>
-		<vertigo.version>0.9.4-SNAPSHOT</vertigo.version>
-		<vertigo-struts.version>0.9.4-SNAPSHOT</vertigo-struts.version>
+		<vertigo.version>0.9.4</vertigo.version>
+		<vertigo-struts.version>0.9.4</vertigo-struts.version>
 	</properties>
 
 	<name>KleeFormation</name>
@@ -231,6 +231,18 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+              <groupId>org.owasp</groupId>
+              <artifactId>dependency-check-maven</artifactId>
+              <version>1.4.5</version>
+              <executions>
+                  <execution>
+                      <goals>
+                          <goal>check</goal>
+                      </goals>
+                  </execution>
+              </executions>
+            </plugin>
 		</plugins>
 	</build>
 </project>
