@@ -31,9 +31,12 @@ alter Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
 create Task TK_GET_UTILISATEUR_BY_CRITERE {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "Select uti.*
-               From	UTILISATEUR uti, LOGIN log
+               From	UTILISATEUR uti
+               <%if(dtoUtilisateurCritere.getRole()!=null) {%>
+               , UTI_ROL pro
+           	   <%}%>
                Where
-               		uti.uti_id = log.uti_id
+               		1 = 1
                		<%if(dtoUtilisateurCritere.getNom()!=null) {%>
                			And uti.NOM LIKE #DTO_UTILISATEUR_CRITERE.NOM# || '%%'
                		<%}%>
@@ -41,9 +44,8 @@ create Task TK_GET_UTILISATEUR_BY_CRITERE {
                			And uti.PRENOM LIKE #DTO_UTILISATEUR_CRITERE.PRENOM# || '%%'
                		<%}%>
                		<%if(dtoUtilisateurCritere.getRole()!=null) {%>
-               			And exists (Select null From UTI_ROL pro
-              					Where pro.ROL_CODE = #DTO_UTILISATEUR_CRITERE.ROLE#
-              						And uti.UTI_ID = pro.UTI_ID)
+               			And pro.ROL_CODE = #DTO_UTILISATEUR_CRITERE.ROLE#
+               			And uti.UTI_ID = pro.UTI_ID
                		<%}%>
                		<%if(dtoUtilisateurCritere.getIsActif()!=null) {%>
                			And uti.SI_ACTIF = #DTO_UTILISATEUR_CRITERE.IS_ACTIF#

@@ -64,7 +64,7 @@
 	</div>
 		</s:if>
 		 <v:div layout="table" cols="4">
-		  <s:textfield name="sessionTest.lieux" label="lieu"/>
+		  <s:textfield name="sessionTest.lieux" label="Lieu"/>
 			<s:textfield name="sessionTest.nbPersonne" label="Nombre de personnes maximum"/>
 			
 			<s:if test="%{modeReadOnly}">

@@ -120,6 +120,20 @@ public final class SessionPAO implements StoreServices {
 	}
 
 	/**
+	 * Execute la tache TK_LIST_SESSION.
+	 * @param critere com.kleegroup.formation.domain.session.CritereSession 
+	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> dtcSessionFormation
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> listSession(final com.kleegroup.formation.domain.session.CritereSession critere) {
+		final Task task = createTaskBuilder("TK_LIST_SESSION")
+				.addValue("CRITERE", critere)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TK_LIST_SESSION_BY_CRITERE.
 	 * @param critere com.kleegroup.formation.domain.session.CritereSession 
 	 * @return io.vertigo.dynamo.domain.model.DtList<com.kleegroup.formation.domain.session.SessionView> dtcSessionFormation

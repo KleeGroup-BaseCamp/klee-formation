@@ -248,7 +248,6 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		return SUCCESS;
 	}
 
-	@SuppressWarnings("deprecation")
 	public String datemodif() {
 		final SessionFormation session_modif = session.readDto();
 		if (DateUtil.newDate().after(session_modif.getDateDebut())) {
@@ -320,7 +319,6 @@ public final class SessionDetailAction extends AbstractKleeFormationActionSuppor
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public String Horaire() {
 
 		final UiObject<SessionFormation> session_date = session.getUiObject();

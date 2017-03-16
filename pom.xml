@@ -14,6 +14,7 @@
 		<maven.test.error.ignore>true</maven.test.error.ignore>
 		<project.build.sourceEncoding>utf8</project.build.sourceEncoding>
 		<vertigo.version>0.9.4</vertigo.version>
+		<vertigo-studio.version>0.9.4a</vertigo-studio.version>
 		<vertigo-struts.version>0.9.4</vertigo-struts.version>
 	</properties>
 
@@ -64,7 +65,7 @@
 		<dependency>
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-studio</artifactId>
-			<version>${vertigo.version}</version>
+			<version>${vertigo-studio.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>

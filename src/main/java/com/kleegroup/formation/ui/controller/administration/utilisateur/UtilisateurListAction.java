@@ -32,8 +32,9 @@ public final class UtilisateurListAction extends AbstractKleeFormationActionSupp
 	protected void initContext() {
 		SecurityUtil.checkRole(com.kleegroup.formation.security.Roles.R_RESPONSSABLE, com.kleegroup.formation.security.Roles.R_ADMIN);
 		roles.publish(Role.class, null);
-		utilisateurCritereForm.publish(new UtilisateurCritere());
-		utilisateurs.publish(utilisateurServices.listUtilisateur());
+		UtilisateurCritere utilisateurCritere = new UtilisateurCritere();
+		utilisateurCritereForm.publish(utilisateurCritere);
+		utilisateurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurCritere));
 		toModeEdit();
 	}
 

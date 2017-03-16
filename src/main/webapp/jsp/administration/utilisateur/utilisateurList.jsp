@@ -7,12 +7,13 @@
 <s:include value="/jsp/include/header.jsp">
 	<s:param name="subtitle">${pageName}</s:param>
 </s:include>
+<h5>Rechercher un Utilisateur</h5>
 <s:form>
 	<v:div layout="table" cols="6">
 		<s:textfield name="utilisateurCritere.nom" label="default"/>
 		<s:textfield name="utilisateurCritere.prenom" label="Prénom"/>
 		<%--<s:textfield name="utilisateurCritere.role" label="default"/> --%>
-		<s:select name="utilisateurCritere.role" label="default" list="roles"/>	
+		<s:select name="utilisateurCritere.role" label="default" list="roles" emptyOption="true" />	
 	</v:div>
 	<div class="button-bar">
 		<div class="right">

@@ -81,9 +81,9 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'NbPersonne'.
-	 * @return Long nbPersonne
+	 * @return Long nbPersonne <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_QUANTITE", label = "NbPersonne")
+	@Field(domain = "DO_QUANTITE", required = true, label = "NbPersonne")
 	public Long getNbPersonne() {
 		return nbPersonne;
 	}
@@ -91,7 +91,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'NbPersonne'.
-	 * @param nbPersonne Long
+	 * @param nbPersonne Long <b>Obligatoire</b>
 	 */
 	public void setNbPersonne(final Long nbPersonne) {
 		this.nbPersonne = nbPersonne;
@@ -157,9 +157,9 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'DateFin'.
-	 * @return java.util.Date dateFin
+	 * @return java.util.Date dateFin <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_DATE", label = "DateFin")
+	@Field(domain = "DO_DATE", required = true, label = "DateFin")
 	public java.util.Date getDateFin() {
 		return dateFin;
 	}
@@ -167,7 +167,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'DateFin'.
-	 * @param dateFin java.util.Date
+	 * @param dateFin java.util.Date <b>Obligatoire</b>
 	 */
 	public void setDateFin(final java.util.Date dateFin) {
 		this.dateFin = dateFin;
@@ -176,9 +176,9 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'DateDebut'.
-	 * @return java.util.Date dateDebut
+	 * @return java.util.Date dateDebut <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_DATE", label = "DateDebut")
+	@Field(domain = "DO_DATE", required = true, label = "DateDebut")
 	public java.util.Date getDateDebut() {
 		return dateDebut;
 	}
@@ -186,7 +186,7 @@ public final class SessionFormation implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'DateDebut'.
-	 * @param dateDebut java.util.Date
+	 * @param dateDebut java.util.Date <b>Obligatoire</b>
 	 */
 	public void setDateDebut(final java.util.Date dateDebut) {
 		this.dateDebut = dateDebut;

@@ -86,17 +86,14 @@ public class InscriptionServicesImpl implements InscriptionServices {
 	}
 
 	private void enregistrerInscription(final Inscription inscription) {
-		//		final SessionFormation session = sessionServices.loadSessionbyId(inscription.getSesId());
 		final SessionFormation session = sessionServices.loadSessionbyId(inscription.getSesId());
-		final BigDecimal zero = new BigDecimal(0);
-		inscription.setSatisfaction(zero);
+		inscription.setSatisfaction(BigDecimal.ZERO);
 		if (session.getInscriptionList().size() < session.getNbPersonne()) {
 			if (session.getInscriptionList().size() + 1 == session.getNbPersonne()) {
 				session.setEsuCode("Complete");
 				sessionServices.saveSessionFormation(session);
 			}
 			inscriptionDAO.save(inscription);
-
 		}
 
 	}
