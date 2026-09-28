@@ -1,7 +1,16 @@
 <%@ page session="false" import="java.util.*, javax.servlet.*" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%!
-	private String printException(Throwable t) throws Exception {
+	private String escapeHtml(String s) {
+        if (s == null) return "";
+        return s.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;");
+    }
+
+    private String printException(Throwable t) throws Exception {
         int i;
         StringBuffer sw = new StringBuffer();
         StackTraceElement[] stack = t.getStackTrace();
@@ -142,7 +151,7 @@ communiquer l'heure &agrave; laquelle s'est produite l'erreur ainsi que les info
 		
 		<a href="#" onclick="handleClick();return false;" id="showerrorlink">Voir le message d'erreur</a>
 		<div id="errordetail" style="display:none;">
-		<h2><%="HTTP (" + errorCode + ") : " + errorMessage %></h2>
+		<h2><%= "HTTP (" + errorCode + ") : " + escapeHtml(errorMessage) %></h2>
 		<% for (int i = 0; i < list.size(); i++) { %>
 			<% t = (Throwable)list.get(i); %>
 			<h2><%= i > 0 ? "Cons&eacute;quence (" + i + ")" : "Cause racine" %></h2>
